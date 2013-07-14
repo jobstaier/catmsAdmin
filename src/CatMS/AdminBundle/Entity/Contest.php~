@@ -1,0 +1,385 @@
+<?php
+namespace CatMS\AdminBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\True;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+require_once __DIR__.'/../External/WideImage/WideImage.php';
+
+/**
+ * @ORM\Table(name="contest")
+ * @ORM\Entity(repositoryClass="CatMS\AdminBundle\Repository\ContestRepository")
+ */
+class Contest
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var integer
+     */
+    private $id;
+    
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime", name="created_at")
+     *
+     * @var datetime
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min=4,
+     *      minMessage="Name name must have at least {{ limit }} characters.",
+     *      max=255,
+     *      maxMessage="Name name must have no more than {{ limit }} characters."
+     * )
+     * @var string
+     */
+    private $name;  
+    
+    /**
+     * 
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min=4,
+     *      minMessage="Email must have at least {{ limit }} characters.",
+     *      max=255,
+     *      maxMessage="Email must have no more than {{ limit }} characters."
+     * )
+     * @var string 
+     */
+    private $email;
+    
+    
+    /**
+     * 
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min=4,
+     *      minMessage="Phone must have at least {{ limit }} characters.",
+     *      max=255,
+     *      maxMessage="Phone must have no more than {{ limit }} characters."
+     * )
+     * @var string 
+     */
+    private $phone;
+    
+    /**
+     * 
+     * @ORM\Column(type="string", length=510)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min=1,
+     *      minMessage="Answear must have at least {{ limit }} characters.",
+     *      max=510,
+     *      maxMessage="Answear must have no more than {{ limit }} characters."
+     * )
+     * @var string 
+     */
+    private $answear;
+    
+    /**
+     * 
+     * @ORM\Column(type="string", length=510)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min=1,
+     *      minMessage="Question must have at least {{ limit }} characters.",
+     *      max=510,
+     *      maxMessage="Question must have no more than {{ limit }} characters."
+     * )
+     * @var string 
+     */
+    private $question;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $path;    
+    
+    /**
+     * @Assert\File(maxSize="900000")
+     */
+    private $file;
+    
+    private $temp;
+    
+    public function getAbsolutePath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadRootDir().'/'.$this->path;
+    }
+    
+    public function getWebPath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadDir().'/'.$this->path;
+    }
+    
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded
+        // documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+    
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/contest';
+    }
+    
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(\Symfony\Component\HttpFoundation\File\UploadedFile $file = null)
+    {
+        $this->file = $file;
+        // check if we have an old image path
+        if (isset($this->path)) {
+            // store the old name to delete after the update
+            $this->temp = $this->path;
+            $this->path = null;
+        } else {
+            $this->path = 'initial';
+        }
+    }
+    
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->getFile()) {
+            if ($this->name != null) {
+                $i = 0;
+                while (file_exists($this->getUploadRootDir().'/'.$this->name.'.'.$this->getFile()->guessExtension())) {
+                   $i++;
+                   $this->setName($this->name.'-'.$i);
+                }
+                $filename = $this->name;
+            } else {
+                $filename = substr(sha1(uniqid(mt_rand(), true)), 0, 10);
+            }
+            $this->path = $filename.'.'.$this->getFile()->guessExtension();
+        }
+    }    
+    
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->getFile()) {
+            return;
+        }
+        $this->getFile()->move($this->getUploadRootDir(), $this->path);
+
+        $this->resizeAndSaveImage();
+        
+        // check if we have an old image
+        if (isset($this->temp)) {
+            // delete the old image
+            if (file_exists($this->getUploadRootDir().'/'.$this->temp)) {
+                unlink($this->getUploadRootDir().'/'.$this->temp);
+            }
+            // clear the temp image path
+            $this->temp = null;
+        }
+        $this->file = null;
+    }  
+    
+    
+    private function resizeAndSaveImage()
+    {
+        $imagePath = $this->getUploadRootDir().'/'.$this->path;
+        $image = \WideImage::load($imagePath);
+        $image->saveToFile($imagePath);
+    }
+    
+    
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload()
+    {
+        if ($file = $this->getAbsolutePath()) {
+            if (file_exists($file)) {
+                unlink($file);
+            }
+        }
+    } 
+    
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Contest
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Contest
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return Contest
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set answear
+     *
+     * @param string $answear
+     * @return Contest
+     */
+    public function setAnswear($answear)
+    {
+        $this->answear = $answear;
+
+        return $this;
+    }
+
+    /**
+     * Get answear
+     *
+     * @return string 
+     */
+    public function getAnswear()
+    {
+        return $this->answear;
+    }
+
+    /**
+     * Set question
+     *
+     * @param string $question
+     * @return Contest
+     */
+    public function setQuestion($question)
+    {
+        $this->question = $question;
+
+        return $this;
+    }
+
+    /**
+     * Get question
+     *
+     * @return string 
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Contest
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+}

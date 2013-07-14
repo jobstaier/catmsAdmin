@@ -1,0 +1,13 @@
+/web/bundles/
+/web/uploads/
+/app/bootstrap.php.cache
+/app/cache/*
+/app/logs/*
+/build/
+/vendor/
+/bin/
+/composer.phar
+/megiteam/
+/nbproject/
+/www_backup/
+/src/CatMS/FrontBundle/

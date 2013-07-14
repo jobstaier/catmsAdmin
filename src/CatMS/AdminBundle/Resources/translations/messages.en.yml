@@ -1,0 +1,23 @@
+edit.error: An error occured while editing
+edit.success: Data has been changed successfuly
+upload.success: File has been uploaded successfuly
+upload.error: An error occured while uploading
+update.success: Data has been updated successfuly
+update.error: An error occured while updating 
+remove.success: Image has been removed successfuly
+remove.error: An error occured while removing file
+
+delete.success: Data has been deleted successfuly  
+delete.error: An error occured while deleting data
+
+seo.create.success: SEO page has been created successfuly
+seo.create.error: An error occured while saving SEO page
+seo.update.success: SEO page has been updated successfuly
+seo.delete.success: SEO page has been deleted successfuly
+seo.delete.error: An error occured while deleting SEO page
+
+create.success: Data has been created successfuly
+create.error: An error occured while creating data
+
+setting.remove.success: Setting has been deleted successfuly
+setting.remove.error: An error occured while deleting setting

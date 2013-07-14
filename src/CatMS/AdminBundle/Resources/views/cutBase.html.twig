@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}CatMS Admin - Login{% endblock %}</title>
+    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" media="screen" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/style.css') }}" media="screen" rel="stylesheet" type="text/css" />
+    <style>
+        {% block stylesheets %}{% endblock %}
+    </style>
+    <script src="{{ asset('js/jquery-1.7.2.min.js') }}"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="{{ path('admin-home') }}">CatMS Admin</a>
+            </div>
+        </div>
+    </div>
+        
+    <div class="container">
+    <legend><i class="icon-lock" style="margin-top: 4px;"></i> User authentication</legend>
+    {% for flashMessage in app.session.flashbag.get('noticeSuccess') %}
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('noticeFailure') %}
+        <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
+    {% if error %}
+    <div class="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ error.message }}. Please, try again.
+    </div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+        
+    </div> <!-- /container -->
+            
+    <!-- Javascripts at the bottom of page - inclrease stie load time -->
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    {% block javascripts_bottom %}{% endblock %}
+    <!-- End Javascripts Bottom -->
+    
+</body>
+</html>

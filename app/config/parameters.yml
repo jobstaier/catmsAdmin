@@ -1,0 +1,14 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: energia
+    database_user: root
+    database_password: dawid11
+    mailer_transport: gmail
+    mailer_host: ~
+    mailer_user: catms.mailer@gmail.com
+    mailer_password: AF2tyfyq
+    locale: en
+    secret: 8d9602b01b84df6fb26bf1ebb04a01ba176e1d71
+    database_path: null

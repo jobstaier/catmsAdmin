@@ -1,0 +1,67 @@
+{% extends 'CatMSAdminBundle::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    input { width: 500px }
+    textarea { width: 500px }
+{% endblock %}
+
+{% if (module == 'Panel') %}
+    {% set range = 'Panel' %}
+    {% set pathname = 'panel-settings' %}
+{% else %}
+    {% set range = 'Frontend' %}
+    {% set pathname = 'frontend-settings' %}
+{% endif %}
+
+{% block javascripts_bottom %}
+    {% if not is_granted('ROLE_DEVELOPER') %}
+    <script>
+        $('.checkDeveloper').attr('readonly', 'readonly');
+    </script>
+    {% endif %}
+{% endblock %}
+    
+{% block breadcrumb %}
+    {{ parent() }}
+    <li><a href="{{ path(pathname) }}">{{ module }} settings</a></li> <span class="divider">/</span>
+    <li  class="active">{{ entity.slug }} setting</li>
+{% endblock %}
+    
+{% block content -%}
+    <legend>Setting {{ entity.slug | capitalize }} editing</legend>
+
+    <form novalidate action="{{ path('settings-update', { 'id': entity.id, 'range': range | lower }) }}" method="post" {{ form_enctype(edit_form) }} class="form-float">
+        <input type="hidden" name="_method" value="PUT" />
+        {{ form_row(edit_form.slug, {'attr': {'class': 'checkDeveloper'}}) }}
+        {% if entity.fieldType == 'checkbox' %}
+            <label class="checkbox" style="margin: 15px 0;">
+                {{ entity.description }}
+                {{ form_widget(edit_form.value) }}
+            </label>
+        {% elseif  entity.fieldType == 'radio' %}
+            <label class="radio" style="margin: 15px 0;">
+                {{ entity.description }}
+                {{ form_widget(edit_form.value) }}
+            </label>
+        {% else %}
+            {{ form_row(edit_form.value) }}
+        {% endif %}
+        {{ form_rest(edit_form)}}
+        <div class="btn-group">
+            <a href="{{ path(pathname) }}" class="btn"><i class="icon-list"></i> Back to the list</a>
+            <a href="{{ path('settings-show', { 'id': entity.id, 'range': range | lower  }) }}" class="btn"><i class="icon-fullscreen"></i> Show</a>
+            <button type="submit" class="btn btn-primary show-loader" data-loading-text="Saving..."><i class="icon-hdd"></i> Save</button>
+        </div>
+    </form>
+
+    {% if is_granted('ROLE_DEVELOPER') %}
+    <form action="{{ path('settings-delete', { 'id': entity.id, 'range': range | lower }) }}" method="post" class="clear">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_widget(delete_form) }}
+        <button type="submit" class="btn" data-toggle="modal" data-target="#delete"><i class="icon-trash"></i> Delete</button>
+        {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'delete', 'msg': 'Delete setting', 'btnTxt': 'Delete'} %}
+    </form>
+    {% endif %}
+
+{% endblock %}

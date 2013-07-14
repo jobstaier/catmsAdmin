@@ -1,0 +1,28 @@
+media-library:
+    path:      /image-list/{page}/{slug}
+    defaults:  { _controller: CatMSAdminBundle:MediaLibrary:list, page: 1, slug: null }
+    requirements:
+        page:  \d+
+
+media-library-upload:
+    path:     /upload/{group}
+    defaults: { _controller: CatMSAdminBundle:MediaLibrary:upload, group: null }
+        
+media-library-image-edit:
+    path:   /edit/{id}/{group}
+    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:editImage, id: null, group: null }
+    requirements:
+        page:  \d+
+        
+media-library-image-delete:
+    path:     /delete/{id}/{group}
+    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:deleteImage, group: null }
+    requirements:
+        page:  \d+
+    methods:  [DELETE]      
+    
+delete-all-marked:
+    path:     /delete-all-marked/{token}
+    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:multipleDeleteImageAjax }
+    methods:  [POST] 
+    

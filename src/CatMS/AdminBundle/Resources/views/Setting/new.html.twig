@@ -1,0 +1,36 @@
+{% extends 'CatMSAdminBundle::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    input { width: 500px }
+    textarea { width: 500px }
+{% endblock %}
+
+{% if (module == 'Panel') %}
+    {% set range = 'Panel' %}
+    {% set pathname = 'panel-settings' %}
+{% elseif (module == 'Frontend') %}
+    {% set range = 'Frontend' %}
+    {% set pathname = 'frontend-settings' %}
+{% endif %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li><a href="{{ path(pathname) }}">{{ module }} settings</a></li> <span class="divider">/</span>
+    <li class="active">{{ module }} setting creation</li>
+{% endblock %}
+    
+{% block content -%}
+    <legend>{{ module }} setting creation</legend>
+
+    <form novalidate action="{{ path('settings-create', {'range': range | lower }) }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit" data-toggle="button" class="btn btn-primary show-loader" data-loading-text="Creating..."><i class="icon-hdd"></i> Create</button>
+        </p>
+    </form>
+
+    <div class="btn-group" style="margin-bottom: 10px">
+        <a href="{{ path(pathname) }}" class="btn"><i class="icon-list"></i> Back to the list</a>
+    </div>    
+{% endblock %}

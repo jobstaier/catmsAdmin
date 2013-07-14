@@ -1,0 +1,269 @@
+<?php
+namespace CatMS\AdminBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\True;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+/**
+ * @ORM\Table(name="kama")
+ * @ORM\Entity(repositoryClass="CatMS\AdminBundle\Repository\KamaRepository")
+ */
+class Kama
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var integer
+     */
+    private $id;
+    
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min=4,
+     *      minMessage="Name name must have at least {{ limit }} characters.",
+     *      max=255,
+     *      maxMessage="Name name must have no more than {{ limit }} characters."
+     * )
+     * @var string
+     */
+    private $name;  
+    
+    /**
+     * 
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min=4,
+     *      minMessage="Email must have at least {{ limit }} characters.",
+     *      max=255,
+     *      maxMessage="Email must have no more than {{ limit }} characters."
+     * )
+     * @var string 
+     */
+    private $email;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     * @var string
+     */
+    private $wannaBe;
+    
+    /**
+     *
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min=4,
+     *      minMessage="City must have at least {{ limit }} characters.",
+     *      max=255,
+     *      maxMessage="City must have no more than {{ limit }} characters."
+     * )
+     * @var string 
+     */
+    private $city;
+    
+    /**
+     *
+     * @ORM\Column(type="text")
+     * @var string 
+     */
+    private $message;
+    
+    /**
+     *
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min=6,
+     *      minMessage="Phone must have at least {{ limit }} characters.",
+     *      max=20,
+     *      maxMessage="Phone must have no more than {{ limit }} characters."
+     * )
+     * @var string 
+     */
+    private $phone;
+    
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime", name="updated_at")
+     * @var datetime
+     */
+    private $createdAt;
+    
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Kama
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Kama
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set wannaBe
+     *
+     * @param boolean $wannaBe
+     * @return Kama
+     */
+    public function setWannaBe($wannaBe)
+    {
+        $this->wannaBe = $wannaBe;
+
+        return $this;
+    }
+
+    /**
+     * Get wannaBe
+     *
+     * @return boolean 
+     */
+    public function getWannaBe()
+    {
+        return $this->wannaBe;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Kama
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return Kama
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string 
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param string $phone
+     * @return Kama
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return string 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set message
+     *
+     * @param string $message
+     * @return Kama
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * Get message
+     *
+     * @return string 
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+}

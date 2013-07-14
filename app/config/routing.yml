@@ -1,0 +1,17 @@
+cat_ms_front:
+    resource: "@CatMSFrontBundle/Resources/config/routing.yml"
+
+cat_ms_admin:
+    resource: "@CatMSAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    
+cat_ms_admin_media_library:
+    resource: "@CatMSAdminBundle/Resources/config/media-library/routing.yml"
+    prefix:   /admin/media-library
+
+catms_auth:
+    resource: "@CatMSAuthBundle/Controller/"
+    type:     annotation
+    prefix:   /
+

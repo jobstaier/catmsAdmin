@@ -1,0 +1,10 @@
+services:
+  request:
+    class: Symfony\Component\HttpFoundation\Request
+  
+  catms.twig.twig_user_extension:
+      class: CatMS\AdminBundle\Twig\TwigUserExtension
+      arguments: ['@request', '@doctrine.orm.entity_manager'] 
+      tags:
+          - { name: twig.extension }
+
