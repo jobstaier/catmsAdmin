@@ -10,6 +10,7 @@
         {% block stylesheets %}{% endblock %}
     </style>
     <script src="{{ asset('js/jquery-1.7.2.min.js') }}"></script>
+    <script src="{{ asset('js/catms-global.js') }}"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -71,6 +72,8 @@
         {% block content %}
         {% endblock %}
     </div> <!-- /container -->
+    
+    <footer class="footer-bottom"><small><a href="http://www.catdesign.pl">Catdesign</a> &copy; 2013 Author: Dawid Job <a href="mailto:d.job@catdesign.pl">d.job@catdesign.pl</a></small></footer>
     
     <!-- Javascripts at the bottom of page - decrease site load time -->
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>

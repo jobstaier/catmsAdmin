@@ -14,8 +14,14 @@
 
 {% block breadcrumb %}
     {{ parent() }}
+    {% if group is empty %}
     <li><a href="{{ path('media-library') }}">Media library</a></li> <span class="divider">/</span>
     <li class="active">Upload file</li>
+    {% else %}
+    <li><a href="{{ path('media-library') }}">Media library</a></li> <span class="divider">/</span>
+    <li><a href="{{ path('media-library', {'slug': group}) }}">Group <i>{{ groupEntity.description }}</i></a></li> <span class="divider">/</span>
+    <li class="active">Upload file</li>
+    {% endif %}
 {% endblock %}    
     
 {% block content -%}    
@@ -33,8 +39,8 @@
 
     {% endif %}
     
-    <form novalidate action="{{ path('media-library-upload', {'group': group}) }}" method="post" {{ form_enctype(form) }} style="float: left;">
-        <legend>Upload single file <small>and set properties</small> {% if group is not empty %} - <i>{{ groupEntity.description | raw }}</i> group{% endif %}</legend>
+    <form novalidate action="{{ path('media-library-upload', {'group': group}) }}" method="post" {{ form_enctype(form) }} class="upload-form">
+        <legend>Upload single file <small>and set properties</small></legend>
          
         <div class="control-group">
         
@@ -88,8 +94,8 @@
                 {{ form_errors(form.slug) }}
             </div>
             
-            <div class="controls">
-                <span class="btn btn-file"><i class="icon-file"></i> 
+            <div class="controls file-input-container">
+                <span class="btn btn-file btn-small"><i class="icon-file"></i> 
                     <input type="file" name="form[file]" id="form_file" />
                 </span>    
                 {{ form_errors(form.file) }}
@@ -109,8 +115,12 @@
         </div>
         
         <div class="btn-group" style="margin-top: 20px;">
-            <a href="{{ path('media-library') }}" class="btn"><i class="icon-list"></i> Back to the list</a>    
-            <button class="show-loader btn btn-primary" type="submit"  data-loading-text="Uploading..."><i class="icon-upload"></i> Upload </button>
+            {% if group is not empty %}
+            <a href="{{ path('media-library', {'slug': group}) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
+            {% else %}    
+            <a href="{{ path('media-library') }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>    
+            {% endif %}
+            <button class="show-loader btn btn-primary btn-small" type="submit"  data-loading-text="Uploading..."><i class="icon-upload"></i> Upload </button>
         </div>
     </form>
 
@@ -121,7 +131,7 @@
 
 <script type="text/javascript" src="{{ asset('js/catms-plupload.js') }}"></script>
 <a href="{{ path('media-library-plupload', {'group': group}) }}" id="pluploadUrl" style="display: none"></a>
-<div style="float: right;">
+<div class="multiple-upload-form">
     <legend>
         Multiple Files Upload
     </legend>

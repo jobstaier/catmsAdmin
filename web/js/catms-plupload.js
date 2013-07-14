@@ -48,7 +48,7 @@ $(function() {
         runtimes : 'html5,gears,flash,silverlight,browserplus,html4',
         url : $('#pluploadUrl').attr('href'),
         max_file_size : '10mb',
-        chunk_size : '1mb',
+        chunk_size : '6mb',
         unique_names : true,
         multiple_queues: true,
 

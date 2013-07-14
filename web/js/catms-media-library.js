@@ -30,18 +30,31 @@ $(function(){
     $('.remove-all-marked').popover({
         content: 
                 '<div style="text-align: center;">Are you sure you want to delete all selected items?<br /><br />' + 
-                '<a href="" class="btn btn-primary btn-mini remove-all-marked-confirm">Confirm</a>&nbsp;&nbsp;&nbsp;<a href="#" class="btn btn-inverse btn-mini dismiss">Dismiss</a></div>',
+                '<a href="" class="btn btn-primary btn-mini remove-all-marked-confirm">Confirm</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-inverse btn-mini dismiss">Dismiss</a></div>',
         placement: 'top',
         html: true
     });
     
-    $('.dismiss').live('click', function(){
-        $('a.remove-all-marked').popover('hide');
+    $('.remove-this').popover({
+        content: 
+                '<div style="text-align: center;">Are you sure you want to delete this item?<br /><br />' + 
+                '<a href="" class="btn btn-primary btn-mini remove-this-confirm">Confirm</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-inverse btn-mini dismiss">Dismiss</a></div>',
+        placement: 'left',
+        html: true
     });
     
-     $('.remove-all-marked').click(function(){
-         return false;
-     });
+    $('.dismiss').live('click', function(){
+        $('a.remove-all-marked, .remove-this').popover('hide');
+    });
+    
+    $('.remove-all-marked, .remove-this').click(function(){
+        return false;
+    });
+     
+    $('.remove-this-confirm').live('click', function(){
+        $(this).parents('form').submit();
+        return false;
+    });
     
     $('.remove-all-marked-confirm').live('click', function(){
         if ($('.mark-it:checked').length === 0) {
@@ -60,19 +73,23 @@ $(function(){
             });
 
             var URL = removeTrigger.attr('href');
+            showLoader();
+            
             $.ajax({
                 type: 'POST',
                 url: URL,
                 dataType: 'json',
                 data: data,
                 success: function(data) {
+
+                    closeLoader();
                     $.each(data.images, function(i, val){
+                        
                         var tr = $('.row_'+val);
                         tr.fadeOut(650);
                         window.setTimeout(function(){
                             tr.remove();  
-                            
-                            
+
                             showAlert('Remove success!', ' Assets has been removed successfuly.', 'info');
                             
                             if ($('table tbody img').length === 0) {
@@ -86,6 +103,7 @@ $(function(){
                     removeTrigger.removeAttr('disabled');
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown){
+                    closeLoader();
                     removeTrigger.html(defText);
                     removeTrigger.removeAttr('disabled');
                     showAlert('Delete failure!', errorThrown, 'error');
@@ -96,13 +114,3 @@ $(function(){
         return false;
     });
 });
-
-function showAlert(header, message, type)
-{
-var html = '<div class="alert alert-'+ type +'">' + 
-       '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-       '<strong>'+ header +'</strong>' + message +
-       '</div>';
-
-$('.notice-container').html(html);
-}
