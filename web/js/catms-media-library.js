@@ -71,8 +71,9 @@ $(function(){
                         tr.fadeOut(650);
                         window.setTimeout(function(){
                             tr.remove();  
-
-                            showAlert('Remove success!', ' Asset has been removed successfuly.', 'info');
+                            
+                            
+                            showAlert('Remove success!', ' Assets has been removed successfuly.', 'info');
                             
                             if ($('table tbody img').length === 0) {
                                 window.location.href = $('.list-home-url').attr('href');
@@ -103,5 +104,5 @@ var html = '<div class="alert alert-'+ type +'">' +
        '<strong>'+ header +'</strong>' + message +
        '</div>';
 
-$('.notice-container').append(html);
+$('.notice-container').html(html);
 }

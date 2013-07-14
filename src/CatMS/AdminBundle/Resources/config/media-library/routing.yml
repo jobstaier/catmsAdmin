@@ -26,3 +26,7 @@ delete-all-marked:
     defaults: {  _controller: CatMSAdminBundle:MediaLibrary:multipleDeleteImageAjax }
     methods:  [POST] 
     
+media-library-plupload:
+    path:     /pluapload-load-asset/{group}
+    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:plupload, group: null }
+    

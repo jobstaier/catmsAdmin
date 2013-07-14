@@ -5,6 +5,7 @@
     <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" media="screen" rel="stylesheet" type="text/css" />
     <link href="{{ asset('fancybox/jquery.fancybox-1.3.4.css') }}" media="screen" rel="stylesheet" type="text/css" />
     <link href="{{ asset('css/style.css') }}" media="screen" rel="stylesheet" type="text/css" />
+    {% block stylesheets_import %}{% endblock %}
     <style>
         {% block stylesheets %}{% endblock %}
     </style>

@@ -1,5 +1,17 @@
 {% extends 'CatMSAdminBundle::base.html.twig' %}
 
+
+{% block stylesheets_import %}
+<link href="{{ asset('js/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css') }}" media="screen" rel="stylesheet" type="text/css"</link>
+{% endblock %}
+
+{% block stylesheets %}
+#uploader_browse {margin-right: 10px; !important;}
+#uploader_filelist {height: 242px;}
+#uploader {float: right; width: 520px; margin-top: -10px;}
+.plupload_scroll .plupload_filelist {background: none; border-left: 1px dashed #DDD;}
+{% endblock %}
+
 {% block breadcrumb %}
     {{ parent() }}
     <li><a href="{{ path('media-library') }}">Media library</a></li> <span class="divider">/</span>
@@ -7,7 +19,6 @@
 {% endblock %}    
     
 {% block content -%}    
-    <legend>Upload file {% if group is not empty %} - <i>{{ groupEntity.description | raw }}</i> group{% endif %}</legend>
     
     {% if group is not empty and groupEntity is defined and (groupEntity.imageWidth or groupEntity.imageHeight) %}
         
@@ -22,8 +33,9 @@
 
     {% endif %}
     
-    <form novalidate action="{{ path('media-library-upload', {'group': group}) }}" method="post" {{ form_enctype(form) }}>
-        
+    <form novalidate action="{{ path('media-library-upload', {'group': group}) }}" method="post" {{ form_enctype(form) }} style="float: left;">
+        <legend>Upload single file <small>and set properties</small> {% if group is not empty %} - <i>{{ groupEntity.description | raw }}</i> group{% endif %}</legend>
+         
         <div class="control-group">
         
             <div class="controls">
@@ -92,8 +104,7 @@
             </div>
             {% endif %}
 
-            
-             {{ form_row(form._token) }}
+            {{ form_row(form._token) }}
             
         </div>
         
@@ -102,5 +113,23 @@
             <button class="show-loader btn btn-primary" type="submit"  data-loading-text="Uploading..."><i class="icon-upload"></i> Upload </button>
         </div>
     </form>
+
+{# plupload #}
+<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+<script type="text/javascript" src="{{ asset('js/plupload/js/plupload.full.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js')}}"></script>
+
+<script type="text/javascript" src="{{ asset('js/catms-plupload.js') }}"></script>
+<a href="{{ path('media-library-plupload', {'group': group}) }}" id="pluploadUrl" style="display: none"></a>
+<div style="float: right;">
+    <legend>
+        Multiple Files Upload
+    </legend>
+<form>
+<div id="uploader">
+    <p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
+</div>
+</form>
+</div>
     
 {% endblock %}

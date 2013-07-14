@@ -301,6 +301,30 @@ class MediaLibraryController extends Controller
         
         return new Response(json_encode($removed), 200, array('Content-Type' => 'application/json'));
     }
-   
+  
+    
+    public function pluploadAction($group)
+    {
+        $request = $this->getRequest();
+
+        $em = $this->getDoctrine()->getManager();
+        
+        if ($group) {
+            $group = $em->getRepository('CatMSAdminBundle:ImageGroup')->findOneBySlug($group);
+        } else {
+            $group = $em->getRepository('CatMSAdminBundle:ImageGroup')->findOneBySlug('undefined');
+        }
+        
+        $uploadedFile = $request->files->get('file');
+        
+        $image = new ImageUpload();
+        
+        $image->setFile($uploadedFile);
+        $image->setImageGroup($group);
+        $em->persist($image);
+        $em->flush();
+        
+        return new Response(json_encode(array('notice' => 'success')), 200, array('Content-Type' => 'application/json'));
+    }
 }
 ?>
