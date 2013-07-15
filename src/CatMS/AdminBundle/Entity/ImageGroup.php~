@@ -61,7 +61,7 @@ class ImageGroup
     private $images;
     
     /**
-     * @ORM\ManyToMany(targetEntity="CatMS\AdminBundle\Entity\ContentGroup", mappedBy="relatedImages", cascade = {"persist", "remove"}))
+     * @ORM\ManyToMany(targetEntity="CatMS\AdminBundle\Entity\ContentGroup", mappedBy="relatedImages", cascade={"persist"})
      */
     private $relatedContents;
     
@@ -237,4 +237,15 @@ class ImageGroup
     {
         return $this->relatedContents;
     }
+    
+    /*
+    public function setRelatedContents($relatedContents) 
+    {
+        $this->relatedContents = $relatedContents;
+        foreach ($relatedContents as $relatedContent) {
+            $relatedContent->addRelatedImage($this);
+        }
+        return $this;
+    }
+    */
 }

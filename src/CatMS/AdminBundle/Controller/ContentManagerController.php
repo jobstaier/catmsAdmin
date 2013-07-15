@@ -11,6 +11,7 @@ use CatMS\AdminBundle\Entity\ContentManager;
 use CatMS\AdminBundle\Form\ContentManagerType;
 use CatMS\AdminBundle\Controller\CommonMethods;
 use CatMS\AdminBundle\Logger\History;
+use CatMS\AdminBundle\Entity\ContentArchive;
 
 /**
  * ContentManager controller.
@@ -236,16 +237,23 @@ class ContentManagerController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+            $archived = $entity;
             $em->persist($entity);
             $em->flush();
 
             $history = new History($this->get('session'), $this->get('router'));
             $history->logEditContent($entity);
             
+            $archive = new ContentArchive();
+            $archive->setPopertiesFromContent($archived);
+            
+            $em->persist($archive);
+            $em->flush();
+            
             $this->get('session')->getFlashBag()->add('noticeSuccess', 'edit.success');
             return $this->redirect($this->generateUrl('content-manager-edit', array('id' => $id, 'group' => $group)));
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'edit.error');
+            $this->get('session')->getFlashBag()->add('noticeFailure', 'edit.error');
         }
 
         return array(

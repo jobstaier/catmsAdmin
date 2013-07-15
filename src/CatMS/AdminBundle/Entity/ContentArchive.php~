@@ -9,12 +9,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Table(name="content_manager")
- * @ORM\Entity(repositoryClass="CatMS\AdminBundle\Repository\ContentManagerRepository")
- * @UniqueEntity("slug")
- * @ORM\Table(name="content_manager")
+ * @ORM\Table(name="content_archive")
+ * @ORM\Entity(repositoryClass="CatMS\AdminBundle\Repository\ContentArchiveRepository")
+ * @ORM\Table(name="content_archive")
  */
-class ContentManager
+class ContentArchive
 {
     /**
      * @ORM\Column(type="integer")
@@ -25,7 +24,7 @@ class ContentManager
     private $id;
     
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255, unique=false)
      * @Assert\NotBlank()
      * @Assert\Length(
      *      min="4",
@@ -92,39 +91,18 @@ class ContentManager
      * @var datetime
      */
     private $createdAt;
-    
-    /**
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(type="datetime", name="updated_at")
-     *
-     * @var datetime
-     */
-    private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\CatMS\AdminBundle\Entity\ContentGroup", inversedBy="contents")
-     * @ORM\JoinColumn(name="content_group_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="\CatMS\AdminBundle\Entity\ContentManager", inversedBy="archives")
+     * @ORM\JoinColumn(name="content_id", referencedColumnName="id", onDelete="SET NULL")
      * @var object \CatMS\AdminBundle\Entity\ContentGroup
      */
-    private $contentGroup;
-    
-    /**
-     * @ORM\OneToMany(targetEntity="CatMS\AdminBundle\Entity\ContentArchive", mappedBy="content")
-     * @var object \CatMS\AdminBundle\Entity\ContentArvhive
-     */
-    private $archives;
+    private $content;
     
     /**
      *  @ORM\Column(type="integer", nullable=true)
      */
-    protected $priority = 99;
-    
-    protected $image;
-
-    
-    public function __construct() {
-        $this->archives = new \Doctrine\Common\Collections\ArrayCollection(); 
-    }
+    protected $priority;
 
     /**
      * Get id
@@ -140,7 +118,7 @@ class ContentManager
      * Set slug
      *
      * @param string $slug
-     * @return ContentManager
+     * @return ContentArchive
      */
     public function setSlug($slug)
     {
@@ -163,7 +141,7 @@ class ContentManager
      * Set title
      *
      * @param string $title
-     * @return ContentManager
+     * @return ContentArchive
      */
     public function setTitle($title)
     {
@@ -186,7 +164,7 @@ class ContentManager
      * Set shortText
      *
      * @param string $shortText
-     * @return ContentManager
+     * @return ContentArchive
      */
     public function setShortText($shortText)
     {
@@ -209,7 +187,7 @@ class ContentManager
      * Set fullText
      *
      * @param string $fullText
-     * @return ContentManager
+     * @return ContentArchive
      */
     public function setFullText($fullText)
     {
@@ -232,7 +210,7 @@ class ContentManager
      * Set createdAt
      *
      * @param \DateTime $createdAt
-     * @return ContentManager
+     * @return ContentArchive
      */
     public function setCreatedAt($createdAt)
     {
@@ -252,33 +230,10 @@ class ContentManager
     }
 
     /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     * @return ContentManager
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime 
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
      * Set description
      *
      * @param string $description
-     * @return ContentManager
+     * @return ContentArchive
      */
     public function setDescription($description)
     {
@@ -298,33 +253,33 @@ class ContentManager
     }
 
     /**
-     * Set contentGroup
+     * Set content
      *
-     * @param \CatMS\AdminBundle\Entity\ContentGroup $contentGroup
-     * @return ContentManager
+     * @param \CatMS\AdminBundle\Entity\ContentManager $content
+     * @return ContentArchive
      */
-    public function setContentGroup(\CatMS\AdminBundle\Entity\ContentGroup $contentGroup = null)
+    public function setContent(\CatMS\AdminBundle\Entity\ContentManager $content = null)
     {
-        $this->contentGroup = $contentGroup;
+        $this->content = $content;
 
         return $this;
     }
 
     /**
-     * Get contentGroup
+     * Get content
      *
-     * @return \CatMS\AdminBundle\Entity\ContentGroup 
+     * @return \CatMS\AdminBundle\Entity\ContentManager
      */
-    public function getContentGroup()
+    public function getContent()
     {
-        return $this->contentGroup;
+        return $this->content;
     }
 
     /**
      * Set priority
      *
      * @param integer $priority
-     * @return ContentManager
+     * @return ContentArchive
      */
     public function setPriority($priority)
     {
@@ -341,50 +296,5 @@ class ContentManager
     public function getPriority()
     {
         return $this->priority;
-    }
-    
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-    
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Add archives
-     *
-     * @param \CatMS\AdminBundle\Entity\ContentArchive $archives
-     * @return ContentManager
-     */
-    public function addArchive(\CatMS\AdminBundle\Entity\ContentArchive $archives)
-    {
-        $this->archives[] = $archives;
-
-        return $this;
-    }
-
-    /**
-     * Remove archives
-     *
-     * @param \CatMS\AdminBundle\Entity\ContentArchive $archives
-     */
-    public function removeArchive(\CatMS\AdminBundle\Entity\ContentArchive $archives)
-    {
-        $this->archives->removeElement($archives);
-    }
-
-    /**
-     * Get archives
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getArchives()
-    {
-        return $this->archives;
     }
 }

@@ -12,8 +12,8 @@ class ContentManagerType extends AbstractType
     {
         $builder
             ->add('slug', 'text', array('label' => 'Slug'))
-            ->add('description', 'text')
-            ->add('title', 'textarea')
+            ->add('description', 'textarea')
+            ->add('title', 'text')
             ->add('shortText', 'textarea',  array('label' => 'Short Text'))
             ->add('fullText', 'textarea',  array('label' => 'Full text'))
             ->add('contentGroup', 'entity', array(

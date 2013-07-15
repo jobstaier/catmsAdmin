@@ -21,7 +21,6 @@ class ImageUpload
      */
     protected $id;
     
-    
     protected $name;
     
     /**
@@ -71,6 +70,10 @@ class ImageUpload
     
     protected $temp;
     
+    protected $mimeType;
+    
+    protected $deleteForm;
+
     public function getAbsolutePath()
     {
         return null === $this->path
@@ -213,6 +216,9 @@ class ImageUpload
         if (null === $this->getFile()) {
             return;
         }
+        
+        $this->mimeType = $this->getFile()->getMimeType();
+        
         $this->getFile()->move($this->getUploadRootDir(), $this->path);
 
         $this->resizeAndSaveImage();
@@ -230,23 +236,25 @@ class ImageUpload
     }    
     
     private function resizeAndSaveImage()
-    {
-        $imagePath = $this->getUploadRootDir().'/'.$this->path;
-        $image = \WideImage::load($imagePath);
-        $size = getimagesize($imagePath);
+    {        
+        if ($this->mimeType == 'image/jpeg') {
+            $imagePath = $this->getUploadRootDir().'/'.$this->path;
+            $image = \WideImage::load($imagePath);
+            $size = getimagesize($imagePath);
 
-        $groupImageWidth = $this->getImageGroup()->getImageWidth();
-        $groupImageHeight = $this->getImageGroup()->getImageHeight();
-        
-        if ($groupImageWidth || $groupImageHeight) {
-            
-            $width = ($groupImageWidth) ? $groupImageWidth : $size[0];
-            $height = ($groupImageHeight) ? $groupImageHeight : $size[1];
-            
-            if ($size[0] > $groupImageWidth  || $size[1] > $groupImageHeight) {
-                $image->resize($width, $height, 'outside')
-                    ->crop('center', 'center', $width, $height)
-                    ->saveToFile($imagePath);
+            $groupImageWidth = $this->getImageGroup()->getImageWidth();
+            $groupImageHeight = $this->getImageGroup()->getImageHeight();
+
+            if ($groupImageWidth || $groupImageHeight) {
+
+                $width = ($groupImageWidth) ? $groupImageWidth : $size[0];
+                $height = ($groupImageHeight) ? $groupImageHeight : $size[1];
+
+                if ($size[0] > $groupImageWidth  || $size[1] > $groupImageHeight) {
+                    $image->resize($width, $height, 'outside')
+                        ->crop('center', 'center', $width, $height)
+                        ->saveToFile($imagePath);
+                }
             }
         }
     }
@@ -399,5 +407,23 @@ class ImageUpload
     public function getRedirect()
     {
         return $this->redirect;
+    }
+    
+    public function getMimeType()
+    {
+        $file = new \Symfony\Component\HttpFoundation\File\File($this->getUploadRootDir().'/'.$this->path);
+        return $file->getMimeType();
+    }
+    
+    public function setDeleteForm($deleteForm)
+    {
+        $this->deleteForm = $deleteForm;
+
+        return $this;
+    }
+
+    public function getDeleteForm()
+    {
+        return $this->deleteForm;
     }
 }

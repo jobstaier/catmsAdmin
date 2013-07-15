@@ -66,6 +66,10 @@ class ContentGroup
         $this->contents = new \Doctrine\Common\Collections\ArrayCollection(); 
         $this->relatedImages = new \Doctrine\Common\Collections\ArrayCollection();
     }
+    
+    public function __toString() {
+        return $this->description;
+    }
 
     /**
      * Get id

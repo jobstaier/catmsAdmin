@@ -55,6 +55,12 @@ body {
     top: 100px;
 }
 
+.archive-trigger-container {
+    position: fixed;
+    right: -3px;
+    top: 142px;
+}
+
 .related-images-container {
     position: fixed;
     right: -992px;
@@ -79,6 +85,29 @@ body {
     padding: 10px 20px 20px;
 }
 
+.archive-container {
+    position: fixed;
+    /*right: -592px;*/
+    right: 0px;
+    top: 172px;
+    border: 1px solid #111;
+    height: 340px;
+    width: 530px;
+    background: #fff;
+    z-index: 9;
+    padding: 10px 0 20px 20px;
+}
+
+.archive-table {
+    width: 450px;
+    margin: 10px auto;
+    overflow-y: scroll;
+}
+
+.archive-table tr td, .archive-table tr th {
+    text-align: center;
+}
+
 .related-images-container hr {
     margin: 0;
 }
@@ -95,15 +124,24 @@ body {
     height: 340px;
 }
 
+.archive {
+    height: 340px;
+}
+
 .append-here {
     overflow-y: scroll;
     overflow-x: hidden;
     height: 300px;
 }
 
+.append-here-archive {
+    overflow: auto;
+    height: 300px;
+}
+
 .append-here-bottom {
     overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-x: scroll;
     height: 137px;
 }
 
@@ -181,3 +219,13 @@ body {
     max-width: 340px;
     overflow: hidden;
 }
+
+.input-xplarge { width: 420px; }
+.textarea-xplarge { width: 420px; }
+.h100 { height: 100px; }
+.w420 { width: 420px; max-width: 420px;}
+form .well { margin-bottom: -3px;}
+.select-large { width: 300px; }
+
+.error-tooltip { padding: 3px 1px 3px 14px; }
+.error-tooltip i { margin-right: 10px; }

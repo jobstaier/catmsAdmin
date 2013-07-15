@@ -1,7 +1,17 @@
 tinymce.init({
-    selector: "textarea",
-    width : 940,
-    height: 220,
+    selector: "textarea.tiny_full",
+    width : 938,
+    height: 420,
+    remove_linebreaks : false,
+    plugins: "code, textcolor, table",
+    tools: "inserttable",
+    toolbar: "undo redo | styleselect | bold italic underline strikethrough | lignleft aligncenter alignright alignjustify | numlist bullist outdent indent | code | forecolor"
+});
+
+tinymce.init({
+    selector: "textarea.tiny_half",
+    width : 433,
+    height: 170,
     remove_linebreaks : false,
     plugins: "code, textcolor, table",
     tools: "inserttable",
@@ -9,6 +19,8 @@ tinymce.init({
 });
 
 $(document).ready(function() {
+    
+    /*
     $('.before-tiny').next().hide();
     $('.content-manager-form label.before-tiny').click(function(){
         var tinyHandler = $(this).next();
@@ -24,4 +36,5 @@ $(document).ready(function() {
             $(this).children('i').addClass('icon-chevron-up');
         }
     });
+    */
 });
