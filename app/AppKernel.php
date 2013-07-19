@@ -22,7 +22,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new CatMS\AdminBundle\CatMSAdminBundle(),
             new CatMS\AuthBundle\CatMSAuthBundle(),
-            new CatMS\FrontBundle\CatMSFrontBundle()
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -14,17 +14,12 @@ use CatMS\AuthBundle\Form\ChangePasswordType;
 /**
  * User controller.
  *
- * @Route("/admin/user")
  */
 class UserController extends Controller
 {
     /**
      * Lists all User entities.
      *
-     * @Route("/list/{page}",
-     *  name="user",
-     *  defaults={"page" = 1}
-     * )
      * @Template()
      */
     public function indexAction($page)
@@ -47,7 +42,6 @@ class UserController extends Controller
     /**
      * Creates a new User entity.
      *
-     * @Route("/", name="user_create")
      * @Template("CatMSAuthBundle:User:new.html.twig")
      */
     public function createAction(Request $request)
@@ -98,8 +92,6 @@ class UserController extends Controller
     /**
      * Displays a form to create a new User entity.
      *
-     * @Route("/new", name="user_new")
-     * @Method("GET")
      * @Template()
      */
     public function newAction()
@@ -116,8 +108,6 @@ class UserController extends Controller
     /**
      * Finds and displays a User entity.
      *
-     * @Route("/{id}", name="user_show")
-     * @Method("GET")
      * @Template()
      */
     public function showAction($id)
@@ -141,8 +131,6 @@ class UserController extends Controller
     /**
      * Displays a form to edit an existing User entity.
      *
-     * @Route("/{id}/edit", name="user_edit")
-     * @Method("GET")
      * @Template()
      */
     public function editAction($id)
@@ -168,8 +156,6 @@ class UserController extends Controller
     /**
      * Edits an existing User entity.
      *
-     * @Route("/{id}", name="user_update")
-     * @Method("PUT")
      * @Template("CatMSAuthBundle:User:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -244,9 +230,8 @@ class UserController extends Controller
     }
     
     /**
-     * @Route("/change-password/{id}",
-     *  name="edit_password"
-     * )
+     * Change password action
+     * 
      * @Template("CatMSAuthBundle:User:edit-password.html.twig")
      */
     public function changePasswordAction(Request $request, $id)
@@ -303,6 +288,11 @@ class UserController extends Controller
     }
 
     private function generatePassword()
+    {
+        return UserController::generateInitialPassword();
+    }
+    
+    public static function generateInitialPassword()
     {
         return substr(md5(microtime()), 0, 5);
     }
