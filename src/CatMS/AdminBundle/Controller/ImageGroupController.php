@@ -4,8 +4,6 @@ namespace CatMS\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use CatMS\AdminBundle\Entity\ImageGroup;
 use CatMS\AdminBundle\Form\ImageGroupType;
@@ -14,18 +12,12 @@ use CatMS\AdminBundle\Controller\CommonMethods;
 /**
  * ImageGroup controller.
  *
- * @Route("/admin/image-group")
  */
 class ImageGroupController extends Controller
 {
     /**
      * Lists all ImageGroup entities.
      *
-     * @Route("/list/{page}", 
-     *  name="image-group",
-     *  defaults={"page"=1}
-     * )
-     * @Method("GET")
      * @Template()
      */
     public function indexAction($page)
@@ -54,8 +46,6 @@ class ImageGroupController extends Controller
     /**
      * Creates a new ImageGroup entity.
      *
-     * @Route("/", name="image-group-create")
-     * @Method("POST")
      * @Template("CatMSAdminBundle:ImageGroup:new.html.twig")
      */
     public function createAction(Request $request)
@@ -84,8 +74,6 @@ class ImageGroupController extends Controller
     /**
      * Displays a form to create a new ImageGroup entity.
      *
-     * @Route("/new", name="image-group-new")
-     * @Method("GET")
      * @Template()
      */
     public function newAction()
@@ -102,8 +90,6 @@ class ImageGroupController extends Controller
     /**
      * Finds and displays a ImageGroup entity.
      *
-     * @Route("/{id}", name="image-group-show")
-     * @Method("GET")
      * @Template()
      */
     public function showAction($id)
@@ -127,8 +113,6 @@ class ImageGroupController extends Controller
     /**
      * Displays a form to edit an existing ImageGroup entity.
      *
-     * @Route("/{id}/edit", name="image-group-edit")
-     * @Method("GET")
      * @Template()
      */
     public function editAction($id)
@@ -154,8 +138,6 @@ class ImageGroupController extends Controller
     /**
      * Edits an existing ImageGroup entity.
      *
-     * @Route("/{id}", name="image-group-update")
-     * @Method("PUT")
      * @Template("CatMSAdminBundle:ImageGroup:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
@@ -173,8 +155,6 @@ class ImageGroupController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            
-            //$entity->setRelatedContents($entity->getRelatedContents());
             
             $em->persist($entity);
             $em->flush();
@@ -195,8 +175,6 @@ class ImageGroupController extends Controller
     /**
      * Deletes a ImageGroup entity.
      *
-     * @Route("/{id}", name="image-group-delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {

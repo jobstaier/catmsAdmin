@@ -6,6 +6,14 @@ cat_ms_admin:
 cat_ms_admin_media_library:
     resource: "@CatMSAdminBundle/Resources/config/media-library/routing.yml"
     prefix:   /admin/media-library
+    
+cat_ms_admin_image_group:
+    resource: "@CatMSAdminBundle/Resources/config/image-group/routing.yml"
+    prefix:   /admin/asset-group   
+    
+cat_ms_admin_content_group:
+    resource: "@CatMSAdminBundle/Resources/config/content-group/routing.yml"
+    prefix:   /admin/content-group    
 
 catms_auth_user:
     resource: "@CatMSAuthBundle/Resources/config/user/routing.yml"
