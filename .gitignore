@@ -1,0 +1,13 @@
+/web/bundles/
+/web/uploads/
+/app/bootstrap.php.cache
+/app/cache/*
+/app/logs/*
+/build/
+/vendor/
+/bin/
+/composer.phar
+/nbproject/
+/src/CatMS/FrontBundle/
+/web/css/yui/cmp_*
+/web/js/yui/cmp_*

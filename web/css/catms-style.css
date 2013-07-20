@@ -1,0 +1,231 @@
+/* 
+    Document   : style
+    Created on : 2013-04-29, 09:13:52
+    Author     : jobs
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body {
+  padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+}
+
+.to-right { 
+    float: right !important;
+}
+
+.checkbox_inline {
+    margin: -53px 0 0 75px !important;
+}
+
+.form-float {
+    float: left;
+}
+
+.clear {
+    clear: both;
+    float: left;
+}
+
+.well {
+    padding: 5px !important;
+}
+
+.popup-text-input {
+    margin-bottom: 1px !important;
+    margin-left: 5px !important;
+}
+
+.loader-gif, .loader-gif-bottom, .loader-history-gif {
+    width: 66px;
+    height: 66px;
+    background: url('../img/loading.gif') no-repeat 0 0;
+    margin: 40px auto;
+}
+
+.related-images-trigger-container {
+    position: fixed;
+    right: -3px;
+    top: 58px;
+}
+
+.history-trigger-container {
+    position: fixed;
+    right: -3px;
+    top: 100px;
+}
+
+.archive-trigger-container {
+    position: fixed;
+    right: -3px;
+    top: 142px;
+}
+
+.related-images-container {
+    position: fixed;
+    right: -992px;
+    top: 87px;
+    border: 1px solid #F89406;
+    height: 508px;
+    width: 950px;
+    background: #fff;
+    z-index: 9;
+    padding: 10px 20px 20px;
+}
+
+.history-container {
+    position: fixed;
+    right: -475px;
+    top: 129px;
+    border: 1px solid #2F96B4;
+    height: 300px;
+    width: 400px;
+    background: #fff;
+    z-index: 9;
+    padding: 10px 20px 20px;
+}
+
+.archive-container {
+    position: fixed;
+    /*right: -592px;*/
+    right: 0px;
+    top: 172px;
+    border: 1px solid #111;
+    height: 340px;
+    width: 530px;
+    background: #fff;
+    z-index: 9;
+    padding: 10px 0 20px 20px;
+}
+
+.archive-table {
+    width: 450px;
+    margin: 10px auto;
+    overflow-y: scroll;
+}
+
+.archive-table tr td, .archive-table tr th {
+    text-align: center;
+}
+
+.related-images-container hr {
+    margin: 0;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-margin h5 {
+    margin: 5px 0 0 0;
+}
+
+.related-from-group {
+    height: 340px;
+}
+
+.archive {
+    height: 340px;
+}
+
+.append-here {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 300px;
+}
+
+.append-here-archive {
+    overflow: auto;
+    height: 300px;
+}
+
+.append-here-bottom {
+    overflow-y: scroll;
+    overflow-x: scroll;
+    height: 137px;
+}
+
+.append-here-bottom ul li, .append-here ul li {
+    list-style: none;
+    display: inline-block;
+    width: 150px;
+    text-align: center;
+    margin: 5px 0;
+    vertical-align: top;
+}
+
+.append-here-bottom ul li p, .append-here ul li p {
+    font-size: 11px;
+    margin: 0;
+}
+
+.append-here ul li h6, .append-here-bottom ul li h6 {
+    margin: 2px 0;
+}
+
+.append-here ul li img, .append-here-bottom ul li img {
+    max-width: 130px;
+}
+
+.append-history-here ul {
+    padding: 9px 0 0 0;
+    margin-bottom: 5px;
+}
+
+.append-history-here ul li {
+    list-style: decimal;
+    margin: 6px 0;
+}
+
+.pdf-icon-32 {
+    display: block;
+    width: 32px;
+    height: 32px;
+    background: url('../img/pdf32x32.png') 0 0 no-repeat;
+}
+
+.pdf-icon-48 {
+    display: block;
+    width: 48px;
+    height: 48px;
+    background: url('../img/pdf48x48.png') 0 0 no-repeat;
+}
+
+.footer-bottom {
+    padding: 15px 0;
+    text-align: center;
+    color: #ccc;
+}
+
+.footer-bottom a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+#fancybox-overlay {
+    background-color: transparent !important; 
+}
+
+.upload-form {
+    float: left;
+    width: 390px;
+}
+
+.multiple-upload-form {
+    float: right;
+}
+
+.file-input-container input {
+    max-width: 340px;
+    overflow: hidden;
+}
+
+.input-xplarge { width: 420px; }
+.textarea-xplarge { width: 420px; }
+.h100 { height: 100px; }
+.w420 { width: 420px; max-width: 420px;}
+form .well { margin-bottom: -3px;}
+.select-large { width: 300px; }
+
+.error-tooltip { padding: 3px 1px 3px 14px; }
+.error-tooltip i { margin-right: 10px; }

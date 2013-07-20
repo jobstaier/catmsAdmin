@@ -1,0 +1,28 @@
+{% extends 'CatMSAdminBundle::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    textarea { width: 500px }
+{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li><a href="{{ path('seo') }}">SEO manager</a></li> <span class="divider">/</span>
+    <li class="active">New SEO page</li>
+{% endblock %}
+    
+{% block content -%}
+    <legend>SEO page creation</legend>
+
+    <form action="{{ path('seo-create') }}" method="post" {{ form_enctype(form) }} style="width: 220px;">
+        {{ form_widget(form) }}
+        <p>
+            <button type="submit" data-toggle="button" class="btn btn-primary show-loader" data-loading-text="Saving..."><i class="icon-hdd"></i> Create</button>
+        </p>
+    </form>
+
+    
+    <div class="btn-group" style="margin-bottom: 10px">
+        <a href="{{ path('seo') }}" class="btn"><i class="icon-list"></i> Back to the list</a>
+    </div>
+{% endblock %}

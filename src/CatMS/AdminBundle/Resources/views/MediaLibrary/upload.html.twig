@@ -1,0 +1,145 @@
+{% extends 'CatMSAdminBundle::base.html.twig' %}
+
+
+{% block stylesheets_import %}
+<link href="{{ asset('js/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css') }}" media="screen" rel="stylesheet" type="text/css"</link>
+{% endblock %}
+
+{% block stylesheets %}
+#uploader_browse {margin-right: 10px; !important;}
+#uploader_filelist {height: 242px;}
+#uploader {float: right; width: 520px; margin-top: -10px;}
+.plupload_scroll .plupload_filelist {background: none; border-left: 1px dashed #DDD;}
+{% endblock %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    {% if group is empty %}
+    <li><a href="{{ path('media-library') }}">Media library</a></li> <span class="divider">/</span>
+    <li class="active">Upload file</li>
+    {% else %}
+    <li><a href="{{ path('media-library') }}">Media library</a></li> <span class="divider">/</span>
+    <li><a href="{{ path('media-library', {'slug': group}) }}">Group <i>{{ groupEntity.description }}</i></a></li> <span class="divider">/</span>
+    <li class="active">Upload file</li>
+    {% endif %}
+{% endblock %}    
+    
+{% block content -%}    
+    
+    {% if group is not empty and groupEntity is defined and (groupEntity.imageWidth or groupEntity.imageHeight) %}
+        
+        <div class="alert alert-block">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4>Warning!</h4>
+            Canvas has dimensions 
+            {% if groupEntity.imageWidth %} {{ groupEntity.imageWidth }}px width {% endif %}
+            {% if groupEntity.imageWidth and groupEntity.imageHeight %} and {% endif %}
+            {% if groupEntity.imageHeight %}{{ groupEntity.imageHeight }}px height{% endif %}. Larger image will be cropped to canvas dimensions.
+        </div>
+
+    {% endif %}
+    
+    <form novalidate action="{{ path('media-library-upload', {'group': group}) }}" method="post" {{ form_enctype(form) }} class="upload-form">
+        <legend>Upload single file <small>and set properties</small></legend>
+         
+        <div class="control-group">
+        
+            <div class="controls">
+                <div class="input-append">
+                    <input style="width: 280px;" id="form_name" type="text" maxlength="255" required="required" name="form[name]" placeholder="Filename">
+                    <a class="popoverButton" href="#" data-content="Define custom filename allows to identyfing Image/asset by this name. Otherwise filename will be generated automticaly." data-toggle="popover" data-original-title="Filename">
+                        <span class="add-on"><i class="icon-question-sign"></i></span>
+                    </a>
+                </div>
+                {{ form_errors(form.name) }}
+            </div>
+            
+            <div class="controls">
+                <div class="input-append">
+                <input style="width: 280px;" id="form_titl" type="text" maxlength="255" required="required" name="form[title]" placeholder="Image/asset title">
+                <a class="popoverButton" href="#" data-content="Image title render into HTML img title attribute." data-toggle="popover" data-original-title="Image/asset title">
+                    <span class="add-on"><i class="icon-question-sign"></i></span>
+                </a>
+                </div>
+                {{ form_errors(form.title) }}
+            </div>
+        
+            <div class="controls">
+                <div class="input-append">
+                <input style="width: 280px;" id="form_prioriy" type="text" maxlength="255" required="required" name="form[priority]" placeholder="Image/asset priority">
+                <a class="popoverButton" href="#" data-content="Priority of image display into defined group." data-toggle="popover" data-original-title="Image/asset priority">
+                    <span class="add-on"><i class="icon-question-sign"></i></span>
+                </a>
+                </div>
+                {{ form_errors(form.priority) }}
+            </div>
+            
+            <div class="controls">
+                <div class="input-append">
+                <input style="width: 280px;" id="form_redirect" type="text" maxlength="255" name="form[redirect]" placeholder="Redirect after click">
+                <a class="popoverButton" href="#" data-content="Redirect aftter click on image canvas." data-toggle="popover" data-original-title="Redirect after click">
+                    <span class="add-on"><i class="icon-question-sign"></i></span>
+                </a>
+                </div>
+                {{ form_errors(form.redirect) }}
+            </div>
+            
+            <div class="controls">
+                <div class="input-append">
+                <input style="width: 280px;" id="form_slug" type="text" maxlength="255" required="required" name="form[slug]" placeholder="Image/asset slug">
+                <a class="popoverButton" href="#" data-content="Image slug is using whlie identyfing and fetching." data-toggle="popover" data-original-title="Image/asset slug">
+                    <span class="add-on"><i class="icon-question-sign"></i></span>
+                </a>
+                </div>
+                {{ form_errors(form.slug) }}
+            </div>
+            
+            <div class="controls file-input-container">
+                <span class="btn btn-file btn-small"><i class="icon-file"></i> 
+                    <input type="file" name="form[file]" id="form_file" />
+                </span>    
+                {{ form_errors(form.file) }}
+            </div>
+            
+            {% if group is empty %}  
+            <script>$(function(){var txt='Undefined';$('#form_imageGroup option').each(function(){if ($(this).text() === txt) {$(this).attr('selected', 'selected');}})});</script>
+            <div class="controls" style="margin-top: 15px;">
+                <label for="form_imageGroup"><i class="icon-chevron-down"></i> Image/asset group</label>
+                {{ form_widget(form.imageGroup, {'attr': {'class': 'span4'}}) }}
+                {{ form_errors(form.imageGroup) }}
+            </div>
+            {% endif %}
+
+            {{ form_row(form._token) }}
+            
+        </div>
+        
+        <div class="btn-group" style="margin-top: 20px;">
+            {% if group is not empty %}
+            <a href="{{ path('media-library', {'slug': group}) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
+            {% else %}    
+            <a href="{{ path('media-library') }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>    
+            {% endif %}
+            <button class="show-loader btn btn-primary btn-small" type="submit"  data-loading-text="Uploading..."><i class="icon-upload"></i> Upload </button>
+        </div>
+    </form>
+
+{# plupload #}
+<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+<script type="text/javascript" src="{{ asset('js/plupload/js/plupload.full.js')}}"></script>
+<script type="text/javascript" src="{{ asset('js/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js')}}"></script>
+
+<script type="text/javascript" src="{{ asset('js/catms-plupload.js') }}"></script>
+<a href="{{ path('media-library-plupload', {'group': group}) }}" id="pluploadUrl" style="display: none"></a>
+<div class="multiple-upload-form">
+    <legend>
+        Multiple Files Upload
+    </legend>
+<form>
+<div id="uploader">
+    <p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
+</div>
+</form>
+</div>
+    
+{% endblock %}

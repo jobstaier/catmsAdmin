@@ -1,0 +1,21 @@
+{% extends 'CatMSAdminBundle::base.html.twig' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li><a href="{{ path('image-group') }}">Image Groups</a></li> <span class="divider">/</span>
+    <li class="active">Create new group</a>
+{% endblock %} 
+
+{% block content -%}
+    <legend>Image Group creation</legend>
+
+    <form novalidate action="{{ path('image-group-create') }}" method="post" {{ form_enctype(form) }} class="form-float content-manager-form">
+        {{ form_widget(form) }}
+            
+            
+        <div class="btn-group">
+            <a href="{{ path('image-group') }}" class="btn"><i class="icon-list"></i> Back to the list</a>
+            <button type="submit" class="btn btn-primary show-loader" data-loading-text="Creating..."><i class="icon-hdd"></i> Create</button>
+        </div>    
+    </form>
+{% endblock %}

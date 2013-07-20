@@ -1,0 +1,148 @@
+<?php
+namespace CatMS\AdminBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\True;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Table(name="province")
+ * @ORM\Entity(repositoryClass="CatMS\AdminBundle\Repository\ProvinceRepository")
+ * @UniqueEntity("slug")
+ */
+class Province
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var integer
+     */
+    private $id;
+    
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min=4,
+     *      minMessage="Province slug must have at least {{ limit }} characters.",
+     *      max=255,
+     *      maxMessage="Province slug must have no more than {{ limit }} characters."
+     * )
+     * @var string
+     */
+    private $slug;
+    
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min=4,
+     *      minMessage="Province name must have at least {{ limit }} characters.",
+     *      max=255,
+     *      maxMessage="Province name must have no more than {{ limit }} characters."
+     * )
+     * @var string
+     */
+    private $name;  
+    
+    /**
+     * @ORM\OneToMany(targetEntity="CatMS\AdminBundle\Entity\ShopAddress", mappedBy="province")
+     * @var object \CatMS\AdminBundle\Entity\ShopAddress
+     */
+    private $shops;
+    
+    public function __construct() {
+        $this->shops = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Province
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Province
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add shops
+     *
+     * @param \CatMS\AdminBundle\Entity\ShopAddress $shops
+     * @return Province
+     */
+    public function addShop(\CatMS\AdminBundle\Entity\ShopAddress $shops)
+    {
+        $this->shops[] = $shops;
+
+        return $this;
+    }
+
+    /**
+     * Remove shops
+     *
+     * @param \CatMS\AdminBundle\Entity\ShopAddress $shops
+     */
+    public function removeShop(\CatMS\AdminBundle\Entity\ShopAddress $shops)
+    {
+        $this->shops->removeElement($shops);
+    }
+
+    /**
+     * Get shops
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getShops()
+    {
+        return $this->shops;
+    }
+}
