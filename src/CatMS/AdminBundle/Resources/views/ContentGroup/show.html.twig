@@ -6,6 +6,10 @@
     <li class="active">Show group - <i>{{ truncate(entity.description | striptags | raw, 40) }}</i></a>
 {% endblock %} 
         
+{% block javascripts_bottom %}
+    <script src="{{ asset('js/catms.popover.js') }}"></script>
+{% endblock %}         
+        
 {% block content %}
     <legend><i>{{ entity.description | striptags | raw }}</i> content group</legend>
 
@@ -55,29 +59,5 @@
         {{ form_widget(delete_form) }}
         <button type="submit" class="btn btn-small remove-this"><i class="icon-trash"></i> Delete</button>
     </form>
-    
-    <script>
-        $('.remove-this').click(function(){
-            return false;
-        });        
-
-        $('.remove-this').popover({
-            content: 
-                    '<div style="text-align: center;">Are you sure you want to delete this item?<br /><br />' + 
-                    '<a href="" class="btn btn-primary btn-mini remove-this-confirm">Confirm</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-inverse btn-mini dismiss">Dismiss</a></div>',
-            placement: 'right',
-            html: true
-        });
-
-        $('.dismiss').live('click', function(){
-            $('.remove-this').popover('hide');
-            return false;
-        });
-
-        $('.remove-this-confirm').live('click', function(){
-            console.log('Parent Submit');
-            //$(this).parents('form').submit();
-        });
-    </script>
 
 {% endblock %}

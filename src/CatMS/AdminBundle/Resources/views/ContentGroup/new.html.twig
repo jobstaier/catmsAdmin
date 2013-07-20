@@ -10,17 +10,17 @@
     <script type="text/javascript" src="{{ asset('js/tinymce/tinymce.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/catms.text-editor.js')}}"></script>
     <script>
-    $('.input-wrapper label').prepend('<i class="icon-chevron-right"></i>');
-    $('.select-icons option[value="777"]').prepend('<i class="icon-ok-circle"></i>');
-    $('.select-icons option[value="755"]').prepend('<i class="icon-warning-sign"></i>');
-    $('.select-icons option[value="000"]').prepend('<i class="icon-remove-circle"></i>');
+        $('.input-wrapper label').prepend('<i class="icon-chevron-right"></i>');
+        $('.select-icons option[value="777"]').prepend('<i class="icon-ok-circle"></i>');
+        $('.select-icons option[value="755"]').prepend('<i class="icon-warning-sign"></i>');
+        $('.select-icons option[value="000"]').prepend('<i class="icon-remove-circle"></i>');
     </script>
 {% endblock %}          
         
 {% block content -%}
     {% include 'CatMSAdminBundle:Helpers:form-errors-div.html.twig' with {'form': form, 'errors': errors | default() } %}
     
-    <legend>Content group creation</legend>
+    <legend><i class="icon-large icon-edit"></i> Content group creation</legend>
     
     <form novalidate action="{{ path('content-group-create') }}" method="post" {{ form_enctype(form) }}>
         <div class="btn-group" style="margin-bottom: 20px;">

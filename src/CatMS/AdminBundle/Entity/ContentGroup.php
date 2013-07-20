@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="CatMS\AdminBundle\Repository\ContentGroupRepository")
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity("slug")
- * @ORM\Table(name="contentgroup")
+ * @ORM\Table(name="content_group")
  */
 class ContentGroup
 {

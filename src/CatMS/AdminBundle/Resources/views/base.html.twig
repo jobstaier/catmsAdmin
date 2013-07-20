@@ -23,6 +23,8 @@
         filter='yui_js' output="js/yui/cmp.js" %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
+        
+    {% block javascripts_bottom %}{% endblock %}
     
 </head>
 <body>
@@ -87,10 +89,6 @@
     </div> <!-- /container -->
     
     <footer class="footer-bottom"><small><a href="http://www.catdesign.pl">Catdesign</a> &copy; 2013 Author: Dawid Job <a href="mailto:d.job@catdesign.pl">d.job@catdesign.pl</a></small></footer>
-    
-    <!-- Javascripts at the bottom of page - decrease site load time -->
-    {% block javascripts_bottom %}{% endblock %}
-    <!-- End Javascripts Bottom -->
     
 </body>
 </html>

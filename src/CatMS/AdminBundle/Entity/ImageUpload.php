@@ -10,7 +10,7 @@ require_once __DIR__.'/../External/WideImage/WideImage.php';
 /**
  * @ORM\Entity(repositoryClass="CatMS\AdminBundle\Repository\ImageUploadRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="imageupload")
+ * @ORM\Table(name="asset_upload")
  */
 class ImageUpload
 {
