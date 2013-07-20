@@ -249,11 +249,12 @@ form .well { margin-bottom: -3px;}
 
 
 .select-icons option {
-    padding: 4px 0; 
+    padding: 4px 0;
 }
 
 .select-icons option i {
     margin-right: 6px;
+    margin-left: 8px;
 }
 
 .icon-large.icon-edit {
@@ -277,4 +278,31 @@ form .well { margin-bottom: -3px;}
 
 .content-group-fields input[type="text"] {
     margin-top: -5px;
+}
+
+.navbar .container .brand {
+    padding: 5px 20px 0 20px;
+    font-size: 15px;
+}
+
+.navbar .container .brand span {
+    position: relative;
+    top: 9px;
+    left: -8px;
+    letter-spacing: -1px;
+}
+
+.brand img {
+    width: 30px;
+    height: 30px;
+    margin-right: 7px;
+}
+
+.navbar  .btn-group.header-btns {
+    margin-top: 8px;
+}
+
+.content-group-fields .alert {
+    padding-left: 10px;
+    margin-top: -4px;
 }

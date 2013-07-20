@@ -31,19 +31,19 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
-                <a class="brand" href="{{ path('admin-home') }}">CatMS Admin</a>
+                <a class="brand" href="{{ path('admin-home') }}"><img src="{{ asset('img/catms-logo.png') }}" /><span>CatMS</span></a>
                 <div class="nav-collapse collapse">
 
                     <ul class="nav">
                         {{ include('CatMSAdminBundle:Helpers:nav.html.twig') }}
                     </ul>
 
-                    <div class="btn-group to-right">
+                    <div class="btn-group to-right header-btns">
                         {% if not app.user %}
                             <a href="{{ path('login') }}" class="btn btn-primary">Login</a>
                         {% else %}
-                            <span class="btn"><i class="icon-user"></i> Hello {{ app.user.username }}!</span>
-                            <a href="{{ path('logout') }}" class="btn btn-primary"><i class="icon-off"></i> Logout</a>
+                            <span class="btn btn-small"><i class="icon-user"></i> Hello {{ app.user.username }}!</span>
+                            <a href="{{ path('logout') }}" class="btn btn-primary btn-small"><i class="icon-off"></i> Logout</a>
                         {% endif %}
                     </div>           
                 </div>

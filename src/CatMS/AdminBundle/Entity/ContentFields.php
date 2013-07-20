@@ -68,8 +68,8 @@ class ContentFields
      *  nullable=false
      * )
      * @Assert\Length(
-     *      min="1",
-     *      minMessage="Description label must have at least {{ limit }} characters."
+     *      min="3",
+     *      minMessage="This value must have at least {{ limit }} characters"
      * ) 
      * @var string
      */
@@ -82,8 +82,8 @@ class ContentFields
      *  nullable=false
      * )
      * @Assert\Length(
-     *      min="1",
-     *      minMessage="Short text label must have at least {{ limit }} characters."
+     *      min="3",
+     *      minMessage="This value must have at least {{ limit }} characters"
      * ) 
      * @var string
      */
@@ -96,8 +96,8 @@ class ContentFields
      *  nullable=false
      * )
      * @Assert\Length(
-     *      min="1",
-     *      minMessage="Title label must have at least {{ limit }} characters."
+     *      min="3",
+     *      minMessage="This value must have at least {{ limit }} characters"
      * ) 
      * @var string
      */    
@@ -110,8 +110,8 @@ class ContentFields
      *  nullable=false
      * )
      * @Assert\Length(
-     *      min="4",
-     *      minMessage="Full text label must have at least {{ limit }} characters."
+     *      min="3",
+     *      minMessage="This value must have at least {{ limit }} characters"
      * ) 
      * @var string
      */
