@@ -38,7 +38,7 @@ class ContentManager
     private $slug;
     
     /**
-     * @ORM\Column(type="string", length=510, unique=false)
+     * @ORM\Column(type="string", length=510, unique=false, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(
      *      min="5",

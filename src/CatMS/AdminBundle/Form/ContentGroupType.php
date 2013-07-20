@@ -5,6 +5,7 @@ namespace CatMS\AdminBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use CatMS\AdminBundle\Form\ContentFieldsType;
 
 class ContentGroupType extends AbstractType
 {
@@ -26,13 +27,15 @@ class ContentGroupType extends AbstractType
                 'preferred_choices' => array('777'),
                 'label' => 'Is removable?',
             ))
+            ->add('contentFields', new ContentFieldsType());
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CatMS\AdminBundle\Entity\ContentGroup'
+            'data_class' => 'CatMS\AdminBundle\Entity\ContentGroup',
+            'cascade_validation' => true,
         ));
     }
 

@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use CatMS\AdminBundle\Entity\ContentGroup;
+use CatMS\AdminBundle\Entity\ContentFields;
 
 class LoadContentGroupData extends AbstractFixture  implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -29,9 +30,22 @@ class LoadContentGroupData extends AbstractFixture  implements OrderedFixtureInt
             '</div>';
         
         $entity->setManual($manual);
+        $entity->setContentFields($this->getContentFields());
         
         $manager->persist($entity);
         $manager->flush();
+    }
+    
+    private function getContentFields()
+    {
+        $entity = new ContentFields();
+        
+        $entity->setFieldDescriptionLabel('Description');
+        $entity->setFieldFullTextLabel('Full Text');
+        $entity->setFieldShortTextLabel('Short Text');
+        $entity->setFieldTitleLabel('Title');
+        
+        return $entity;
     }
     
     /**

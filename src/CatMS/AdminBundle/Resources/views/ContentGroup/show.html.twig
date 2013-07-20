@@ -30,9 +30,9 @@
             <tr>
                 <th>Is removable?</th>
                 <td>
-                    {% if entity.isRemovable == '777' %}<i class="icon-ok-circle"></i> YES
-                    {% elseif entity.isRemovable == '755' %}<i class="icon-warning-sign"> Only by Developer
-                    {% elseif entity.isRemovable == '00' %}<i class="icon-remove-circle">Forbidden
+                    {% if entity.isRemovable == '777' %}<span class="label label-success"><i class="icon-ok-circle"></i> YES</span>
+                    {% elseif entity.isRemovable == '755' %}<span class="label label-warning"><i class="icon-warning-sign"> Only by Developer</span>
+                    {% elseif entity.isRemovable == '00' %}<span class="label label-error"><i class="icon-remove-circle">Forbidden</span>
                     {% endif %}
                 </td>
             </tr>

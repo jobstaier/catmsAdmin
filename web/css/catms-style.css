@@ -255,3 +255,26 @@ form .well { margin-bottom: -3px;}
 .select-icons option i {
     margin-right: 6px;
 }
+
+.icon-large.icon-edit {
+    width: 25px;
+    height: 25px;
+}
+
+.legend-inside {
+    margin-top: 20px;
+}
+
+.content-group-fields label {
+    float: left;
+    width: 160px;
+    display: block;
+}
+
+.content-group-fields input {
+    float: left;
+}
+
+.content-group-fields input[type="text"] {
+    margin-top: -5px;
+}

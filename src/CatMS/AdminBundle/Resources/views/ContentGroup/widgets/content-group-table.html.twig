@@ -16,8 +16,13 @@
             <td><a href="{{ path('content-group-show', { 'id': entity.id }) }}">{{ entity.id }} <i class="icon-chevron-right"></i></a></td>
             <td>{{ entity.slug }}</td>
             <td>{{ entity.description }}</td>
-            <td>{% if entity.manual %}<span class="label label-success">YES</span>{% else %}<span class="label label-warning">NO</span>{% endif %}</td>
-            <td>{% if entity.manual %}<span class="label label-success">YES</span>{% else %}<span class="label label-warning">NO</span>{% endif %}</td>
+            <td>{% if entity.manual %}<span class="label label-success"><i class="icon-white icon-ok-circle"></i> YES</span>{% else %}<span class="label label-warning"><i class="icon-white icon-warning-sign"></i> NO</span>{% endif %}</td>
+            <td>
+                {% if entity.isRemovable == '777' %}<span class="label label-success"><i class="icon-white icon-ok-circle"></i> YES</span>
+                {% elseif entity.isRemovable == '755' %}<span class="label label-warning"><i class="icon-white icon-warning-sign"></i> Only by Developer</span>
+                {% elseif entity.isRemovable == '00' %}<span class="label label-error"><i class="icon-white icon-remove-circle">Forbidden</span>
+                {% endif %}
+            </td>
             <td><span class="label">{{ entity.contents | length }}</span></td>
             <td>
                 <div class="btn-group">

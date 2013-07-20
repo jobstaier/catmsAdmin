@@ -69,6 +69,12 @@ class ContentGroup
      */
     private $relatedImages;
     
+    /**
+     * @ORM\OneToOne(targetEntity="CatMS\AdminBundle\Entity\ContentFields", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="content_fields_id", referencedColumnName="id")
+     */
+    private $contentFields;
+    
     public function __construct() {
         $this->contents = new \Doctrine\Common\Collections\ArrayCollection(); 
         $this->relatedImages = new \Doctrine\Common\Collections\ArrayCollection();
@@ -244,5 +250,29 @@ class ContentGroup
     public function getIsRemovable()
     {
         return $this->isRemovable;
+    }
+
+
+    /**
+     * Set contentFields
+     *
+     * @param \CatMS\AdminBundle\Entity\ContentFields $contentFields
+     * @return ContentGroup
+     */
+    public function setContentFields(\CatMS\AdminBundle\Entity\ContentFields $contentFields = null)
+    {
+        $this->contentFields = $contentFields;
+
+        return $this;
+    }
+
+    /**
+     * Get contentFields
+     *
+     * @return \CatMS\AdminBundle\Entity\ContentFields 
+     */
+    public function getContentFields()
+    {
+        return $this->contentFields;
     }
 }

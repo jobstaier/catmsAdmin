@@ -155,6 +155,7 @@ class ContentGroupController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+            //echo 'Controller'; die();
             $em->persist($entity);
             $em->flush();
 
