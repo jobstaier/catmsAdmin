@@ -24,7 +24,7 @@ $(document).ready(function(){
                     } else {
                         handler.append('<li><a href="#"><i class="icon-remove-sign"></i> No groups defined</a></li>')
                     } 
-                    handler.hide().fadeIn(150);  
+                    //handler.hide().fadeIn(150);
                 },
                 error:function(){}   
             });
@@ -47,7 +47,6 @@ $(document).ready(function(){
     var cHandler = $('.ajax-content-groups-preloder').parent();
     
     $('.ajax-get-content-groups').hover(function(){
-
         if (!$(this).hasClass('ready')) {
             $(this).addClass('ready');
             var url = $(this).attr('href');
@@ -59,14 +58,14 @@ $(document).ready(function(){
                     var tmpImageGroupUrl = $('.tmp-content-group-url').attr('href');
                     cHandler.children().remove();
           
-                    if (groups.length != 0) {
+                    if (groups.length !== 0) {
                         for (slug in groups) {
-                            cHandler.append('<li><a href="' + tmpImageGroupUrl + '/1/' + slug + '"><i class="icon-book"></i> ' + groups[slug]  + '</a></li>')
+                            cHandler.append('<li><a href="' + tmpImageGroupUrl + '/1/' + slug + '"><i class="icon-tag"></i> ' + groups[slug]  + '</a></li>')
                         }
                     } else {
                         cHandler.append('<li><a href="#"><i class="icon-remove-sign"></i> No groups defined</a></li>')
                     } 
-                    cHandler.hide().fadeIn(150);  
+                    //cHandler.hide().fadeIn(150);  
                 },
                 error:function(){}   
             });

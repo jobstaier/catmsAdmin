@@ -21,6 +21,11 @@ class ContentGroupType extends AbstractType
                 'multiple' => true
             ))    
             ->add('manual', 'textarea')
+            ->add('isRemovable', 'choice', array(
+                'choices' => array('777' => 'Yes', '755' => 'Only by Developer', '000' => 'Forbidden'),
+                'preferred_choices' => array('777'),
+                'label' => 'Is removable?',
+            ))
         ;
     }
 

@@ -51,6 +51,13 @@ class ContentGroup
     private $manual;
     
     /**
+     * @ORM\Column(type="text", length=3, nullable=false)
+     * @Assert\Choice(choices = {"777", "755", "000"}, message = "Choose a valid access value.")
+     * @var integer 
+     */
+    private $isRemovable = "777";
+    
+    /**
      * @ORM\OneToMany(targetEntity="CatMS\AdminBundle\Entity\ContentManager", mappedBy="contentGroup")
      * @var object \CatMS\AdminBundle\Entity\ContentManager
      */
@@ -214,5 +221,28 @@ class ContentGroup
     public function getRelatedImages()
     {
         return $this->relatedImages;
+    }
+
+    /**
+     * Set isRemovable
+     *
+     * @param integer $isRemovable
+     * @return ContentGroup
+     */
+    public function setIsRemovable($isRemovable)
+    {
+        $this->isRemovable = $isRemovable;
+
+        return $this;
+    }
+
+    /**
+     * Get isRemovable
+     *
+     * @return integer 
+     */
+    public function getIsRemovable()
+    {
+        return $this->isRemovable;
     }
 }

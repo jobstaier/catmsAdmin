@@ -1,6 +1,6 @@
 <?php
 
-namespace CatMS\AuthBundle\DataFixtures\ORM;
+namespace CatMS\AdminBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -8,7 +8,6 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use CatMS\AdminBundle\Entity\ContentGroup;
-use CatMS\AuthBundle\Controller\UserController;
 
 class LoadContentGroupData extends AbstractFixture  implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -19,14 +18,14 @@ class LoadContentGroupData extends AbstractFixture  implements OrderedFixtureInt
     {
         $entity = new ContentGroup();
 
-        $entity->setSlug('sf2-internals');
-        $entity->setDescription('Symfony2 Internals');
+        $entity->setSlug('symfony2');
+        $entity->setDescription('Symfony2');
         
         $manual = '<div class="alert alert-block">'.
             '<button type="button" class="close" data-dismiss="alert">&times;</button>'.
             '<h4>Tutorial</h4>'.
-            'Looks like you want to understand how Symfony2 works and how to extend it. That makes me very happy! This section is an in-depth explanation of the Symfony2 internals.<br />'.
-            '<h5>Overview</h5>The Symfony2 code is made of several independent layers. Each layer is built on top of the previous one.'.
+            'Speed up the creation and maintenance of your PHP web applications. Replace the repetitive coding tasks by power, control and pleasure..<br />'.
+            '<h5>Overview</h5>Symfony is a PHP framework for web projects.'.
             '</div>';
         
         $entity->setManual($manual);

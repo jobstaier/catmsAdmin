@@ -4,48 +4,53 @@
     {{ parent() }}
     <li><a href="{{ path('content-group') }}">Content groups</a></li> <span class="divider">/</span>
     <li class="active">Create new group</a>
-{% endblock %} 
-
+{% endblock %}        
+        
 {% block javascripts_bottom %}
-    <script>
-        $(function(){
-            $('#catms_adminbundle_contentgrouptype').css('margin-bottom', '30px');
-            var relImgContainer = $('#catms_adminbundle_contentgrouptype_relatedImages').parent('div');
-            relImgContainer.css({
-                'float': 'right',
-                'position': 'relative',
-                'top': '-165px',
-                'right': '0px',
-                'height': '155px',
-                'width': '250px'
-            });
-            relImgContainer.children('select').css({
-           'width': '250px',
-           'height': '130px'
-        });
-    });
-    </script>
     <script type="text/javascript" src="{{ asset('js/tinymce/tinymce.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/catms.text-editor.js')}}"></script>
     <script>
-    tinymce.init({
-        selector: "textarea#catms_adminbundle_contentgrouptype_manual",
-        width : 940,
-        height: 220,
-        plugins: "code, textcolor",
-        toolbar: "undo redo | styleselect | bold italic underline strikethrough | lignleft aligncenter alignright alignjustify | numlist bullist outdent indent | code | forecolor"
-    });
+    $('.input-wrapper label').prepend('<i class="icon-chevron-right"></i>');
+    $('.select-icons option[value="777"]').prepend('<i class="icon-ok-circle"></i>');
+    $('.select-icons option[value="755"]').prepend('<i class="icon-warning-sign"></i>');
+    $('.select-icons option[value="000"]').prepend('<i class="icon-remove-circle"></i>');
     </script>
 {% endblock %}          
         
 {% block content -%}
+    {% include 'CatMSAdminBundle:Helpers:form-errors-div.html.twig' with {'form': form, 'errors': errors | default() } %}
+    
     <legend>Content group creation</legend>
-
+    
     <form novalidate action="{{ path('content-group-create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
+        <div class="btn-group" style="margin-bottom: 20px;">
+            <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> Back to the list</a>
+            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="Creating..."><i class="icon-hdd icon-small"></i> Create</button>
+        </div> 
+        
+
+        <div class="row-fluid">
+            <div class="span5 input-wrapper">
+                {{ form_row(form.slug, {'attr': {'class': 'span12'}}) }}
+                {{ form_row(form.description, {'attr': {'class': 'span12'}})}}
+                {{ form_row(form.isRemovable, {'attr': {'class': 'span12 select-icons'}})}}
+            </div>
+            <div class="span4 related-image-select pull-right offset3 input-wrapper">
+                {{ form_row(form.relatedImages) }}
+            </div>                    
+        </div>
+        <hr />
+        <div class="row-fluid">
+            <div class="span12 input-wrapper">
+                {{ form_row(form.manual, {'attr': {'class': 'tiny_full'}}) }}
+            </div>
+        </div>
+            
+        {{ form_rest(form) }}
         
         <div class="btn-group">
-            <a href="{{ path('content-group') }}" class="btn"><i class="icon-tags"></i> Back to the list</a>
-            <button type="submit" class="btn btn-primary show-loader" data-loading-text="Creating..."><i class="icon-hdd"></i> Create</button>
+            <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> Back to the list</a>
+            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="Creating..."><i class="icon-hdd icon-small"></i> Create</button>
         </div> 
         
     </form>

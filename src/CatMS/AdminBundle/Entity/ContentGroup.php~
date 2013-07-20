@@ -51,6 +51,13 @@ class ContentGroup
     private $manual;
     
     /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @Assert\Choice(choices = {777, 755, 000}, message = "Choose a valid access value.")
+     * @var integer 
+     */
+    private $isRemovable = 777;
+    
+    /**
      * @ORM\OneToMany(targetEntity="CatMS\AdminBundle\Entity\ContentManager", mappedBy="contentGroup")
      * @var object \CatMS\AdminBundle\Entity\ContentManager
      */
