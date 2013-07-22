@@ -3,12 +3,14 @@ $(function(){
         return false;
     });        
 
-    $('.remove-this').popover({
-        content: 
+    $('.remove-this').each(function(){
+        $(this).popover({
+            content: 
                 '<div style="text-align: center;">Are you sure you want to delete this item?<br /><br />' + 
                 '<a href="" class="btn btn-primary btn-mini remove-this-confirm">Confirm</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-inverse btn-mini dismiss">Dismiss</a></div>',
-        placement: 'right',
-        html: true
+            placement: ($(this).attr('data-view')) ? $(this).attr('data-view') : 'right',
+            html: true
+        });
     });
 
     $('.dismiss').live('click', function(){

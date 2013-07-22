@@ -9,6 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use CatMS\AdminBundle\Entity\ContentGroup;
 use CatMS\AdminBundle\Entity\ContentFields;
+use CatMS\AdminBundle\Entity\ImageGroup;
 
 class LoadContentGroupData extends AbstractFixture  implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -30,13 +31,16 @@ class LoadContentGroupData extends AbstractFixture  implements OrderedFixtureInt
             '</div>';
         
         $entity->setManual($manual);
-        $entity->setContentFields($this->getContentFields());
+        $entity->setContentFields($this->loadContentFields());
+        $entity->addRelatedImage($this->getReference('image-group-1'));
         
         $manager->persist($entity);
         $manager->flush();
+        
+        $this->addReference('content-group-1', $entity);
     }
     
-    private function getContentFields()
+    private function loadContentFields()
     {
         $entity = new ContentFields();
         
@@ -53,7 +57,7 @@ class LoadContentGroupData extends AbstractFixture  implements OrderedFixtureInt
      */
     public function getOrder()
     {
-        return 2;
+        return 3;
     }
     
     /**

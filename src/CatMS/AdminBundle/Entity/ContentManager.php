@@ -41,7 +41,7 @@ class ContentManager
      * @ORM\Column(type="string", length=510, unique=false, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      min="5",
+     *      min="3",
      *      max="510",
      *      minMessage="Description must have at least {{ limit }} characters.",
      *      maxMessage="Description must have no more than {{ limit }} characters."

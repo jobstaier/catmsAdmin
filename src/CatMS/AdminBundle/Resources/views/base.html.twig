@@ -11,6 +11,7 @@
         filter='cssrewrite, yui_css' output="css/yui/cmp.css" %}
         <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
     {% endstylesheets %}
+    {% block stylesheets_import %}{% endblock %}
     
     {% javascripts
         'js/jquery-1.7.2.min.js'
@@ -22,10 +23,8 @@
         'js/catms.ajax.js'
         filter='yui_js' output="js/yui/cmp.js" %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-        
+    {% endjavascripts %}  
     {% block javascripts_bottom %}{% endblock %}
-    
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -54,7 +53,7 @@
     <div class="container">
         
         <div class="history-trigger-container">
-            <a class="btn btn-info"><i class="icon-chevron-left"></i> History</a>
+            <a class="btn btn-info btn-small"><i class="icon-chevron-left"></i> History</a>
         </div>
         <div class="history-container">
             <a href="{{ path('ajax-get-history')}}" id="getHistoryUrl" style="display: none"></a>

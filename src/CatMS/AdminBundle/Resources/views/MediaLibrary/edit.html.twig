@@ -1,5 +1,9 @@
 {% extends 'CatMSAdminBundle::base.html.twig' %}
 
+{% block stylesheets_import %}
+    <link href="{{ asset('js/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css') }}" media="screen" rel="stylesheet" type="text/css"</link>
+{% endblock %}
+
 {% block breadcrumb %}
     {{ parent() }}
     {% if group is empty %}
@@ -10,9 +14,6 @@
         <li><a href="{{ path('media-library', {'page': 1, 'slug': image.imageGroup.slug }) }}">Group {{ image.imageGroup.description | raw }} images</a></li> <span class="divider">/</span>
         <li class="active">Edit image</li>
     {% endif %}
-
-
-
 {% endblock %}    
     
     

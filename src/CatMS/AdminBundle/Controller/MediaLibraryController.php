@@ -44,7 +44,7 @@ class MediaLibraryController extends Controller
         }
         
         $recordsPerPage = CommonMethods::castRecordsPerPage(
-        $em->getRepository('CatMSAdminBundle:Setting')->findOneBySlug('image-list-records-per-page'), 
+        $em->getRepository('CatMSAdminBundle:Setting')->findOneBySlug('asset-records-per-page'), 
         $this->container);
         
         $paginator  = $this->get('knp_paginator');
