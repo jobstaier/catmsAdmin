@@ -27,7 +27,7 @@ user_edit:
     requirements:
         id:  \d+
   
-user_edit:
+user_update:
     path:     /{id}
     defaults:  { _controller: CatMSAuthBundle:User:update }
     methods:  [PUT]

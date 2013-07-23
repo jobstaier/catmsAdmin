@@ -32,15 +32,24 @@ content-manager-edit:
     methods:  [GET]    
     
 content-manager-update:
-    path:      /{id}
+    path:      /update/{id}
     defaults:  { _controller: CatMSAdminBundle:ContentManager:update }
     requirements:
         id:  \d+
     methods:  [PUT] 
     
 content-manager-delete:
-    path:      /{id}/{group}
+    path:      /delete/{id}/{group}
     defaults:  { _controller: CatMSAdminBundle:ContentManager:delete }
     requirements:
         id:  \d+
     methods:  [DELETE]
+    
+content-manager-get-archive:
+    path: /ajax/get-archive/{id}
+    defaults:  { _controller: CatMSAdminBundle:ContentManager:getArchiveContent }
+    requirements:
+        id:  \d+
+    methods:  [GET]
+    
+    

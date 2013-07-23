@@ -7,8 +7,6 @@
 {% endblock %}        
         
 {% block javascripts_bottom %}
-    <script type="text/javascript" src="{{ asset('js/tinymce/tinymce.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('js/catms.text-editor.js')}}"></script>
     <script src="{{ asset('js/catms.fields-labels.js') }}"></script>
 {% endblock %}          
         
@@ -18,11 +16,12 @@
     <legend><i class="icon-large icon-pencil"></i> Content group creation</legend>
     
     <form novalidate action="{{ path('content-group-create') }}" method="post" {{ form_enctype(form) }}>
-        <div class="btn-group" style="margin-bottom: 20px;">
+        <div>
             <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> Back to the list</a>
             <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="Creating..."><i class="icon-hdd icon-small"></i> Create</button>
         </div> 
         
+        <hr class="clear" />            
 
         <div class="row-fluid" content-group-basics>
             <div class="span5 input-wrapper">
@@ -40,16 +39,20 @@
         <legend class="legend-inside"><i class="icon-large icon-comment"></i> Manual</legend>
         <div class="row-fluid">
             <div class="span12 input-wrapper">
-                {{ form_widget(form.manual, {'attr': {'class': 'tiny_full'}}) }}
+                {{ form_widget(form.manual, {'attr': {'class': 'tiny_full_with_image'}}) }}
             </div>
         </div>
             
         {{ form_rest(form) }}
         
-        <div class="btn-group">
+        <hr class="clear" />
+
+        <div>
             <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> Back to the list</a>
             <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="Creating..."><i class="icon-hdd icon-small"></i> Create</button>
-        </div> 
+        </div>
+        
+        <hr class="clear" />
         
     </form>
 {% endblock %}

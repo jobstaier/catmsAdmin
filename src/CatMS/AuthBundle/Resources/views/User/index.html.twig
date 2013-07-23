@@ -6,7 +6,7 @@
 {% endblock %}
     
 {% block content -%}
-    <legend>Users list</legend>
+    <legend><i class="icon-large icon-parents"></i> Users</legend>
 
     <table class="records_list table table-hover">
         <thead>
@@ -15,7 +15,7 @@
                 <th>{{ knp_pagination_sortable(pagination, 'Username', 'u.username') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Email', 'u.email') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Is active', 'u.isActive') }}</th>
-                <th>Actions</th>
+                <th style="width: 90px;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -55,7 +55,7 @@
         {{ knp_pagination_render(pagination) }}
     </div>
 
-    <a href="{{ path('user_new') }}" class="btn"><i class=" icon-user"></i> 
-        Create a new user
+    <a href="{{ path('user_new') }}" class="btn btn-small btn-primary"><i class=" icon-user"></i> 
+        Create new user
     </a>
     {% endblock %}

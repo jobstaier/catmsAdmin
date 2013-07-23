@@ -58,7 +58,7 @@ class ContentGroup
     private $isRemovable = "777";
     
     /**
-     * @ORM\OneToMany(targetEntity="CatMS\AdminBundle\Entity\ContentManager", mappedBy="contentGroup")
+     * @ORM\OneToMany(targetEntity="CatMS\AdminBundle\Entity\ContentManager", mappedBy="contentGroup", cascade={"persist", "remove"})
      * @var object \CatMS\AdminBundle\Entity\ContentManager
      */
     private $contents;

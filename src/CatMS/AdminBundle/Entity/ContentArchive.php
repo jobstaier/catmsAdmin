@@ -308,4 +308,18 @@ class ContentArchive
         $this->setSlug($archived->getSlug());
         $this->setTitle($archived->getTitle());
     }
+    
+    public function serialize()
+    {
+        $data = array();
+        
+        $data['fullText'] = $this->getFullText();
+        $data['shortText'] = $this->getShortText();
+        $data['title'] = $this->getTitle();
+        $data['slug'] = $this->getSlug();
+        $data['description'] = $this->getDescription();
+        $data['priority'] = $this->getPriority();
+        
+        return $data;
+    }
 }

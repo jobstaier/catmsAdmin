@@ -38,6 +38,17 @@ class LoadContentGroupData extends AbstractFixture  implements OrderedFixtureInt
         $manager->flush();
         
         $this->addReference('content-group-1', $entity);
+        
+        
+        $entity2 = new ContentGroup();
+
+        $entity2->setSlug('undefined');
+        $entity2->setDescription('Undefined');
+        $entity2->setContentFields($this->loadContentFields());
+        $entity2->setIsRemovable('000');
+        
+        $manager->persist($entity2);
+        $manager->flush();
     }
     
     private function loadContentFields()

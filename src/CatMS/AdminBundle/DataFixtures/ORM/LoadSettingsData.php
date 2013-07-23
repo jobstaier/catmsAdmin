@@ -20,7 +20,7 @@ class LoadSettingsData extends AbstractFixture  implements OrderedFixtureInterfa
 
         $entity->setSlug('asset-records-per-page');
         $entity->setDescription('Records per assets list page');
-        $entity->setValue(1);
+        $entity->setValue(12);
         $entity->setRange('panel');
         $entity->setFieldType('text');
         
@@ -32,7 +32,7 @@ class LoadSettingsData extends AbstractFixture  implements OrderedFixtureInterfa
         
         $entity2->setSlug('content-groups-list-records-per-page');
         $entity2->setDescription('Records per content group list page');
-        $entity2->setValue(1);
+        $entity2->setValue(8);
         $entity2->setRange('panel');
         $entity2->setFieldType('text');
         
@@ -44,7 +44,7 @@ class LoadSettingsData extends AbstractFixture  implements OrderedFixtureInterfa
         
         $entity3->setSlug('settings-panel-list-records-per-page');
         $entity3->setDescription('Records per settings page');
-        $entity3->setValue(1);
+        $entity3->setValue(8);
         $entity3->setRange('panel');
         $entity3->setFieldType('text');
         

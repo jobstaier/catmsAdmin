@@ -15,12 +15,12 @@
 {% endblock %}
     
 {% block content -%}
-    <legend>{{ entity.slug | capitalize }} setting</legend>
+    <legend><i class="icon-large icon-settings"></i> <i>{{ entity.description }}</i> setting</legend>
 
     <table class="table table-bordered table-striped">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th style="width: 120px;">Id</th>
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
@@ -31,19 +31,24 @@
                 <th>Value</th>
                 <td>{{ entity.value }}</td>
             </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ entity.description }}</td>
+            </tr>
         </tbody>
     </table>
 
-    <div class="btn-group" style="margin-bottom: 10px">
-        <a href="{{ path(pathname) }}" class="btn"><i class="icon-list"></i> Back to the list</a>
-        <a href="{{ path('settings-edit', { 'id': entity.id, 'range': range | lower }) }}" class="btn"><i class="icon-edit"></i> Edit</a>
+    <div style="margin-bottom: 10px">
+        <a href="{{ path(pathname) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
+        <a href="{{ path('settings-edit', { 'id': entity.id, 'range': range | lower }) }}" class="btn btn-small btn-primary"><i class="icon-edit"></i> Edit</a>
+        
+        <form action="{{ path('settings-delete', { 'id': entity.id, 'range': range | lower }) }}" method="post" style="float: right;">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
+        </form>
     </div> 
 
-    <form action="{{ path('settings-delete', { 'id': entity.id, 'range': range | lower }) }}" method="post">
-        <input type="hidden" name="_method" value="DELETE" />
-        {{ form_widget(delete_form) }}
-        <button type="submit" class="btn" data-toggle="modal" data-target="#delete"><i class="icon-trash"></i> Delete</button>
-        {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'delete', 'msg': 'Delete setting', 'btnTxt': 'Delete'} %}
-    </form>
+
 
 {% endblock %}

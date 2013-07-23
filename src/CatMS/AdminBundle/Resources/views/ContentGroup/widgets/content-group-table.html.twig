@@ -20,7 +20,7 @@
             <td>
                 {% if entity.isRemovable == '777' %}<span class="label label-success"><i class="icon-white icon-ok-circle"></i> YES</span>
                 {% elseif entity.isRemovable == '755' %}<span class="label label-warning"><i class="icon-white icon-warning-sign"></i> Only by Developer</span>
-                {% elseif entity.isRemovable == '00' %}<span class="label label-error"><i class="icon-white icon-remove-circle">Forbidden</span>
+                {% elseif entity.isRemovable == '000' %}<span class="label label-error"><i class="icon-white icon-remove-circle"></i> Forbidden</span>
                 {% endif %}
             </td>
             <td><span class="label">{{ entity.contents | length }}</span></td>
@@ -32,7 +32,6 @@
                     </button>
 
                     <ul class="dropdown-menu">
-                        {% if is_granted('ROLE_DEVELOPER') %}
                         <li>
                             <a href="{{ path('content-group-edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> Edit</a>
                         </li>
@@ -42,7 +41,6 @@
                         <li>
                             <a href="{{ path('content-manager-new', {'group': entity.slug }) }}"><i class="icon-font"></i> Add content</a>
                         </li>
-                        {% endif %}
                     </ul>
                 </div>
             </td>

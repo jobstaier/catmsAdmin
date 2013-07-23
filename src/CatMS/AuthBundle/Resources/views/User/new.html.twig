@@ -13,27 +13,23 @@
 {% endblock %}
     
 {% block content -%}
-    <legend>Create new user</legend>
+    <legend><i class="icon-large icon-user-add"></i> Create new user</legend>
 
     <form action="{{ path('user_create') }}" method="post" {{ form_enctype(form) }} class="form-float">
         {% if form_errors(form) %}
-        {#<script src="{{ asset('js/cleanErrorField.js') }}"></script>
-        <div class="alert error-field">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-           {{ form_errors(form) }}
-        </div>
-        #} 
+            
         <div class="alert error-field">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             Errors occurred while validating form
         </div>
+            
         {% endif %}
         
-        
         {{ form_widget(form) }}
-        <div class="btn-group">
-            <a href="{{ path('user') }}" class="btn"><i class="icon-list"></i> Back to the list</a>
-            <button type="submit" class="btn"><i class="icon-hdd"></i> Create</button>
+            
+        <div>
+            <a href="{{ path('user') }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
+            <button type="submit" class="btn btn-small btn-primary"><i class="icon-hdd"></i> Create</button>
         </div>
     </form>
 

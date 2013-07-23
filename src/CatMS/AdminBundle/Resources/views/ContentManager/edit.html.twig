@@ -1,9 +1,6 @@
 {% extends 'CatMSAdminBundle::base.html.twig' %}   
 
 {% block javascripts_bottom %}
-    <script type="text/javascript" src="{{ asset('js/tinymce/tinymce.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('js/catms.text-editor.js')}}"></script>
-    <script src="{{ asset('js/catms.popover.js') }}"></script>
     {% if not is_granted('ROLE_DEVELOPER') %}
     <script>
         $(function(){
@@ -28,7 +25,7 @@
 
     {% include 'CatMSAdminBundle:Helpers:related-images.html.twig' with {'group': entity.contentGroup } %}
     
-    {% include 'CatMSAdminBundle:Helpers:archive.html.twig' with {'entity': entity } %}
+    {% include 'CatMSAdminBundle:Helpers:archive.html.twig' with {'archive': archive } %}
 
     
     {% if entity.contentGroup.manual %}
@@ -39,7 +36,7 @@
     </div>
     {% endif %}
     
-    <form novalidate action="{{ path('content-manager-update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} style="width: 100%" class="content-manager-form">
+    <form novalidate action="{{ path('content-manager-update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="content-manager-form">
         
         {% include 'CatMSAdminBundle:ContentManager:widgets/edit-buttons.html.twig' with {'entity': entity, 'position': 'up'} %}
         <hr class="clear"/>
@@ -57,7 +54,7 @@
     <form action="{{ path('content-manager-delete', { 'id': entity.id, 'group': entity.contentGroup.slug }) }}" method="post" style="float: right;">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" data-view="top" class="btn btn-smal btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
+        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
     </form>
     
     {% if entity.contentGroup.manual %}

@@ -63,37 +63,38 @@ body {
 
 .related-images-container {
     position: fixed;
-    right: -992px;
-    top: 87px;
-    border: 1px solid #F89406;
-    height: 508px;
+    right: 0px;
+    top: 83px;
+    border: 1px solid #51a351;
+    height: 500px;
     width: 950px;
-    background: #fff;
+    background: #EEE;
     z-index: 9;
     padding: 10px 20px 20px;
+    display: none;
 }
 
 .history-container {
     position: fixed;
-    right: -475px;
-    top: 129px;
+    right: 0px;
+    top: 125px;
     border: 1px solid #2F96B4;
     height: 300px;
     width: 400px;
-    background: #fff;
+    background-color: #eee;
     z-index: 9;
     padding: 10px 20px 20px;
+    display: none;
 }
 
 .archive-container {
     position: fixed;
-    /*right: -592px;*/
     right: 0px;
-    top: 172px;
+    top: 167px;
     border: 1px solid #111;
     height: 340px;
     width: 530px;
-    background: #fff;
+    background-color: #eee;
     z-index: 9;
     padding: 10px 0 20px 20px;
 }
@@ -110,6 +111,10 @@ body {
 
 .related-images-container hr {
     margin: 0;
+}
+
+.image-wrapper {
+    height: 110px;
 }
 
 .no-margin {
@@ -131,7 +136,15 @@ body {
 .append-here {
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 300px;
+    height: 460px;
+}
+
+.append-here .btn {
+    margin-right: 7px;
+}
+
+.append-here ul {
+    margin: 0;    
 }
 
 .append-here-archive {
@@ -349,4 +362,20 @@ form {
 .clear {
     clear: both;
     width: 100%;
+}
+
+.content-manager-form {
+    width: 100%;
+}
+
+thead {
+    background-color: #eee;
+}
+
+.plupload {
+    margin-top: 15px;
+}
+
+.plupload_start {
+    margin-left: 10px;
 }

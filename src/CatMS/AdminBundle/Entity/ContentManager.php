@@ -109,7 +109,7 @@ class ContentManager
     private $contentGroup;
     
     /**
-     * @ORM\OneToMany(targetEntity="CatMS\AdminBundle\Entity\ContentArchive", mappedBy="content")
+     * @ORM\OneToMany(targetEntity="CatMS\AdminBundle\Entity\ContentArchive", mappedBy="content", cascade={"persist", "remove"})
      * @var object \CatMS\AdminBundle\Entity\ContentArvhive
      */
     private $archives;

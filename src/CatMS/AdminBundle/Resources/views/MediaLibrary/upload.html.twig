@@ -39,7 +39,7 @@
     {% endif %}
     
     <form novalidate action="{{ path('media-library-upload', {'group': group}) }}" method="post" {{ form_enctype(form) }} class="upload-form">
-        <legend>Upload single file <small>and set properties</small></legend>
+        <legend><i class="icon-large icon-attach"></i> Upload single file <small>and set properties</small></legend>
          
         <div class="control-group">
         
@@ -131,9 +131,7 @@
 <script type="text/javascript" src="{{ asset('js/catms-plupload.js') }}"></script>
 <a href="{{ path('media-library-plupload', {'group': group}) }}" id="pluploadUrl" style="display: none"></a>
 <div class="multiple-upload-form">
-    <legend>
-        Multiple Files Upload
-    </legend>
+    <legend><i class="icon-large icon-sort"></i> Multiple Files Upload</legend>
 <form>
 <div id="uploader">
     <p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>

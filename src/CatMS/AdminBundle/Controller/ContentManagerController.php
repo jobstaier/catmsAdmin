@@ -10,6 +10,7 @@ use CatMS\AdminBundle\Form\ContentManagerType;
 use CatMS\AdminBundle\Controller\CommonMethods;
 use CatMS\AdminBundle\Logger\History;
 use CatMS\AdminBundle\Entity\ContentArchive;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * ContentManager controller.
@@ -184,13 +185,16 @@ class ContentManagerController extends Controller
 
         $entity = $em->getRepository('CatMSAdminBundle:ContentManager')
             ->find($id);
-
+        
         if (!$entity) {
             throw $this->createNotFoundException(
                 'Unable to find ContentManager entity.'
             );
         }
-
+        
+        $archive = $em->getRepository('CatMSAdminBundle:ContentArchive')
+            ->findBy(array('content' => $id), array('createdAt' => 'DESC'));
+        
         $history = new History($this->get('session'), $this->get('router'));
         $history->logOpenEditContent($entity);
         
@@ -201,6 +205,7 @@ class ContentManagerController extends Controller
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'archive' => $archive
         );
     }
 
@@ -248,12 +253,17 @@ class ContentManagerController extends Controller
         } else {
             $this->get('session')->getFlashBag()
                 ->add('noticeFailure', 'edit.error');
+            
+            $archive = $em->getRepository('CatMSAdminBundle:ContentArchive')
+                ->findBy(array('content' => $id), array('createdAt' => 'DESC'));
+            
         }
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView()
+            'delete_form' => $deleteForm->createView(),
+            'archive' => $archive
         );
     }
 
@@ -302,5 +312,18 @@ class ContentManagerController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+    
+    public function getArchiveContentAction($id)
+    {
+        $request = $this->getRequest();
+        
+        if ($request->isXmlHttpRequest()) {
+            $em = $this->getDoctrine()->getManager();
+            $archive = $em->getRepository('CatMSAdminBundle:ContentArchive')
+                ->find($id);
+        }
+        
+        return new Response(json_encode($archive->serialize()), 200, array('Content-Type' => 'application/json'));
     }
 }
