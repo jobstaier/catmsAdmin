@@ -221,11 +221,13 @@ body {
 
 .upload-form {
     float: left;
-    width: 390px;
+    width: 375px;
 }
 
 .multiple-upload-form {
     float: right;
+    max-width: 470px;
+    margin-top: 2px;
 }
 
 .file-input-container input {
@@ -373,9 +375,46 @@ thead {
 }
 
 .plupload {
-    margin-top: 15px;
+    margin: -8px 0 0 0;
 }
 
 .plupload_start {
     margin-left: 10px;
+}
+
+.grid {
+    min-height: 300px;
+    width: 900px;
+    margin: 0 auto;
+}
+
+.grid .grid-list {
+    margin: 0;
+}
+
+.grid ul.grid-list li {
+    list-style: none;
+    width: 130px;
+    height: 115px;
+    text-align: center;
+    margin: 20px 10px;
+    display: inline-block;
+}
+
+.grid ul.grid-list li img {
+    width: 120px;
+    max-height: 80px;
+}
+
+.grid ul.grid-list li a.btn {
+    margin: 5px;
+}
+
+.more-btn-container {
+    width: 875px;
+    margin: 20px auto;
+}
+
+.more-btn-container .btn {
+    width: 860px;
 }

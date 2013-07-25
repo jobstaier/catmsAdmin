@@ -18,11 +18,6 @@ $(function(){
 
         return false;
     });
-    
-    $('.copy-source').live('click', function() {
-        copyToClipboard($(this).attr('href'));
-        return false; 
-    });
 });
         
 /**
@@ -80,8 +75,4 @@ function renderNullResultNotice(container){
         '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
         '<strong>No relations defined!</strong> Check Content Group properties if you want display apropriate images here.' +
         '</div>');
-}
-
-function copyToClipboard(text) {
-    window.prompt ("Copy to clipboard: Ctrl+C, Enter", text);
 }

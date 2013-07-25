@@ -426,4 +426,17 @@ class ImageUpload
     {
         return $this->deleteForm;
     }
+    
+    public function serialize()
+    {
+        return array(
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'slug' => $this->getSlug(),
+            'path' => $this->getPath(),
+            'redirect' => $this->getRedirect(),
+            'imageGroup' => $this->getImageGroup()->getSlug(),
+            'uploadedAt' => $this->getUploadedAt()
+        );
+    }
 }

@@ -19,8 +19,8 @@
     <div class="notice-container"></div>
      
     <legend>
-        <i class="icon-large icon-picture"></i> Media library{% if group is not empty %} - <i>{{ group.description | raw }}</i> images{% endif %}
-        <a href="" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
+        <i class="icon-large icon-picture"></i> Media library{% if group is not empty %} - <i>{{ group.description | raw }} assets</i>{% endif %}
+        {% if not group %}<a href="{{ path('media-library-grid-list') }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>{% endif %}
     </legend>
     
     {% if pagination | length > 0 %}
@@ -72,7 +72,10 @@
                 <td>
                     {% include 'CatMSAdminBundle:Helpers:mime-type-thumb.html.twig' with {'entity': entity} %}
                 </td>
-                <td>{{ entity.path }}</td>
+                <td>
+                    {{ entity.path }}<br />
+                    <a href="{{ asset('uploads/mediaLibrary/')~entity.path }}" class="btn btn-mini btn-success copy-source">Copy Source</a>
+                </td>
                 <td>{{ entity.title }}</td>
 
                 <td width="150">{% if entity.slug %}{{ entity.slug }}{% else %}<span class="label">NOT DEFINED</span>{% endif %}</td>

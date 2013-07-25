@@ -91,23 +91,11 @@ class AjaxController extends Controller
      */
     public function ajaxGetRelatedImageInjectAction(\CatMS\AdminBundle\Entity\ContentGroup $group)
     {
-        //$injectedArr = array();
-        
         $pattern = "(#img=([0-9])+#)";
         
         foreach ($group->getContents() as $content) {
             $this->parseContent($pattern, $content->getFullText());
             $this->parseContent($pattern, $content->getShortText());
-            /*
-            if (!empty($parsedFullText)) {
-                $injectedArr[] = $parsedFullText;
-            };
-            
-            $parsedShortText = $this->parseContent($pattern, $content->getShortText());
-            if (!empty($parsedShortText)) {
-                $injectedArr[] = $parsedShortText;
-            };
-            */
         }
         
         return new Response(json_encode($this->injectedArr), 200, array('Content-Type' => 'application/json'));        
@@ -146,6 +134,46 @@ class AjaxController extends Controller
     {
         $history = new History($this->get('session'), $this->get('router'));
         return new Response(json_encode($history->getHistory()), 200, array('Content-Type' => 'application/json'));
+    }
+    
+    
+    /**
+     * @Route("/admin/get-images-list",
+     *  name="get-images-list-ajax"
+     * )
+     */
+    public function getImagesListAjax()
+    {
+        $request = $this->getRequest();
+        
+        $page = $request->request->get('page');
+        $recordsCount = 24;
+        
+        $repository = $this->getDoctrine()->getRepository('CatMSAdminBundle:ImageUpload');
+        
+        $query = $repository->createQueryBuilder('a')
+            ->setFirstResult($page * $recordsCount - $recordsCount)
+            ->setMaxResults($recordsCount)
+            ->getQuery();
+
+        $images = $query->getResult();
+            
+        $results = array();
+        
+        foreach ($images as $image) {
+            $results['images'][] = $image->serialize();
+        }
+        
+        
+        $count = $repository->createQueryBuilder('a')
+                ->select('count(a.id)')
+                ->getQuery()
+                ->getSingleScalarResult();
+        
+        $results['hasMore'] = ($page * $recordsCount < $count) ? true : false;
+        $results['countAll'] = $count;
+        
+        return new Response(json_encode($results), 200, array('Content-Type' => 'application/json'));   
     }
     
 }

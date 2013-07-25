@@ -15,7 +15,7 @@ function showLoader(){
         {
             'autoDimensions'	: false,
             'width'         	: 350,
-            'height'        	: 'auto',
+            'height'        	: 70,
             'transitionIn'	: 'none',
             'transitionOut'	: 'none',
             'padding'           : '20px',
@@ -29,3 +29,14 @@ function showLoader(){
 function closeLoader(){
     $.fancybox.close();
 }
+
+function copyToClipboard(text) {
+    window.prompt ("Copy to clipboard: Ctrl+C, Enter", text);
+}
+
+$(function() {
+    $('.copy-source').live('click', function() {
+        copyToClipboard($(this).attr('href'));
+        return false; 
+    });
+});

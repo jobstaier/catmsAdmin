@@ -3,6 +3,10 @@ media-library:
     defaults:  { _controller: CatMSAdminBundle:MediaLibrary:list, page: 1, slug: null }
     requirements:
         page:  \d+
+        
+media-library-grid-list:
+    path:      /image-list-grid
+    defaults:  { _controller: CatMSAdminBundle:MediaLibrary:listGrid }    
 
 media-library-upload:
     path:     /upload/{group}
