@@ -34,9 +34,38 @@ function copyToClipboard(text) {
     window.prompt ("Copy to clipboard: Ctrl+C, Enter", text);
 }
 
+function renderMimeTypeThumbnail(obj, dir) {
+    if (obj.mimeType === 'image/jpeg' || obj.mimeType === 'image/png') {
+        return  '<a href="' + dir + obj.path + '" class="thumbnail single-image">' +
+                '<img style="max-width: 160px;" src="/' + obj.thumb + '" title="' + obj.title + '"/>' +
+                '</a>';  
+    } else
+    
+    if (obj.mimeType === 'application/pdf') {
+        return '<a href="' + dir + obj.path + '" class="pdf-icon-48 media-icon"></a><i>' + obj.title + '</i>';
+    } else
+    
+    if (obj.mimeType === 'application/x-rar') {
+        return '<a href="' + dir + obj.path + '" class="rar-icon-48 media-icon">' + obj.title + '</a>';
+    } else
+    
+    if (obj.mimeType === 'application/zip') {
+        return '<a href="' + dir + obj.path + '" class="zip-icon-48 media-icon">' + obj.title + '</a>';
+    } else
+    
+    return '<a href="' + dir + obj.path + '" class="thumbnail single-image">' + obj.title + '</a>';
+}
+
+
 $(function() {
     $('.copy-source').live('click', function() {
         copyToClipboard($(this).attr('href'));
         return false; 
     });
+    
+    $('body').tooltip({
+        selector: '[data-toggle=tooltip]'
+    });
+    
+    $('.selectpicker').selectpicker();
 });

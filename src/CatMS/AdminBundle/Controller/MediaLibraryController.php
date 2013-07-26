@@ -217,7 +217,6 @@ class MediaLibraryController extends Controller
      */
     public function editImageAction(ImageUpload $image, $group)
     {   
-        
         $em = $this->getDoctrine()->getEntityManager();
         
         if (!$image) {
@@ -237,7 +236,7 @@ class MediaLibraryController extends Controller
             ->getForm();
         
         if ($this->getRequest()->isMethod('POST')) {
-
+            
             $form->bind($this->getRequest());
 
             if ($form->isValid()) {
@@ -254,11 +253,21 @@ class MediaLibraryController extends Controller
                 $this->get('session')->getFlashBag()
                     ->add('noticeSuccess', 'edit.success');
                 if ($group) {
-                    return $this->redirect($this->generateUrl('media-library', 
-                        array('page' => 1, 'slug' => $group)
-                    ));
+                    return $this->redirect(
+                        $this->generateUrl('media-library-image-edit', 
+                            array(
+                                'id' => $image->getId(), 'slug' => $group
+                            )
+                        )
+                    );
                 } else {
-                    return $this->redirect($this->generateUrl('media-library'));
+                    return $this->redirect(
+                        $this->generateUrl('media-library-image-edit',  
+                            array(
+                                'id' => $image->getId()
+                            )
+                        )
+                    );
                 }
                 
             } else {
@@ -273,7 +282,6 @@ class MediaLibraryController extends Controller
         return $this->render('CatMSAdminBundle:MediaLibrary:edit.html.twig', 
             array(
                 'group' => $group,
-                //'groupEntity' => $groupEntity,
                 'form' => $form->createView(), 
                 'image' => $image
             )
@@ -360,11 +368,8 @@ class MediaLibraryController extends Controller
     
     public function listGridAction()
     {
-        
         return $this->render('CatMSAdminBundle:MediaLibrary:list-grid.html.twig', 
-            array(
-                //'images' => $image
-            )
+            array()
         );
     }
 }

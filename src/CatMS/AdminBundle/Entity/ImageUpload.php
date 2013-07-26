@@ -474,7 +474,9 @@ class ImageUpload
             'redirect' => $this->getRedirect(),
             'imageGroup' => $this->getImageGroup()->getSlug(),
             'uploadedAt' => $this->getUploadedAt(),
-            'thumb' => $this->getSystemThumbDir().'/'.$this->getSystemThmbPrefix().$this->path
+            'thumb' => $this->getSystemThumbDir().'/'.$this->getSystemThmbPrefix().$this->path,
+            'mimeType' => $this->getMimeType(),
+            'title' => $this->getTitle()
         );
     }
     

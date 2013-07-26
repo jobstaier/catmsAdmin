@@ -54,7 +54,7 @@
         
         <li class="divider"></li>
         <li class="nav-header">Media library</li>
-        <li {% if is_active_nav_button('medialibrary', 'list') %}class="active"{% endif %}><a href="{{ path('media-library') }}"><i class="icon-picture"></i> All images & assets</a></li>
+        <li {% if is_active_nav_button('medialibrary', 'list') %}class="active"{% endif %}><a href="{{ path('media-library-grid-list') }}"><i class="icon-picture"></i> All images & assets</a></li>
         <li {% if is_active_nav_button('mediaibrary', 'upload') %}class="active"{% endif %}><a href="{{ path('media-library-upload') }}"><i class="icon-upload"></i> Upload file</a></li>
         <li {% if is_active_nav_button('imagegroup', 'index') %}class="active"{% endif %}><a href="{{ path('image-group') }}"><i class="icon-folder-open"></i> Groups</a></li>
         {% if is_granted('ROLE_DEVELOPER') %}

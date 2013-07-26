@@ -14,7 +14,11 @@
 {% block breadcrumb %}
     {{ parent() }}
     {% if group is empty %}
-    <li><a href="{{ path('media-library') }}">Media library</a></li> <span class="divider">/</span>
+    <li>
+        <em>Media library</em> 
+        <a href="{{ path('media-library') }}">&nbsp;<i class="icon-list"></i> List</a>&nbsp;&nbsp; 
+        <a href="{{ path('media-library-grid-list') }}"> <i class="icon-th"></i> Grid</a>
+    </li>
     <li class="active">Upload file</li>
     {% else %}
     <li><a href="{{ path('media-library') }}">Media library</a></li> <span class="divider">/</span>
@@ -95,16 +99,25 @@
             
             <div class="controls file-input-container">
                 <span class="btn btn-file btn-small"><i class="icon-file"></i> 
-                    <input type="file" name="form[file]" id="form_file" />
+                    <input type="file" name="form[file]" id="form_file" style="width: 283px;" />
                 </span>    
                 {{ form_errors(form.file) }}
             </div>
             
             {% if group is empty %}  
-            <script>$(function(){var txt='Undefined';$('#form_imageGroup option').each(function(){if ($(this).text() === txt) {$(this).attr('selected', 'selected');}})});</script>
+            <script>
+                $(function() {
+                    var txt='Undefined';
+                    $('#form_imageGroup option').each(function() {
+                        if ($(this).text() === txt) {
+                            $(this).attr('selected', 'selected')
+                        ;}
+                    })
+                });
+            </script>
             <div class="controls" style="margin-top: 15px;">
                 <label for="form_imageGroup"><i class="icon-chevron-down"></i> Image/asset group</label>
-                {{ form_widget(form.imageGroup, {'attr': {'class': 'span4'}}) }}
+                {{ form_widget(form.imageGroup, {'attr': {'class': 'span4 selectpicker'}}) }}
                 {{ form_errors(form.imageGroup) }}
             </div>
             {% endif %}
@@ -124,7 +137,7 @@
     </form>
 
 {# plupload #}
-<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+<script type="text/javascript" src="{{ asset('js/browserplus-min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/plupload/js/plupload.full.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js')}}"></script>
 

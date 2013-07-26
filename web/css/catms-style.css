@@ -385,7 +385,7 @@ thead {
 .grid {
     min-height: 300px;
     width: 900px;
-    margin: 0 auto;
+    margin: 0 auto 20px;
 }
 
 .grid .grid-list {
@@ -397,8 +397,9 @@ thead {
     width: 130px;
     height: 115px;
     text-align: center;
-    margin: 20px 10px;
+    margin: 20px 10px 10px;
     display: inline-block;
+    border-bottom: 1px solid #979797;
 }
 
 .grid ul.grid-list li img {
@@ -411,10 +412,24 @@ thead {
 }
 
 .more-btn-container {
-    width: 875px;
+    width: 100%;
     margin: 20px auto;
 }
 
 .more-btn-container .btn {
-    width: 860px;
+    width: 100%;
+}
+
+.image-grid-btns a {
+    float: left;
+    margin: 3px 10px 0 0;
+}
+
+.grid ul.grid-list li .media-icon {
+    margin: 10px 45px 12px;
+}
+
+.breadcrumb em {
+    color: #999999;
+    font-style: normal;
 }

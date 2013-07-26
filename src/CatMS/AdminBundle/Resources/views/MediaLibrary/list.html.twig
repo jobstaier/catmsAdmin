@@ -3,11 +3,14 @@
 {% block breadcrumb %}
     {{ parent() }}
     {% if group is empty %}
-        <li class="active">Media library</li>
-        <a href="{{ path('media-library') }}" class="list-home-url" style="display: none;"></a>
+        <li>
+            <em>Media library</em> 
+            <a href="{{ path('media-library') }}">&nbsp;<i class="icon-list"></i> List</a> &nbsp; 
+            <a href="{{ path('media-library-grid-list') }}"> <i class="icon-th"></i> Grid</a>
+        </li>
     {% else %}
         <li><a href="{{ path('media-library') }}">Media library</a></li> <span class="divider">/</span>
-        <li class="active">Group {{ group.description | raw }} images</li>
+        <li class="active">Group <i>{{ group.description | raw }}</i> assets</li>
         <a href="{{ path('media-library', {'page': 1, 'slug': group.slug }) }}" class="list-home-url" style="display: none;"></a>
     {% endif %}
     
@@ -20,7 +23,7 @@
      
     <legend>
         <i class="icon-large icon-picture"></i> Media library{% if group is not empty %} - <i>{{ group.description | raw }} assets</i>{% endif %}
-        {% if not group %}<a href="{{ path('media-library-grid-list') }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>{% endif %}
+        {% if not group %}<a data-toggle="tooltip" title="Grid View" href="{{ path('media-library-grid-list') }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>{% endif %}
     </legend>
     
     {% if pagination | length > 0 %}
@@ -149,7 +152,7 @@
         </div>
     
     {% if group is not empty %}
-        <div class="btn-group" style="margin-top: 20px;">
+        <div style="margin-top: 20px;">
             <a href="{{ path('image-group') }}" class="btn btn-small"><i class="icon-th-large"></i> Go to the group list</a>
             <a href="{{ path('media-library-upload', {'group': group.slug }) }}" class="btn btn-success btn-small"><i class="icon-upload"></i> Upload file</a>
         </div>
