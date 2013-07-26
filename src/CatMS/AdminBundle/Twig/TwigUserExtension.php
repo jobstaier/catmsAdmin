@@ -157,7 +157,7 @@ class TwigUserExtension extends \Twig_Extension {
     }
     
     public function getImageSizeFunction(\CatMS\AdminBundle\Entity\ImageUpload $image) {
-        if (is_object($image)) {
+        if (is_object($image) && file_exists($image->getAbsolutePath())) {
             $size = round(filesize($image->getAbsolutePath()) / 1024);
             switch ($size) {
                 case $size < 100 :

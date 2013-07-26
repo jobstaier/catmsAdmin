@@ -74,7 +74,7 @@
                 </td>
                 <td>
                     {{ entity.path }}<br />
-                    <a href="{{ asset('uploads/mediaLibrary/')~entity.path }}" class="btn btn-mini btn-success copy-source">Copy Source</a>
+                    <a href="{{ asset('uploads/media-library/')~entity.path }}" class="btn btn-mini btn-success copy-source">Copy Source</a>
                 </td>
                 <td>{{ entity.title }}</td>
 
@@ -82,9 +82,9 @@
                 <td rowspan="4">
                     <div class="btn-group btn-group-vertical">
                         {% if entity.mimeType == 'image/jpeg' or entity.mimeType == 'image/png' %}
-                            <a style="text-align: left;" href="{{ asset('uploads/mediaLibrary/')~entity.path }}" class="btn single-image btn-small"><i class="icon-fullscreen"></i> Show</a>
+                            <a style="text-align: left;" href="{{ asset('uploads/media-library/')~entity.path }}" class="btn single-image btn-small"><i class="icon-fullscreen"></i> Show</a>
                         {% else %}
-                            <a style="text-align: left;" href="{{ asset('uploads/mediaLibrary/')~entity.path }}" class="btn btn-small"><i class="icon-download"></i> Download</a>
+                            <a style="text-align: left;" href="{{ asset('uploads/media-library/')~entity.path }}" class="btn btn-small"><i class="icon-download"></i> Show</a>
                         {% endif %}
                         
                         {% if group is not empty %}

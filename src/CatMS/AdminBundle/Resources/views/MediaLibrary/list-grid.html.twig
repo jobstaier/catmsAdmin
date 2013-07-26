@@ -18,7 +18,7 @@
 
     <div class="grid">
         <a href="{{ path('get-images-list-ajax') }}" id="getImagesList" style="display: none;"></a>
-        <a href="{{ asset('uploads/mediaLibrary/') }}" id="dirPath" style="display: none;"></a>
+        <a href="{{ asset('uploads/media-library/') }}" id="dirPath" style="display: none;"></a>
         <a href="{{ path('media-library-image-edit') }}" id="editPath" style="display: none;"></a>
         
         <ul class="grid-list" data-view="0">
@@ -29,6 +29,11 @@
         <a href="" class="btn btn-info btn-small"><i class="icon-chevron-down"></i> Show More</a>
     </div>
     
+
+    <a href="{{ path('media-library-upload') }}" class="btn btn-small btn-success"><i class="icon-upload"></i> 
+        Upload file
+    </a>
+
     
 <script>
 $(function() {
@@ -86,7 +91,7 @@ function renderList(data, container) {
     var editPath = $('#editPath').attr('href');
     $.each(data.images, function(i, obj){
         list = list + '<li>' + 
-            '<a href="' + dir + obj.path + '" class="single-image"><img class="img-polaroid" src="' + dir + obj.path + '" /></a>' +
+            '<a href="' + dir + obj.path + '" class="single-image"><img class="img-polaroid" src="/' + obj.thumb + '" /></a>' +
             '<a href="' + dir + obj.path + '" class="btn btn-mini btn-success copy-source">Copy Source</a>' +
             '<a href="' + editPath + '/' + obj.id + '" class="btn btn-mini btn-primary">Edit<a/>' +
             '</li>';

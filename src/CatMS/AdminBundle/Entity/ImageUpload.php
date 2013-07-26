@@ -73,12 +73,23 @@ class ImageUpload
     protected $mimeType;
     
     protected $deleteForm;
+    
+    protected $systemThumbWidth;
+    
+    protected $systemThumbHeight;
 
     public function getAbsolutePath()
     {
         return null === $this->path
             ? null
             : $this->getUploadRootDir().'/'.$this->path;
+    }
+    
+    public function getSystemThumbAbsolutePath()
+    {
+        return null === $this->path
+            ? null
+            : __DIR__.'/../../../../web/'.$this->getSystemThumbDir().'/'.$this->getSystemThmbPrefix().$this->path;
     }
     
     public function getWebPath()
@@ -99,7 +110,14 @@ class ImageUpload
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads/mediaLibrary';
+        return 'uploads/media-library';
+    }
+    
+    protected function getSystemThumbDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/system-thumbs';
     }
 
     /**
@@ -237,7 +255,7 @@ class ImageUpload
     
     private function resizeAndSaveImage()
     {        
-        if ($this->mimeType == 'image/jpeg') {
+        if ($this->mimeType == 'image/jpeg' || $this->mimeType == 'image/png') {
             $imagePath = $this->getUploadRootDir().'/'.$this->path;
             $image = \WideImage::load($imagePath);
             $size = getimagesize($imagePath);
@@ -256,6 +274,15 @@ class ImageUpload
                         ->saveToFile($imagePath);
                 }
             }
+            
+            //Save system thumb
+            $sThmWidth = $this->getSystemThumbWidth();
+            $sThmbHeight = $this->getSystemThumbHeight();
+            
+            $image->resize($sThmWidth, $sThmbHeight, 'outside')
+                ->crop('center', 'center', $sThmWidth, $sThmbHeight)
+                ->saveToFile($this->getSystemThumbDir().'/'.$this->getSystemThmbPrefix().$this->path);
+            
         }
     }
     
@@ -267,8 +294,14 @@ class ImageUpload
         if ($file = $this->getAbsolutePath()) {
             if (file_exists($file)) {
                 unlink($file);
-            }
+            }           
         }
+        
+        if ($systemThumb = $this->getSystemThumbAbsolutePath()) {
+            if (file_exists($systemThumb)) {
+                unlink($systemThumb);
+            }           
+        }       
     }    
 
     /**
@@ -411,8 +444,12 @@ class ImageUpload
     
     public function getMimeType()
     {
-        $file = new \Symfony\Component\HttpFoundation\File\File($this->getUploadRootDir().'/'.$this->path);
-        return $file->getMimeType();
+        if (file_exists($this->getUploadRootDir().'/'.$this->path)) {
+            $file = new \Symfony\Component\HttpFoundation\File\File($this->getUploadRootDir().'/'.$this->path);
+            return $file->getMimeType();           
+        } else {
+            return null;
+        }
     }
     
     public function setDeleteForm($deleteForm)
@@ -436,7 +473,23 @@ class ImageUpload
             'path' => $this->getPath(),
             'redirect' => $this->getRedirect(),
             'imageGroup' => $this->getImageGroup()->getSlug(),
-            'uploadedAt' => $this->getUploadedAt()
+            'uploadedAt' => $this->getUploadedAt(),
+            'thumb' => $this->getSystemThumbDir().'/'.$this->getSystemThmbPrefix().$this->path
         );
+    }
+    
+    public function getSystemThumbWidth() 
+    {
+        return 120;
+    }
+    
+    public function getSystemThumbHeight() 
+    {
+        return 80;
+    }
+    
+    public function getSystemThmbPrefix()
+    {
+        return 'sThmb_';
     }
 }

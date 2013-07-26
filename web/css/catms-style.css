@@ -226,7 +226,7 @@ body {
 
 .multiple-upload-form {
     float: right;
-    max-width: 470px;
+    width: 470px;
     margin-top: 2px;
 }
 
