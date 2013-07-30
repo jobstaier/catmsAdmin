@@ -3,11 +3,11 @@ $(function() {
     
     $('.more-btn-container').hide();
     
-    var URL = $('#getImagesList').attr('href');
+    var URL = $('#getGroupImagesList').attr('href');
     var page = parseInt($('.grid-list').attr('data-view') + 1);
     
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         url: URL,
         dataType: 'json',
         data: {'page': page},
@@ -19,7 +19,6 @@ $(function() {
                 $('.grid').html(notice);
             }
             closeLoader();
-            
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
             alert(errorThrown);
@@ -59,7 +58,7 @@ function renderList(data, container) {
         list = list + '<li>' + renderMimeTypeThumbnail(obj, dir) +
             '<div class="image-grid-btns">' + 
             '<a data-toggle="tooltip" title="Copy Source" href="' + dir + obj.path + '" class="copy-source"><i class="icon-screenshot"></i></a>' +
-            '<a data-placement="right" data-toggle="tooltip" title="Edit" href="' + editPath + '/' + obj.id + '"><i class="icon-edit"></i><a/>' +
+            '<a data-placement="right" data-toggle="tooltip" title="Edit" href="' + editPath + '/' + obj.id + '/' + obj.imageGroupId +'"><i class="icon-edit"></i><a/>' +
             '</div></li>';
     });
     container.append(list);

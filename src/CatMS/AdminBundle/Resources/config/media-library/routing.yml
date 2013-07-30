@@ -1,12 +1,20 @@
 media-library:
-    path:      /image-list/{page}/{slug}
+    path:      /asset-list/{page}/{slug}
     defaults:  { _controller: CatMSAdminBundle:MediaLibrary:list, page: 1, slug: null }
     requirements:
         page:  \d+
         
 media-library-grid-list:
-    path:      /image-list-grid
-    defaults:  { _controller: CatMSAdminBundle:MediaLibrary:listGrid }    
+    path:      /asset-grid
+    defaults:  { _controller: CatMSAdminBundle:MediaLibrary:listGrid }
+    
+media-library-group-grid-list:
+    path:      /asset-group-grid/{group}
+    defaults:  { _controller: CatMSAdminBundle:MediaLibrary:listGroupGrid }     
+    
+media-library-group-grid-list-pure:
+    path:      /asset-group-grid/{group}
+    defaults:  { _controller: CatMSAdminBundle:MediaLibrary:listGroupGrid, group: null }     
 
 media-library-upload:
     path:     /upload/{group}

@@ -5,13 +5,15 @@
     {% if group is empty %}
         <li>
             <em>Media library</em> 
-            <a href="{{ path('media-library') }}">&nbsp;<i class="icon-list"></i> List</a> &nbsp; 
-            <a href="{{ path('media-library-grid-list') }}"> <i class="icon-th"></i> Grid</a>
+            <a href="{{ path('media-library') }}">&nbsp;<i class="icon-list"></i>List</a>&nbsp; 
+            <a href="{{ path('media-library-grid-list') }}"><i class="icon-th"></i>Grid</a>
         </li>
     {% else %}
-        <li><a href="{{ path('media-library') }}">Media library</a></li> <span class="divider">/</span>
-        <li class="active">Group <i>{{ group.description | raw }}</i> assets</li>
-        <a href="{{ path('media-library', {'page': 1, 'slug': group.slug }) }}" class="list-home-url" style="display: none;"></a>
+        <li class="active">
+            <em>Group <i>{{ group.description }}</i> assets</em> 
+            <a href="{{ path('media-library', {'page': 1, 'slug': group.slug}) }}"><i class="icon-list"></i>List</a>&nbsp
+            <a href="{{ path('media-library-group-grid-list', {'group': group.id}) }}"><i class="icon-th"></i>Grid</a>
+        </li>
     {% endif %}
     
 {% endblock %}    
@@ -23,7 +25,11 @@
      
     <legend>
         <i class="icon-large icon-picture"></i> Media library{% if group is not empty %} - <i>{{ group.description | raw }} assets</i>{% endif %}
-        {% if not group %}<a data-toggle="tooltip" title="Grid View" href="{{ path('media-library-grid-list') }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>{% endif %}
+        {% if not group %}
+            <a data-toggle="tooltip" title="Grid View" href="{{ path('media-library-grid-list') }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
+        {% else %}
+            <a data-toggle="tooltip" title="Grid View" href="{{ path('media-library-group-grid-list', {'group': group.id}) }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>       
+        {% endif %}
     </legend>
     
     {% if pagination | length > 0 %}
@@ -40,7 +46,7 @@
                 
                     <div style="float: right; display: inline;">
                     {% if group is not empty %}
-                    <div class="btn-group">
+                    <div>
                         <a href="{{ path('image-group') }}" class="btn btn-mini"><i class="icon-th-large"></i> Back to the group</a>
                         <a href="{{ path('media-library-upload', {'group': group.slug }) }}" class="btn btn-mini btn-success"><i class="icon-upload"></i> Upload file</a>
                     </div>

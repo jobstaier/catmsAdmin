@@ -17,10 +17,12 @@ $(document).ready(function(){
                     var tmpImageGroupUrl = $('.tmp-image-group-url').attr('href');
                     handler.children().remove();
 
-                    if (groups.length != 0) {
-                        for (slug in groups) {
-                            handler.append('<li><a href="' + tmpImageGroupUrl + '/1/' + slug + '"><i class="icon-picture"></i> ' + groups[slug]  + '</a></li>')
-                        }
+                    if (groups.length !== 0) {
+                        console.log(groups);
+                        $.each(groups, function(i, obj){
+                            handler.append('<li><a href="' + tmpImageGroupUrl + '/' + obj.id + '"><i class="icon-picture"></i> ' + obj.description  + '</a></li>');
+                        });
+                        
                     } else {
                         handler.append('<li><a href="#"><i class="icon-remove-sign"></i> No groups defined</a></li>')
                     } 

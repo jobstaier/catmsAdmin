@@ -35,7 +35,9 @@ class AjaxController extends Controller
         
         $groupsArr = array();
         foreach ($groups as $key => $obj) {
-            $groupsArr[$obj->getSlug()] = $obj->getDescription();
+            $groupsArr[$key]['slug'] = $obj->getSlug();
+            $groupsArr[$key]['description'] = $obj->getDescription();
+            $groupsArr[$key]['id'] = $obj->getId();
         }
 
         $groupsJson = json_encode($groupsArr);
@@ -149,7 +151,8 @@ class AjaxController extends Controller
         $page = $request->request->get('page');
         $recordsCount = 24;
         
-        $repository = $this->getDoctrine()->getRepository('CatMSAdminBundle:ImageUpload');
+        $repository = $this->getDoctrine()
+            ->getRepository('CatMSAdminBundle:ImageUpload');
         
         $query = $repository->createQueryBuilder('a')
             ->setFirstResult($page * $recordsCount - $recordsCount)
@@ -173,8 +176,51 @@ class AjaxController extends Controller
         $results['hasMore'] = ($page * $recordsCount < $count) ? true : false;
         $results['countAll'] = $count;
         
-        return new Response(json_encode($results), 200, array('Content-Type' => 'application/json'));   
+        return new Response(json_encode($results), 200, 
+            array('Content-Type' => 'application/json')
+        );   
     }
     
+    
+    /**
+     * @Route("/admin/get-group-images-list-ajax/{group}/{page}",
+     *  name="get-group-images-list-ajax",
+     *  defaults={"page"=1}
+     * )
+     * @Method("GET")
+     */
+    public function getGroupImagesListAjax($group, $page)
+    {
+        $recordsCount = 24;
+        
+        $repository = $this->getDoctrine()
+            ->getRepository('CatMSAdminBundle:ImageUpload');
+        
+        $query = $repository->createQueryBuilder('a')
+            ->where('a.imageGroup = :group')
+            ->setParameter('group', $group)
+            ->setFirstResult($page * $recordsCount - $recordsCount)
+            ->setMaxResults($recordsCount)
+            ->getQuery();
+
+        $images = $query->getResult();
+        $results = array();
+        
+        foreach ($images as $image) {
+            $results['images'][] = $image->serialize();
+        }
+        
+        $count = $repository->createQueryBuilder('a')
+                ->select('count(a.id)')
+                ->getQuery()
+                ->getSingleScalarResult();
+        
+        $results['hasMore'] = ($page * $recordsCount < $count) ? true : false;
+        $results['countAll'] = $count;
+        
+        return new Response(json_encode($results), 200, 
+            array('Content-Type' => 'application/json')
+        );   
+    }   
 }
 ?>

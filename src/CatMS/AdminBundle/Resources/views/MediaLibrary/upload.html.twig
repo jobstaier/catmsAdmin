@@ -16,13 +16,16 @@
     {% if group is empty %}
     <li>
         <em>Media library</em> 
-        <a href="{{ path('media-library') }}">&nbsp;<i class="icon-list"></i> List</a>&nbsp;&nbsp; 
-        <a href="{{ path('media-library-grid-list') }}"> <i class="icon-th"></i> Grid</a>
+        <a href="{{ path('media-library') }}"><i class="icon-list"></i>List</a>&nbsp 
+        <a href="{{ path('media-library-grid-list') }}"> <i class="icon-th"></i>Grid</a>
     </li>
     <li class="active">Upload file</li>
     {% else %}
-    <li><a href="{{ path('media-library') }}">Media library</a></li> <span class="divider">/</span>
-    <li><a href="{{ path('media-library', {'slug': group}) }}">Group <i>{{ groupEntity.description }}</i></a></li> <span class="divider">/</span>
+    <li>
+        <em>Group <i>{{ groupEntity.description }}</i> assets</em> 
+        <a href="{{ path('media-library', {'page': 1, 'slug': groupEntity.slug}) }}"><i class="icon-list"></i>List</a>&nbsp
+        <a href="{{ path('media-library-group-grid-list', {'group': groupEntity.id}) }}"><i class="icon-th"></i>Grid</a>
+    </li> <span class="divider">/</span>          
     <li class="active">Upload file</li>
     {% endif %}
 {% endblock %}    
@@ -126,7 +129,7 @@
             
         </div>
         
-        <div class="btn-group" style="margin-top: 20px;">
+        <div style="margin-top: 20px;">
             {% if group is not empty %}
             <a href="{{ path('media-library', {'slug': group}) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
             {% else %}    

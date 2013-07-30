@@ -2,11 +2,11 @@
 
 {% block breadcrumb %}
     {{ parent() }}
-    <li class="active">Image Groups</a>
+    <li class="active">Asset Groups</a>
 {% endblock %} 
 
 {% block content -%}
-    <legend>Image group list</legend>
+    <legend><i class="icon-large icon-more-windows"></i> Asset group list</legend>
 
     {% if pagination | length > 0 %}
     
@@ -19,6 +19,7 @@
                 <th width=120>Image width [px]</th>
                 <th width=125>Image height [px]</th>
                 <th width=90>Image count</th>
+                <th width=120>Has thumbnails?</th>
                 <th width=80>Actions</th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                 <td>{% if entity.imageWidth is not empty %}{{ entity.imageWidth }}{% else %}<span class="label ">NOT DEFINED</span>{% endif %}</td>
                 <td>{% if entity.imageHeight is not empty %}{{ entity.imageHeight }}{% else %}<span class="label ">NOT DEFINED</span>{% endif %}</td>
                 <td><span class="badge">{{ entity.images | length }}</span></td>
+                <td>{% if entity.hasThumbnails %}<span class="label label-success">YES</span>{% else %}<span class="label">NO</span>{% endif %}</td>
                 <td>
                     <div class="btn-group">
                         <button class="btn">Action</button>
@@ -48,7 +50,7 @@
                             </li>
                             {% endif %}
                             <li>
-                                <a href="{{ path('media-library', {'page': 1, 'slug': entity.slug}) }}"><i class="icon-list"></i> Images list</a>
+                                <a href="{{ path('media-library-group-grid-list', {'group': entity.id}) }}"><i class="icon-list"></i> Asset list</a>
                             </li>
                             <li>
                                 <li><a href="{{ path('media-library-upload', {'group': entity.slug}) }}"><i class="icon-upload"></i> Upload</a></li>
@@ -72,8 +74,8 @@
     </div>
     {% endif %}
     
-    <a href="{{ path('image-group-new') }}" class="btn"><i class="icon-pencil"></i> 
-        Create a new group
+    <a href="{{ path('image-group-new') }}" class="btn btn-small btn-primary"><i class="icon-pencil"></i> 
+        Create new group
     </a>
     
     {% endblock %}

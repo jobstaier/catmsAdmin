@@ -15,7 +15,15 @@ class ImageGroupType extends AbstractType
             ->add('description', 'textarea')
             ->add('imageWidth', 'text', array('label' => 'Image width [px]'))
             ->add('imageHeight', 'text', array('label' => 'Image height [px]'))
-            //->add('relatedContents')        
+            ->add('hasThumbnails', 'checkbox', array(
+                'label' => 'Set thumbnails?'
+            ))
+            ->add('thumbnailWidth', 'integer', array(
+                'label' => 'Thumbnail width [px]'
+            ))
+            ->add('thumbnailHeight', 'integer', array(
+                'label' => 'Thumbnail height [px]'
+            ))  
         ;
     }
 

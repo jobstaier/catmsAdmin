@@ -9,13 +9,16 @@
     {% if group is empty %}
         <li>
             <em>Media library</em> 
-            <a href="{{ path('media-library') }}">&nbsp;<i class="icon-list"></i> List</a> &nbsp;
-            <a href="{{ path('media-library-grid-list') }}"> <i class="icon-th"></i> Grid</a>
+            <a href="{{ path('media-library') }}"><i class="icon-list"></i>List</a> &nbsp;
+            <a href="{{ path('media-library-grid-list') }}"> <i class="icon-th"></i>Grid</a>
         </li> <span class="divider">/</span> 
         <li class="active">Edit image/asset</li>
     {% else %}
-        <li><a href="{{ path('image-group') }}">Image/asset groups</a></li> <span class="divider">/</span>
-        <li><a href="{{ path('media-library', {'page': 1, 'slug': image.imageGroup.slug }) }}">Group <i>{{ image.imageGroup.description | raw }}</i> assets</a></li> <span class="divider">/</span>
+        <li class="active">
+            <em>Group <i>{{ image.imageGroup.description }}</i> assets</em> 
+            <a href="{{ path('media-library', {'page': 1, 'slug': image.imageGroup.slug}) }}"><i class="icon-list"></i>List</a>&nbsp
+            <a href="{{ path('media-library-group-grid-list', {'group': image.imageGroup.id}) }}"><i class="icon-th"></i>Grid</a>
+        </li> <span class="divider">/</span>
         <li class="active">Edit image</li>
     {% endif %}
 {% endblock %}    

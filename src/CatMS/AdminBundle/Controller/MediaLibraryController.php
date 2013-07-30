@@ -11,6 +11,7 @@ use CatMS\AdminBundle\Entity\ImageUpload;
 use CatMS\AdminBundle\Controller\CommonMethods;
 use CatMS\AdminBundle\Logger\History;
 use Symfony\Component\HttpFoundation\Response;
+use CatMS\AdminBundle\Entity\ImageGroup;
 
 /**
  * MediaLibrary controller.
@@ -370,6 +371,15 @@ class MediaLibraryController extends Controller
     {
         return $this->render('CatMSAdminBundle:MediaLibrary:list-grid.html.twig', 
             array()
+        );
+    }
+    
+    public function listGroupGridAction(ImageGroup $group)
+    {
+        return $this->render('CatMSAdminBundle:MediaLibrary:list-group-grid.html.twig', 
+            array(
+                'group' => $group
+            )
         );
     }
 }

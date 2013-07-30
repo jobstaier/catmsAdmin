@@ -77,6 +77,8 @@ class ImageUpload
     protected $systemThumbWidth;
     
     protected $systemThumbHeight;
+    
+    protected $thumbPath;
 
     public function getAbsolutePath()
     {
@@ -97,6 +99,13 @@ class ImageUpload
         return null === $this->path
             ? null
             : $this->getUploadDir().'/'.$this->path;
+    }
+    
+    public function getThumbWebPath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadDir().'/thmb_'.$this->path;
     }
     
     protected function getUploadRootDir()
@@ -222,6 +231,7 @@ class ImageUpload
                 $filename = substr(sha1(uniqid(mt_rand(), true)), 0, 10);
             }
             $this->path = $filename.'.'.$this->getFile()->guessExtension();
+            $this->thumbPath = 'thmb_'.$filename.'.'.$this->getFile()->guessExtension();
         }
     }    
     
@@ -240,6 +250,10 @@ class ImageUpload
         $this->getFile()->move($this->getUploadRootDir(), $this->path);
 
         $this->resizeAndSaveImage();
+        
+        if ($this->imageGroup->getHasThumbnails()) {
+            $this->resizeAndSaveThumb();
+        }
         
         // check if we have an old image
         if (isset($this->temp)) {
@@ -286,6 +300,23 @@ class ImageUpload
         }
     }
     
+    private function resizeAndSaveThumb()
+    {        
+        if ($this->mimeType == 'image/jpeg' || $this->mimeType == 'image/png') {
+            $imagePath = $this->getUploadRootDir().'/'.$this->path;
+            $imageThumbPath = $this->getUploadRootDir().'/'.$this->thumbPath;
+            $image = \WideImage::load($imagePath);
+            
+            $groupImageWidth = ($this->getImageGroup()->getThumbnailWidth()) ? $this->getImageGroup()->getThumbnailWidth() : 150;
+            $groupImageHeight = ($this->getImageGroup()->getThumbnailHeight()) ? $this->getImageGroup()->getThumbnailHeight() : 100;
+
+            $image->resize($groupImageWidth, $groupImageHeight, 'outside')
+                ->crop('center', 'center', $groupImageWidth, $groupImageHeight)
+                ->saveToFile($imageThumbPath);
+
+        }
+    }
+    
     /**
      * @ORM\PostRemove()
      */
@@ -301,7 +332,13 @@ class ImageUpload
             if (file_exists($systemThumb)) {
                 unlink($systemThumb);
             }           
-        }       
+        }      
+        
+        if ($thumb = $this->getThumbWebPath()) {
+            if (file_exists($thumb)) {
+                unlink($thumb);
+            }    
+        }
     }    
 
     /**
@@ -473,6 +510,7 @@ class ImageUpload
             'path' => $this->getPath(),
             'redirect' => $this->getRedirect(),
             'imageGroup' => $this->getImageGroup()->getSlug(),
+            'imageGroupId' => $this->getImageGroup()->getId(),
             'uploadedAt' => $this->getUploadedAt(),
             'thumb' => $this->getSystemThumbDir().'/'.$this->getSystemThmbPrefix().$this->path,
             'mimeType' => $this->getMimeType(),

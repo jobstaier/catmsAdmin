@@ -3,9 +3,9 @@
 {% block breadcrumb %}
     {{ parent() }}
     <li class="active">
-        <em>Media library</em> 
-        <a href="{{ path('media-library') }}"><i class="icon-list"></i>List</a>&nbsp;
-        <a href="{{ path('media-library-grid-list') }}"><i class="icon-th"></i>Grid</a>
+        <em>Group <i>{{ group.description }}</i> assets</em> 
+        <a href="{{ path('media-library', {'page': 1, 'slug': group.slug}) }}"><i class="icon-list"></i>List</a>&nbsp 
+        <a href="{{ path('media-library-group-grid-list', {'group': group.id}) }}"><i class="icon-th"></i>Grid</a>
     </li>
 {% endblock %}    
     
@@ -13,19 +13,19 @@
     <div class="notice-container"></div>
      
     <legend>
-        <i class="icon-large icon-picture"></i> Media library assets
-        <a href="{{ path('media-library', {'page': 1}) }}" data-toggle="tooltip" title="Details View" class="show-list-view" style="float: right;">
+        <i class="icon-large icon-picture"></i> Group <i>{{ group.description}}</i> assets
+        <a href="{{ path('media-library', {'page': 1, 'slug': group.slug}) }}" data-toggle="tooltip" title="Details View" class="show-list-view" style="float: right;">
             <i class="icon-large icon-list"></i>
         </a>
     </legend>
 
-    <a href="{{ path('media-library-upload') }}" class="btn btn-small btn-success"><i class="icon-upload"></i> 
+    <a href="{{ path('media-library-upload', {'group': group.slug}) }}" class="btn btn-small btn-success"><i class="icon-upload"></i> 
         Upload file
     </a>
     <hr />
     
     <div class="grid">
-        <a href="{{ path('get-images-list-ajax') }}" id="getImagesList" style="display: none;"></a>
+        <a href="{{ path('get-group-images-list-ajax', {'group': group.id}) }}" id="getGroupImagesList" style="display: none;"></a>
         <a href="{{ asset('uploads/media-library/') }}" id="dirPath" style="display: none;"></a>
         <a href="{{ path('media-library-image-edit-pure') }}" id="editPath" style="display: none;"></a>
         
@@ -44,5 +44,5 @@
     <hr />
 
     
-    <script src="{{ asset('js/catms.asset-grid-list.js') }}"></script>
+<script src="{{ asset('js/catms.asset-group-grid-list.js') }}"></script>
 {% endblock %}
