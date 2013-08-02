@@ -148,7 +148,7 @@ class AjaxController extends Controller
     {
         $request = $this->getRequest();
         
-        $page = $request->request->get('page');
+        $page = $request->query->get('page');
         $recordsCount = 24;
         
         $repository = $this->getDoctrine()
@@ -183,14 +183,16 @@ class AjaxController extends Controller
     
     
     /**
-     * @Route("/admin/get-group-images-list-ajax/{group}/{page}",
-     *  name="get-group-images-list-ajax",
-     *  defaults={"page"=1}
+     * @Route("/admin/get-group-images-list-ajax/{group}",
+     *  name="get-group-images-list-ajax"
      * )
-     * @Method("GET")
      */
-    public function getGroupImagesListAjax($group, $page)
+    public function getGroupImagesListAjax($group)
     {
+        $request = $this->getRequest();
+        
+        $page = $request->query->get('page');
+        
         $recordsCount = 24;
         
         $repository = $this->getDoctrine()
@@ -212,6 +214,8 @@ class AjaxController extends Controller
         
         $count = $repository->createQueryBuilder('a')
                 ->select('count(a.id)')
+                ->where('a.imageGroup = :group')
+                ->setParameter('group', $group)
                 ->getQuery()
                 ->getSingleScalarResult();
         

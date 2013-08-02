@@ -7,7 +7,7 @@ $(function() {
     var page = parseInt($('.grid-list').attr('data-view') + 1);
     
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         url: URL,
         dataType: 'json',
         data: {'page': page},
@@ -32,7 +32,7 @@ $(function() {
         var page = parseInt($('.grid-list').attr('data-view')) + 1;
 
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: URL,
             dataType: 'json',
             data: {'page': page},

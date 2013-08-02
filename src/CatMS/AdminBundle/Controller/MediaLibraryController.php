@@ -377,9 +377,7 @@ class MediaLibraryController extends Controller
     public function listGroupGridAction(ImageGroup $group)
     {
         return $this->render('CatMSAdminBundle:MediaLibrary:list-group-grid.html.twig', 
-            array(
-                'group' => $group
-            )
+            array('group' => $group)
         );
     }
 }

@@ -115,7 +115,7 @@
                         if ($(this).text() === txt) {
                             $(this).attr('selected', 'selected')
                         ;}
-                    })
+                    });
                 });
             </script>
             <div class="controls" style="margin-top: 15px;">
@@ -148,7 +148,12 @@
 <a href="{{ path('media-library-plupload', {'group': group}) }}" id="pluploadUrl" style="display: none"></a>
 <div class="multiple-upload-form">
     <legend><i class="icon-large icon-sort"></i> Multiple Files Upload
-        {% if not group %}<a href="{{ path('media-library-grid-list') }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>{% endif %}
+        {% if not group %}
+            <a href="{{ path('media-library-grid-list') }}" data-toggle="tooltip" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
+    {% else%}
+            <a href="{{ path('media-library-group-grid-list', {'group': groupEntity.id }) }}" data-toggle="tooltip" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
+        </a>
+    {% endif %}
     </legend>
 <form>
 <div id="uploader">
