@@ -45,4 +45,19 @@
 
     
     <script src="{{ asset('js/catms.asset-grid-list.js') }}"></script>
+    {#
+    <div id="modalQuickEdit" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel"><i class="icon-large icon-picture"></i> Asset Quick Edit</h3>
+        </div>
+        <div class="modal-body">
+            {{ form_widget(editForm) }}
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-small btn-primary save-trigger">Save changes</button>
+        </div>
+    </div>
+    #}
 {% endblock %}

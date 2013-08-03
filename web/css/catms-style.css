@@ -425,6 +425,11 @@ thead {
     margin: 3px 10px 0 0;
 }
 
+.image-grid-btns input[type="checkbox"] {
+    float: right;
+    margin-top: 6px;
+}
+
 .grid ul.grid-list li .media-icon {
     margin: 10px 45px 12px;
 }
@@ -432,4 +437,8 @@ thead {
 .breadcrumb em {
     color: #999999;
     font-style: normal;
+}
+
+.hide {
+    display: none;
 }

@@ -44,3 +44,9 @@ media-library-plupload:
     path:     /pluapload-load-asset/{group}
     defaults: {  _controller: CatMSAdminBundle:MediaLibrary:plupload, group: null }
     
+media-library-inline-edit:
+    path:     /inline-edit
+    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:inlineEdit }
+    requirements:
+        id: \d+    
+    methods:  [POST]

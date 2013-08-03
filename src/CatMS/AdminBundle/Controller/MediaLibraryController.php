@@ -369,8 +369,22 @@ class MediaLibraryController extends Controller
     
     public function listGridAction()
     {
+        $form = $this->createFormBuilder()
+            ->add('title')  
+            ->add('priority')  
+            ->add('redirect')
+            ->add('slug')
+            ->add('file')
+            ->add('imageGroup', 'entity', array(
+                'class' => 'CatMSAdminBundle:ImageGroup',
+                'property' => 'description',
+            ))
+            ->getForm();
+        
         return $this->render('CatMSAdminBundle:MediaLibrary:list-grid.html.twig', 
-            array()
+            array(
+                'editForm' => $form->createView()
+            )
         );
     }
     
@@ -378,6 +392,15 @@ class MediaLibraryController extends Controller
     {
         return $this->render('CatMSAdminBundle:MediaLibrary:list-group-grid.html.twig', 
             array('group' => $group)
+        );
+    }
+    
+    public function inlineEditAction()
+    {
+        
+        
+        return new Response(json_encode(array('notice' => 'success')), 200, 
+            array('Content-Type' => 'application/json')
         );
     }
 }

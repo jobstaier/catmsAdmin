@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use CatMS\AdminBundle\Logger\History;
+use CatMS\AdminBundle\Form\AssetProtoType;
 
 /**
  * MediaLibrary controller.
@@ -164,7 +165,17 @@ class AjaxController extends Controller
         $results = array();
         
         foreach ($images as $image) {
-            $results['images'][] = $image->serialize();
+            $form = $this->createForm(new AssetProtoType(), $image)
+                ->createView();
+            
+            $results['images'][] = $image->serialize() + 
+                array(
+                    'editFormPrototype' => $this->renderView(
+                        'CatMSAdminBundle:MediaLibrary:prototypes\assetEditPrototype.html.twig',
+                         array('form' => $form)
+                    )
+                );
+            
         }
         
         
