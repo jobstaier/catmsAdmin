@@ -25,9 +25,11 @@
     <hr />
     
     <div class="grid">
-        <a href="{{ path('get-images-list-ajax') }}" id="getImagesList" style="display: none;"></a>
-        <a href="{{ asset('uploads/media-library/') }}" id="dirPath" style="display: none;"></a>
-        <a href="{{ path('media-library-image-edit-pure') }}" id="editPath" style="display: none;"></a>
+        <a href="{{ path('get-images-list-ajax') }}" id="getImagesList" class="hide"></a>
+        <a href="{{ asset('uploads/media-library/') }}" id="dirPath" class="hide"></a>
+        <a href="{{ path('media-library-image-edit-pure') }}" id="editPath" class="hide"></a>
+        <a href="{{ path('media-library-image-inline-edit') }}" id="editInlinePath" class="hide"></a>
+        <a href="{{ path('media-library-image-inline-edit-regenerate-form') }}" id="editInlineRegeneratePath" class="hide"></a>
         
         <ul class="grid-list" data-view="0">
 
@@ -45,19 +47,19 @@
 
     
     <script src="{{ asset('js/catms.asset-grid-list.js') }}"></script>
-    {#
+
     <div id="modalQuickEdit" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel"><i class="icon-large icon-picture"></i> Asset Quick Edit</h3>
         </div>
         <div class="modal-body">
-            {{ form_widget(editForm) }}
+
         </div>
         <div class="modal-footer">
             <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">Close</button>
             <button class="btn btn-small btn-primary save-trigger">Save changes</button>
         </div>
     </div>
-    #}
+
 {% endblock %}

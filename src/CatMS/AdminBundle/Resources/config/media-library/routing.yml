@@ -27,6 +27,16 @@ media-library-image-edit:
 media-library-image-edit-pure:    
     path:   /edit/{id}/{group}
     defaults: {  _controller: CatMSAdminBundle:MediaLibrary:editImage, id: null, group: null }
+  
+media-library-image-inline-edit:
+    path:   /edit-inline
+    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:editInlineImage }      
+    methods: [POST]
+    
+media-library-image-inline-edit-regenerate-form:
+    path:   /regenerate-edit-inline-form
+    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:regenerateEditInlineFormImage }      
+    methods: [GET]
         
 media-library-image-delete:
     path:     /delete/{id}/{group}

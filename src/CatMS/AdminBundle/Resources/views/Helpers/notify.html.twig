@@ -1,0 +1,22 @@
+{% for flashMessage in app.session.flashbag.get('noticeSuccess') %}
+    <script>
+        $(function() {
+            $.pnotify({
+                title: 'Success',
+                text: '{{ flashMessage | trans }}',
+                type: 'success'
+            });              
+        });
+    </script>
+{% endfor %}
+{% for flashMessage in app.session.flashbag.get('noticeFailure') %}
+    <script>
+        $(function() {
+            $.pnotify({
+                title: 'Error ocured',
+                text: '{{ flashMessage | trans }}',
+                type: 'error'
+            });
+        });
+    </script>
+{% endfor %}

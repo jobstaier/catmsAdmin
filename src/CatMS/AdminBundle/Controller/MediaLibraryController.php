@@ -12,6 +12,7 @@ use CatMS\AdminBundle\Controller\CommonMethods;
 use CatMS\AdminBundle\Logger\History;
 use Symfony\Component\HttpFoundation\Response;
 use CatMS\AdminBundle\Entity\ImageGroup;
+use CatMS\AdminBundle\Form\AssetProtoType;
 
 /**
  * MediaLibrary controller.
@@ -369,22 +370,8 @@ class MediaLibraryController extends Controller
     
     public function listGridAction()
     {
-        $form = $this->createFormBuilder()
-            ->add('title')  
-            ->add('priority')  
-            ->add('redirect')
-            ->add('slug')
-            ->add('file')
-            ->add('imageGroup', 'entity', array(
-                'class' => 'CatMSAdminBundle:ImageGroup',
-                'property' => 'description',
-            ))
-            ->getForm();
-        
         return $this->render('CatMSAdminBundle:MediaLibrary:list-grid.html.twig', 
-            array(
-                'editForm' => $form->createView()
-            )
+            array()
         );
     }
     
@@ -395,11 +382,83 @@ class MediaLibraryController extends Controller
         );
     }
     
-    public function inlineEditAction()
+    public function editInlineImageAction()
     {
+        $request = $this->getRequest();
         
+        $post = $request->request->all();
         
-        return new Response(json_encode(array('notice' => 'success')), 200, 
+        $em = $this->getDoctrine()->getManager();
+        $image = $em->getRepository('CatMSAdminBundle:ImageUpload')
+            ->find($post['id']);
+        
+        if (!$image) {
+            return new Response(
+                json_encode(
+                    array('notice' => 'Unable to find Image entity.')
+                ), 
+                200, 
+                array('Content-Type' => 'application/json')
+            );
+        };
+
+        $image->setTitle($post['title']);
+        $image->setPriority($post['priority']);
+        $image->setRedirect($post['redirect']);
+        $image->setSlug($post['slug']);
+        
+        $form = $this->createForm(new AssetProtoType(), $image)
+            ->createView();
+        
+        $em->persist($image);
+        $em->flush();  
+        
+        return new Response(
+            json_encode(
+                array(
+                    'notice' => 'success',
+                    'editFormPrototype' => $this->renderView(
+                        'CatMSAdminBundle:MediaLibrary:prototypes\assetEditPrototype.html.twig',
+                         array('form' => $form)
+                    ) 
+                )
+            ), 
+            200, 
+            array('Content-Type' => 'application/json')
+        );
+    }
+    
+    public function regenerateEditInlineFormImageAction()
+    {
+        $request = $this->getRequest();
+        
+        $em = $this->getDoctrine()->getManager();
+        $image = $em->getRepository('CatMSAdminBundle:ImageUpload')
+            ->find($request->query->get('id'));
+        
+        if (!$image) {
+            return new Response(
+                json_encode(
+                    array('notice' => 'Unable to find Image entity.')
+                ), 
+                200, 
+                array('Content-Type' => 'application/json')
+            );
+        };     
+        
+        $form = $this->createForm(new AssetProtoType(), $image)
+            ->createView();
+        
+        return new Response(
+            json_encode(
+                array(
+                    'editFormPrototype' => $this->renderView(
+                        'CatMSAdminBundle:MediaLibrary:prototypes\assetEditPrototype.html.twig',
+                         array('form' => $form)
+                    ) 
+                )
+            ), 
+            200, 
             array('Content-Type' => 'application/json')
         );
     }

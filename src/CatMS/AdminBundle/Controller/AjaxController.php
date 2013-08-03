@@ -9,12 +9,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use CatMS\AdminBundle\Logger\History;
 use CatMS\AdminBundle\Form\AssetProtoType;
+use CatMS\AdminBundle\Entity\ContentGroup;
 
 /**
  * MediaLibrary controller.
  *
- * @Route("/ajax")
- * 
  */
 class AjaxController extends Controller
 {
@@ -27,12 +26,12 @@ class AjaxController extends Controller
     /**
      * Get image group list
      * 
-     * @Route("/get-groups", name="ajax-get-groups")
      */
     public function getGroupsAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $groups = $em->getRepository('CatMSAdminBundle:ImageGroup')->findBy(array(), array('description' => 'asc'));
+        $groups = $em->getRepository('CatMSAdminBundle:ImageGroup')
+            ->findBy(array(), array('description' => 'asc'));
         
         $groupsArr = array();
         foreach ($groups as $key => $obj) {
@@ -42,18 +41,22 @@ class AjaxController extends Controller
         }
 
         $groupsJson = json_encode($groupsArr);
-        return new Response($groupsJson, 200, array('Content-Type' => 'application/json'));
+        return new Response(
+            $groupsJson, 
+            200, 
+            array('Content-Type' => 'application/json')
+        );
     }
     
     /**
      * Get content group list
      * 
-     * @Route("/get-content-groups", name="ajax-get-content-groups")
      */
-    public function ajaxGetContentGroupsAction()
+    public function getContentGroupsAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $groups = $em->getRepository('CatMSAdminBundle:ContentGroup')->findBy(array(), array('description' => 'asc'));
+        $groups = $em->getRepository('CatMSAdminBundle:ContentGroup')
+            ->findBy(array(), array('description' => 'asc'));
         
         $groupsArr = array();
         foreach ($groups as $key => $obj) {
@@ -61,16 +64,18 @@ class AjaxController extends Controller
         }
 
         $groupsJson = json_encode($groupsArr);
-        return new Response($groupsJson, 200, array('Content-Type' => 'application/json'));        
+        return new Response(
+            $groupsJson, 
+            200, 
+            array('Content-Type' => 'application/json')
+        );        
     }
     
     /**
-     * @Route("/admin/get-related-image-groups/{group}", 
-     *  name="ajax-get-related-image-groups",
-     *  requirements={"group"="\d+"}
-     * )
+     * Get realted images
+     * 
      */
-    public function ajaxGetRelatedImageGroupAction(\CatMS\AdminBundle\Entity\ContentGroup $group)
+    public function getRelatedImageGroupAction(ContentGroup $group)
     {
         $related = $group->getRelatedImages();
 
@@ -78,74 +83,39 @@ class AjaxController extends Controller
         
         foreach($related as $imageGroup) {
             foreach($imageGroup->getImages() as $img) {
-                $relatedArr[$imageGroup->getDescription()][$img->getId()]['path'] = $img->getPath();
-                $relatedArr[$imageGroup->getDescription()][$img->getId()]['title'] = $img->getTitle();
+                $relatedArr[$imageGroup->getDescription()][$img->getId()]['path'] = 
+                    $img->getPath();
+                $relatedArr[$imageGroup->getDescription()][$img->getId()]['title'] = 
+                    $img->getTitle();
             }
         }
 
-        return new Response(json_encode($relatedArr), 200, array('Content-Type' => 'application/json'));        
+        return new Response(
+            json_encode($relatedArr), 
+            200, 
+            array('Content-Type' => 'application/json')
+        );        
     }
     
     /**
-     * @Route("/admin/ajax-get-related-image-inject/{group}", 
-     *  name="ajax-get-related-image-inject",
-     *  requirements={"group"="\d+"}
-     * )
-     */
-    public function ajaxGetRelatedImageInjectAction(\CatMS\AdminBundle\Entity\ContentGroup $group)
-    {
-        $pattern = "(#img=([0-9])+#)";
-        
-        foreach ($group->getContents() as $content) {
-            $this->parseContent($pattern, $content->getFullText());
-            $this->parseContent($pattern, $content->getShortText());
-        }
-        
-        return new Response(json_encode($this->injectedArr), 200, array('Content-Type' => 'application/json'));        
-    }
-    
-    private function parseContent($pattern, $content) 
-    {
-        $em = $this->getDoctrine()->getManager();
-        $matches = array();
-        $images = array();
-        
-        preg_match_all($pattern, $content, $matches);
-
-        if ($matches) {
-            foreach($matches[0] as $key => $code) {
-                preg_match("([0-9]+)", $code, $idMatch);
-                $id = $idMatch[0];
-
-                $image = $em->getRepository('CatMSAdminBundle:ImageUpload')->find($id);
-
-                if ($image) {                
-                    $this->injectedArr[$image->getImageGroup()->getDescription()][$image->getId()]['path'] = $image->getPath();
-                    $this->injectedArr[$image->getImageGroup()->getDescription()][$image->getId()]['title'] = $image->getTitle();
-                }
-            }
-        } 
-        return $images;
-    }
-    
-    /**
-     * @Route("/admin/ajax-get-history", 
-     *  name="ajax-get-history"
-     * )
+     * Get history
+     * 
      */
     public function getHistoryAction()
     {
         $history = new History($this->get('session'), $this->get('router'));
-        return new Response(json_encode($history->getHistory()), 200, array('Content-Type' => 'application/json'));
+        return new Response(
+            json_encode($history->getHistory()),
+            200, 
+            array('Content-Type' => 'application/json')
+        );
     }
     
     
     /**
-     * @Route("/admin/get-images-list",
-     *  name="get-images-list-ajax"
-     * )
+     * Get images list
      */
-    public function getImagesListAjax()
+    public function getImagesListAction()
     {
         $request = $this->getRequest();
         
@@ -165,19 +135,8 @@ class AjaxController extends Controller
         $results = array();
         
         foreach ($images as $image) {
-            $form = $this->createForm(new AssetProtoType(), $image)
-                ->createView();
-            
-            $results['images'][] = $image->serialize() + 
-                array(
-                    'editFormPrototype' => $this->renderView(
-                        'CatMSAdminBundle:MediaLibrary:prototypes\assetEditPrototype.html.twig',
-                         array('form' => $form)
-                    )
-                );
-            
+            $results['images'][] = $image->serialize();
         }
-        
         
         $count = $repository->createQueryBuilder('a')
                 ->select('count(a.id)')
@@ -194,9 +153,8 @@ class AjaxController extends Controller
     
     
     /**
-     * @Route("/admin/get-group-images-list-ajax/{group}",
-     *  name="get-group-images-list-ajax"
-     * )
+     * Get group images list
+     * 
      */
     public function getGroupImagesListAjax($group)
     {
@@ -235,7 +193,7 @@ class AjaxController extends Controller
         
         return new Response(json_encode($results), 200, 
             array('Content-Type' => 'application/json')
-        );   
+        );     
     }   
 }
 ?>

@@ -49,19 +49,21 @@ $(function() {
         return false;
     });
 
-    /*
+
     $('.modal-trigger').live('click', function() {
-        $('.modal-body').html($(this).parent().find($('.edit-form-prototype')).html());
+        
+        regenerateForm($(this).parents('li').find('.image-id').attr('rel'));
+        
         $('#modalQuickEdit').modal();
+        showModalLoader();
         return false;
     });
-    */
+
    
-    /*
     $('.save-trigger').live('click', function() {
         saveChanges($(this));
     });
-    */
+
 });
 
 function renderList(data, container) {
@@ -71,11 +73,12 @@ function renderList(data, container) {
     $.each(data.images, function(i, obj){
         list = list + '<li>' + renderMimeTypeThumbnail(obj, dir) +
             '<div class="image-grid-btns">' + 
-                '<div class="edit-form-prototype hide">' + obj.editFormPrototype +'</div>' +
-                //'<input type="checkbox" data-toggle="tooltip" title="Remove" />' +
+                '<a class="hide image-id" rel="' + obj.id + '"></a>' +
+                '<div class="edit-form-prototype hide">' + /*obj.editFormPrototype*/ '</div>' +
+                '<input type="checkbox" data-toggle="tooltip" title="Remove" />' +
                 '<a data-toggle="tooltip" title="Copy Source" href="' + dir + obj.path + '" class="copy-source"><i class="icon-screenshot"></i></a>' +
+                '<a data-placement="right" class="modal-trigger" data-toggle="tooltip" title="Quick edit" href="' + editPath + '/' + obj.id + '"><i class="icon-pencil"></i></a>' +
                 '<a data-placement="right" data-toggle="tooltip" title="Edit" href="' + editPath + '/' + obj.id + '"><i class="icon-edit"></i></a>' +
-                //'<a data-placement="right" class="modal-trigger" data-toggle="tooltip" title="Quick edit" href="' + editPath + '/' + obj.id + '"><i class="icon-pencil"></i></a>' +
             '</div></li>';
     });
     container.append(list);
@@ -87,25 +90,66 @@ function renderList(data, container) {
     }
 }
 
-/*
+
 function saveChanges(el) {
+    showLoader();
+    
     var form = el.parents('#modalQuickEdit').find($('form.inline-edit-form'));
-    console.log(form.html());
     var data = {
-        'id'            : form.find($('#asset_form_id')).val(),
-        'title'         : form.find($('#asset_form_title')).val(),
-        'priority'      : form.find($('#asset_form_priority')).val(),
-        'redirect'      : form.find($('#asset_form_redirect')).val(),
-        'slug'          : form.find($('#asset_form_slug')).val(),
-        'imageGroup'    : form.find($('#asset_form_imageGroup')).val()
+        'id'            : form.find($('input[name="asset_form[id]"]')).val(),
+        'title'         : form.find($('input[name="asset_form[title]"]')).val(),
+        'priority'      : form.find($('input[name="asset_form[priority]"]')).val(),
+        'redirect'      : form.find($('input[name="asset_form[redirect]"]')).val(),
+        'slug'          : form.find($('input[name="asset_form[slug]"]')).val()
     };
-    console.log(data);
+
+    var URL = $('#editInlinePath').attr('href');
+
+    $.ajax({
+        type: 'POST',
+        url: URL,
+        dataType: 'json',
+        data: data,
+        success: function(data) {
+            pinesNotify(noticeSuccessTitle, noticeSuccessText, 'success');
+            $('#modalQuickEdit').modal('hide');
+            closeLoader();
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+            pinesNotify('Error occured!', errorThrown, 'error');
+            $('#modalQuickEdit').modal('hide');
+            closeLoader();
+        }
+    });
+    
     return false;
 }
-*/
+
+function regenerateForm(assetId) {
+    showLoader();
+    var URL = $('#editInlineRegeneratePath').attr('href');
+    $.ajax({
+        type: 'GET',
+        url: URL,
+        dataType: 'json',
+        data: {'id': assetId},
+        success: function(data) {
+            $('.modal-body').html(data.editFormPrototype);
+            closeLoader();
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+            pinesNotify('Error occured!', errorThrown, 'error');
+            $('#modalQuickEdit').modal('hide');
+            closeLoader();
+        }
+    });
+    closeLoader();
+}
 
 var notice = '<div class="alert">' +
     '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
     '<strong>Empty databse!</strong> No records defined.' +
-    '</div>';
+    '</div>'; 
     
+var noticeSuccessTitle = 'Success!';
+var noticeSuccessText = 'Data has been updated successfuly.';

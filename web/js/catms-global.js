@@ -3,7 +3,7 @@ var loaderGif = '/img/loading.gif';
 function showAlert(header, message, type){
 var html = '<div class="alert alert-'+ type +'">' + 
        '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-       '<strong>'+ header +'</strong>' + message +
+       '<strong>'+ header +'</strong> ' + message +
        '</div>';
 
 $('.notice-container').html(html);
@@ -31,7 +31,24 @@ function closeLoader(){
 }
 
 function copyToClipboard(text) {
-    window.prompt ("Copy to clipboard: Ctrl+C, Enter", text);
+    var modalStr =
+        '<div id="promptModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
+            '<div class="modal-header">' +
+                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
+                '<h3 id="myModalLabel"><i class="icon-large icon-scissors"></i> Copy Source</h3>' +
+            '</div>' +
+            '<div class="modal-body" style="text-align: center;">' +
+                '<p>Copy to clipboard: Ctrl+A, Ctrl+C</p>' +
+                '<input class="span6" style="text-align:center" type="text" value="' + text + '">' +
+            '</div>' +
+            '<div class="modal-footer">' +
+                '<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>' +
+            '</div>' +
+        '</div>';
+        
+    $(modalStr).modal();
+
+    //window.prompt ("Copy to clipboard: Ctrl+C, Enter", text);
 }
 
 function renderMimeTypeThumbnail(obj, dir) {
@@ -69,3 +86,15 @@ $(function() {
     
     $('.selectpicker').selectpicker();
 });
+
+function pinesNotify(title, text, type) {
+    $.pnotify({
+        title: title,
+        text: text,
+        type: type
+    });
+}
+
+function showModalLoader() {
+    $('.modal-body').html('<div class="modal-loader" style="text-align: center"><img src="' + loaderGif + '" /></div>');
+}

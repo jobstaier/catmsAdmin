@@ -15,12 +15,7 @@ class AssetProtoType extends AbstractType
             ->add('title')  
             ->add('priority')  
             ->add('redirect')
-            ->add('slug')
-            ->add('imageGroup', 'entity', array(
-                'class' => 'CatMSAdminBundle:ImageGroup',
-                'property' => 'description',
-            ));
-        
+            ->add('slug');    
     }
     
     public function setDefaultOptions(OptionsResolverInterface $resolver)
