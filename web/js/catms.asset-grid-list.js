@@ -96,11 +96,11 @@ function saveChanges(el) {
     
     var form = el.parents('#modalQuickEdit').find($('form.inline-edit-form'));
     var data = {
-        'id'            : form.find($('input[name="asset_form[id]"]')).val(),
-        'title'         : form.find($('input[name="asset_form[title]"]')).val(),
-        'priority'      : form.find($('input[name="asset_form[priority]"]')).val(),
-        'redirect'      : form.find($('input[name="asset_form[redirect]"]')).val(),
-        'slug'          : form.find($('input[name="asset_form[slug]"]')).val()
+        'asset_form[id]'            : form.find($('input[name="asset_form[id]"]')).val(),
+        'asset_form[title]'         : form.find($('input[name="asset_form[title]"]')).val(),
+        'asset_form[priority]'      : form.find($('input[name="asset_form[priority]"]')).val(),
+        'asset_form[redirect]'      : form.find($('input[name="asset_form[redirect]"]')).val(),
+        'asset_form[slug]'          : form.find($('input[name="asset_form[slug]"]')).val()
     };
 
     var URL = $('#editInlinePath').attr('href');
@@ -111,7 +111,12 @@ function saveChanges(el) {
         dataType: 'json',
         data: data,
         success: function(data) {
-            pinesNotify(noticeSuccessTitle, noticeSuccessText, 'success');
+            if(data.result === 'success') {
+                pinesNotify(noticeSuccessTitle, noticeSuccessText, 'success');
+            } else if(data.result === 'error') {
+                pinesNotify(noticeErrorTitle, noticeErrorText, 'error');
+            }
+            
             $('#modalQuickEdit').modal('hide');
             closeLoader();
         },
@@ -153,3 +158,6 @@ var notice = '<div class="alert">' +
     
 var noticeSuccessTitle = 'Success!';
 var noticeSuccessText = 'Data has been updated successfuly.';
+
+var noticeErrorTitle = 'Error occured!';
+var noticeErrorText = 'Data has not been updated successfuly.';

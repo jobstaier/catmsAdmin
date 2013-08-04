@@ -204,6 +204,20 @@ body {
     background: url('../img/pdf48x48.png') 0 0 no-repeat;
 }
 
+.rar-icon-48 {
+    display: block;
+    width: 48px;
+    height: 48px;
+    background: url('../img/rar48x48.png') 0 0 no-repeat;
+}
+
+.zip-icon-48 {
+    display: block;
+    width: 48px;
+    height: 48px;
+    background: url('../img/zip48x48.png') 0 0 no-repeat;
+}
+
 .footer-bottom {
     padding: 15px 0;
     text-align: center;
@@ -400,6 +414,7 @@ thead {
     margin: 20px 10px 10px;
     display: inline-block;
     border-bottom: 1px solid #979797;
+    vertical-align: top;
 }
 
 .grid ul.grid-list li img {

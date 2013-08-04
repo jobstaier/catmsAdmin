@@ -23,6 +23,7 @@ class AssetProtoType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'CatMS\AdminBundle\Entity\ImageUpload',
             'cascade_validation' => true,
+            'csrf_protection' => false
         ));
     }
 

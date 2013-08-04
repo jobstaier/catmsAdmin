@@ -389,9 +389,58 @@ class MediaLibraryController extends Controller
         $post = $request->request->all();
         
         $em = $this->getDoctrine()->getManager();
+        
+        $image = $em->getRepository('CatMSAdminBundle:ImageUpload')
+            ->find($post['asset_form']['id']);
+
+        if (!$image) {
+            return new Response(
+                json_encode(
+                    array('notice' => 'Unable to find Image entity.')
+                ), 
+                200, 
+                array('Content-Type' => 'application/json')
+            );
+        };
+        
+        $form = $this->createForm(new AssetProtoType(), $image);
+        if ($request->isMethod('POST')) {
+            
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                
+                $em->persist($image);
+                $em->flush();  
+                
+                return new Response(
+                    json_encode(
+                        array(
+                            'result' => 'success',
+                        )
+                    ), 
+                    200, 
+                    array('Content-Type' => 'application/json')
+                );
+            } else {
+                return new Response(
+                    json_encode(
+                        array(
+                            'result' => 'error',
+                        )
+                    ), 
+                    200, 
+                    array('Content-Type' => 'application/json')
+                );
+            }
+        }
+
+        /*
         $image = $em->getRepository('CatMSAdminBundle:ImageUpload')
             ->find($post['id']);
+        */
         
+        /*
         if (!$image) {
             return new Response(
                 json_encode(
@@ -406,13 +455,19 @@ class MediaLibraryController extends Controller
         $image->setPriority($post['priority']);
         $image->setRedirect($post['redirect']);
         $image->setSlug($post['slug']);
+        */
         
+        /*
         $form = $this->createForm(new AssetProtoType(), $image)
             ->createView();
+        */
         
+        /*
         $em->persist($image);
         $em->flush();  
+        */
         
+        /*
         return new Response(
             json_encode(
                 array(
@@ -426,6 +481,7 @@ class MediaLibraryController extends Controller
             200, 
             array('Content-Type' => 'application/json')
         );
+        */
     }
     
     public function regenerateEditInlineFormImageAction()
