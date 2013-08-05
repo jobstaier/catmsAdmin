@@ -22,7 +22,7 @@ $(function() {
             
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            alert(errorThrown);
+            pinesNotify('Error occured!', errorThrown, 'error');
             closeLoader();
         }
     });
@@ -42,8 +42,8 @@ $(function() {
                 $('.grid-list').attr('data-view', page);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
-                alert(errorThrown);
-                closeLoader();
+                pinesNotify('Error occured!', errorThrown, 'error');
+                closeLoader();                
             }
         });
         return false;
@@ -63,7 +63,63 @@ $(function() {
     $('.save-trigger').live('click', function() {
         saveChanges($(this));
     });
+    
+   
+    $('.remove-image').live('click', function() {
+        return false;
+    });
+    
+    $('.remove-image').live('mousedown', function() {
+        var placement = ($(this).data('placement') !== 'undefined') ? $(this).data('placement') : 'left';
+        var url = $(this).attr('href');
 
+        $(this).popover({
+            content: 
+                    '<div class="delete-popvoer">Are you sure you want to delete this item?<br />' + 
+                    '<a data-path="' + url + '" href="" class="btn btn-primary btn-mini remove-image-confirm">Confirm</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-inverse btn-mini dismiss">Dismiss</a></div>',
+            placement: placement,
+            html: true           
+        });
+    });
+    
+
+    $('.dismiss').live('click', function() {
+        $(this).parents('div.popover').prev('a.remove-image').popover('hide');
+    });
+
+   
+    $('.remove-image-confirm').live('click', function() {
+        $(this).parents('div.popover').prev('a.remove-image').popover('hide');
+        $(this).parents('li').fadeOut(500);
+        window.setTimeout(function() {
+            $(this).parents('li').remove();
+        }, 500);
+        
+        showLoader();
+        
+        var URL = $(this).data('path');
+
+        $.ajax({
+            type: 'POST',
+            url: URL,
+            dataType: 'json',
+            data: null,
+            success: function(data) {
+                if(data.result === 'success') {
+                    pinesNotify(noticeSuccessTitle, noticeSuccessDeleteText, 'success');
+                    closeLoader();
+                } else if(data.result === 'error') {
+                    pinesNotify(noticeErrorTitle, noticeErrorText, 'error');
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                pinesNotify('Error occured!', errorThrown, 'error');
+                closeLoader();
+            }
+        });
+
+        return false;
+    });
 });
 
 function renderList(data, container) {
@@ -74,11 +130,11 @@ function renderList(data, container) {
         list = list + '<li>' + renderMimeTypeThumbnail(obj, dir) +
             '<div class="image-grid-btns">' + 
                 '<a class="hide image-id" rel="' + obj.id + '"></a>' +
-                '<div class="edit-form-prototype hide">' + /*obj.editFormPrototype*/ '</div>' +
-                '<input type="checkbox" data-toggle="tooltip" title="Remove" />' +
-                '<a data-toggle="tooltip" title="Copy Source" href="' + dir + obj.path + '" class="copy-source"><i class="icon-screenshot"></i></a>' +
-                '<a data-placement="right" class="modal-trigger" data-toggle="tooltip" title="Quick edit" href="' + editPath + '/' + obj.id + '"><i class="icon-pencil"></i></a>' +
-                '<a data-placement="right" data-toggle="tooltip" title="Edit" href="' + editPath + '/' + obj.id + '"><i class="icon-edit"></i></a>' +
+                '<div class="edit-form-prototype hide"></div>' +
+                '<a data-placement="top" data-toggle="popover" title="Remove" class="remove-image"  href="' + obj.deletePath + '"><i class="icon-trash"></i></a>' +
+                '<a data-placement="top" data-toggle="tooltip" title="Copy Source" href="' + dir + obj.path + '" class="copy-source"><i class="icon-screenshot"></i></a>' +
+                '<a data-placement="top" data-toggle="tooltip" title="Quick edit" class="modal-trigger"   href="' + editPath + '/' + obj.id + '"><i class="icon-pencil"></i></a>' +
+                '<a data-placement="top" data-toggle="tooltip" title="Edit" href="' + editPath + '/' + obj.id + '"><i class="icon-edit"></i></a>' +
             '</div></li>';
     });
     container.append(list);
@@ -161,3 +217,6 @@ var noticeSuccessText = 'Data has been updated successfuly.';
 
 var noticeErrorTitle = 'Error occured!';
 var noticeErrorText = 'Data has not been updated successfuly.';
+
+var noticeSuccessDeleteText = 'Delete success!';
+var noticeSuccessDeleteText = 'Asset has been deleted successfuly.';

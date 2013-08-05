@@ -434,54 +434,6 @@ class MediaLibraryController extends Controller
                 );
             }
         }
-
-        /*
-        $image = $em->getRepository('CatMSAdminBundle:ImageUpload')
-            ->find($post['id']);
-        */
-        
-        /*
-        if (!$image) {
-            return new Response(
-                json_encode(
-                    array('notice' => 'Unable to find Image entity.')
-                ), 
-                200, 
-                array('Content-Type' => 'application/json')
-            );
-        };
-
-        $image->setTitle($post['title']);
-        $image->setPriority($post['priority']);
-        $image->setRedirect($post['redirect']);
-        $image->setSlug($post['slug']);
-        */
-        
-        /*
-        $form = $this->createForm(new AssetProtoType(), $image)
-            ->createView();
-        */
-        
-        /*
-        $em->persist($image);
-        $em->flush();  
-        */
-        
-        /*
-        return new Response(
-            json_encode(
-                array(
-                    'notice' => 'success',
-                    'editFormPrototype' => $this->renderView(
-                        'CatMSAdminBundle:MediaLibrary:prototypes\assetEditPrototype.html.twig',
-                         array('form' => $form)
-                    ) 
-                )
-            ), 
-            200, 
-            array('Content-Type' => 'application/json')
-        );
-        */
     }
     
     public function regenerateEditInlineFormImageAction()
@@ -517,6 +469,24 @@ class MediaLibraryController extends Controller
             200, 
             array('Content-Type' => 'application/json')
         );
+    }
+    
+    public function deleteAssetInlineAction(ImageUpload $image)
+    {
+        $em = $this->getDoctrine()->getManager();  
+        
+        $em->remove($image);
+        $em->flush();
+        
+        return new Response(
+            json_encode(
+                array(
+                    'result' => 'success',
+                )
+            ), 
+            200, 
+            array('Content-Type' => 'application/json')
+        );     
     }
 }
 

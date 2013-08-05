@@ -1,0 +1,3 @@
+admin-home:
+    path:      /
+    defaults:  { _controller: CatMSAdminBundle:FrontPage:index }

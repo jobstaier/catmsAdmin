@@ -9,8 +9,6 @@ $(document).ready(function(){
     
     $('.popoverButton').popover();
 
-    //$("a.single-image").fancybox();
-
     $("a.single-image").live('mouseenter', function(){
         $(this).fancybox();
     });

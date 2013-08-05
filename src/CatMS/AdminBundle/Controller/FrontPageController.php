@@ -8,18 +8,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Admin front page controller.
- * 
- * @Route("/admin")
+ *
  */
 class FrontPageController extends Controller
 {
     /**
-     * @Route("/", name="admin-home")
+     * Admin frontpage
+     * 
      */
-    public function adminAction()
+    public function indexAction()
     {
-        return $this->render('CatMSAdminBundle:FrontPage:index.html.twig', array(
-            
-        ));
+        return $this->render('CatMSAdminBundle:FrontPage:index.html.twig', 
+            array()
+        );
     }
 }

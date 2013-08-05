@@ -60,3 +60,12 @@ media-library-inline-edit:
     requirements:
         id: \d+    
     methods:  [POST]
+    
+media-library-delete-inline:
+    path:     /inline-delete/{id}
+    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:deleteAssetInline }
+    requirements:
+        id: \d+    
+    methods:  [POST]
+  
+  
