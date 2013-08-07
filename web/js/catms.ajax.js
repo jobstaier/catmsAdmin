@@ -18,15 +18,13 @@ $(document).ready(function(){
                     handler.children().remove();
 
                     if (groups.length !== 0) {
-                        console.log(groups);
                         $.each(groups, function(i, obj){
                             handler.append('<li><a href="' + tmpImageGroupUrl + '/' + obj.id + '"><i class="icon-picture"></i> ' + obj.description  + '</a></li>');
                         });
                         
                     } else {
                         handler.append('<li><a href="#"><i class="icon-remove-sign"></i> No groups defined</a></li>')
-                    } 
-                    //handler.hide().fadeIn(150);
+                    }
                 },
                 error:function(){}   
             });

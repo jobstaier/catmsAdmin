@@ -28,8 +28,8 @@ class ImageUpload
      * @Assert\Length(
      *      min = "5",
      *      max = "50",
-     *      minMessage = "Your first name must be at least {{ limit }} characters length",
-     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters length"
+     *      minMessage = "Title must be at least {{ limit }} characters length",
+     *      maxMessage = "Title cannot be longer than {{ limit }} characters length"
      * )
      */
     protected $title;

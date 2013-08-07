@@ -254,11 +254,12 @@ class MediaLibraryController extends Controller
                 
                 $this->get('session')->getFlashBag()
                     ->add('noticeSuccess', 'edit.success');
+                
                 if ($group) {
                     return $this->redirect(
                         $this->generateUrl('media-library-image-edit', 
                             array(
-                                'id' => $image->getId(), 'slug' => $group
+                                'id' => $image->getId(), 'group' => $group
                             )
                         )
                     );
@@ -427,6 +428,7 @@ class MediaLibraryController extends Controller
                     json_encode(
                         array(
                             'result' => 'error',
+                            'errors' => $this->getErrorMessages($form)
                         )
                     ), 
                     200, 
@@ -434,6 +436,24 @@ class MediaLibraryController extends Controller
                 );
             }
         }
+    }
+    
+    private function getErrorMessages(\Symfony\Component\Form\Form $form) {      
+        $errors = array();
+
+        if ($form->hasChildren()) {
+            foreach ($form->getChildren() as $child) {
+                if (!$child->isValid()) {
+                    $errors[$child->getName()] = $this->getErrorMessages($child);
+                }
+            }
+        } else {
+            foreach ($form->getErrors() as $key => $error) {
+                $errors[] = $error->getMessage();
+            }   
+        }
+
+        return $errors;
     }
     
     public function regenerateEditInlineFormImageAction()

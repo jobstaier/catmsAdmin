@@ -49,7 +49,6 @@ $(function() {
         return false;
     });
 
-
     $('.modal-trigger').live('click', function() {
         
         regenerateForm($(this).parents('li').find('.image-id').attr('rel'));
@@ -58,7 +57,6 @@ $(function() {
         showModalLoader();
         return false;
     });
-
    
     $('.save-trigger').live('click', function() {
         saveChanges($(this));
@@ -81,13 +79,11 @@ $(function() {
             html: true           
         });
     });
-    
 
     $('.dismiss').live('click', function() {
         $(this).parents('div.popover').prev('a.remove-image').popover('hide');
     });
 
-   
     $('.remove-image-confirm').live('click', function() {
         $(this).parents('div.popover').prev('a.remove-image').popover('hide');
         $(this).parents('li').fadeOut(500);
@@ -169,12 +165,17 @@ function saveChanges(el) {
         success: function(data) {
             if(data.result === 'success') {
                 pinesNotify(noticeSuccessTitle, noticeSuccessText, 'success');
+                closeLoader();
+                $('#modalQuickEdit').modal('hide');
             } else if(data.result === 'error') {
-                pinesNotify(noticeErrorTitle, noticeErrorText, 'error');
+                closeLoader();
+                pinesNotify(noticeErrorValidationTitle, noticeErrorText, 'error');
+                $.each(data.errors, function(key, error) {
+                    $.each(error, function(i, message) {
+                    pinesNotify(noticeErrorTitle, message, 'error');
+                    });
+                });
             }
-            
-            $('#modalQuickEdit').modal('hide');
-            closeLoader();
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
             pinesNotify('Error occured!', errorThrown, 'error');
@@ -216,6 +217,7 @@ var noticeSuccessTitle = 'Success!';
 var noticeSuccessText = 'Data has been updated successfuly.';
 
 var noticeErrorTitle = 'Error occured!';
+var noticeErrorValidationTitle = "Validation error."
 var noticeErrorText = 'Data has not been updated successfuly.';
 
 var noticeSuccessDeleteText = 'Delete success!';

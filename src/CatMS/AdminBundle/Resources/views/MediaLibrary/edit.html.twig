@@ -9,7 +9,7 @@
     {% if group is empty %}
         <li>
             <em>Media library</em> 
-            <a href="{{ path('media-library') }}"><i class="icon-list"></i>List</a> &nbsp;
+            <a href="{{ path('media-library') }}"><i class="icon-list"></i>List</a>&nbsp;
             <a href="{{ path('media-library-grid-list') }}"> <i class="icon-th"></i>Grid</a>
         </li> <span class="divider">/</span> 
         <li class="active">Edit image/asset</li>
@@ -25,7 +25,14 @@
     
     
 {% block content -%}    
-    <legend><i class="icon-large icon-brush"></i> Edit Image/asset {% if group is not empty %} - <i>{{ image.imageGroup.description | raw }}</i> group{% endif %}</legend>
+    <legend>
+        <i class="icon-large icon-brush"></i> Edit Image/asset {% if group is not empty %} - <i>{{ image.imageGroup.description | raw }}</i> group{% endif %}
+        {% if not group %}
+            <a data-toggle="tooltip" title="Back to Grid View" href="{{ path('media-library-grid-list') }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
+        {% else %}
+            <a data-toggle="tooltip" title="Back to Grid View" href="{{ path('media-library-group-grid-list', {'group': image.imageGroup.id}) }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>       
+        {% endif %}
+    </legend>
     
     {% if group is not empty and image.imageGroup and (image.imageGroup.imageWidth or image.imageGroup.imageHeight) %}
         
