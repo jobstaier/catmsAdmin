@@ -18,6 +18,10 @@ class FrontPageController extends Controller
      */
     public function indexAction()
     {
+        $request = $this->getRequest();
+        
+        //var_dump($request->getHttpHost());
+        
         return $this->render('CatMSAdminBundle:FrontPage:index.html.twig', 
             array()
         );

@@ -2,21 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Generate new password</title>
+<title>{{ 'mailer.password.request' | trans }}</title>
 </head>
 <body>
     <div style="background-color: #000">
-    <img src="https://dl.dropboxusercontent.com/u/25855328/catms-mail-header.jpg" alt="Header image" />
+    <img src="https://dl.dropboxusercontent.com/u/25855328/catms-mail-header.jpg" alt="CatMS Admin" />
     </div>
         
-    <p>Aby wygenerować nowe hasło prosze kliknąć w <a href="{{ get_setting('page-url') }}/{{ userHash }}">ten link</a> lub odwiedzić stronę localhost.katarek.pl/app_dev.php/generate-new-password/{{ userHash }}</p>
+    <p>
+        {% trans with {'url': app.request.httpHost ~ '/' ~ userHash } %}mailer.password.click-to-generate-new{% endtrans  %}
+    </p>
 
     <hr />
     <p style="color: #999">
-    <i>
-    Pozdrawiam serdecznie,<br />
-    Administrator CatMS<br />
-    d.job@catdesign.pl<br /></i>
+    <i>{{ 'mailer.regards' | trans | raw }}</i>
     </p>
 </body>
 </html>
