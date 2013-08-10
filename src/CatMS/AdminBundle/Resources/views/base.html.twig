@@ -24,7 +24,7 @@
     <script type="text/javascript" src="{{ asset('js/pines-notify/jquery.pnotify.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/catms.text-editor.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/catms.popover.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/catms-global.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/catms.global.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/catms.scripts.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/catms.ajax.js') }}"></script>
     {% block javascripts_bottom %}{% endblock %}
@@ -34,7 +34,9 @@
         'bootstrap/css/bootstrap.min.css'
         'bootstrap/css/bootstrap.icon-large.min.css'
         'bootstrap/css/glyphicons.css'
+        bootstrap/css/bootstrap-select.min.css
         'fancybox/jquery.fancybox-1.3.4.css'
+        'js/pines-notify/jquery.pnotify.default.css'
         'css/catms-style.css'
         filter='cssrewrite, yui_css' output="css/yui/cmp.css" %}
         <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
@@ -48,6 +50,8 @@
         'bootstrap/js/bootstrap.min.js'
         'fancybox/jquery.fancybox-1.3.4.pack.js'
         'fancybox/jquery.easing-1.3.pack.js'
+        'bootstrap/js/bootstrap-select.min.js'
+        'js/pines-notify/jquery.pnotify.min.js'
         'js/catms.text-editor.js'
         'js/catms.popover.js'
         'js/catms-global.js' 
