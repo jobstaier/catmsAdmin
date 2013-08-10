@@ -21,11 +21,19 @@ class SettingType extends AbstractType
     {
         $type = ($options['form_value_field_type'] != '') ? $options['form_value_field_type'] : 'textarea';
 
-        $builder->add('slug');
+        $builder->add('slug', 'text', array('attr' => array(
+                'placeholder' => 'Slug'
+            )
+        ));
         
-        $builder->add('value', (string) $type);
+        $builder->add('value', (string) $type, array('attr' => array(
+                'placeholder' => 'Setting value'
+            )
+        ));
             
-        $builder->add('description', 'textarea')
+        $builder->add('description', 'textarea', array(
+                    'attr' => array('placeholder' => 'Description')
+                ))
                 ->add('fieldType', 'choice', array(
                     'choices' => $this->getFieldTypes(),
                     'multiple' => false,

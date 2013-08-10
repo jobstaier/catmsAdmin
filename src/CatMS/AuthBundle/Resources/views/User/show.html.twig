@@ -8,29 +8,17 @@
 
     
 {% block content -%}
-    <legend>User <i>{{entity.username}}</i></legend>
+    <legend><i class="icon-large icon-user"></i> User <i>{{entity.username}}</i></legend>
 
     <table class="record_properties table table-striped table-bordered">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th style="width: 120px;">Id</th>
                 <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>User hash</th>
-                <td>{{ entity.userHash }}</td>
             </tr>
             <tr>
                 <th>Username</th>
                 <td>{{ entity.username }}</td>
-            </tr>
-            <tr>
-                <th>Salt</th>
-                <td>{{ entity.salt }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ entity.password }}</td>
             </tr>
             <tr>
                 <th>Email</th>
@@ -47,21 +35,22 @@
         </tbody>
     </table>
 
-    <div class="btn-group" style="margin-bottom: 10px">
-        <a href="{{ path('user') }}" class="btn"><i class="icon-list"></i> 
+    <div style="margin-bottom: 10px">
+        <a href="{{ path('user') }}" class="btn btn-small"><i class="icon-list"></i> 
             Back to the list
         </a>
 
-        <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn"><i class="icon-edit"></i> 
+        <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn-small"><i class="icon-edit"></i> 
             Edit
         </a>
+            
+        <form action="{{ path('user_delete', { 'id': entity.id }) }}" method="post" style="float: right">
+            <input type="hidden" name="_method" value="DELETE" />
+            {{ form_widget(delete_form) }}
+            <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
+        </form>
     </div>
            
-    <form action="{{ path('user_delete', { 'id': entity.id }) }}" method="post">
-        <input type="hidden" name="_method" value="DELETE" />
-        {{ form_widget(delete_form) }}
-        <button type="submit" class="btn" data-toggle="modal" data-target="#delete"><i class="icon-trash"></i> Delete</button>
-        {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'delete', 'msg': 'Delete user', 'btnTxt': 'Delete'} %}
-    </form>
+
 
 {% endblock %}

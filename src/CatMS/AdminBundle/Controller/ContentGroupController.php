@@ -97,7 +97,7 @@ class ContentGroupController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('CatMSAdminBundle:ContentGroup')->find($id);
-
+        
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find ContentGroup entity.');
         }
@@ -155,6 +155,7 @@ class ContentGroupController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
+            //echo 'Controller'; die();
             $em->persist($entity);
             $em->flush();
 
@@ -188,11 +189,19 @@ class ContentGroupController extends Controller
                 throw $this->createNotFoundException('Unable to find ContentGroup entity.');
             }
 
+            if ($entity->getIsRemovable() == '000') {
+                $this->get('session')->getFlashBag()->add('noticeFailure', 'delete.error.delete.resticted');
+                return $this->redirect($this->generateUrl('content-group'));
+            } elseif ($entity->getIsRemovable() == '755' && !$this->get('security.context')->isGranted('ROLE_DEVELOPER')) {
+                $this->get('session')->getFlashBag()->add('noticeFailure', 'delete.error.delete.developer');
+                return $this->redirect($this->generateUrl('content-group'));    
+            }
+            
             $em->remove($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add('noticeSuccess', 'delete.success');
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'delete.error');
+            $this->get('session')->getFlashBag()->add('noticeFailure', 'delete.error');
         }
 
         return $this->redirect($this->generateUrl('content-group'));

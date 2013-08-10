@@ -2,21 +2,30 @@
 <html lang="en">
 <head>
     <title>{% block title %}CatMS Admin - Login{% endblock %}</title>
-    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" media="screen" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('css/style.css') }}" media="screen" rel="stylesheet" type="text/css" />
-    <style>
-        {% block stylesheets %}{% endblock %}
-    </style>
-    <script src="{{ asset('js/jquery-1.7.2.min.js') }}"></script>
+    {% stylesheets 
+        'bootstrap/css/bootstrap.min.css'
+        'css/catms-style.css'
+        filter='cssrewrite, yui_css' output="css/yui/cmp-cut.css" %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
+    {% endstylesheets %}
+
+    {% javascripts
+        'js/jquery-1.7.2.min.js'
+        'bootstrap/js/bootstrap.min.js'
+        filter='yui_js' output="js/yui/cmp-cut.js" %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %} 
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
-                <a class="brand" href="{{ path('admin-home') }}">CatMS Admin</a>
+                <a class="brand" href="{{ path('admin-home') }}">
+                    <img src="{{ asset('img/catms-logo.png') }}" /><span>CatMS</span>
+                </a>
             </div>
         </div>
-    </div>
+    </div> 
         
     <div class="container">
     <legend><i class="icon-lock" style="margin-top: 4px;"></i> User authentication</legend>
@@ -43,11 +52,6 @@
     {% block content %}{% endblock %}
         
     </div> <!-- /container -->
-            
-    <!-- Javascripts at the bottom of page - inclrease stie load time -->
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-    {% block javascripts_bottom %}{% endblock %}
-    <!-- End Javascripts Bottom -->
     
 </body>
 </html>

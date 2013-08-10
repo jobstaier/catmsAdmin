@@ -2,20 +2,33 @@
 
 {% block breadcrumb %}
     {{ parent() }}
-    <li><a href="{{ path('image-group') }}">Image Groups</a></li> <span class="divider">/</span>
+    <li><a href="{{ path('image-group') }}">Assets Groups</a></li> <span class="divider">/</span>
     <li class="active">Create new group</a>
 {% endblock %} 
 
 {% block content -%}
-    <legend>Image Group creation</legend>
+    <legend><i class="icon-large icon-pencil"></i> Asset Group creation</legend>
 
     <form novalidate action="{{ path('image-group-create') }}" method="post" {{ form_enctype(form) }} class="form-float content-manager-form">
-        {{ form_widget(form) }}
-            
-            
-        <div class="btn-group">
-            <a href="{{ path('image-group') }}" class="btn"><i class="icon-list"></i> Back to the list</a>
-            <button type="submit" class="btn btn-primary show-loader" data-loading-text="Creating..."><i class="icon-hdd"></i> Create</button>
+        <div class="row-fluid">
+            <div class="span6">
+                {{ form_row(form.slug) }}
+                {{ form_row(form.description) }}
+                {{ form_row(form.imageWidth) }}
+                {{ form_row(form.imageHeight) }}
+            </div>
+            <div class="span6">
+                <label for="catms_adminbundle_imagegrouptype_hasThumbnails">Has thumbnails? {{ form_widget(form.hasThumbnails)}}</label><br />
+                {{ form_row(form.thumbnailWidth) }}
+                {{ form_row(form.thumbnailHeight) }}
+            </div>
+        </div>
+        {{ form_rest(form) }}
+
+        <br />
+        <div>
+            <a href="{{ path('image-group') }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
+            <button type="submit" class="btn btn-primary btn-small show-loader" data-loading-text="Creating..."><i class="icon-hdd"></i> Create</button>
         </div>    
     </form>
 {% endblock %}

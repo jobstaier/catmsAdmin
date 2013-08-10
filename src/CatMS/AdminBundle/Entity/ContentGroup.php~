@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="CatMS\AdminBundle\Repository\ContentGroupRepository")
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity("slug")
- * @ORM\Table(name="contentgroup")
+ * @ORM\Table(name="content_group")
  */
 class ContentGroup
 {
@@ -51,6 +51,13 @@ class ContentGroup
     private $manual;
     
     /**
+     * @ORM\Column(type="text", length=3, nullable=false)
+     * @Assert\Choice(choices = {"777", "755", "000"}, message = "Choose a valid access value.")
+     * @var integer 
+     */
+    private $isRemovable = "777";
+    
+    /**
      * @ORM\OneToMany(targetEntity="CatMS\AdminBundle\Entity\ContentManager", mappedBy="contentGroup")
      * @var object \CatMS\AdminBundle\Entity\ContentManager
      */
@@ -61,6 +68,12 @@ class ContentGroup
      * @ORM\JoinTable(name="contents_images")
      */
     private $relatedImages;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="CatMS\AdminBundle\Entity\ContentFields", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="content_fields_id", referencedColumnName="id")
+     */
+    private $contentFields;
     
     public function __construct() {
         $this->contents = new \Doctrine\Common\Collections\ArrayCollection(); 
@@ -214,5 +227,52 @@ class ContentGroup
     public function getRelatedImages()
     {
         return $this->relatedImages;
+    }
+
+    /**
+     * Set isRemovable
+     *
+     * @param integer $isRemovable
+     * @return ContentGroup
+     */
+    public function setIsRemovable($isRemovable)
+    {
+        $this->isRemovable = $isRemovable;
+
+        return $this;
+    }
+
+    /**
+     * Get isRemovable
+     *
+     * @return integer 
+     */
+    public function getIsRemovable()
+    {
+        return $this->isRemovable;
+    }
+
+
+    /**
+     * Set contentFields
+     *
+     * @param \CatMS\AdminBundle\Entity\ContentFields $contentFields
+     * @return ContentGroup
+     */
+    public function setContentFields(\CatMS\AdminBundle\Entity\ContentFields $contentFields = null)
+    {
+        $this->contentFields = $contentFields;
+
+        return $this;
+    }
+
+    /**
+     * Get contentFields
+     *
+     * @return \CatMS\AdminBundle\Entity\ContentFields 
+     */
+    public function getContentFields()
+    {
+        return $this->contentFields;
     }
 }

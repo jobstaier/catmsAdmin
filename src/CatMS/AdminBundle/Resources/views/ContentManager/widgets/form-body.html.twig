@@ -1,0 +1,44 @@
+<div style="float: left; width: 435px;">
+    <label for="catms_adminbundle_contentmanagertype_slug"><i class="icon-bookmark"></i> Slug</label>
+    {{ form_widget(form.slug, {'attr': {'class': 'input-xplarge', 'placeholder': 'Slug'}}) }}    
+    {{ form_errors(form.slug) }}    
+</div>
+
+{% if not group.contentFields.hasTitle %}
+    {% include 'CatMSAdminBundle:ContentManager:widgets/form-body-new-attributes.html.twig' with {'form': form, 'style': 'float: right;'} %}
+{% endif %}
+
+<div style="width: 435px;{% if not group.contentFields.hasTitle %} float: left;{% else %} float: right;{% endif %}">
+    <label for="catms_adminbundle_contentmanagertype_description" class=""><i class="icon-chevron-down"></i> {{ group.contentFields.fieldDescriptionLabel | striptags }}</label>
+    {{ form_widget(form.description, {'attr': {'class': 'textarea-xplarge h100 w420', 'placeholder': group.contentFields.fieldDescriptionLabel }}) }}    
+    {{ form_errors(form.description) }}       
+
+</div>
+
+<div style="width: 435px; margin-top: 10px; float: left;{% if not group.contentFields.hasTitle %} display: none;{% endif %}">
+    <label for="catms_adminbundle_contentmanagertype_title" class=""><i class="icon-chevron-down"></i> {{ group.contentFields.fieldTitleLabel | striptags }}</label>
+    {{ form_widget(form.title, {'attr': {'class': 'input-xplarge', 'placeholder': group.contentFields.fieldTitleLabel}}) }}    
+    {{ form_errors(form.title) }}    
+</div>
+
+<div style="float: left; width: 100%; clear: both; margin-top: 30px;">
+    <label for="#" class="before-tiny well"><i class="icon-chevron-down"></i> {{ group.contentFields.fieldFullTextLabel | striptags }}</label>
+    {{ form_widget(form.fullText, {'attr': {'class': 'tiny_full_with_image', 'placeholder': group.contentFields.fieldFullTextLabel}}) }}    
+    {{ form_errors(form.fullText) }}  
+</div>
+
+<div style="float: left; margin: 20px 0 30px; width: 100%;">
+    
+    <div style="float: left; width: 435px; margin-top: 15px;{% if not group.contentFields.hasShortText %} display: none;{% endif %}">
+        <label for="#" class="well"><i class="icon-chevron-down"></i> {{ group.contentFields.fieldShortTextLabel | striptags }}</label>
+        {{ form_widget(form.shortText, {'attr': {'class': 'textarea-xplarge h100 w420 tiny_half', 'placeholder': group.contentFields.fieldShortTextLabel }}) }}    
+        {{ form_errors(form.shortText) }}    
+    </div>
+    
+{% if group.contentFields.hasTitle and not group.contentFields.hasShortText %}
+    {% include 'CatMSAdminBundle:ContentManager:widgets/form-body-new-attributes.html.twig' with {'form': form, 'style': ''} %}
+{% elseif group.contentFields.hasTitle and group.contentFields.hasShortText %}    
+    {% include 'CatMSAdminBundle:ContentManager:widgets/form-body-new-attributes.html.twig' with {'form': form, 'style': 'float: right; margin-top: 15px;'} %}
+{% endif %}
+    
+</div>

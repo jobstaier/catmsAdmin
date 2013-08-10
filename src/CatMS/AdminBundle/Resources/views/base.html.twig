@@ -1,45 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    
     <title>{% block title %}CatMS Admin{% endblock %}</title>
+
+
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.icon-large.min.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/glyphicons.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap-select.min.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('fancybox/jquery.fancybox-1.3.4.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('js/pines-notify/jquery.pnotify.default.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('css/catms-style.css') }}" type="text/css" media="screen" />
+    {% block stylesheets_import %}{% endblock %}
+    
+    <script type="text/javascript" src="{{ asset('js/jquery-1.7.2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap-select.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('fancybox/jquery.fancybox-1.3.4.pack.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('fancybox/jquery.easing-1.3.pack.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/tinymce/tinymce.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/pines-notify/jquery.pnotify.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/catms.text-editor.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/catms.popover.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/catms.global.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/catms.scripts.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/catms.ajax.js') }}"></script>
+    {% block javascripts_bottom %}{% endblock %}
+    
+    {#
     {% stylesheets 
         'bootstrap/css/bootstrap.min.css'
+        'bootstrap/css/bootstrap.icon-large.min.css'
+        'bootstrap/css/glyphicons.css'
+        bootstrap/css/bootstrap-select.min.css
         'fancybox/jquery.fancybox-1.3.4.css'
+        'js/pines-notify/jquery.pnotify.default.css'
         'css/catms-style.css'
         filter='cssrewrite, yui_css' output="css/yui/cmp.css" %}
         <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
     {% endstylesheets %}
+    {% block stylesheets_import %}{% endblock %}
     
+        
+    <script type="text/javascript" src="{{ asset('js/tinymce/tinymce.min.js')}}"></script>
     {% javascripts
         'js/jquery-1.7.2.min.js'
-        'js/catms-global.js' 
         'bootstrap/js/bootstrap.min.js'
         'fancybox/jquery.fancybox-1.3.4.pack.js'
         'fancybox/jquery.easing-1.3.pack.js'
+        'bootstrap/js/bootstrap-select.min.js'
+        'js/pines-notify/jquery.pnotify.min.js'
+        'js/catms.text-editor.js'
+        'js/catms.popover.js'
+        'js/catms-global.js' 
         'js/catms.scripts.js'
         'js/catms.ajax.js'
         filter='yui_js' output="js/yui/cmp.js" %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {% endjavascripts %}  
+    {% block javascripts_bottom %}{% endblock %}
+    #}
     
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
-                <a class="brand" href="{{ path('admin-home') }}">CatMS Admin</a>
+                <a class="brand" href="{{ path('admin-home') }}"><img src="{{ asset('img/catms-logo.png') }}" /><span>CatMS</span></a>
                 <div class="nav-collapse collapse">
 
                     <ul class="nav">
                         {{ include('CatMSAdminBundle:Helpers:nav.html.twig') }}
                     </ul>
 
-                    <div class="btn-group to-right">
+                    <div class="btn-group to-right header-btns">
                         {% if not app.user %}
                             <a href="{{ path('login') }}" class="btn btn-primary">Login</a>
                         {% else %}
-                            <span class="btn"><i class="icon-user"></i> Hello {{ app.user.username }}!</span>
-                            <a href="{{ path('logout') }}" class="btn btn-primary"><i class="icon-off"></i> Logout</a>
+                            <span class="btn btn-small"><i class="icon-user"></i> Hello {{ app.user.username }}!</span>
+                            <a href="{{ path('logout') }}" class="btn btn-primary btn-small"><i class="icon-off"></i> Logout</a>
                         {% endif %}
                     </div>           
                 </div>
@@ -50,7 +91,7 @@
     <div class="container">
         
         <div class="history-trigger-container">
-            <a class="btn btn-info"><i class="icon-chevron-left"></i> History</a>
+            <a class="btn btn-info btn-small"><i class="icon-chevron-left"></i> History</a>
         </div>
         <div class="history-container">
             <a href="{{ path('ajax-get-history')}}" id="getHistoryUrl" style="display: none"></a>
@@ -63,32 +104,17 @@
         
         <ul class="breadcrumb">
             {% block breadcrumb %}
-                <li><i class="icon-home" style="margin-top: 0px;"></i> <a href="{{ path('admin-home')}}">Home</a></li> <span class="divider">/</span>
+                <li><a href="{{ path('admin-home')}}"><i class="icon-home" style="margin-top: 0px;"></i> Home</a></li> <span class="divider">/</span>
             {% endblock %}
         </ul>
 
-        {% for flashMessage in app.session.flashbag.get('noticeSuccess') %}
-            <div class="alert alert-info">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{ flashMessage | trans }}
-            </div>
-        {% endfor %}
-        {% for flashMessage in app.session.flashbag.get('noticeFailure') %}
-            <div class="alert alert-error">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                {{ flashMessage | trans }}
-            </div>
-        {% endfor %}
-        
+        {% include 'CatMSAdminBundle:Helpers:notify.html.twig' %}
+                
         {% block content %}
         {% endblock %}
     </div> <!-- /container -->
     
     <footer class="footer-bottom"><small><a href="http://www.catdesign.pl">Catdesign</a> &copy; 2013 Author: Dawid Job <a href="mailto:d.job@catdesign.pl">d.job@catdesign.pl</a></small></footer>
-    
-    <!-- Javascripts at the bottom of page - decrease site load time -->
-    {% block javascripts_bottom %}{% endblock %}
-    <!-- End Javascripts Bottom -->
     
 </body>
 </html>

@@ -2,30 +2,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Create Account</title>
+<title>{{ 'mailer.account.create' | trans }}</title>
 </head>
 <body>
     <div style="background-color: #000">
-    <img src="https://dl.dropboxusercontent.com/u/25855328/catms-mail-header.jpg" alt="Header image" />
+    <img src="https://dl.dropboxusercontent.com/u/25855328/catms-mail-header.jpg" alt="CatMS Admin" />
     </div>
     
-    <p>Utworzono konto użytkownika <strong>{{ username }}</strong>.<br />
-    Aby zalogować sie do panelu CatMS prosze przejśc na stronę {{ get_setting('page-url') }} i użyć poniższych danych autoryzacyjnych:</p>
+    <p>
+        {{ 'mailer.account.created' | trans }} <strong>{{ username }}</strong>.<br />
+        {% trans with {'page_url': app.request.httpHost} %}mailer.affiliate{% endtrans %}:
+    </p>
+        
     <table>
         <tr>
-        <td><strong>User</strong></td><td>{{ username }}</td>
+        <td><strong>{{ 'mailer.user' | trans }}</strong></td><td>{{ username }}</td>
         </tr>
         <tr>
-            <td><strong>Password</strong></td><td>{{ newPw }}</td>
+            <td><strong>{{ 'mailer.password.password' | trans }}</strong></td><td>{{ newPw }}</td>
         </tr>
     </table>
     
     <hr />
     <p style="color: #999">
-    <i>
-    Pozdrawiam serdecznie,<br />
-    Administrator CatMS<br />
-    d.job@catdesign.pl<br /></i>
+    <i>{{ 'mailer.regards' | trans | raw }}</i>
     </p>
 </body>
 </html>

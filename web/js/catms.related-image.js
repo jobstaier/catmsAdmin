@@ -3,15 +3,11 @@ $(function(){
         if ($(this).hasClass('active')){
             $(this).removeClass('active');
             $(this).children('i').removeClass('icon-chevron-right').addClass('icon-chevron-left');
-            $('.related-images-container').animate({
-                right: '-992px'
-            }, 1000, function(){});
+            $('.related-images-container').fadeOut(350);
         } else {
             $(this).addClass('active');
             $(this).children('i').removeClass('icon-chevron-left').addClass('icon-chevron-right');
-            $('.related-images-container').animate({
-                right: '0px'
-            }, 1000, function(){});
+            $('.related-images-container').fadeIn(350);
         }
 
         if (!$(this).hasClass('ready')){
@@ -55,37 +51,6 @@ function getRelatedImageGroup(){
     });
 }
 
-/**
- * Function to get images injected into FullText and ShortText Content field
- *
- * @method getRelatedImageInjected
- */
-function getRelatedImageInjected(){
-    $('.loader-gif-bottom').show();
-    var URL = $('#getRelatedImageInjectUrl').attr('href');
-    $.ajax({
-        type: 'POST',
-        url: URL,
-        dataType: 'json',
-        data: null,
-        success: function(data) {
-
-            $('.loader-gif-bottom').hide();
-            var count = Object.keys(data).length;
-            var container = $('.related-directly .append-here-bottom');
-
-            if (count > 0 ) {
-                renderThumbs(data, container);
-            } else {
-                renderNullResultNotice(container);
-            }
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown){
-            alert(errorThrown);
-        }
-    });
-}
-
 function renderThumbs(data, container){
     var html = '<ul>';
     $.each(data, function(i, val){
@@ -93,10 +58,12 @@ function renderThumbs(data, container){
         var editUrl = $('#editImageUrl').attr('href');
         $.each(val, function(id, properties){
             var title = (properties.title !== null) ? properties.title : '';
-            html = html + '<li><a href="' + imgDirectory + properties.path + '" class="single-image"><img class="img-polaroid" src="' + imgDirectory + 
-                    properties.path + '" title="' + properties.title + '"/></a>' +
-                    '<div class="caption"><h6>[#img='+ id +'#]</h6><p><strong>['+ i 
-                    +']</strong><br />'+ title +'</div></p><a href="' + editUrl+ '/' + id + '" class="btn  btn-mini btn-primary">Edit</a></li>';
+            html = html + '<li><div class="image-wrapper"><a href="' + imgDirectory + properties.path + '" class="single-image"><img class="img-polaroid" src="' + imgDirectory + 
+                    properties.path + '" title="' + properties.title + '"/></a></div>' +
+                    '<div class="caption">'+ title +'</div>' +
+                    '<a href="' + imgDirectory + properties.path + '" class="btn btn-mini btn-success copy-source">Copy Source</a>' + 
+                    '<a href="' + editUrl+ '/' + id + '" class="btn edit btn-mini btn-primary">Edit</a>' + 
+                    '</li>';
         });
     });
     html = html + '</ul>';

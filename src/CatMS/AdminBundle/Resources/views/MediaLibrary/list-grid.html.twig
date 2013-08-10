@@ -1,0 +1,64 @@
+{% extends 'CatMSAdminBundle::base.html.twig' %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    <li class="active">
+        <em>Media library</em> 
+        <a href="{{ path('media-library') }}"><i class="icon-list"></i>List</a>&nbsp;
+        <a href="{{ path('media-library-grid-list') }}"><i class="icon-th"></i>Grid</a>
+    </li>
+{% endblock %}    
+    
+{% block content -%}
+    <div class="notice-container"></div>
+     
+    <legend>
+        <i class="icon-large icon-picture"></i> Media library assets
+        <a href="{{ path('media-library', {'page': 1}) }}" data-toggle="tooltip" title="Details View" class="show-list-view" style="float: right;">
+            <i class="icon-large icon-list"></i>
+        </a>
+    </legend>
+
+    <a href="{{ path('media-library-upload') }}" class="btn btn-small btn-success"><i class="icon-upload"></i> 
+        Upload file
+    </a>
+    <hr />
+    
+    <div class="grid">
+        <a href="{{ path('get-images-list-ajax') }}" id="getImagesList" class="hide"></a>
+        <a href="{{ asset('uploads/media-library/') }}" id="dirPath" class="hide"></a>
+        <a href="{{ path('media-library-image-edit-pure') }}" id="editPath" class="hide"></a>
+        <a href="{{ path('media-library-image-inline-edit') }}" id="editInlinePath" class="hide"></a>
+        <a href="{{ path('media-library-image-inline-edit-regenerate-form') }}" id="editInlineRegeneratePath" class="hide"></a>
+        
+        <ul class="grid-list" data-view="0">
+
+        </ul>
+    </div>
+    <div class="more-btn-container">
+        <a href="" class="btn btn-info btn-small"><i class="icon-chevron-down"></i> Show More</a>
+    </div>
+    
+    <hr />
+    <a href="{{ path('media-library-upload') }}" class="btn btn-small btn-success"><i class="icon-upload"></i> 
+        Upload file
+    </a>
+    <hr />
+    
+    <div id="modalQuickEdit" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel"><i class="icon-large icon-picture"></i> Asset Quick Edit</h3>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-small btn-primary save-trigger">Save changes</button>
+        </div>
+    </div>
+    
+    <script src="{{ asset('js/catms.asset-grid-list.js') }}"></script>
+
+{% endblock %}

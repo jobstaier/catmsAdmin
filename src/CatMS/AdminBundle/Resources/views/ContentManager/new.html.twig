@@ -1,89 +1,51 @@
 {% extends 'CatMSAdminBundle::base.html.twig' %}
 
-{% block stylesheets %}
-    input { width: 500px; }
-{% endblock %}
-
 {% block javascripts_bottom %}
-    <script type="text/javascript" src="{{ asset('js/tinymce/tinymce.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('js/text-editor.js')}}"></script>
-    <script>
-        $(function(){
-           $('#catms_adminbundle_contentmanagertype_description').css('width', '927px');
-        });
-    </script>
+
 {% endblock %}
    
 {% block breadcrumb %}
     {{ parent() }}
-    <li><a href="{{ path('content-manager') }}">Content manager</a></li> <span class="divider">/</span>
+    <li><a href="{{ path('content-group') }}">Content groups</a></li> <span class="divider">/</span>
+    <li><a href="{{ path('content-manager-list', {'page': 1, 'slug': contentGroup.slug }) }}">Group {{ contentGroup.description | striptags }} contents</a></li> <span class="divider">/</span>
     <li class="active">Create new content</li>
 {% endblock %}
     
 {% block content %}
-    <legend>Create new content</legend>
+    {% include 'CatMSAdminBundle:Helpers:form-errors-div.html.twig' with {'form': form, 'errors': errors | default() } %}                
+        
+    <legend><i class="icon-large icon-font"></i> Create new content</legend>
 
-    {% if group %}
-        {% if entity.contentGroup.manual %}
+    {% include 'CatMSAdminBundle:Helpers:related-images.html.twig' with {'group': contentGroup } %}
+    
+    
+    {% if contentGroup.manual %}
         <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <h4>Tutorial available!</h4>
-        This page has defined  manual. <a class="btn btn-primary  btn-mini" href="#tutorial">Read tutorial</a>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4>Tutorial available!</h4>
+            This page has defined  manual. <a class="btn btn-primary  btn-mini" href="#tutorial">Read tutorial</a>
         </div>
-        {% endif %}
     {% endif %}
     
-    <form novalidate action="{{ path('content-manager-create', {'group': group}) }}" method="post" {{ form_enctype(form) }} class="form-float content-manager-form" style="width: 100%">
+    <form novalidate action="{{ path('content-manager-create', {'group': entity.contentGroup}) }}" method="post" {{ form_enctype(form) }} style="width: 100%" class="content-manager-form">
         
-        <label for="catms_adminbundle_contentmanagertype_slug" class="before-hide well"><i class="icon-bookmark"></i> Slug</label>
-        {{ form_widget(form.slug) }}    
-        {{ form_errors(form.slug) }}    
-        <hr />
+        {% include 'CatMSAdminBundle:ContentManager:widgets/new-buttons.html.twig' with {'contentGroup' : contentGroup, 'position': 'up'} %}
+        <hr class="clear" />
         
-        <label for="#" class="before-tiny well"><i class="icon-chevron-down"></i> Description</label>
-        {{ form_widget(form.description) }}    
-        {{ form_errors(form.description) }}       
-        <hr />
-        
-        <label for="#" class="before-tiny well"><i class="icon-chevron-down"></i> Title</label>
-        {{ form_widget(form.title) }}    
-        {{ form_errors(form.title) }}    
-        <hr />
-        
-        <label for="#" class="before-tiny well"><i class="icon-chevron-down"></i> Short text</label>
-        {{ form_widget(form.shortText) }}    
-        {{ form_errors(form.shortText) }}    
-        <hr />
-        
-        <label for="#" class="before-tiny well"><i class="icon-chevron-down"></i> Full text</label>
-        {{ form_widget(form.fullText) }}    
-        {{ form_errors(form.fullText) }}  
-        <hr />
-        
-        <label for="#" class=""><i class="icon-chevron-down"></i> Content group</label>
-        {{ form_widget(form.contentGroup) }}    
-        {{ form_errors(form.contentGroup) }}  
-        <hr />
-        
-        <label for="#" class=""><i class="icon-chevron-down"></i> Priority</label>
-        {{ form_widget(form.priority) }}    
-        {{ form_errors(form.priority) }}  
-        <hr />
-        
+        {% include 'CatMSAdminBundle:ContentManager:widgets/form-body.html.twig' with {'form': form, 'group': contentGroup} %}
+
         {{ form_rest(form) }}
             
-        <div class="btn-group">
-            <a href="{{ path('content-manager-list') }}" class="btn"><i class="icon-list"></i> Back to the list</a>
-            <button type="submit" class="btn btn-primary show-loader" data-loading-text="Creating..."><i class="icon-hdd"></i> Create</button>
-        </div>
+        <hr class="clear" />
+        {% include 'CatMSAdminBundle:ContentManager:widgets/new-buttons.html.twig' with { 'contentGroup' : contentGroup, 'position': 'bottom'} %}
+
     </form>
 
-    {% if group %}
-    {% if entity.contentGroup.manual %}
-    <div id="tutorial" style="clear: both">
-        {{ entity.contentGroup.manual | raw }}
+    {% if contentGroup and contentGroup.manual %}
+    <div id="tutorial"  style="float: left; width: 100%;">
+        <hr />
+        {{ contentGroup.manual | raw }}
     </div>
-    {% endif %}
     {% endif %}
     
 {% endblock %}

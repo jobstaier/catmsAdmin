@@ -22,39 +22,32 @@
     </a>
 
     <ul class="dropdown-menu">
-        <script>
-            $(function(){
-                //$('.dropdown-submenu.pull-left > .dropdown-menu').css('left', '-190px');
-            });
-        </script>
         <li class="nav-header">Direct access edit</li>
         <li class="dropdown-submenu">
-            <a class="ajax-get-groups" tabindex="-1" href="{{ path('ajax-get-groups') }}"><i class="icon-folder-open"></i> Image/asset groups</a>
+            <a class="ajax-get-groups" tabindex="-1" href="{{ path('ajax-get-groups') }}"><i class="icon-folder-open"></i> Image/asset groups </a>
             <ul class="dropdown-menu" id="image-groups-submenu">
-                <li class="ajax-image-groups-preloder"><a class="tmp-image-group-url" href="{{ path('media-library') }}"><img src="{{ asset('img/loader.gif') }}" alt="Loading..." /></a></li>
+                <li class="ajax-image-groups-preloder"><a class="tmp-image-group-url" href="{{ path('media-library-group-grid-list-pure') }}"><img src="{{ asset('img/loader.gif') }}" alt="Loading..." /></a></li>
             </ul>
         </li>
         
-        <li class="dropdown-submenu  pull-left">
-            <a class="ajax-get-content-groups" tabindex="-1" href="{{ path('ajax-get-content-groups') }}"><i class="icon-font"></i> Content groups</a>
+        <li class="dropdown-submenu">
+            <a class="ajax-get-content-groups" tabindex="-1" href="{{ path('ajax-get-content-groups') }}"><i class="icon-tags"></i> Content groups</a>
             <ul class="dropdown-menu" id="content-groups-submenu">
-                <li class="ajax-content-groups-preloder"><a class="tmp-content-group-url" href="{{ path('content-manager-list') }}"><img src="{{ asset('img/loader.gif') }}" alt="Loading..." /></a></li>
+                <li class="ajax-content-groups-preloder"><a class="tmp-content-group-url" href="{{ path('content-manager-pure-url') }}"><img src="{{ asset('img/loader.gif') }}" alt="Loading..." /></a></li>
             </ul>
         </li>
         
         <li class="divider"></li>
         
         <li class="nav-header">Text content</li>
-        <li {% if is_active_nav_button('contentmanager', 'list') %}class="active"{% endif %}><a href="{{ path('content-manager-list') }}"><i class="icon-list"></i> Content list</a></li>
-        <li {% if is_active_nav_button('contentmanager', 'create') %}class="active"{% endif %}><a href="{{ path('content-manager-new') }}"><i class="icon-pencil"></i> Create content</a></li>
-        <li {% if is_active_nav_button('contentgroup', 'index') %}class="active"{% endif %}><a href="{{ path('content-group') }}"><i class="icon-font"></i> Groups</a></li>
+        <li {% if is_active_nav_button('contentgroup', 'index') %}class="active"{% endif %}><a href="{{ path('content-group') }}"><i class="icon-tags"></i> Groups</a></li>
         {% if is_granted('ROLE_DEVELOPER') %}
         <li {% if is_active_nav_button('contentgroup', 'new') %}class="active"{% endif %}><a href="{{ path('content-group-new') }}"><i class="icon-pencil"></i> Create group</a></li>
         {% endif %}
         
         <li class="divider"></li>
         <li class="nav-header">Media library</li>
-        <li {% if is_active_nav_button('medialibrary', 'list') %}class="active"{% endif %}><a href="{{ path('media-library') }}"><i class="icon-picture"></i> Images & assets</a></li>
+        <li {% if is_active_nav_button('medialibrary', 'list') %}class="active"{% endif %}><a href="{{ path('media-library-grid-list') }}"><i class="icon-picture"></i> All images & assets</a></li>
         <li {% if is_active_nav_button('mediaibrary', 'upload') %}class="active"{% endif %}><a href="{{ path('media-library-upload') }}"><i class="icon-upload"></i> Upload file</a></li>
         <li {% if is_active_nav_button('imagegroup', 'index') %}class="active"{% endif %}><a href="{{ path('image-group') }}"><i class="icon-folder-open"></i> Groups</a></li>
         {% if is_granted('ROLE_DEVELOPER') %}

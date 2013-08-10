@@ -7,4 +7,3 @@ services:
       arguments: ['@request', '@doctrine.orm.entity_manager'] 
       tags:
           - { name: twig.extension }
-

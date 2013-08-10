@@ -1,0 +1,12 @@
+<div style="float: right; display: inline;">                
+    {% if group is not empty %}
+        <div class="btn-group">
+            <a href="{{ path('image-group') }}" class="btn btn-mini"><i class="icon-th-large"></i> Back to the group</a>
+            <a href="{{ path('media-library-upload', {'group': group.slug }) }}" class="btn btn-success btn-mini"><i class="icon-upload"></i> Upload file</a>
+        </div>
+    {% else %}
+        <a href="{{ path('media-library-upload') }}" class="btn btn-mini btn-success"><i class="icon-upload"></i> 
+            Upload file
+        </a>
+    {% endif %}
+</div>

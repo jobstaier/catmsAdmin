@@ -38,10 +38,10 @@ class ContentManager
     private $slug;
     
     /**
-     * @ORM\Column(type="string", length=510, unique=false)
+     * @ORM\Column(type="string", length=510, unique=false, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      min="5",
+     *      min="3",
      *      max="510",
      *      minMessage="Description must have at least {{ limit }} characters.",
      *      maxMessage="Description must have no more than {{ limit }} characters."
@@ -109,7 +109,7 @@ class ContentManager
     private $contentGroup;
     
     /**
-     * @ORM\OneToMany(targetEntity="CatMS\AdminBundle\Entity\ContentArchive", mappedBy="content")
+     * @ORM\OneToMany(targetEntity="CatMS\AdminBundle\Entity\ContentArchive", mappedBy="content", cascade={"persist", "remove"})
      * @var object \CatMS\AdminBundle\Entity\ContentArvhive
      */
     private $archives;

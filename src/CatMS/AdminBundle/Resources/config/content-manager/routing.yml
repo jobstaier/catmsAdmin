@@ -1,0 +1,55 @@
+content-manager-list:
+    path:      /list/{page}/{slug}
+    defaults:  { _controller: CatMSAdminBundle:ContentManager:list, page: 1 }
+    requirements:
+        page:  \d+
+    methods:  [GET]  
+    
+content-manager-pure-url:
+    path:      /list
+    defaults:  null   
+    
+content-manager-create:
+    path:      /new/create/{group}
+    defaults:  { _controller: CatMSAdminBundle:ContentManager:create }
+    methods:  [POST]    
+     
+content-manager-new:
+    path:      /new/{group}
+    defaults:  { _controller: CatMSAdminBundle:ContentManager:new }
+    methods:  [GET]  
+
+content-manager-show:
+    path:      /show/{id}/{group}
+    defaults:  { _controller: CatMSAdminBundle:ContentManager:show, group: null }
+    methods:  [GET] 
+    
+content-manager-edit:
+    path:      /{id}/edit
+    defaults:  { _controller: CatMSAdminBundle:ContentManager:edit }
+    requirements:
+        id:  \d+
+    methods:  [GET]    
+    
+content-manager-update:
+    path:      /update/{id}
+    defaults:  { _controller: CatMSAdminBundle:ContentManager:update }
+    requirements:
+        id:  \d+
+    methods:  [PUT] 
+    
+content-manager-delete:
+    path:      /delete/{id}/{group}
+    defaults:  { _controller: CatMSAdminBundle:ContentManager:delete }
+    requirements:
+        id:  \d+
+    methods:  [DELETE]
+    
+content-manager-get-archive:
+    path: /ajax/get-archive/{id}
+    defaults:  { _controller: CatMSAdminBundle:ContentManager:getArchiveContent }
+    requirements:
+        id:  \d+
+    methods:  [GET]
+    
+    

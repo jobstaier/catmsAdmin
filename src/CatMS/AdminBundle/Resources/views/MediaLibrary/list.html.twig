@@ -3,12 +3,17 @@
 {% block breadcrumb %}
     {{ parent() }}
     {% if group is empty %}
-        <li class="active">Media library</li>
-        <a href="{{ path('media-library') }}" class="list-home-url" style="display: none;"></a>
+        <li>
+            <em>Media library</em> 
+            <a href="{{ path('media-library') }}">&nbsp;<i class="icon-list"></i>List</a>&nbsp; 
+            <a href="{{ path('media-library-grid-list') }}"><i class="icon-th"></i>Grid</a>
+        </li>
     {% else %}
-        <li><a href="{{ path('media-library') }}">Media library</a></li> <span class="divider">/</span>
-        <li class="active">Group {{ group.description | raw }} images</li>
-        <a href="{{ path('media-library', {'page': 1, 'slug': group.slug }) }}" class="list-home-url" style="display: none;"></a>
+        <li class="active">
+            <em>Group <i>{{ group.description }}</i> assets</em> 
+            <a href="{{ path('media-library', {'page': 1, 'slug': group.slug}) }}"><i class="icon-list"></i>List</a>&nbsp
+            <a href="{{ path('media-library-group-grid-list', {'group': group.id}) }}"><i class="icon-th"></i>Grid</a>
+        </li>
     {% endif %}
     
 {% endblock %}    
@@ -18,7 +23,14 @@
     
     <div class="notice-container"></div>
      
-    <legend>Media library{% if group is not empty %} - <i>{{ group.description | raw }}</i> images{% endif %}</legend>
+    <legend>
+        <i class="icon-large icon-picture"></i> Media library{% if group is not empty %} - <i>{{ group.description | raw }} assets</i>{% endif %}
+        {% if not group %}
+            <a data-toggle="tooltip" title="Grid View" href="{{ path('media-library-grid-list') }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
+        {% else %}
+            <a data-toggle="tooltip" title="Grid View" href="{{ path('media-library-group-grid-list', {'group': group.id}) }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>       
+        {% endif %}
+    </legend>
     
     {% if pagination | length > 0 %}
 
@@ -34,7 +46,7 @@
                 
                     <div style="float: right; display: inline;">
                     {% if group is not empty %}
-                    <div class="btn-group">
+                    <div>
                         <a href="{{ path('image-group') }}" class="btn btn-mini"><i class="icon-th-large"></i> Back to the group</a>
                         <a href="{{ path('media-library-upload', {'group': group.slug }) }}" class="btn btn-mini btn-success"><i class="icon-upload"></i> Upload file</a>
                     </div>
@@ -69,16 +81,19 @@
                 <td>
                     {% include 'CatMSAdminBundle:Helpers:mime-type-thumb.html.twig' with {'entity': entity} %}
                 </td>
-                <td>{{ entity.path }}</td>
+                <td>
+                    {{ entity.path }}<br />
+                    <a href="{{ asset('uploads/media-library/')~entity.path }}" class="btn btn-mini btn-success copy-source">Copy Source</a>
+                </td>
                 <td>{{ entity.title }}</td>
 
                 <td width="150">{% if entity.slug %}{{ entity.slug }}{% else %}<span class="label">NOT DEFINED</span>{% endif %}</td>
                 <td rowspan="4">
                     <div class="btn-group btn-group-vertical">
                         {% if entity.mimeType == 'image/jpeg' or entity.mimeType == 'image/png' %}
-                            <a style="text-align: left;" href="{{ asset('uploads/mediaLibrary/')~entity.path }}" class="btn single-image btn-small"><i class="icon-fullscreen"></i> Show</a>
+                            <a style="text-align: left;" href="{{ asset('uploads/media-library/')~entity.path }}" class="btn single-image btn-small"><i class="icon-fullscreen"></i> Show</a>
                         {% else %}
-                            <a style="text-align: left;" href="{{ asset('uploads/mediaLibrary/')~entity.path }}" class="btn btn-small"><i class="icon-download"></i> Download</a>
+                            <a style="text-align: left;" href="{{ asset('uploads/media-library/')~entity.path }}" class="btn btn-small"><i class="icon-download"></i> Show</a>
                         {% endif %}
                         
                         {% if group is not empty %}
@@ -124,19 +139,7 @@
                     
                     <a class="btn btn-mini remove-all-marked" href="{{ path('delete-all-marked', {'token': multipleDeleteToken }) }}"><i class="icon-trash"></i> Remove all selected</a>
                 
-                <div style="float: right; display: inline;">
-                {% if group is not empty %}
-                <div class="btn-group">
-                    <a href="{{ path('image-group') }}" class="btn btn-mini"><i class="icon-th-large"></i> Back to the group</a>
-                    <a href="{{ path('media-library-upload', {'group': group.slug }) }}" class="btn btn-success btn-mini"><i class="icon-upload"></i> Upload file</a>
-                </div>
-
-                {% else %}
-                    <a href="{{ path('media-library-upload') }}" class="btn btn-mini btn-success"><i class="icon-upload"></i> 
-                        Upload file
-                    </a>
-                {% endif %}
-                </div>     
+                    {% include 'CatMSAdminBundle:MediaLibrary:widgets/list-buttons.html.twig' with {'group': group} %} 
                     
                 </td>
             </tr>
@@ -149,17 +152,16 @@
     
     {% else %}
     
-    <div class="alert">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Empty databse!</strong> No records defined
-    </div>
+        <div class="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Empty databse!</strong> No records defined
+        </div>
     
     {% if group is not empty %}
-    <div class="btn-group" style="margin-top: 20px;">
-        <a href="{{ path('image-group') }}" class="btn btn-small"><i class="icon-th-large"></i> Go to the group list</a>
-        <a href="{{ path('media-library-upload', {'group': group.slug }) }}" class="btn btn-success btn-small"><i class="icon-upload"></i> Upload file</a>
-    </div>
-
+        <div style="margin-top: 20px;">
+            <a href="{{ path('image-group') }}" class="btn btn-small"><i class="icon-th-large"></i> Go to the group list</a>
+            <a href="{{ path('media-library-upload', {'group': group.slug }) }}" class="btn btn-success btn-small"><i class="icon-upload"></i> Upload file</a>
+        </div>
     {% else %}
         <a href="{{ path('media-library-upload') }}" class="btn btn-small btn-success"><i class="icon-upload"></i> 
             Upload file

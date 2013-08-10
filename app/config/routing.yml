@@ -3,6 +3,14 @@ cat_ms_admin:
     type:     annotation
     prefix:   /
     
+cat_ms_admin_front:
+    resource: "@CatMSAdminBundle/Resources/config/front/routing.yml"
+    prefix:   /admin   
+    
+cat_ms_admin_content_manager:
+    resource: "@CatMSAdminBundle/Resources/config/content-manager/routing.yml"
+    prefix:   /admin/content-manager   
+    
 cat_ms_admin_media_library:
     resource: "@CatMSAdminBundle/Resources/config/media-library/routing.yml"
     prefix:   /admin/media-library
@@ -13,7 +21,11 @@ cat_ms_admin_image_group:
     
 cat_ms_admin_content_group:
     resource: "@CatMSAdminBundle/Resources/config/content-group/routing.yml"
-    prefix:   /admin/content-group    
+    prefix:   /admin/content-group
+    
+cat_ms_admin_ajax:
+    resource: "@CatMSAdminBundle/Resources/config/ajax/routing.yml"
+    prefix:   /admin/ajax   
 
 catms_auth_user:
     resource: "@CatMSAuthBundle/Resources/config/user/routing.yml"

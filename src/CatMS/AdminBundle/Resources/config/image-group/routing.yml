@@ -29,14 +29,14 @@ image-group-edit:
 
 image-group-update:
     path:     /{id}
-    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:update }
+    defaults: {  _controller: CatMSAdminBundle:ImageGroup:update }
     requirements:
         id:  \d+
     methods:  [PUT] 
 
 image-group-delete:
     path:     /{id}
-    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:delete }
+    defaults: {  _controller: CatMSAdminBundle:ImageGroup:delete }
     requirements:
         id:  \d+
     methods:  [DELETE]   

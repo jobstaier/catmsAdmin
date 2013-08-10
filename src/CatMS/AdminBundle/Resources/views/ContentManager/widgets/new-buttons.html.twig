@@ -1,0 +1,6 @@
+<div class="btns-{{ position }}">
+    <a href="{{ path('content-group-edit', {'id': entity.contentGroup.id}) }}" class="btn btn-small"><i class="icon-tags"></i> Edit group</a>
+    <a href="{{ path('content-manager-list', {'page': 1, 'slug': entity.contentGroup.slug }) }}" class="btn btn-small"><i class="icon-list"></i> Content list</a>        
+    <button type="submit" class="btn btn-primary btn-small show-loader" data-loading-text="Loading..."><i class="icon-hdd"></i> Save</button>
+    {#<button type="submit" disabled="disabled" class="btn btn-inverse btn-small show-loader" data-loading-text="Loading..."><i class="icon-pencil"></i> Save as draft</button>#}
+</div>

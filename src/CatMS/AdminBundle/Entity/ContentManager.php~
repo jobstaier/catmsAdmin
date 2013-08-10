@@ -38,7 +38,7 @@ class ContentManager
     private $slug;
     
     /**
-     * @ORM\Column(type="string", length=510, unique=false)
+     * @ORM\Column(type="string", length=510, unique=false, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(
      *      min="5",
@@ -353,5 +353,38 @@ class ContentManager
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Add archives
+     *
+     * @param \CatMS\AdminBundle\Entity\ContentArchive $archives
+     * @return ContentManager
+     */
+    public function addArchive(\CatMS\AdminBundle\Entity\ContentArchive $archives)
+    {
+        $this->archives[] = $archives;
+
+        return $this;
+    }
+
+    /**
+     * Remove archives
+     *
+     * @param \CatMS\AdminBundle\Entity\ContentArchive $archives
+     */
+    public function removeArchive(\CatMS\AdminBundle\Entity\ContentArchive $archives)
+    {
+        $this->archives->removeElement($archives);
+    }
+
+    /**
+     * Get archives
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArchives()
+    {
+        return $this->archives;
     }
 }

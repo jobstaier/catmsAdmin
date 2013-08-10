@@ -12,7 +12,9 @@
 {% endblock %}
     
 {% block content -%}
-    <legend>SEO page creation</legend>
+    <legend>
+        <i class="icon-large icon-globe"></i> SEO page creation
+    </legend>
 
     <form action="{{ path('seo-create') }}" method="post" {{ form_enctype(form) }} style="width: 220px;">
         {{ form_widget(form) }}

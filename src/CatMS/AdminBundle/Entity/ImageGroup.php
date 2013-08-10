@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="CatMS\AdminBundle\Repository\ImageGroupRepository")
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity("slug")
- * @ORM\Table(name="imagegroup")
+ * @ORM\Table(name="asset_group")
  */
 class ImageGroup
 {
@@ -64,6 +64,21 @@ class ImageGroup
      * @ORM\ManyToMany(targetEntity="CatMS\AdminBundle\Entity\ContentGroup", mappedBy="relatedImages", cascade={"persist"})
      */
     private $relatedContents;
+    
+    /**
+     *  @ORM\Column(type="boolean")
+     */
+    protected $hasThumbnails = false;
+    
+    /**
+     *  @ORM\Column(type="integer", nullable=true)
+     */
+    protected $thumbnailWidth;
+    
+    /**
+     *  @ORM\Column(type="integer", nullable=true)
+     */
+    protected $thumbnailHeight;    
     
     public function __construct() {
         $this->images = new \Doctrine\Common\Collections\ArrayCollection();
@@ -238,14 +253,72 @@ class ImageGroup
         return $this->relatedContents;
     }
     
-    /*
-    public function setRelatedContents($relatedContents) 
+    /**
+     * Set hasThumbnails
+     *
+     * @param boolean $hasThumbnails
+     * @return ImageGroup
+     */
+    public function setHasThumbnails($hasThumbnails)
     {
-        $this->relatedContents = $relatedContents;
-        foreach ($relatedContents as $relatedContent) {
-            $relatedContent->addRelatedImage($this);
-        }
+        $this->hasThumbnails = $hasThumbnails;
+
         return $this;
     }
-    */
+
+    /**
+     * Get hasThumbnails
+     *
+     * @return boolean 
+     */
+    public function getHasThumbnails()
+    {
+        return $this->hasThumbnails;
+    }
+
+    /**
+     * Set thumbnailWidth
+     *
+     * @param integer $thumbnailWidth
+     * @return ImageGroup
+     */
+    public function setThumbnailWidth($thumbnailWidth)
+    {
+        $this->thumbnailWidth = $thumbnailWidth;
+
+        return $this;
+    }
+
+    /**
+     * Get thumbnailWidth
+     *
+     * @return integer 
+     */
+    public function getThumbnailWidth()
+    {
+        return $this->thumbnailWidth;
+    }
+
+    /**
+     * Set thumbnailHeight
+     *
+     * @param integer $thumbnailHeight
+     * @return ImageGroup
+     */
+    public function setThumbnailHeight($thumbnailHeight)
+    {
+        $this->thumbnailHeight = $thumbnailHeight;
+
+        return $this;
+    }
+
+    /**
+     * Get thumbnailHeight
+     *
+     * @return integer 
+     */
+    public function getThumbnailHeight()
+    {
+        return $this->thumbnailHeight;
+    }
 }

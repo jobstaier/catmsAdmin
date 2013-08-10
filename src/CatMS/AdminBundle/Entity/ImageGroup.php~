@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass="CatMS\AdminBundle\Repository\ImageGroupRepository")
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity("slug")
- * @ORM\Table(name="imagegroup")
+ * @ORM\Table(name="asset_group")
  */
 class ImageGroup
 {

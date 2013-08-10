@@ -63,37 +63,38 @@ body {
 
 .related-images-container {
     position: fixed;
-    right: -992px;
-    top: 87px;
-    border: 1px solid #F89406;
-    height: 508px;
+    right: 0px;
+    top: 83px;
+    border: 1px solid #51a351;
+    height: 500px;
     width: 950px;
-    background: #fff;
+    background: #EEE;
     z-index: 9;
     padding: 10px 20px 20px;
+    display: none;
 }
 
 .history-container {
     position: fixed;
-    right: -475px;
-    top: 129px;
+    right: 0px;
+    top: 125px;
     border: 1px solid #2F96B4;
     height: 300px;
     width: 400px;
-    background: #fff;
+    background-color: #eee;
     z-index: 9;
     padding: 10px 20px 20px;
+    display: none;
 }
 
 .archive-container {
     position: fixed;
-    /*right: -592px;*/
     right: 0px;
-    top: 172px;
+    top: 167px;
     border: 1px solid #111;
     height: 340px;
     width: 530px;
-    background: #fff;
+    background-color: #eee;
     z-index: 9;
     padding: 10px 0 20px 20px;
 }
@@ -110,6 +111,10 @@ body {
 
 .related-images-container hr {
     margin: 0;
+}
+
+.image-wrapper {
+    height: 110px;
 }
 
 .no-margin {
@@ -131,7 +136,15 @@ body {
 .append-here {
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 300px;
+    height: 460px;
+}
+
+.append-here .btn {
+    margin-right: 7px;
+}
+
+.append-here ul {
+    margin: 0;    
 }
 
 .append-here-archive {
@@ -191,6 +204,20 @@ body {
     background: url('../img/pdf48x48.png') 0 0 no-repeat;
 }
 
+.rar-icon-48 {
+    display: block;
+    width: 48px;
+    height: 48px;
+    background: url('../img/rar48x48.png') 0 0 no-repeat;
+}
+
+.zip-icon-48 {
+    display: block;
+    width: 48px;
+    height: 48px;
+    background: url('../img/zip48x48.png') 0 0 no-repeat;
+}
+
 .footer-bottom {
     padding: 15px 0;
     text-align: center;
@@ -208,11 +235,13 @@ body {
 
 .upload-form {
     float: left;
-    width: 390px;
+    width: 375px;
 }
 
 .multiple-upload-form {
     float: right;
+    width: 470px;
+    margin-top: 2px;
 }
 
 .file-input-container input {
@@ -229,3 +258,206 @@ form .well { margin-bottom: -3px;}
 
 .error-tooltip { padding: 3px 1px 3px 14px; }
 .error-tooltip i { margin-right: 10px; }
+
+.related-image-select select {
+    width: 300px;
+    height: 200px;
+}   
+
+.alert-error {
+    margin-bottom: 10px;
+}
+
+.input-wrapper > div {
+    margin-bottom: 15px;
+}
+
+.input-wrapper label {
+    font-weight: bold;
+}
+
+
+.select-icons option {
+    padding: 4px 0;
+}
+
+.select-icons option i {
+    margin-right: 6px;
+    margin-left: 8px;
+}
+
+.icon-large.icon-edit {
+    width: 25px;
+    height: 25px;
+}
+
+.legend-inside {
+    margin-top: 20px;
+}
+
+.content-group-fields label {
+    float: left;
+    width: 160px;
+    display: block;
+}
+
+.content-group-fields input {
+    float: left;
+}
+
+.content-group-fields input[type="text"] {
+    margin-top: -5px;
+}
+
+.navbar .container .brand {
+    padding: 5px 20px 0 20px;
+    font-size: 15px;
+}
+
+.navbar .container .brand span {
+    position: relative;
+    top: 9px;
+    left: -8px;
+    letter-spacing: -1px;
+}
+
+.brand img {
+    width: 30px;
+    height: 30px;
+    margin-right: 7px;
+}
+
+.navbar  .btn-group.header-btns {
+    margin-top: 8px;
+}
+
+.content-group-fields .alert {
+    padding-left: 10px;
+    margin-top: -4px;
+}
+
+.content-group-basics textarea {
+    max-width: 600px;
+    max-height: 118px;
+}
+
+.btns-bottom, .btns-up {
+    width: 80%;
+    float: left;
+    margin: 0 0 0 0;
+}
+
+.btns-bottom {
+
+}
+
+.btns-up {
+
+}
+
+.btns-bottom form, .btns-up form {
+    display: inline;
+    float: right;
+}
+
+form label {
+    font-weight: bold;
+    color: #444;
+}
+
+form {
+    margin: 0;
+}
+
+.table-padding {
+    width: 100%; 
+    height: 1px; 
+    border-top: 1px dashed #888;
+}
+
+.clear {
+    clear: both;
+    width: 100%;
+}
+
+.content-manager-form {
+    width: 100%;
+}
+
+thead {
+    background-color: #eee;
+}
+
+.plupload {
+    margin: -8px 0 0 0;
+}
+
+.plupload_start {
+    margin-left: 10px;
+}
+
+.grid {
+    min-height: 300px;
+    width: 900px;
+    margin: 0 auto 20px;
+}
+
+.grid .grid-list {
+    margin: 0;
+}
+
+.grid ul.grid-list li {
+    list-style: none;
+    width: 130px;
+    height: 115px;
+    text-align: center;
+    margin: 20px 10px 10px;
+    display: inline-block;
+    border-bottom: 1px solid #979797;
+    vertical-align: top;
+}
+
+.grid ul.grid-list li img {
+    width: 120px;
+    max-height: 80px;
+}
+
+.grid ul.grid-list li a.btn {
+    margin: 5px;
+}
+
+.more-btn-container {
+    width: 100%;
+    margin: 20px auto;
+}
+
+.more-btn-container .btn {
+    width: 100%;
+}
+
+.image-grid-btns a {
+    float: left;
+    margin: 3px 10px 0 0;
+}
+
+.grid ul.grid-list li .media-icon {
+    margin: 10px 45px 12px;
+}
+
+.breadcrumb em {
+    color: #999999;
+    font-style: normal;
+}
+
+.hide {
+    display: none;
+}
+
+.delete-popvoer {
+    text-align: center;
+    float: none;
+}
+
+.delete-popvoer .btn {
+    float: none;
+}

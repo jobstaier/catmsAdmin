@@ -24,14 +24,16 @@ class ImageGroupController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $dql   = "SELECT ig FROM CatMSAdminBundle:ImageGroup ig ORDER BY ig.description ASC";
+        $dql   = "SELECT ig FROM CatMSAdminBundle:ImageGroup ig 
+            ORDER BY ig.description ASC";
         $query = $em->createQuery($dql);
         
         $paginator  = $this->get('knp_paginator');
         
         $recordsPerPage = CommonMethods::castRecordsPerPage(
-                $em->getRepository('CatMSAdminBundle:Setting')->findOneBySlug('image-groups-list-records-per-page'), 
-                $this->container);
+            $em->getRepository('CatMSAdminBundle:Setting')
+                ->findOneBySlug('image-groups-list-records-per-page'), 
+            $this->container);
         
         $pagination = $paginator->paginate($query, 
             $this->get('request')->query->get('page', $page),
@@ -59,10 +61,14 @@ class ImageGroupController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('noticeSuccess', 'create.success');
-            return $this->redirect($this->generateUrl('image-group-show', array('id' => $entity->getId())));
+            $this->get('session')->getFlashBag()
+                ->add('noticeSuccess', 'create.success');
+            return $this->redirect($this->generateUrl('image-group-show', 
+                array('id' => $entity->getId())   
+            ));
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'create.error');
+            $this->get('session')->getFlashBag()
+                ->add('noticeError', 'create.error');
         }
 
         return array(
@@ -96,10 +102,13 @@ class ImageGroupController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CatMSAdminBundle:ImageGroup')->find($id);
+        $entity = $em->getRepository('CatMSAdminBundle:ImageGroup')
+                ->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ImageGroup entity.');
+            throw $this->createNotFoundException(
+                'Unable to find ImageGroup entity.'
+            );
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -122,7 +131,9 @@ class ImageGroupController extends Controller
         $entity = $em->getRepository('CatMSAdminBundle:ImageGroup')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ImageGroup entity.');
+            throw $this->createNotFoundException(
+                'Unable to find ImageGroup entity.'
+            );
         }
 
         $editForm = $this->createForm(new ImageGroupType(), $entity);
@@ -144,10 +155,13 @@ class ImageGroupController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CatMSAdminBundle:ImageGroup')->find($id);
+        $entity = $em->getRepository('CatMSAdminBundle:ImageGroup')
+            ->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ImageGroup entity.');
+            throw $this->createNotFoundException(
+                'Unable to find ImageGroup entity.'
+            );
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -159,10 +173,14 @@ class ImageGroupController extends Controller
             $em->persist($entity);
             $em->flush();
             
-            $this->get('session')->getFlashBag()->add('noticeSuccess', 'edit.success');
-            return $this->redirect($this->generateUrl('image-group-show', array('id' => $id)));
+            $this->get('session')->getFlashBag()
+                ->add('noticeSuccess', 'edit.success');
+            return $this->redirect($this->generateUrl('image-group-show', 
+                array('id' => $id)
+            ));
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'edit.error');
+            $this->get('session')->getFlashBag()
+                ->add('noticeError', 'edit.error');
         }
 
         return array(
@@ -183,17 +201,22 @@ class ImageGroupController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CatMSAdminBundle:ImageGroup')->find($id);
+            $entity = $em->getRepository('CatMSAdminBundle:ImageGroup')
+                ->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find ImageGroup entity.');
+                throw $this->createNotFoundException(
+                    'Unable to find ImageGroup entity.'
+                );
             }
 
             $em->remove($entity);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('noticeSuccess', 'delete.success');
+            $this->get('session')->getFlashBag()
+                ->add('noticeSuccess', 'delete.success');
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'delete.error');
+            $this->get('session')->getFlashBag()
+                ->add('noticeError', 'delete.error');
         }
 
         return $this->redirect($this->generateUrl('image-group'));

@@ -1,141 +1,61 @@
-{% extends 'CatMSAdminBundle::base.html.twig' %}
-
-{% block stylesheets %}
-
-{% endblock %}
-    
+{% extends 'CatMSAdminBundle::base.html.twig' %}   
 
 {% block javascripts_bottom %}
-    <script type="text/javascript" src="{{ asset('js/tinymce/tinymce.min.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('js/text-editor.js')}}"></script>
     {% if not is_granted('ROLE_DEVELOPER') %}
     <script>
-        $('.checkDeveloper').attr('readonly', 'readonly');
+        $(function(){
+            $('.checkDeveloper').attr('readonly', 'readonly');
+        });
     </script>
     {% endif %}
 {% endblock %}
    
 {% block breadcrumb %}
     {{ parent() }}
-    {% if group is empty %}
-    <li><a href="{{ path('content-manager') }}">Content manager</a></li> <span class="divider">/</span>
-    <li><a href="{{ path('content-manager-list') }}">Content list</a></li> <span class="divider">/</span>
-    <li class="active">Edit {{ truncate(entity.description | striptags, 40) | raw }} </li>
-    {% else %}
     <li><a href="{{ path('content-group') }}">Content groups</a></li> <span class="divider">/</span>
-    <li><a href="{{ path('content-manager-list', {'page': 1, 'slug': group}) }}">Group {{ entity.contentGroup.description | raw }} contents</a></li> <span class="divider">/</span>
+    <li><a href="{{ path('content-manager-list', {'page': 1, 'slug': entity.contentGroup.slug }) }}">Group {{ entity.contentGroup.description | striptags }} contents</a></li> <span class="divider">/</span>
     <li class="active">{{ entity.description | raw }}</li>
-    {% endif %}
 {% endblock %}
     
 {% block content %}
     {% include 'CatMSAdminBundle:Helpers:form-errors-div.html.twig' with {'form': edit_form, 'errors': errors | default() } %}        
 
-    <legend>{{ entity.description | striptags | raw }} edit <span class="label label-inverse">Draft</span> <span class="label label-info">Published</span></legend>
+    <legend><i class="icon-large icon-edit"></i> <i>{{ entity.description | striptags }}</i> edit {#<span class="label label-inverse">Draft</span> <span class="label label-info">Published</span>#}</legend>
     
-    {# Related Images #}
-    {% if group is not empty %}
-        {% include 'CatMSAdminBundle:Helpers:related-images.html.twig' with {'group': entity.contentGroup } %}
-    {% endif %}
-    {# End Related Images#}
-    {# Archive #}
-        {% include 'CatMSAdminBundle:Helpers:archive.html.twig' with {'entity': entity } %}
-    {# End Archive #}
+
+    {% include 'CatMSAdminBundle:Helpers:related-images.html.twig' with {'group': entity.contentGroup } %}
+    
+    {% include 'CatMSAdminBundle:Helpers:archive.html.twig' with {'archive': archive } %}
+
     
     {% if entity.contentGroup.manual %}
     <div class="alert alert-success">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <h4>Tutorial available!</h4>
-    This page has defined  manual. <a class="btn btn-primary  btn-mini" href="#tutorial">Read tutorial</a>
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <h4>Tutorial available!</h4>
+        This page has defined  manual. <a class="btn btn-primary  btn-mini" href="#tutorial">Read tutorial</a>
     </div>
     {% endif %}
     
-    <form novalidate action="{{ path('content-manager-update', { 'id': entity.id, 'group': group }) }}" method="post" {{ form_enctype(edit_form) }} style="width: 100%" class="content-manager-form">
+    <form novalidate action="{{ path('content-manager-update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="content-manager-form">
         
-        <div class="" style="float: left; width: 100%;">
-            {% if group is empty %}
-            <a href="{{ path('content-manager-list') }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
-            {% else %}
-            <a href="{{ path('content-manager-list', {'page': 1, 'slug': group}) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
-            {% endif %}
-            <button type="submit" class="btn btn-primary btn-small show-loader" data-loading-text="Loading..."><i class="icon-hdd"></i> Save</button>
-            <button type="submit" disabled="disabled" class="btn btn-inverse btn-small show-loader" data-loading-text="Loading..."><i class="icon-pencil"></i> Save as draft</button>
-            <hr />
-        </div>
+        {% include 'CatMSAdminBundle:ContentManager:widgets/edit-buttons.html.twig' with {'entity': entity, 'position': 'up'} %}
+        <hr class="clear"/>
         
-        
-        <div style="float: left; width: 435px;">
-            <label for="catms_adminbundle_contentmanagertype_slug" class=""><i class="icon-bookmark"></i> Slug</label>
-            {{ form_widget(edit_form.slug, {'attr': {'class': 'checkDeveloper input-xplarge' }}) }}    
-            {{ form_errors(edit_form.slug) }}    
-        </div>
-        
-        <div style="float: right;  width: 435px;">
-            <label for="catms_adminbundle_contentmanagertype_description" class=""><i class="icon-chevron-down"></i> Description</label>
-            {{ form_widget(edit_form.description, {'attr': {'class': 'textarea-xplarge h100 w420' }}) }}    
-            {{ form_errors(edit_form.description) }}       
-        </div>
-
-        
-        <div style="float: left; width: 435px; margin-top: 10px;">
-            <label for="catms_adminbundle_contentmanagertype_title" class=""><i class="icon-chevron-down"></i> Title</label>
-            {{ form_widget(edit_form.title, {'attr': {'class': 'checkDeveloper, input-xplarge' }}) }}    
-            {{ form_errors(edit_form.title) }}    
-        </div>
-        
-        <div style="float: left; width: 100%; clear: both; margin-top: 30px;">
-            <label for="#" class="before-tiny well"><i class="icon-chevron-down"></i> Full text</label>
-            {{ form_widget(edit_form.fullText, {'attr': {'class': 'tiny_full' }}) }}    
-            {{ form_errors(edit_form.fullText) }}  
-        </div>
-        
-        <div style="float: left; margin: 20px 0 30px; width: 100%;">
-            <div style="float: left; width: 435px; margin-top: 15px;">
-                <label for="#" class="well"><i class="icon-chevron-down"></i> Short text</label>
-                {{ form_widget(edit_form.shortText, {'attr': {'class': 'textarea-xplarge h100 w420 tiny_half' }}) }}    
-                {{ form_errors(edit_form.shortText) }}    
-            </div>
-
-            <div style="float: right; width: 435px; margin-top: 15px; height: 335px;">
-                <label for="catms_adminbundle_contentmanagertype_priority" class=""><i class="icon-chevron-down"></i> Priority</label>
-                {{ form_widget(edit_form.priority) }}    
-                {{ form_errors(edit_form.priority) }}  
-
-                <label for="catms_adminbundle_contentmanagertype_contentGroup" class="" style="margin-top: 10px;"><i class="icon-chevron-down"></i> Content group</label>
-                {{ form_widget(edit_form.contentGroup, {'attr': {'class': 'select-large' }}) }}    
-                {{ form_errors(edit_form.contentGroup) }}
-                
-                <hr />
-                <div style="padding: 20px 0 0 0;">
-                    <p><i class="icon-share"></i> Last update: {{ entity.updatedAt | date("Y/m/d H:i:s") }}</p>
-                    <p><i class="icon-folder-open"></i> Archive records: {{ entity.archives | length }}</p>
-                </div>
-            </div>
-        </div>
-        
+        {% include 'CatMSAdminBundle:ContentManager:widgets/form-body.html.twig' with {'form': edit_form, 'group': entity.ContentGroup, 'action': 'edit' } %}
         
         {{ form_rest(edit_form) }}
         <input type="hidden" name="_method" value="PUT" />
 
-        <div class="" style="float: left; clear: both;'">
-            {% if group is empty %}
-            <a href="{{ path('content-manager-list') }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
-            {% else %}
-            <a href="{{ path('content-manager-list', {'page': 1, 'slug': group}) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
-            {% endif %}
-            <button type="submit" class="btn btn-primary btn-small show-loader" data-loading-text="Loading..."><i class="icon-hdd"></i> Save</button>
-            <button disabled="disabled" type="submit" class="btn btn-inverse btn-small show-loader" data-loading-text="Loading..."><i class="icon-pencil"></i> Save as draft</button>
-        </div>
+        <hr class="clear" />
+        {% include 'CatMSAdminBundle:ContentManager:widgets/edit-buttons.html.twig' with {'entity': entity, 'position': 'bottom'} %}
         
     </form>
     
-    <form action="{{ path('content-manager-delete', { 'id': entity.id, 'group': group }) }}" method="post" style="float: right;">
+    <form action="{{ path('content-manager-delete', { 'id': entity.id, 'group': entity.contentGroup.slug }) }}" method="post" style="float: right;">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" class="btn btn-small" data-toggle="modal" data-target="#delete"><i class="icon-trash"></i> Delete</button>
-        {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'delete', 'msg': 'Delete content', 'btnTxt': 'Delete'} %}
+        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
     </form>
-    
     
     {% if entity.contentGroup.manual %}
     <div id="tutorial" style="float: left; width: 100%;">

@@ -1,8 +1,20 @@
 media-library:
-    path:      /image-list/{page}/{slug}
+    path:      /asset-list/{page}/{slug}
     defaults:  { _controller: CatMSAdminBundle:MediaLibrary:list, page: 1, slug: null }
     requirements:
         page:  \d+
+        
+media-library-grid-list:
+    path:      /asset-grid
+    defaults:  { _controller: CatMSAdminBundle:MediaLibrary:listGrid }
+    
+media-library-group-grid-list:
+    path:      /asset-group-grid/{group}
+    defaults:  { _controller: CatMSAdminBundle:MediaLibrary:listGroupGrid }     
+    
+media-library-group-grid-list-pure:
+    path:      /asset-group-grid/{group}
+    defaults:  { _controller: CatMSAdminBundle:MediaLibrary:listGroupGrid, group: null }     
 
 media-library-upload:
     path:     /upload/{group}
@@ -10,9 +22,21 @@ media-library-upload:
         
 media-library-image-edit:
     path:   /edit/{id}/{group}
+    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:editImage, group: null }
+        
+media-library-image-edit-pure:    
+    path:   /edit/{id}/{group}
     defaults: {  _controller: CatMSAdminBundle:MediaLibrary:editImage, id: null, group: null }
-    requirements:
-        page:  \d+
+  
+media-library-image-inline-edit:
+    path:   /edit-inline
+    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:editInlineImage }      
+    methods: [POST]
+    
+media-library-image-inline-edit-regenerate-form:
+    path:   /regenerate-edit-inline-form
+    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:regenerateEditInlineFormImage }      
+    methods: [GET]
         
 media-library-image-delete:
     path:     /delete/{id}/{group}
@@ -30,3 +54,18 @@ media-library-plupload:
     path:     /pluapload-load-asset/{group}
     defaults: {  _controller: CatMSAdminBundle:MediaLibrary:plupload, group: null }
     
+media-library-inline-edit:
+    path:     /inline-edit
+    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:inlineEdit }
+    requirements:
+        id: \d+    
+    methods:  [POST]
+    
+media-library-delete-inline:
+    path:     /inline-delete/{id}
+    defaults: {  _controller: CatMSAdminBundle:MediaLibrary:deleteAssetInline }
+    requirements:
+        id: \d+    
+    methods:  [POST]
+  
+  

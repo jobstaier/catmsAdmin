@@ -1,23 +1,38 @@
 {% extends 'CatMSAdminBundle::base.html.twig' %}
 
+{% block stylesheets_import %}
+    <link href="{{ asset('js/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css') }}" media="screen" rel="stylesheet" type="text/css"</link>
+{% endblock %}
+
 {% block breadcrumb %}
     {{ parent() }}
     {% if group is empty %}
-        <li><a href="{{ path('media-library') }}">Media library</a></li> <span class="divider">/</span>
+        <li>
+            <em>Media library</em> 
+            <a href="{{ path('media-library') }}"><i class="icon-list"></i>List</a>&nbsp;
+            <a href="{{ path('media-library-grid-list') }}"> <i class="icon-th"></i>Grid</a>
+        </li> <span class="divider">/</span> 
         <li class="active">Edit image/asset</li>
     {% else %}
-        <li><a href="{{ path('image-group') }}">Image/asset groups</a></li> <span class="divider">/</span>
-        <li><a href="{{ path('media-library', {'page': 1, 'slug': image.imageGroup.slug }) }}">Group {{ image.imageGroup.description | raw }} images</a></li> <span class="divider">/</span>
+        <li class="active">
+            <em>Group <i>{{ image.imageGroup.description }}</i> assets</em> 
+            <a href="{{ path('media-library', {'page': 1, 'slug': image.imageGroup.slug}) }}"><i class="icon-list"></i>List</a>&nbsp
+            <a href="{{ path('media-library-group-grid-list', {'group': image.imageGroup.id}) }}"><i class="icon-th"></i>Grid</a>
+        </li> <span class="divider">/</span>
         <li class="active">Edit image</li>
     {% endif %}
-
-
-
 {% endblock %}    
     
     
 {% block content -%}    
-    <legend>Edit Image/asset {% if group is not empty %} - <i>{{ image.imageGroup.description | raw }}</i> group{% endif %}</legend>
+    <legend>
+        <i class="icon-large icon-brush"></i> Edit Image/asset {% if group is not empty %} - <i>{{ image.imageGroup.description | raw }}</i> group{% endif %}
+        {% if not group %}
+            <a data-toggle="tooltip" title="Back to Grid View" href="{{ path('media-library-grid-list') }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
+        {% else %}
+            <a data-toggle="tooltip" title="Back to Grid View" href="{{ path('media-library-group-grid-list', {'group': image.imageGroup.id}) }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>       
+        {% endif %}
+    </legend>
     
     {% if group is not empty and image.imageGroup and (image.imageGroup.imageWidth or image.imageGroup.imageHeight) %}
         
@@ -34,7 +49,7 @@
     
     <form novalidate action="{{ path('media-library-image-edit', {'id': image.id,'group': group}) }}" method="post" {{ form_enctype(form) }}>
         
-        <div class="control-group" style="float: left">
+        <div class="control-group" style="float: left; width: 360px;">
             
             <div class="controls">
                 <div class="input-append">
@@ -78,17 +93,17 @@
             
             <div class="controls">
                 <span class="btn btn-file"><i class="icon-file"></i> 
-                    <input type="file" name="form[file]" id="form_file" />
+                    <input type="file" name="form[file]" id="form_file" style="width: 280px" />
                 </span>    
                 {{ form_errors(form.file) }}
             </div>
             
             {% if group is empty %}
-            <script>$(function(){$('#form_imageGroup option').each(function(){if ($(this).val() == '9') {$(this).attr('selected', 'selected');}})});</script>
+            <script>$(function(){var txt='Undefined';$('#form_imageGroup option').each(function(){if ($(this).text() === txt) {$(this).attr('selected', 'selected');}});});</script>
             {% endif %}
             <div class="controls" style="margin-top: 15px;">
                 <label for="form_imageGroup">Image/asset group</label>
-                {{ form_widget(form.imageGroup, {'attr': {'class': 'span4'}}) }}
+                {{ form_widget(form.imageGroup, {'attr': {'class': 'span4 selectpicker'}}) }}
                 {{ form_errors(form.imageGroup) }}
             </div>
 
@@ -97,18 +112,18 @@
             
         </div>
         <div style="float: right">
-            <a class="single-image" href="{{ asset('uploads/mediaLibrary/')~image.path }}">
-                <img src="{{ asset('uploads/mediaLibrary/')~image.path }}" class="img-polaroid" style="max-width: 500px" />
+            <a class="single-image" href="{{ asset('uploads/media-library/')~image.path }}">
+                <img src="{{ asset('uploads/media-library/')~image.path }}" class="img-polaroid" style="max-width: 500px" />
             </a>
         </div>
         
-        <div class="btn-group" style="margin-top: 20px; float: left; clear: both;">
+        <div style="margin-top: 20px; float: left;">
             {% if group is defined %}
-                <a href="{{ path('media-library', {'page': 1, 'slug': group}) }}" class="btn"><i class="icon-list"></i> Back to the list</a>    
+                <a href="{{ path('media-library', {'page': 1, 'slug': group}) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>    
             {% else %}
-                <a href="{{ path('media-library') }}" class="btn"><i class="icon-list"></i> Back to the list</a>    
+                <a href="{{ path('media-library') }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>    
             {% endif %}
-            <a role="button" href="#" class="btn btn-inverse" data-toggle="modal" data-target="#delete"><i class="icon-trash"></i> Delete</a>
+            <a role="button" href="#" class="btn btn-small btn-inverse" data-toggle="modal" data-target="#delete"><i class="icon-trash icon-white"></i> Delete</a>
             {% if group is empty %}
                 {% set href = path('media-library-image-delete', { 'id': image.id }) %}
             {% else%}
@@ -117,7 +132,7 @@
 
             {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'delete', 'msg': 'Confirm delete?', 'btnTxt': 'Delete', 'content': 'Do you confirm delete?', 'href': href} %}    
                 
-            <button class="show-loader btn btn-primary" type="submit"  data-loading-text="Updating..."><i class="icon-upload"></i> Update</button>
+            <button class="show-loader btn btn-primary btn-small" type="submit"  data-loading-text="Updating..."><i class="icon-upload"></i> Update</button>
         </div>
     </form>
     

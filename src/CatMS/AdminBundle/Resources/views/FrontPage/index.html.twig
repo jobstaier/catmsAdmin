@@ -9,33 +9,4 @@
         <h2>Hello {{ app.user.username }}!</h2>
         <p><a class="btn btn-primary btn-small" href="{{ path('user_show', {'id': app.user.id })}}">Your account</a></p>
     </div>
-  
-    <div class="page-header">
-        <h3>Wpisy administratora <small>14/07/13 11:12</small></h3>
-    </div>
-    
-<div style="height: 300px; border: 1px solid #EEE; padding: 15px; border-radius: 8px; overflow: scroll;overflow-x: hidden;">    
-
-
-<div>
-    <h4>@jobs <small>14/07/13 11:12</small></h4>
-
-
-    <h4>Samouczek</h4>
-    <br /> Aby wstawić zdjęcie do tekstu należy:<br />
-    <ul>
-    <li>Dodać zdjęcie do Media Library. Zalecam dodanie zdjęcia do grupy "Nie przypisane"</li>
-    <li>W treści strony [ "Full Text" ] wpisać #img=ID# , gdzie ID to numer identyfikacyjny zdjęcia. Można go sprawdzić na liście zdjęć. Jeżeli do zdjęcia zdefiniowane zostało przekierowanie po kliknięciu - zostanie ono autmoatyczne zaimplementowane w kodzie</li>
-    </ul>
-    <br />Jeżeli dany obraz <strong>został już wcześniej zdefionwany</strong> przez developera <strong>bez użycia konstrukcji #img=ID#</strong> oznacza to, że obrazek jest wstzyknięty do
-    szablonu z poziomu kodu PHP. Dlatego, też nie ma większego sensu jego usuwanie - chyba że nam bardzo przeszkadza, zaleca się jego podmianę poprzez wejście w tryp edycji zdjęcia i załadowanie wybranego zdjęcia.<br /><br />
-    <br /><br />
-    Przy kopiowaniu tekstu do edytora WYSIWYG używać trybu <strong>Source Code &lt;&gt;</strong>, w innym przypadku edytor próbuje dokładnie odzwierciedlić styl źródłowy
-    np z Word lub przeglądarki etc. co kończy się rozsypaniem stylu strony. Inną możliwością jest skopiowanie tekstu źródłowego do zwykłego notatnika - który usuwa style źrodłowe, następnie spokojnie można wkleić do edytora.
-    <hr />
-</div>    
-
-    
-</div>
-    
 {% endblock %}

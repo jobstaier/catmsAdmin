@@ -10,4 +10,6 @@
 /nbproject/
 /src/CatMS/FrontBundle/
 /web/css/yui/cmp_*
+/web/css/yui/.css
 /web/js/yui/cmp_*
+/web/js/yui/.js

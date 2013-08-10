@@ -21,16 +21,12 @@
 {% endblock %}
     
 {% block content -%}
-    <legend>{{ module }} setting creation</legend>
+    <legend><i class="icon-large icon-settings"></i> {{ module }} setting creation</legend>
 
     <form novalidate action="{{ path('settings-create', {'range': range | lower }) }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
-        <p>
-            <button type="submit" data-toggle="button" class="btn btn-primary show-loader" data-loading-text="Creating..."><i class="icon-hdd"></i> Create</button>
-        </p>
-    </form>
 
-    <div class="btn-group" style="margin-bottom: 10px">
-        <a href="{{ path(pathname) }}" class="btn"><i class="icon-list"></i> Back to the list</a>
-    </div>    
+        <a href="{{ path(pathname) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
+        <button type="submit" data-toggle="button" class="btn btn-small btn-primary show-loader" data-loading-text="Creating..."><i class="icon-hdd"></i> Create</button>
+    </form>  
 {% endblock %}

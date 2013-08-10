@@ -6,12 +6,22 @@ use CatMS\AdminBundle\Entity\ImageUpload;
 
 class ImageUploadTest extends \PHPUnit_Framework_TestCase
 {
-    public function testName()
+    public function testGetSystemThumbDir()
     {
+        $method = self::getMethod('getSystemThumbDir');
+        
         $image = new ImageUpload();
         
-        $this->assertEquals('some-file-name', $image->setName('some-file-name')->getName());
-
-
+        $result = $method->invokeArgs($image, array());
+        
+        $this->assertEquals('uploads/system-thumbs', $result);
+    }
+    
+    protected static function getMethod($name) {
+        $class = new \ReflectionClass('CatMS\AdminBundle\Entity\ImageUpload');
+        $method = $class->getMethod($name);
+        $method->setAccessible(true);
+        return $method;
     }
 }
+

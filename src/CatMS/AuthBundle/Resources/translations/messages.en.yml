@@ -1,0 +1,18 @@
+mailer:
+    password:
+        generate: Generate new password
+        changed: User password has been changed
+        password: Password
+        generated-new: New password has been generated for user
+        request: Generate new password request
+        click-to-generate-new: To generate new password click into <a href="url">this link</a> or visit webpage url
+    affiliate: To sign up for the panel CatMS please visit page_url and use the following authentication data
+    user: User
+    regards: 'Best regards,<br />CatMS Founder<br />d.job@catdesign.pl<br />'
+    
+    
+    account:
+        create: Create Account
+        created: Created a user account
+    
+    

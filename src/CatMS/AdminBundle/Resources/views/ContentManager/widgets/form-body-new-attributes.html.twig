@@ -1,0 +1,17 @@
+<div style="width: 435px;{{ style }}">
+    <label for="catms_adminbundle_contentmanagertype_priority" class=""><i class="icon-chevron-down"></i> Priority</label>
+    {{ form_widget(form.priority) }}    
+    {{ form_errors(form.priority) }}  
+
+    <label for="catms_adminbundle_contentmanagertype_contentGroup" class="" style="margin-top: 10px;"><i class="icon-chevron-down"></i> Content group</label>
+    {{ form_widget(form.contentGroup, {'attr': {'class': 'selectpicker' }}) }}    
+    {{ form_errors(form.contentGroup) }}
+    <hr />
+
+    <div>
+    {% if action | default('create') == 'edit' %}
+        <p><i class="icon-share"></i> Last update: {{ entity.updatedAt | date("Y/m/d H:i:s") }}</p>
+        <p><i class="icon-folder-open"></i> Archive records: {{ entity.archives | length }}</p>
+    {% endif %}
+    </div>
+</div>

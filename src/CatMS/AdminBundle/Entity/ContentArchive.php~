@@ -297,4 +297,15 @@ class ContentArchive
     {
         return $this->priority;
     }
+    
+    public function setPopertiesFromContent(\CatMS\AdminBundle\Entity\ContentManager $archived)
+    {
+        $this->setContent($archived);
+        $this->setDescription($archived->getDescription());
+        $this->setFullText($archived->getFullText());
+        $this->setPriority($archived->getPriority());
+        $this->setShortText($archived->getShortText());
+        $this->setSlug($archived->getSlug());
+        $this->setTitle($archived->getTitle());
+    }
 }

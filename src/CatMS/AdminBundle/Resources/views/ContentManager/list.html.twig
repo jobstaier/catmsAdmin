@@ -9,26 +9,20 @@
 
 {% block breadcrumb %}
     {{ parent() }}    
-    {% if group is empty %}
-        <li><a href="{{ path('content-manager') }}">Content manager</a></li> <span class="divider">/</span>
-        <li class="active">Content list</li>
-    {% else %}
-        <li><a href="{{ path('content-group') }}">Content groups</a></li> <span class="divider">/</span>
-        <li class="active">Group {{ group.description | raw }} contents</li>
-    {% endif %}
-    
+    <li><a href="{{ path('content-group') }}">Content groups</a></li> <span class="divider">/</span>
+    <li class="active">Group {{ group.description | raw }} contents</li>
 {% endblock %}    
     
 {% block content -%}
-    <legend>Content list{% if group is not empty %} - <i>{{ group.description | raw }}</i>{% endif %}</legend>
+    <legend><i class="icon-large icon-list"></i> Content list{% if group is not empty %} - <i>{{ group.description | raw }}</i>{% endif %}</legend>
 
-    {# Related Images #}
-    {% if group is not empty %}
-        {% include 'CatMSAdminBundle:Helpers:related-images.html.twig' with {'group': group} %}
-    {% endif %}
-    {# End Related Images#}
+    {% include 'CatMSAdminBundle:Helpers:related-images.html.twig' with {'group': group} %}
+
+    {% include 'CatMSAdminBundle:ContentManager:widgets/list-buttons.html.twig' with {'group': group, 'position': 'up'} %}
+    
     
     {% if pagination | length > 0 %}
+    <hr class="clear"/>
     <table class="table table-bordered table-hover table-striped">
         <thead>
             <tr>
@@ -42,44 +36,23 @@
         <tbody>
         {% for entity in pagination %}
             <tr>
-                <td rowspan="3"><a href="{{ path('content-manager-show', { 'id': entity.id }) }}">{{ entity.id }} <i class="icon-chevron-right"></i></a></td>
+                <td rowspan="2"><a href="{{ path('content-manager-edit', { 'id': entity.id }) }}">{{ entity.id }} <i class="icon-chevron-right"></i></a></td>
                 <td>{{ truncate(entity.description | striptags, 45) | raw }}</td>
                 <td>{{ entity.slug }}</td>
                 
                 <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td rowspan="3">
-                    <div class="btn-group btn-group-vertical">
-                        
-                        {% if group is not empty %}
-                        <a href="{{ path('content-manager-show', { 'id': entity.id, 'group': group.slug }) }}" class="btn"><i class="icon-fullscreen"></i> Show</a>
-                        <a href="{{ path('content-manager-edit', { 'id': entity.id, 'group': group.slug }) }}" class="btn"><i class="icon-edit"></i> Edit</a>
-                        {% else %}
-                        <a href="{{ path('content-manager-show', { 'id': entity.id }) }}" class="btn"><i class="icon-fullscreen"></i> Show</a>
-                        <a href="{{ path('content-manager-edit', { 'id': entity.id }) }}" class="btn"><i class="icon-edit"></i> Edit</a>
-                        {% endif %}
-                    </div>
+                <td rowspan="2">
+                    <a href="{{ path('content-manager-edit', { 'id': entity.id }) }}" class="btn brn-small"><i class="icon-edit"></i> Edit</a>
                 </td>
-            </tr>
-            <tr>
-                <th>Group</th>
-                {% if entity.contentGroup.description is defined %}
-                <td colspan="2">
-                    <a href="{{ path('content-manager-list', {'page': 1, 'slug': entity.contentGroup.slug }) }}">{{ entity.contentGroup.description | striptags | raw }}</a>
-                    {% if is_granted('ROLE_DEVELOPER')%}
-                    [ {{ entity.contentGroup.slug }} ]
-                    {% endif %}
-                </td>
-                {% else %}
-                <td colspan="2"><span class="label">NOT DEFINED</span></td>
-                {% endif %}
             </tr>
             <tr>
                 <td colspan="3">
-                    {% if (entity.fullText | striptags) == 'null' %}
-                        {{ truncate(entity.shortText | striptags , 400) | raw }}
-                    {% else %}    
-                        {{ truncate(entity.fullText | striptags , 400) | raw }}
-                    {% endif %}
+                    {{ truncate(entity.fullText | striptags , 400) | raw }}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <div class="table-padding"></div>
                 </td>
             </tr>
         {% endfor %}
@@ -91,24 +64,14 @@
     </div>
     
     {% else %}
-    <div class="alert">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Empty databse!</strong> No records defined
+    <div class="alert clear" style="margin-top: 20px;">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Empty databse!</strong> No records defined
     </div>
     {% endif %}
 
-    {% if group is not empty %}
-    <div class="btn-group" style="margin-top: 20px;">
-        <a href="{{ path('content-group') }}" class="btn"><i class="icon-tags"></i> Back to the group</a>
-        <a href="{{ path('content-manager-new', {'group': group.slug }) }}" class="btn"><i class="icon-pencil"></i> 
-            Create new content
-        </a>
-    </div>
-    {% else %}
-        <a href="{{ path('content-manager-new') }}" class="btn"><i class="icon-pencil"></i> 
-            Create new content
-        </a>
-    {% endif %}
     
+    {% include 'CatMSAdminBundle:ContentManager:widgets/list-buttons.html.twig' with {'group': group, 'position': 'bottom'} %}
+    <hr class="clear"/>    
     
 {% endblock %}

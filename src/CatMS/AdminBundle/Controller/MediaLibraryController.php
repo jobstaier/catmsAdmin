@@ -11,6 +11,8 @@ use CatMS\AdminBundle\Entity\ImageUpload;
 use CatMS\AdminBundle\Controller\CommonMethods;
 use CatMS\AdminBundle\Logger\History;
 use Symfony\Component\HttpFoundation\Response;
+use CatMS\AdminBundle\Entity\ImageGroup;
+use CatMS\AdminBundle\Form\AssetProtoType;
 
 /**
  * MediaLibrary controller.
@@ -28,8 +30,11 @@ class MediaLibraryController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         if ($slug) {
-            $dql   = "SELECT iu FROM CatMSAdminBundle:ImageUpload iu JOIN iu.imageGroup ig WHERE ig.slug = :slug ORDER BY iu.priority ASC";
-            $group = $em->getRepository('CatMSAdminBundle:ImageGroup')->findOneBySlug($slug);
+            $dql   = "SELECT iu FROM CatMSAdminBundle:ImageUpload iu 
+                JOIN iu.imageGroup ig WHERE ig.slug = :slug 
+                ORDER BY iu.priority ASC";
+            $group = $em->getRepository('CatMSAdminBundle:ImageGroup')
+                ->findOneBySlug($slug);
             $query = $em->createQuery($dql)->setParameter('slug', $slug);
             
             $history = new History($this->get('session'), $this->get('router'));
@@ -44,7 +49,8 @@ class MediaLibraryController extends Controller
         }
         
         $recordsPerPage = CommonMethods::castRecordsPerPage(
-        $em->getRepository('CatMSAdminBundle:Setting')->findOneBySlug('image-list-records-per-page'), 
+        $em->getRepository('CatMSAdminBundle:Setting')
+            ->findOneBySlug('asset-records-per-page'), 
         $this->container);
         
         $paginator  = $this->get('knp_paginator');
@@ -90,7 +96,8 @@ class MediaLibraryController extends Controller
                 ->add('file')
                 ->getForm();
             
-            $groupEntity = $em->getRepository('CatMSAdminBundle:ImageGroup')->findOneBySlug($group);
+            $groupEntity = $em->getRepository('CatMSAdminBundle:ImageGroup')
+                ->findOneBySlug($group);
             $document->setImageGroup($groupEntity);
         } else {
             $form = $this->createFormBuilder($document)
@@ -118,23 +125,29 @@ class MediaLibraryController extends Controller
                 
                 $files = $this->getRequest()->files->get('form');
                 if ($files['file'] == null) {
-                    $this->get('session')->getFlashBag()->add('noticeFailure', 'upload.error');
+                    $this->get('session')->getFlashBag()
+                        ->add('noticeFailure', 'upload.error');
                     
                 } else {
                     $em->persist($document);
                     $em->flush();
 
-                    $this->get('session')->getFlashBag()->add('noticeSuccess', 'upload.success');
+                    $this->get('session')->getFlashBag()
+                        ->add('noticeSuccess', 'upload.success');
                 }
                 
                 if ($group) {
-                    return $this->redirect($this->generateUrl('media-library', array('page' => 1, 'slug' => $group)));
+                    return $this->redirect(
+                        $this->generateUrl('media-library', 
+                            array('page' => 1, 'slug' => $group)
+                        ));
                 } else {
                     return $this->redirect($this->generateUrl('media-library'));
                 }
                 
             } else {
-                $this->get('session')->getFlashBag()->add('noticeFailure', 'upload.error');
+                $this->get('session')->getFlashBag()
+                    ->add('noticeFailure', 'upload.error');
             }
         }
 
@@ -160,7 +173,9 @@ class MediaLibraryController extends Controller
             $em = $this->getDoctrine()->getEntityManager();
 
             if (!$image) {
-                throw $this->createNotFoundException('Unable to find Image entity.');
+                throw $this->createNotFoundException(
+                    'Unable to find Image entity.'
+                );
             };
             
             $em->remove($image);
@@ -168,9 +183,11 @@ class MediaLibraryController extends Controller
             
             $history = new History($this->get('session'), $this->get('router'));
             $history->logDeleteImage();
-            $this->get('session')->getFlashBag()->add('noticeSuccess', 'remove.success');
+            $this->get('session')->getFlashBag()
+                ->add('noticeSuccess', 'remove.success');
         } else {
-            $this->get('session')->getFlashBag()->add('noticFailure', 'delete.error');
+            $this->get('session')->getFlashBag()
+                ->add('noticFailure', 'delete.error');
         }
 
         return $this->redirect($this->generateUrl(
@@ -202,7 +219,6 @@ class MediaLibraryController extends Controller
      */
     public function editImageAction(ImageUpload $image, $group)
     {   
-        
         $em = $this->getDoctrine()->getEntityManager();
         
         if (!$image) {
@@ -222,7 +238,7 @@ class MediaLibraryController extends Controller
             ->getForm();
         
         if ($this->getRequest()->isMethod('POST')) {
-
+            
             $form->bind($this->getRequest());
 
             if ($form->isValid()) {
@@ -231,36 +247,55 @@ class MediaLibraryController extends Controller
                 $em->persist($image);
                 $em->flush();
 
-                $history = new History($this->get('session'), $this->get('router'));
+                $history = new History($this->get('session'), 
+                    $this->get('router')
+                );
                 $history->logEditImage($image);
                 
-                $this->get('session')->getFlashBag()->add('noticeSuccess', 'edit.success');
+                $this->get('session')->getFlashBag()
+                    ->add('noticeSuccess', 'edit.success');
+                
                 if ($group) {
-                    return $this->redirect($this->generateUrl('media-library', array('page' => 1, 'slug' => $group)));
+                    return $this->redirect(
+                        $this->generateUrl('media-library-image-edit', 
+                            array(
+                                'id' => $image->getId(), 'group' => $group
+                            )
+                        )
+                    );
                 } else {
-                    return $this->redirect($this->generateUrl('media-library'));
+                    return $this->redirect(
+                        $this->generateUrl('media-library-image-edit',  
+                            array(
+                                'id' => $image->getId()
+                            )
+                        )
+                    );
                 }
                 
             } else {
-            $this->get('session')->getFlashBag()->add('noticeFailure', 'edit.error');
+            $this->get('session')->getFlashBag()
+                ->add('noticeFailure', 'edit.error');
             }
         }
         
         $history = new History($this->get('session'), $this->get('router'));
         $history->logOpenEditImage($image);
         
-        return $this->render('CatMSAdminBundle:MediaLibrary:edit.html.twig', array(
-            'group' => $group,
-            //'groupEntity' => $groupEntity,
-            'form' => $form->createView(), 
-            'image' => $image
-        ));
+        return $this->render('CatMSAdminBundle:MediaLibrary:edit.html.twig', 
+            array(
+                'group' => $group,
+                'form' => $form->createView(), 
+                'image' => $image
+            )
+        );
     }
     
     private function getGroups()
     {
         $em = $this->getDoctrine()->getEntityManager();
-        $objs = $em->getRepository('CatMSAdminBundle:ImageGroup')->findBy(array(), array('slug' => 'asc'));
+        $objs = $em->getRepository('CatMSAdminBundle:ImageGroup')
+            ->findBy(array(), array('slug' => 'asc'));
         
         $results = array();
         
@@ -286,7 +321,8 @@ class MediaLibraryController extends Controller
             
             foreach ($data as $key => $id) {
                 $em = $this->getDoctrine()->getEntityManager();
-                $image = $em->getRepository('CatMSAdminBundle:ImageUpload')->find($id);
+                $image = $em->getRepository('CatMSAdminBundle:ImageUpload')
+                    ->find($id);
                 
                 $imageId = $image->getId();
                 
@@ -299,7 +335,9 @@ class MediaLibraryController extends Controller
             }
         }
         
-        return new Response(json_encode($removed), 200, array('Content-Type' => 'application/json'));
+        return new Response(json_encode($removed), 200, 
+            array('Content-Type' => 'application/json')
+        );
     }
   
     
@@ -310,9 +348,11 @@ class MediaLibraryController extends Controller
         $em = $this->getDoctrine()->getManager();
         
         if ($group) {
-            $group = $em->getRepository('CatMSAdminBundle:ImageGroup')->findOneBySlug($group);
+            $group = $em->getRepository('CatMSAdminBundle:ImageGroup')
+                ->findOneBySlug($group);
         } else {
-            $group = $em->getRepository('CatMSAdminBundle:ImageGroup')->findOneBySlug('undefined');
+            $group = $em->getRepository('CatMSAdminBundle:ImageGroup')
+                ->findOneBySlug('undefined');
         }
         
         $uploadedFile = $request->files->get('file');
@@ -324,7 +364,149 @@ class MediaLibraryController extends Controller
         $em->persist($image);
         $em->flush();
         
-        return new Response(json_encode(array('notice' => 'success')), 200, array('Content-Type' => 'application/json'));
+        return new Response(json_encode(array('notice' => 'success')), 200, 
+            array('Content-Type' => 'application/json')
+        );
+    }
+    
+    public function listGridAction()
+    {
+        return $this->render('CatMSAdminBundle:MediaLibrary:list-grid.html.twig', 
+            array()
+        );
+    }
+    
+    public function listGroupGridAction(ImageGroup $group)
+    {
+        return $this->render('CatMSAdminBundle:MediaLibrary:list-group-grid.html.twig', 
+            array('group' => $group)
+        );
+    }
+    
+    public function editInlineImageAction()
+    {
+        $request = $this->getRequest();
+        
+        $post = $request->request->all();
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $image = $em->getRepository('CatMSAdminBundle:ImageUpload')
+            ->find($post['asset_form']['id']);
+
+        if (!$image) {
+            return new Response(
+                json_encode(
+                    array('notice' => 'Unable to find Image entity.')
+                ), 
+                200, 
+                array('Content-Type' => 'application/json')
+            );
+        };
+        
+        $form = $this->createForm(new AssetProtoType(), $image);
+        if ($request->isMethod('POST')) {
+            
+            $form->bind($request);
+
+            if ($form->isValid()) {
+                
+                $em->persist($image);
+                $em->flush();  
+                
+                return new Response(
+                    json_encode(
+                        array(
+                            'result' => 'success',
+                        )
+                    ), 
+                    200, 
+                    array('Content-Type' => 'application/json')
+                );
+            } else {
+                return new Response(
+                    json_encode(
+                        array(
+                            'result' => 'error',
+                            'errors' => $this->getErrorMessages($form)
+                        )
+                    ), 
+                    200, 
+                    array('Content-Type' => 'application/json')
+                );
+            }
+        }
+    }
+    
+    private function getErrorMessages(\Symfony\Component\Form\Form $form) {      
+        $errors = array();
+
+        if ($form->hasChildren()) {
+            foreach ($form->getChildren() as $child) {
+                if (!$child->isValid()) {
+                    $errors[$child->getName()] = $this->getErrorMessages($child);
+                }
+            }
+        } else {
+            foreach ($form->getErrors() as $key => $error) {
+                $errors[] = $error->getMessage();
+            }   
+        }
+
+        return $errors;
+    }
+    
+    public function regenerateEditInlineFormImageAction()
+    {
+        $request = $this->getRequest();
+        
+        $em = $this->getDoctrine()->getManager();
+        $image = $em->getRepository('CatMSAdminBundle:ImageUpload')
+            ->find($request->query->get('id'));
+        
+        if (!$image) {
+            return new Response(
+                json_encode(
+                    array('notice' => 'Unable to find Image entity.')
+                ), 
+                200, 
+                array('Content-Type' => 'application/json')
+            );
+        };     
+        
+        $form = $this->createForm(new AssetProtoType(), $image)
+            ->createView();
+        
+        return new Response(
+            json_encode(
+                array(
+                    'editFormPrototype' => $this->renderView(
+                        'CatMSAdminBundle:MediaLibrary:prototypes\assetEditPrototype.html.twig',
+                         array('form' => $form)
+                    ) 
+                )
+            ), 
+            200, 
+            array('Content-Type' => 'application/json')
+        );
+    }
+    
+    public function deleteAssetInlineAction(ImageUpload $image)
+    {
+        $em = $this->getDoctrine()->getManager();  
+        
+        $em->remove($image);
+        $em->flush();
+        
+        return new Response(
+            json_encode(
+                array(
+                    'result' => 'success',
+                )
+            ), 
+            200, 
+            array('Content-Type' => 'application/json')
+        );     
     }
 }
-?>
+

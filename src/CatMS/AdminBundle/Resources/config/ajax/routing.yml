@@ -1,0 +1,25 @@
+ajax-get-groups:
+    path:      /get-groups
+    defaults:  { _controller: CatMSAdminBundle:Ajax:getGroups }
+    
+ajax-get-content-groups:
+    path:      /get-content-groups
+    defaults:  { _controller: CatMSAdminBundle:Ajax:getContentGroups }    
+
+ajax-get-related-image-groups:
+    path:      /get-related-image-groups/{group}
+    defaults:  { _controller: CatMSAdminBundle:Ajax:getRelatedImageGroup }
+    requirements:
+        group: \d+
+
+ajax-get-history:
+    path:     /get-history
+    defaults:  { _controller: CatMSAdminBundle:Ajax:getHistory}
+
+get-images-list-ajax:
+    path:     /get-images-list
+    defaults:  { _controller: CatMSAdminBundle:Ajax:getImagesList }
+
+get-group-images-list-ajax:
+    path:     /get-group-images-list-ajax/{group}
+    defaults:  { _controller: CatMSAdminBundle:Ajax:getImagesList }

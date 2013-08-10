@@ -7,54 +7,72 @@
 {% endblock %}
 
 {% block javascripts_bottom %}
+    <script src="{{ asset('js/catms.fields-labels.js') }}"></script>
     <script>
         $(function(){
-            $('#catms_adminbundle_contentgrouptype').css('margin-bottom', '30px');
-            var relImgContainer = $('#catms_adminbundle_contentgrouptype_relatedImages').parent('div');
-            relImgContainer.css({
-                'float': 'right',
-                'position': 'relative',
-                'top': '-165px',
-                'right': '0px',
-                'height': '155px',
-                'width': '250px'
-            });
-            relImgContainer.children('select').css({
-           'width': '250px',
-           'height': '130px'
+            $('.check-developer-disabled').attr('disabled', 'disabled');
         });
-    });
-    </script>
-    <script type="text/javascript" src="{{ asset('js/tinymce/tinymce.min.js')}}"></script>
-    <script>
-    tinymce.init({
-        selector: "textarea#catms_adminbundle_contentgrouptype_manual",
-        width : 940,
-        height: 220,
-        plugins: "code, textcolor",
-        toolbar: "undo redo | styleselect | bold italic underline strikethrough | lignleft aligncenter alignright alignjustify | numlist bullist outdent indent | code | forecolor"
-    });
     </script>
 {% endblock %}        
         
 {% block content -%}
+    {% include 'CatMSAdminBundle:Helpers:form-errors-div.html.twig' with {'form': edit_form, 'errors': errors | default() } %}
+    
+    <legend><i class="icon-large icon-edit"></i> Content group <i>{{ entity.description | striptags | raw }}</i> edit</legend>
 
-    <legend>Content group <i>{{ entity.description | striptags | raw }}</i> edit</legend>
-
-    <form novalidate action="{{ path('content-group-update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="form-float">
-        <input type="hidden" name="_method" value="PUT" />
-        {{ form_widget(edit_form) }}
-        <div class="btn-group">
-            <a href="{{ path('content-group') }}" class="btn"><i class="icon-list"></i> Back to the list</a>
-            <button type="submit" class="btn btn-primary show-loader" data-loading-text="Saving..."><i class="icon-hdd"></i> Save</button>
+    <form novalidate action="{{ path('content-group-update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="content-manager-form">
+        
+        <div class="btns-up">
+            <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> Back to the list</a>
+            <a href="{{ path('content-manager-list', { 'slug': entity.slug }) }}"class="btn btn-small"><i class="icon-list"></i> Content list</a>
+            <a href="{{ path('content-manager-new', { 'group': entity.slug }) }}"class="btn btn-primary btn-small"><i class="icon-font"></i> Add content</a>
+            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="Saving..."><i class="icon-hdd icon-small"></i> Save</button>
+        </div> 
+        
+        <hr class="clear" />
+        
+        <div class="row-fluid content-group-basics">
+            
+            <div class="span5 input-wrapper">
+                {{ form_row(edit_form.slug, {'attr': {'class': 'span12'}}) }}
+                {{ form_row(edit_form.description, {'attr': {'class': 'span12'}})}}
+                {{ form_row(edit_form.isRemovable, {'attr': {'class': 'span12 select-icons check-developer-disabled'}})}}
+            </div>
+            <div class="span4 related-image-select pull-right offset3 input-wrapper">
+                {{ form_row(edit_form.relatedImages) }}
+            </div>                    
         </div>
 
-    </form>
+        {% include 'CatMSAdminBundle:ContentGroup:widgets/labelized.html.twig' with {'form': edit_form, 'errors': errors | default() } %}
+        
+        <legend class="legend-inside"><i class="icon-large icon-comment"></i> Manual</legend>
+        <div class="row-fluid">
+            <div class="span12 input-wrapper">
+                {{ form_widget(edit_form.manual, {'attr': {'class': 'tiny_full_with_image'}}) }}
+            </div>
+        </div>
+        
+        {{ form_rest(edit_form) }}
+        
+        <input type="hidden" name="_method" value="PUT" />
+        
+        <hr class="clear" />
+        <div class="btns-bottom">
+            
+            <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> Back to the list</a>
+            <a href="{{ path('content-manager-list', { 'slug': entity.slug }) }}"class="btn btn-small"><i class="icon-list"></i> Content list</a>
+            <a href="{{ path('content-manager-new', { 'group': entity.slug }) }}"class="btn btn-primary btn-small"><i class="icon-font"></i> Add content</a>
+            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="Saving..."><i class="icon-hdd icon-small"></i> Save</button>
+        </div> 
 
-    <form action="{{ path('content-group-delete', { 'id': entity.id }) }}" method="post" style="clear: both">
+    </form>
+    
+    <form action="{{ path('content-group-delete', { 'id': entity.id }) }}" method="post" style="float: right;">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" class="btn" data-toggle="modal" data-target="#delete"><i class="icon-trash"></i> Delete</button>
-        {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'delete', 'msg': 'Delete content group', 'btnTxt': 'Delete'} %}
+        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
     </form>
+    
+    <hr class="clear" />
+
 {% endblock %}

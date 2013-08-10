@@ -12,7 +12,9 @@
 {% endblock %}
     
 {% block content -%}
-    <legend>Edit page {{ entity.slug }} SEO</legend>
+    <legend>
+        <i class="icon-large icon-globe"></i> Edit page <i>{{ entity.slug }}</i> SEO
+    </legend>
 
     <form action="{{ path('seo-update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} style="width: 225px">
         <input type="hidden" name="_method" value="PUT" />

@@ -1,11 +1,11 @@
 {% if entity.mimeType == 'image/jpeg' or entity.mimeType == 'image/png' %}
-<a href="{{ asset('uploads/mediaLibrary/')~entity.path }}" class="thumbnail single-image">
-    <img style="max-width: 160px;" src="{{ asset('uploads/mediaLibrary/')~entity.path }}" title="{{ entity.title }}"/>
+<a href="{{ asset('uploads/media-library/')~entity.path }}" class="thumbnail single-image">
+    <img style="max-width: 160px;" src="{{ asset('uploads/media-library/')~entity.path }}" title="{{ entity.title }}"/>
 </a>
 {% elseif entity.mimeType == 'application/pdf' %}
-    <a href="{{ asset('uploads/mediaLibrary/')~entity.path }}" class="pdf-icon-48"></a>
+    <a href="{{ asset('uploads/media-library/')~entity.path }}" class="pdf-icon-48"></a>
 {% elseif entity.mimeType == 'application/x-rar' %}    
-    <a href="{{ asset('uploads/mediaLibrary/')~entity.path }}" class="rar-icon-48"></a>
+    <a href="{{ asset('uploads/media-library/')~entity.path }}" class="rar-icon-48"></a>
 {% elseif entity.mimeType == 'application/zip' %}  
-    <a href="{{ asset('uploads/mediaLibrary/')~entity.path }}" class="zip-icon-48"></a>
+    <a href="{{ asset('uploads/media-library/')~entity.path }}" class="zip-icon-48"></a>
 {% endif %}

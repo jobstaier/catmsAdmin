@@ -1,0 +1,16 @@
+mailer:
+    password:
+        generate: Generowanie nowego hasła
+        changed: Zmieniono hasło użytkownika
+        password: Hasło
+        generated-new: Wygenerowano nowe hasło dla użytkownika
+        request: Prośba wygenerowania nowego hasła
+        click-to-generate-new: Aby wygenerować nowe hasło kliknij w <a href="url">ten link</a> lub odwiedź stronę url
+    affiliate: Aby zalogować się do panelu administracyjnego ofwiedź stronę page_url i zaloguj się używając poniższych danych
+    user: User
+    regards: 'Pozdrawiam serdecznie,<br />CatMS Founder<br />d.job@catdesign.pl<br />'
+    
+    
+    account:
+        create: Nowe konto
+        created: Stworzono konto użytkownika

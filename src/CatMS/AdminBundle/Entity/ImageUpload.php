@@ -10,7 +10,7 @@ require_once __DIR__.'/../External/WideImage/WideImage.php';
 /**
  * @ORM\Entity(repositoryClass="CatMS\AdminBundle\Repository\ImageUploadRepository")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="imageupload")
+ * @ORM\Table(name="asset_upload")
  */
 class ImageUpload
 {
@@ -25,6 +25,12 @@ class ImageUpload
     
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(
+     *      min = "5",
+     *      max = "50",
+     *      minMessage = "Title must be at least {{ limit }} characters length",
+     *      maxMessage = "Title cannot be longer than {{ limit }} characters length"
+     * )
      */
     protected $title;
     
@@ -73,6 +79,12 @@ class ImageUpload
     protected $mimeType;
     
     protected $deleteForm;
+    
+    protected $systemThumbWidth;
+    
+    protected $systemThumbHeight;
+    
+    protected $thumbPath;
 
     public function getAbsolutePath()
     {
@@ -81,11 +93,25 @@ class ImageUpload
             : $this->getUploadRootDir().'/'.$this->path;
     }
     
+    public function getSystemThumbAbsolutePath()
+    {
+        return null === $this->path
+            ? null
+            : __DIR__.'/../../../../web/'.$this->getSystemThumbDir().'/'.$this->getSystemThmbPrefix().$this->path;
+    }
+    
     public function getWebPath()
     {
         return null === $this->path
             ? null
             : $this->getUploadDir().'/'.$this->path;
+    }
+    
+    public function getThumbWebPath()
+    {
+        return null === $this->path
+            ? null
+            : $this->getUploadDir().'/thmb_'.$this->path;
     }
     
     protected function getUploadRootDir()
@@ -99,9 +125,22 @@ class ImageUpload
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads/mediaLibrary';
+        return 'uploads/media-library';
+    }
+    
+    protected function getSystemThumbDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw up
+        // when displaying uploaded doc/image in the view.
+        return 'uploads/system-thumbs';
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
+    
     /**
      * Get id
      *
@@ -204,6 +243,7 @@ class ImageUpload
                 $filename = substr(sha1(uniqid(mt_rand(), true)), 0, 10);
             }
             $this->path = $filename.'.'.$this->getFile()->guessExtension();
+            $this->thumbPath = 'thmb_'.$filename.'.'.$this->getFile()->guessExtension();
         }
     }    
     
@@ -223,6 +263,10 @@ class ImageUpload
 
         $this->resizeAndSaveImage();
         
+        if ($this->imageGroup->getHasThumbnails()) {
+            $this->resizeAndSaveThumb();
+        }
+        
         // check if we have an old image
         if (isset($this->temp)) {
             // delete the old image
@@ -237,7 +281,7 @@ class ImageUpload
     
     private function resizeAndSaveImage()
     {        
-        if ($this->mimeType == 'image/jpeg') {
+        if ($this->mimeType == 'image/jpeg' || $this->mimeType == 'image/png') {
             $imagePath = $this->getUploadRootDir().'/'.$this->path;
             $image = \WideImage::load($imagePath);
             $size = getimagesize($imagePath);
@@ -256,6 +300,32 @@ class ImageUpload
                         ->saveToFile($imagePath);
                 }
             }
+            
+            //Save system thumb
+            $sThmWidth = $this->getSystemThumbWidth();
+            $sThmbHeight = $this->getSystemThumbHeight();
+            
+            $image->resize($sThmWidth, $sThmbHeight, 'outside')
+                ->crop('center', 'center', $sThmWidth, $sThmbHeight)
+                ->saveToFile($this->getSystemThumbDir().'/'.$this->getSystemThmbPrefix().$this->path);
+            
+        }
+    }
+    
+    private function resizeAndSaveThumb()
+    {        
+        if ($this->mimeType == 'image/jpeg' || $this->mimeType == 'image/png') {
+            $imagePath = $this->getUploadRootDir().'/'.$this->path;
+            $imageThumbPath = $this->getUploadRootDir().'/'.$this->thumbPath;
+            $image = \WideImage::load($imagePath);
+            
+            $groupImageWidth = ($this->getImageGroup()->getThumbnailWidth()) ? $this->getImageGroup()->getThumbnailWidth() : 150;
+            $groupImageHeight = ($this->getImageGroup()->getThumbnailHeight()) ? $this->getImageGroup()->getThumbnailHeight() : 100;
+
+            $image->resize($groupImageWidth, $groupImageHeight, 'outside')
+                ->crop('center', 'center', $groupImageWidth, $groupImageHeight)
+                ->saveToFile($imageThumbPath);
+
         }
     }
     
@@ -267,7 +337,19 @@ class ImageUpload
         if ($file = $this->getAbsolutePath()) {
             if (file_exists($file)) {
                 unlink($file);
-            }
+            }           
+        }
+        
+        if ($systemThumb = $this->getSystemThumbAbsolutePath()) {
+            if (file_exists($systemThumb)) {
+                unlink($systemThumb);
+            }           
+        }      
+        
+        if ($thumb = $this->getThumbWebPath()) {
+            if (file_exists($thumb)) {
+                unlink($thumb);
+            }    
         }
     }    
 
@@ -411,8 +493,12 @@ class ImageUpload
     
     public function getMimeType()
     {
-        $file = new \Symfony\Component\HttpFoundation\File\File($this->getUploadRootDir().'/'.$this->path);
-        return $file->getMimeType();
+        if (file_exists($this->getUploadRootDir().'/'.$this->path)) {
+            $file = new \Symfony\Component\HttpFoundation\File\File($this->getUploadRootDir().'/'.$this->path);
+            return $file->getMimeType();           
+        } else {
+            return null;
+        }
     }
     
     public function setDeleteForm($deleteForm)
@@ -425,5 +511,37 @@ class ImageUpload
     public function getDeleteForm()
     {
         return $this->deleteForm;
+    }
+    
+    public function serialize()
+    {
+        return array(
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'slug' => $this->getSlug(),
+            'path' => $this->getPath(),
+            'redirect' => $this->getRedirect(),
+            'imageGroup' => $this->getImageGroup()->getSlug(),
+            'imageGroupId' => $this->getImageGroup()->getId(),
+            'uploadedAt' => $this->getUploadedAt(),
+            'thumb' => $this->getSystemThumbDir().'/'.$this->getSystemThmbPrefix().$this->path,
+            'mimeType' => $this->getMimeType(),
+            'title' => $this->getTitle()
+        );
+    }
+    
+    public function getSystemThumbWidth() 
+    {
+        return 120;
+    }
+    
+    public function getSystemThumbHeight() 
+    {
+        return 80;
+    }
+    
+    public function getSystemThmbPrefix()
+    {
+        return 'sThmb_';
     }
 }

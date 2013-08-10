@@ -1,25 +1,16 @@
 <script src={{ asset('js/catms.related-image.js') }}></script>
 <div class="related-images-trigger-container">
-    <a class="btn btn-warning"><i class="icon-chevron-left"></i> Related images</a>
+    <a class="btn btn-small btn-success"><i class="icon-chevron-left"></i> Related images</a>
 </div>
 <div class="related-images-container">
-    <a href="{{ path('media-library-image-edit') }}" style="display: none" id="editImageUrl"></a>
+    <a href="{{ path('media-library-image-edit-pure') }}" style="display: none" id="editImageUrl"></a>
     <div class="related-from-group">
         <div class="page-header no-margin">
             <h5>Related images <small>from image group</small></h5>
         </div>
         <a href="{{ path('ajax-get-related-image-groups', {'group': group.id }) }}" style="display: none" id="getRelatedImageGroupUrl"></a>
-        <a href="{{ asset('uploads/mediaLibrary/') }}" style="display: none" id="getImagesDirectroyUrl"></a>
+        <a href="{{ asset('uploads/media-library/') }}" style="display: none" id="getImagesDirectroyUrl"></a>
         <div class="loader-gif"></div>
         <div class="append-here"></div>
-    </div>
-    <hr />
-    <div class="related-directly">
-        <div class="page-header no-margin">
-            <h5>Related injected directly <small>into Full Text and Short Text field</small></h5>
-        </div>
-        <a href="{{ path('ajax-get-related-image-inject', {'group': group.id }) }}" style="display: none" id="getRelatedImageInjectUrl"></a>
-        <div class="loader-gif-bottom"></div>
-        <div class="append-here-bottom"></div>
     </div>
 </div>

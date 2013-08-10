@@ -21,3 +21,6 @@ create.error: An error occured while creating data
 
 setting.remove.success: Setting has been deleted successfuly
 setting.remove.error: An error occured while deleting setting
+
+delete.error.delete.resticted: Delete this entity is forbidden
+delete.error.delete.developer: This entity can be removed only by developer

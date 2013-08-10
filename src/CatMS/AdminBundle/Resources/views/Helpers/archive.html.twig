@@ -1,12 +1,12 @@
 <script src={{ asset('js/catms.archive.js') }}></script>
 <div class="archive-trigger-container">
-    <a class="btn btn-inverse"><i class="icon-chevron-left"></i> Archive</a>
+    <a class="btn btn-inverse btn-small"><i class="icon-white icon-chevron-left"></i> Archive</a>
 </div>
 <div class="archive-container">
     <div class="archive">
-        {% if entity.archives | length > 0 %}
+        {% if archive | length > 0 %}
         <div class="page-header no-margin">
-            <h5>Archive <small>from {{ entity.archives[0].createdAt | date("Y/m/d H:i:s") }} to {{ entity.archives[entity.archives | length - 1].createdAt | date("Y/m/d H:i:s") }}</small></h5>
+            <h5>Archive <small>from {{ archive[0].createdAt | date("Y/m/d H:i:s") }} to {{ archive[archive | length - 1].createdAt | date("Y/m/d H:i:s") }}</small></h5>
         </div>
         <!--<div class="loader-gif"></div>-->
         <div class="append-here-archive">
@@ -14,23 +14,15 @@
                 <thead>
                     <tr>
                         <th>Archive date</th>
-                        <th>Full Text</th>
-                        <th>Short Text</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for archive in entity.archives %}
+                {% for content in archive %}
                     <tr>
-                        <td>{{ archive.createdAt | date("Y/m/d H:i:s") }}</td>
+                        <td>{{ content.createdAt | date("Y/m/d H:i:s") }}</td>
                         <td>
-                            <input type="checkbox" />
-                        </td>
-                        <td>
-                            <input type="checkbox" />
-                        </td>
-                        <td>
-                            <button class="btn btn-primary btn-mini"><i class="icon-refresh"></i> Import</button>
+                            <a href="{{ path('content-manager-get-archive', {'id': content.id}) }}" class="btn btn-primary btn-mini import-archive"><i class="icon-refresh"></i> Import</a>
                         </td>
                     </tr>
                 {% endfor %}

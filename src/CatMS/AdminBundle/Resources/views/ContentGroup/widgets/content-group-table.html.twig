@@ -16,8 +16,13 @@
             <td><a href="{{ path('content-group-show', { 'id': entity.id }) }}">{{ entity.id }} <i class="icon-chevron-right"></i></a></td>
             <td>{{ entity.slug }}</td>
             <td>{{ entity.description }}</td>
-            <td>{% if entity.manual %}<span class="label label-success">YES</span>{% else %}<span class="label label-warning">NO</span>{% endif %}</td>
-            <td>{% if entity.manual %}<span class="label label-success">YES</span>{% else %}<span class="label label-warning">NO</span>{% endif %}</td>
+            <td>{% if entity.manual %}<span class="label label-success"><i class="icon-white icon-ok-circle"></i> YES</span>{% else %}<span class="label label-warning"><i class="icon-white icon-warning-sign"></i> NO</span>{% endif %}</td>
+            <td>
+                {% if entity.isRemovable == '777' %}<span class="label label-success"><i class="icon-white icon-ok-circle"></i> YES</span>
+                {% elseif entity.isRemovable == '755' %}<span class="label label-warning"><i class="icon-white icon-warning-sign"></i> Only by Developer</span>
+                {% elseif entity.isRemovable == '000' %}<span class="label label-error"><i class="icon-white icon-remove-circle"></i> Forbidden</span>
+                {% endif %}
+            </td>
             <td><span class="label">{{ entity.contents | length }}</span></td>
             <td>
                 <div class="btn-group">
@@ -28,26 +33,21 @@
 
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="{{ path('content-group-show', { 'id': entity.id }) }}"><i class="icon-fullscreen"></i> Show</a>
-                        </li>
-                        {% if is_granted('ROLE_DEVELOPER') %}
-                        <li>
                             <a href="{{ path('content-group-edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> Edit</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('content-manager-new', {'group': entity.slug }) }}"><i class="icon-upload"></i> Add content</a>
                         </li>
                         <li>
                             <a href="{{ path('content-manager-list', {'page': 1, 'slug': entity.slug }) }}"><i class="icon-list"></i> Content list</a>
                         </li>
-                        {% endif %}
+                        <li>
+                            <a href="{{ path('content-manager-new', {'group': entity.slug }) }}"><i class="icon-font"></i> Add content</a>
+                        </li>
                     </ul>
                 </div>
             </td>
         </tr>
         <tr>
             <td colspan="7">
-                <div style="width: 100%; height: 1px; border-top: 1px dashed #888;"></div>
+                <div class="table-padding"></div>
             </td>
         </tr>
     {% endfor %}

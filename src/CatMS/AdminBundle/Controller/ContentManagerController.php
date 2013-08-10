@@ -4,68 +4,46 @@ namespace CatMS\AdminBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use CatMS\AdminBundle\Entity\ContentManager;
 use CatMS\AdminBundle\Form\ContentManagerType;
 use CatMS\AdminBundle\Controller\CommonMethods;
 use CatMS\AdminBundle\Logger\History;
 use CatMS\AdminBundle\Entity\ContentArchive;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * ContentManager controller.
- *
- * @Route("/admin/content-manager")
  * 
  */
 class ContentManagerController extends Controller
 {
     /**
-     * Module description page.
-     * 
-     * @Route("/", 
-     *  name="content-manager"
-     * )
-     */
-    public function indexAction()
-    {
-        return $this->render('CatMSAdminBundle:ContentManager:index.html.twig',
-                array());
-    }   
-    
-    /**
      * Lists all ContentManager entities.
      *
-     * @Route("/list/{page}/{slug}", 
-     *  name="content-manager-list",
-     *  requirements={"page"="\d+"},
-     *  defaults={"page"=1, "slug"=null}
-     * )
-     * @Method("GET")
      * @Template()
      */
     public function listAction($page, $slug)
     {
         $em = $this->getDoctrine()->getManager();
         
-        if ($slug) {
-            $dql   = "SELECT cm FROM CatMSAdminBundle:ContentManager cm JOIN cm.contentGroup cg WHERE cg.slug = :slug ORDER BY cm.priority ASC";
-            $group = $em->getRepository('CatMSAdminBundle:ContentGroup')->findOneBySlug($slug);
-            $query = $em->createQuery($dql)->setParameter('slug', $slug);
-                    
-            $history = new History($this->get('session'), $this->get('router'));
-            $history->logListContentGroup($group);
-        } else {
-            $dql   = "SELECT cm FROM CatMSAdminBundle:ContentManager cm";
-            $group = null;
-            $query = $em->createQuery($dql);
-        }
+        $dql = "SELECT cm FROM CatMSAdminBundle:ContentManager cm 
+                JOIN cm.contentGroup cg WHERE cg.slug = :slug 
+                ORDER BY cm.priority ASC";
         
+        $group = $em->getRepository('CatMSAdminBundle:ContentGroup')
+            ->findOneBySlug($slug);
+        
+        $query = $em->createQuery($dql)->setParameter('slug', $slug);
+
+        $history = new History($this->get('session'), $this->get('router'));
+        $history->logListContentGroup($group);
+
         $recordsPerPage = CommonMethods::castRecordsPerPage(
-            $em->getRepository('CatMSAdminBundle:Setting')->findOneBySlug('content-manager-list-records-per-page'), 
-            $this->container);
-        
+            $em->getRepository('CatMSAdminBundle:Setting')
+                ->findOneBySlug('content-manager-list-records-per-page'), 
+            $this->container
+        );
         
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate($query, 
@@ -82,90 +60,109 @@ class ContentManagerController extends Controller
     /**
      * Creates a new ContentManager entity.
      *
-     * @Route("/new/create/{group}", 
-     *  name="content-manager-create",
-     *  defaults={"group"=null}
-     * )
-     * @Method("POST")
      * @Template("CatMSAdminBundle:ContentManager:new.html.twig")
      */
     public function createAction(Request $request, $group)
     {
+        $em = $this->getDoctrine()->getManager();
+        
         $entity  = new ContentManager();
         $form = $this->createForm(new ContentManagerType(), $entity);
         $form->bind($request);
         
+        $contentGroup = $em->getRepository('CatMSAdminBundle:ContentGroup')
+                ->findOneBySlug($group);
+        
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            
             
             $em->persist($entity);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('noticeSuccess', 'create.success');
-            return $this->redirect($this->generateUrl('content-manager-show', array('id' => $entity->getId(), 'group' => $group)));
+            $this->get('session')->getFlashBag()
+                ->add('noticeSuccess', 'create.success');
+            return $this->redirect($this->generateUrl(
+                'content-manager-edit', array(
+                    'id' => $entity->getId()
+                )
+            ));
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'create.error');
+            $this->get('session')->getFlashBag()
+                ->add('noticeError', 'create.error');
         }
 
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'group' => $group
+            'contentGroup' => $contentGroup
         );
     }
 
     /**
      * Displays a form to create a new ContentManager entity.
      *
-     * @Route("/new/{group}", 
-     *  name="content-manager-new",
-     *  defaults={"group"=null}
-     * )
-     * @Method("GET")
      * @Template()
      */
     public function newAction($group)
     {
         $entity = new ContentManager();
-        
-        if ($group) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $contentGroup = $em->getRepository('CatMSAdminBundle:ContentGroup')->findOneBySlug($group);
-            
-            if (!$contentGroup) {
-                throw $this->createNotFoundException('Unable to find ContentGroup entity.');
-            };
-            
-            $entity->setContentGroup($contentGroup);
-        }
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $contentGroup = $em->getRepository('CatMSAdminBundle:ContentGroup')
+            ->findOneBySlug($group);
+
+        if (!$contentGroup) {
+            throw $this->createNotFoundException(
+                'Unable to find ContentGroup entity.'
+            );
+        };
+
+        $entity->setContentGroup($contentGroup);
+        $entity->setSlug($this->getDefaultSlug($entity));
         
         $form   = $this->createForm(new ContentManagerType(), $entity);
 
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
-            'group' => $group
+            'contentGroup' => $contentGroup
         );
     }
 
+    private function getDefaultSlug($entity)
+    {
+        $slug = $entity->getContentGroup()->getSlug();
+        $em = $this->getDoctrine()->getManager();
+
+        $i = 1;
+        do {
+            $contentSlug = $slug.'-content-'.$i;
+            $i++;
+            
+            $alreadyUsed = $em->getRepository('CatMSAdminBundle:ContentManager')
+                ->findOneBySlug($contentSlug);
+            
+        } while ($alreadyUsed);
+        
+        return $contentSlug;
+    }
+    
     /**
      * Finds and displays a ContentManager entity.
      *
-     * @Route("/{id}/{group}", 
-     *  name="content-manager-show",
-     *  defaults={"group"=null}
-     * )
-     * @Method("GET")
      * @Template()
      */
     public function showAction($id, $group)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CatMSAdminBundle:ContentManager')->find($id);
+        $entity = $em->getRepository('CatMSAdminBundle:ContentManager')
+            ->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ContentManager entity.');
+            throw $this->createNotFoundException(
+                'Unable to find ContentManager entity.'
+            );
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -180,24 +177,24 @@ class ContentManagerController extends Controller
     /**
      * Displays a form to edit an existing ContentManager entity.
      *
-     * @Route("/{id}/edit/{group}", 
-     *  name="content-manager-edit",
-     *  requirements={"id"="\d+"},
-     *  defaults={"group"=null}
-     *  )
-     * @Method("GET")
      * @Template()
      */
-    public function editAction($id, $group)
+    public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CatMSAdminBundle:ContentManager')->find($id);
-
+        $entity = $em->getRepository('CatMSAdminBundle:ContentManager')
+            ->find($id);
+        
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ContentManager entity.');
+            throw $this->createNotFoundException(
+                'Unable to find ContentManager entity.'
+            );
         }
-
+        
+        $archive = $em->getRepository('CatMSAdminBundle:ContentArchive')
+            ->findBy(array('content' => $id), array('createdAt' => 'DESC'));
+        
         $history = new History($this->get('session'), $this->get('router'));
         $history->logOpenEditContent($entity);
         
@@ -208,28 +205,26 @@ class ContentManagerController extends Controller
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'group' => $group
+            'archive' => $archive
         );
     }
 
     /**
      * Edits an existing ContentManager entity.
      *
-     * @Route("/{id}/{group}", 
-     *  name="content-manager-update",
-     *  defaults={"group"=null}
-     * )
-     * @Method("PUT")
      * @Template("CatMSAdminBundle:ContentManager:edit.html.twig")
      */
-    public function updateAction(Request $request, $id, $group)
+    public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CatMSAdminBundle:ContentManager')->find($id);
+        $entity = $em->getRepository('CatMSAdminBundle:ContentManager')
+            ->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find ContentManager entity.');
+            throw $this->createNotFoundException(
+                'Unable to find ContentManager entity.'
+            );
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -250,28 +245,31 @@ class ContentManagerController extends Controller
             $em->persist($archive);
             $em->flush();
             
-            $this->get('session')->getFlashBag()->add('noticeSuccess', 'edit.success');
-            return $this->redirect($this->generateUrl('content-manager-edit', array('id' => $id, 'group' => $group)));
+            $this->get('session')->getFlashBag()
+                    ->add('noticeSuccess', 'edit.success');
+            return $this->redirect(
+                $this->generateUrl('content-manager-edit', array('id' => $id)
+            ));
         } else {
-            $this->get('session')->getFlashBag()->add('noticeFailure', 'edit.error');
+            $this->get('session')->getFlashBag()
+                ->add('noticeFailure', 'edit.error');
+            
+            $archive = $em->getRepository('CatMSAdminBundle:ContentArchive')
+                ->findBy(array('content' => $id), array('createdAt' => 'DESC'));
+            
         }
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'group' => $group
+            'archive' => $archive
         );
     }
 
     /**
      * Deletes a ContentManager entity.
      *
-     * @Route("/{id}/{group}",
-     *  name="content-manager-delete",
-     *  defaults={"group"=null}
-     * )
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id, $group)
     {
@@ -280,17 +278,25 @@ class ContentManagerController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CatMSAdminBundle:ContentManager')->find($id);
+            $entity = $em->getRepository('CatMSAdminBundle:ContentManager')
+                    ->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find ContentManager entity.');
+                throw $this->createNotFoundException(
+                    'Unable to find ContentManager entity.'
+                );
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('content-manager-list', array('page' => 1, 'slug' => $group)));
+        return $this->redirect(
+                $this->generateUrl('content-manager-list', array(
+                    'page' => 1, 
+                    'slug' => $group
+                ))
+            );
     }
 
     /**
@@ -306,5 +312,18 @@ class ContentManagerController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+    
+    public function getArchiveContentAction($id)
+    {
+        $request = $this->getRequest();
+        
+        if ($request->isXmlHttpRequest()) {
+            $em = $this->getDoctrine()->getManager();
+            $archive = $em->getRepository('CatMSAdminBundle:ContentArchive')
+                ->find($id);
+        }
+        
+        return new Response(json_encode($archive->serialize()), 200, array('Content-Type' => 'application/json'));
     }
 }

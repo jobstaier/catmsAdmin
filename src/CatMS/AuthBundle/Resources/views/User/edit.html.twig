@@ -14,27 +14,27 @@
 {% endblock %}
     
 {% block content -%}
-    <legend>Edit user <i>{{  entity.username }}</i></legend>
+    <legend><i class="icon-large icon-user"></i> Edit user <i>{{  entity.username }}</i></legend>
     
     <form action="{{ path('user_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="form-float">
         <input type="hidden" name="_method" value="PUT" />
+        
         {{ form_widget(edit_form) }}
 
-        <div class="btn-group">
-            <a class="btn" href="{{ path('user_show', {'id': entity.id }) }}"><i class="icon-user"></i> Back to the user details</a>
-            <button class="btn btn-primary" type="submit" data-toggle="modal" data-target="#edit"><i class="icon-hdd"></i> Save</button>
-            <a href="{{ path('edit_password', { 'id': entity.id }) }}" class="btn"><i class="icon-asterisk"></i> Edit password</a>   
+        <div>
+            <a class="btn btn-small" href="{{ path('user_show', {'id': entity.id }) }}"><i class="icon-user"></i> Back to the user details</a>
+            <a type="submit" data-view="top" class="btn btn-primary btn-small save-this"><i class="icon-hdd"></i> Save</a>
+            <a href="{{ path('edit_password', { 'id': entity.id }) }}" class="btn btn-small"><i class="icon-asterisk"></i> Edit password</a>   
         </div>
         
         {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'edit', 'msg': 'Edit user data'} %}
         
     </form>
 
-    <form action="{{ path('user_delete', { 'id': entity.id }) }}" method="post" class="form-float clear">
+    <form action="{{ path('user_delete', { 'id': entity.id }) }}" method="post" class="form-float clear" style="margin-top: 15px;">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" class="btn" data-toggle="modal" data-target="#delete"><i class="icon-trash"></i> Delete</button>
-        {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'delete', 'msg': 'Delete user', 'btnTxt': 'Delete'} %}
+        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
     </form>
 
 </ul>
@@ -47,7 +47,7 @@
     $(document).ready(function() {
         var activeVal = '{{ edit_form.vars.value.roles[0] }}';
         $("#user_roles option").filter(function() {
-            return $(this).val() == activeVal; 
+            return $(this).val() === activeVal; 
         }).prop('selected', true);
     });
 </script>

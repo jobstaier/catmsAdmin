@@ -1,0 +1,51 @@
+<legend class="legend-inside"><i class="icon-large icon-tags"></i> Content group fields and labels</legend>
+<div class="content-group-fields">     
+    <div class="row-fluid">  
+        <div class="span3 chevronized">
+            {{ form_row(form.contentFields.hasDescription) }}
+        </div>
+        <div class="span5 field-label">
+            {{ form_label(form.contentFields.fieldDescriptionLabel) }}
+            {{ form_widget(form.contentFields.fieldDescriptionLabel) }}
+        </div>
+        <div class="span4">
+            {{ form_errors(form.contentFields.fieldDescriptionLabel) }}
+        </div>
+    </div>
+    <div class="row-fluid">  
+        <div class="span3 chevronized">
+            {{ form_row(form.contentFields.hasTitle) }}
+        </div>
+        <div class="span5 field-label">
+            {{ form_label(form.contentFields.fieldTitleLabel) }}
+            {{ form_widget(form.contentFields.fieldTitleLabel) }}
+        </div>
+        <div class="span4">
+            {{ form_errors(form.contentFields.fieldTitleLabel) }}
+        </div>
+    </div>
+    <div class="row-fluid">  
+        <div class="span3 chevronized">
+            {{ form_row(form.contentFields.hasFullText) }}
+        </div>
+        <div class="span5 field-label">
+            {{ form_label(form.contentFields.fieldFullTextLabel) }}
+            {{ form_widget(form.contentFields.fieldFullTextLabel) }}
+        </div>
+        <div class="span4">
+            {{ form_errors(form.contentFields.fieldFullTextLabel) }}
+        </div>
+    </div>                   
+    <div class="row-fluid">  
+        <div class="span3 chevronized">
+            {{ form_row(form.contentFields.hasShortText) }}
+        </div>
+        <div class="span5 field-label">
+            {{ form_label(form.contentFields.fieldShortTextLabel) }}
+            {{ form_widget(form.contentFields.fieldShortTextLabel) }}
+        </div>                    
+        <div class="span4">
+            {{ form_errors(form.contentFields.fieldShortTextLabel) }}
+        </div>                    
+    </div>        
+</div>

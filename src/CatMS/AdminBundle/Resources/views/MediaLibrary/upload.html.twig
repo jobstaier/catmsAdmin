@@ -1,8 +1,7 @@
 {% extends 'CatMSAdminBundle::base.html.twig' %}
 
-
 {% block stylesheets_import %}
-<link href="{{ asset('js/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css') }}" media="screen" rel="stylesheet" type="text/css"</link>
+    <link href="{{ asset('js/plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css') }}" media="screen" rel="stylesheet" type="text/css"</link>
 {% endblock %}
 
 {% block stylesheets %}
@@ -15,11 +14,18 @@
 {% block breadcrumb %}
     {{ parent() }}
     {% if group is empty %}
-    <li><a href="{{ path('media-library') }}">Media library</a></li> <span class="divider">/</span>
+    <li>
+        <em>Media library</em> 
+        <a href="{{ path('media-library') }}"><i class="icon-list"></i>List</a>&nbsp 
+        <a href="{{ path('media-library-grid-list') }}"> <i class="icon-th"></i>Grid</a>
+    </li>
     <li class="active">Upload file</li>
     {% else %}
-    <li><a href="{{ path('media-library') }}">Media library</a></li> <span class="divider">/</span>
-    <li><a href="{{ path('media-library', {'slug': group}) }}">Group <i>{{ groupEntity.description }}</i></a></li> <span class="divider">/</span>
+    <li>
+        <em>Group <i>{{ groupEntity.description }}</i> assets</em> 
+        <a href="{{ path('media-library', {'page': 1, 'slug': groupEntity.slug}) }}"><i class="icon-list"></i>List</a>&nbsp
+        <a href="{{ path('media-library-group-grid-list', {'group': groupEntity.id}) }}"><i class="icon-th"></i>Grid</a>
+    </li> <span class="divider">/</span>          
     <li class="active">Upload file</li>
     {% endif %}
 {% endblock %}    
@@ -40,7 +46,7 @@
     {% endif %}
     
     <form novalidate action="{{ path('media-library-upload', {'group': group}) }}" method="post" {{ form_enctype(form) }} class="upload-form">
-        <legend>Upload single file <small>and set properties</small></legend>
+        <legend><i class="icon-large icon-attach"></i> Upload single file <small>and set properties</small></legend>
          
         <div class="control-group">
         
@@ -96,16 +102,25 @@
             
             <div class="controls file-input-container">
                 <span class="btn btn-file btn-small"><i class="icon-file"></i> 
-                    <input type="file" name="form[file]" id="form_file" />
+                    <input type="file" name="form[file]" id="form_file" style="width: 283px;" />
                 </span>    
                 {{ form_errors(form.file) }}
             </div>
             
             {% if group is empty %}  
-            <script>$(function(){var txt='Undefined';$('#form_imageGroup option').each(function(){if ($(this).text() === txt) {$(this).attr('selected', 'selected');}})});</script>
+            <script>
+                $(function() {
+                    var txt='Undefined';
+                    $('#form_imageGroup option').each(function() {
+                        if ($(this).text() === txt) {
+                            $(this).attr('selected', 'selected')
+                        ;}
+                    });
+                });
+            </script>
             <div class="controls" style="margin-top: 15px;">
                 <label for="form_imageGroup"><i class="icon-chevron-down"></i> Image/asset group</label>
-                {{ form_widget(form.imageGroup, {'attr': {'class': 'span4'}}) }}
+                {{ form_widget(form.imageGroup, {'attr': {'class': 'span4 selectpicker'}}) }}
                 {{ form_errors(form.imageGroup) }}
             </div>
             {% endif %}
@@ -114,7 +129,7 @@
             
         </div>
         
-        <div class="btn-group" style="margin-top: 20px;">
+        <div style="margin-top: 20px;">
             {% if group is not empty %}
             <a href="{{ path('media-library', {'slug': group}) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
             {% else %}    
@@ -125,15 +140,20 @@
     </form>
 
 {# plupload #}
-<script type="text/javascript" src="http://bp.yahooapis.com/2.4.21/browserplus-min.js"></script>
+<script type="text/javascript" src="{{ asset('js/browserplus-min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/plupload/js/plupload.full.js')}}"></script>
 <script type="text/javascript" src="{{ asset('js/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js')}}"></script>
 
 <script type="text/javascript" src="{{ asset('js/catms-plupload.js') }}"></script>
 <a href="{{ path('media-library-plupload', {'group': group}) }}" id="pluploadUrl" style="display: none"></a>
 <div class="multiple-upload-form">
-    <legend>
-        Multiple Files Upload
+    <legend><i class="icon-large icon-sort"></i> Multiple Files Upload
+        {% if not group %}
+            <a href="{{ path('media-library-grid-list') }}" data-toggle="tooltip" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
+    {% else%}
+            <a href="{{ path('media-library-group-grid-list', {'group': groupEntity.id }) }}" data-toggle="tooltip" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
+        </a>
+    {% endif %}
     </legend>
 <form>
 <div id="uploader">
