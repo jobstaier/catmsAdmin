@@ -1,8 +1,8 @@
 #Top navigation
 users:
-    title: Users
-    create: Create
-    list: List
+    title: Użytkownicy
+    create: Dodaj
+    list: Lista
 
 #CRUD
 edit.error: An error occured while editing

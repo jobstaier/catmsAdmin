@@ -9,6 +9,6 @@ parameters:
     mailer_host: ~
     mailer_user: catms.mailer@gmail.com
     mailer_password: AF2tyfyq
-    locale: en
+    locale: pl
     secret: 8d9602b01b84df6fb26bf1ebb04a01ba176e1d71
     database_path: null

@@ -17,4 +17,10 @@ services:
       class: CatMS\AdminBundle\Twig\TwigCatMSExtension
       arguments: ['@request', '@doctrine.orm.entity_manager'] 
       tags:
-          - { name: twig.extension }          
+          - { name: twig.extension }   
+          
+  catms.locale_listener:
+      class: CatMS\AdminBundle\Listener\LocaleListener
+      arguments: ["%kernel.default_locale%"]
+      tags:
+          - { name: kernel.event_subscriber }          
