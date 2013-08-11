@@ -90,9 +90,10 @@ $(function(){
                         window.setTimeout(function(){
                             tr.remove();  
 
-                            showAlert('Remove success!', ' Assets has been removed successfuly.', 'info');
+                            pinesNotify('Remove success!', 'Assets has been removed successfuly', 'success');
                             
                             if ($('table tbody img').length === 0) {
+                                console.log($('.list-home-url').attr('href'));
                                 window.location.href = $('.list-home-url').attr('href');
                             }
 
@@ -106,7 +107,7 @@ $(function(){
                     closeLoader();
                     removeTrigger.html(defText);
                     removeTrigger.removeAttr('disabled');
-                    showAlert('Delete failure!', errorThrown, 'error');
+                    pinesNotify('Delete failure!', errorThrown, 'error');
                 }
             });
         }
