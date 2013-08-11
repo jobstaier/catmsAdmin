@@ -135,14 +135,19 @@ class MediaLibraryController extends Controller
                     $this->get('session')->getFlashBag()
                         ->add('noticeSuccess', 'upload.success');
                 }
-                
+
                 if ($group) {
                     return $this->redirect(
-                        $this->generateUrl('media-library', 
-                            array('page' => 1, 'slug' => $group)
+                        $this->generateUrl('media-library-image-edit', 
+                            array(
+                                'id' => $document->getId(), 
+                                'group' => $document->getImageGroup()->getSlug()
+                            )
                         ));
                 } else {
-                    return $this->redirect($this->generateUrl('media-library'));
+                    return $this->redirect($this->generateUrl('media-library-image-edit',
+                        array('id' =>  $document->getId())
+                    ));
                 }
                 
             } else {
