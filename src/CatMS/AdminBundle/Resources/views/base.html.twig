@@ -22,12 +22,21 @@
     <script type="text/javascript" src="{{ asset('fancybox/jquery.easing-1.3.pack.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/tinymce/tinymce.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/pines-notify/jquery.pnotify.min.js')}}"></script>
+    
+    {# Translations #}
+    <script type="text/javascript" src="{{ asset('js/vendor/translator.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url('bazinga_exposetranslation_js', {'_locale' : app.request.locale }) }}"></script>
+    {# End #}
+    
     <script type="text/javascript" src="{{ asset('js/catms.text-editor.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/catms.popover.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/catms.global.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/catms.scripts.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/catms.ajax.js') }}"></script>
     {% block javascripts_bottom %}{% endblock %}
+    
+    
+
     
     {#
     {% stylesheets 
@@ -79,8 +88,8 @@
                         {% if not app.user %}
                             <a href="{{ path('login') }}" class="btn btn-primary">Login</a>
                         {% else %}
-                            <span class="btn btn-small"><i class="icon-user"></i> Hello {{ app.user.username }}!</span>
-                            <a href="{{ path('logout') }}" class="btn btn-primary btn-small"><i class="icon-off"></i> Logout</a>
+                            <span class="btn btn-small"><i class="icon-user"></i>{% trans with {'username': app.user.username } %}auth.welcome{% endtrans %}</span>
+                            <a href="{{ path('logout') }}" class="btn btn-primary btn-small"><i class="icon-off"></i> {{ 'auth.logout' | trans }}</a>
                         {% endif %}
                     </div>           
                 </div>
@@ -91,7 +100,7 @@
     <div class="container">
         
         <div class="history-trigger-container">
-            <a class="btn btn-info btn-small"><i class="icon-chevron-left"></i> History</a>
+            <a class="btn btn-info btn-small"><i class="icon-chevron-left"></i> {{ 'global.history' | trans }}</a>
         </div>
         <div class="history-container">
             <a href="{{ path('ajax-get-history')}}" id="getHistoryUrl" style="display: none"></a>

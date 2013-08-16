@@ -40,10 +40,11 @@ class LoginListener
             //$em = $this->doctrine->getEntityManager();
             //$em->flush();
             
-            $username = $user->getUsername();
+            //$username = $user->getUsername();
             $request = $event->getRequest();
             $session = $request->getSession();
-            $session->getFlashBag()->add('noticeSuccess', 'Logged in. Hello '.$username.'!');
+
+            $session->getFlashBag()->add('noticeSuccess', 'auth.signin.success');
         } 
     }
 }
