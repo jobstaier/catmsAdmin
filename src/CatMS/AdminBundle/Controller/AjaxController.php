@@ -161,7 +161,7 @@ class AjaxController extends Controller
      * Get group images list
      * 
      */
-    public function getGroupImagesListAjax($group)
+    public function getGroupImagesListAjaxAction($group)
     {
         $request = $this->getRequest();
         
