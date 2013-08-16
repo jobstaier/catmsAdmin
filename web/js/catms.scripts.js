@@ -37,6 +37,12 @@ $(document).ready(function(){
 
         return false;
     });
+    
+    $('.set-locale').click(function() {
+        setLocale($(this));
+        
+        return false;
+    });
 });
 
 function getHistory(){
@@ -58,7 +64,25 @@ function getHistory(){
             $('.append-history-here').html(html);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            alert(errorThrown);
+            pinesNotify('Error occured!', errorThrown, 'error');
+        }
+    });
+}
+
+function setLocale(el) {
+    showLoader();
+    var URL = el.attr('href');
+    
+    $.ajax({
+        type: 'GET',
+        url: URL,
+        dataType: 'json',
+        data: null,
+        success: function(data) {
+            window.location.reload(true);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+            pinesNotify('Error occured!', errorThrown, 'error');
         }
     });
 }
