@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use CatMS\AdminBundle\Entity\ImageGroup;
 use CatMS\AdminBundle\Form\ImageGroupType;
-use CatMS\AdminBundle\Controller\CommonMethods;
+use CatMS\AdminBundle\Utility\CommonMethods;
 
 /**
  * ImageGroup controller.
