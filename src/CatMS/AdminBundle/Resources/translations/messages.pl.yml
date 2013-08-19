@@ -1,9 +1,64 @@
-#Top navigation
-users:
-    title: Użytkownicy
-    create: Dodaj
-    list: Lista
+#Top navigation    
+nav:
+    users:
+        tabTitle: Użytkownicy
+        create: Dodaj
+        list: Lista
+        dropdownHeaders:
+            registered: Zarejestrowani
+    contentManager:
+        tabTitle: Zarządzanie treścią
+        dropdownHeaders:
+            directAccessEdit: Szybki dostęp
+            textContent: Treść tekstowa
+            mediaLibrary: Biblioteka mediów
+        list:
+            imageAssetGroups: Obrazy/pliki
+            contentGroups:  Treść tekstowa
+            groups: Grupy
+            allImagesAndAssets: Wszystkie obrazy & pliki
+            uploadFile: Załaduj plik
+            createGroup: Stwórz grupę
+    settings:
+        tabTitle: Ustawienia
+        dropdownHeaders:
+            panelSettings:  Ustawienie panelu
+            otherSettings:  Ustawienie strony
+            cache:  Cache
+            appLanguage:  Język aplikacji
+        list:
+            showSettings: Pokaż opcje
+            addNew: Dodaj nową
+            clearCache: Wyczyść Cache
+    seo:
+        tabTitle: SEO
+        dropdownHeaders:
+            seoSettings: Ustawienia SEO
+        list:
+            pagesList: Lista stron
+            createSeoSettings: Dodaj ustawienia
 
+#Auth
+auth:
+    signin:
+        success: 'Zalogowano poprawnie. Witaj!'
+    logout: Wyloguj
+    welcome:  Witaj username!
+
+#Global
+global:
+    success: Sukces!
+    errorOccured: Wystąpił błąd!
+    history:  Historia
+    
+#User account    
+users:
+    yourAccount: Twoje konto
+            
+            
+            
+            
+            
 #CRUD
 edit.error: An error occured while editing
 edit.success: Data has been changed successfuly

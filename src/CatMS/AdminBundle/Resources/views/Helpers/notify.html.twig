@@ -2,7 +2,7 @@
     <script>
         $(function() {
             $.pnotify({
-                title: 'Success',
+                title: '{{ 'global.success' | trans }}',
                 text: '{{ flashMessage | trans }}',
                 type: 'success'
             });              
@@ -13,7 +13,7 @@
     <script>
         $(function() {
             $.pnotify({
-                title: 'Error ocured',
+                title: {{ 'global.errorOccured' | trans }},
                 text: '{{ flashMessage | trans }}',
                 type: 'error'
             });

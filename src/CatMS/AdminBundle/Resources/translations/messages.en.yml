@@ -1,8 +1,59 @@
-#Top navigation
+#Top navigation    
+nav:
+    users:
+        tabTitle: Users
+        create: Add user
+        list: Users list
+        dropdownHeaders:
+            registered: Registered
+    contentManager:
+        tabTitle: Content Manager
+        dropdownHeaders:
+            directAccessEdit: Direct Access Edit
+            textContent: Text Content
+            mediaLibrary: Media Library
+        list:
+            imageAssetGroups: Image/asset groups
+            contentGroups:  Content groups
+            groups: Groups
+            allImagesAndAssets: All images & assets
+            uploadFile: Upload File
+            createGroup: Create group
+    settings:
+        tabTitle: Settings
+        dropdownHeaders:
+            panelSettings:  Penel Settings
+            otherSettings:  Frontedn Settings
+            cache:  Cache
+            appLanguage:  App language
+        list:
+            showSettings: Show settings
+            addNew: Create setting
+            clearCache: Clear Cache        
+    seo:
+        tabTitle: SEO
+        dropdownHeaders:
+            seoSettings: Seo Settings
+        list:
+            pagesList: Pages list
+            createSeoSettings: Add settings
+
+#Auth
+auth:
+    signin:
+        success: 'Logged in. Hello!'
+    logout: Logout
+    welcome:  Hello username!
+
+#Global
+global:
+    success: Success!
+    errorOccured: Error occured!
+    history:  History
+    
+#User account    
 users:
-    title: Users
-    create: Create
-    list: List
+    yourAccount: Your account
 
 #CRUD
 edit.error: An error occured while editing

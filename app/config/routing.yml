@@ -1,3 +1,6 @@
+_bazinga_exposetranslation:
+    resource: "@BazingaExposeTranslationBundle/Resources/config/routing/routing.yml"
+
 cat_ms_admin:
     resource: "@CatMSAdminBundle/Controller/"
     type:     annotation
