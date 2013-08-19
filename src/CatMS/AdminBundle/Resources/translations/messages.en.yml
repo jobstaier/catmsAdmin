@@ -21,8 +21,22 @@ nav:
             createGroup: Create group
     settings:
         tabTitle: Settings
+        dropdownHeaders:
+            panelSettings:  Penel Settings
+            otherSettings:  Frontedn Settings
+            cache:  Cache
+            appLanguage:  App language
+        list:
+            showSettings: Show settings
+            addNew: Create setting
+            clearCache: Clear Cache        
     seo:
         tabTitle: SEO
+        dropdownHeaders:
+            seoSettings: Seo Settings
+        list:
+            pagesList: Pages list
+            createSeoSettings: Add settings
 
 #Auth
 auth:

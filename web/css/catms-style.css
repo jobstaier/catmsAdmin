@@ -474,3 +474,7 @@ thead {
 .lang-dropdown span {
     padding-left: 22px;
 }
+
+.ui-pnotify-icon {
+    margin-top: 3px;
+}

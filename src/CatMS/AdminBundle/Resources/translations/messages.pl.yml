@@ -21,8 +21,22 @@ nav:
             createGroup: Stwórz grupę
     settings:
         tabTitle: Ustawienia
+        dropdownHeaders:
+            panelSettings:  Ustawienie panelu
+            otherSettings:  Ustawienie strony
+            cache:  Cache
+            appLanguage:  Język aplikacji
+        list:
+            showSettings: Pokaż opcje
+            addNew: Dodaj nową
+            clearCache: Wyczyść Cache
     seo:
         tabTitle: SEO
+        dropdownHeaders:
+            seoSettings: Ustawienia SEO
+        list:
+            pagesList: Lista stron
+            createSeoSettings: Dodaj ustawienia
 
 #Auth
 auth:
@@ -40,6 +54,10 @@ global:
 #User account    
 users:
     yourAccount: Twoje konto
+            
+            
+            
+            
             
 #CRUD
 edit.error: An error occured while editing
