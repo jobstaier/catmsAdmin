@@ -1,19 +1,13 @@
 {% extends 'CatMSAdminBundle::base.html.twig' %}
 
-{% block stylesheets %}
-#user_isActive {
-    display: inline;
-}
-{% endblock %}
-
 {% block breadcrumb %}
     {{ parent() }}
-    <li><a href="{{ path('user')}}">Users List</a></li> <span class="divider">/</span></li>
-    <li class="active">Create User</li>
+    <li><a href="{{ path('user')}}">{{ 'user.breadcrumbs.userList' | trans }}</a></li> <span class="divider">/</span></li>
+    <li class="active">{{ 'user.breadcrumbs.createUser' | trans }}</li>
 {% endblock %}
     
 {% block content -%}
-    <legend><i class="icon-large icon-user-add"></i> Create new user</legend>
+    <legend><i class="icon-large icon-user-add"></i> {{ 'user.index.createNewUser' | trans }}</legend>
 
     <form action="{{ path('user_create') }}" method="post" {{ form_enctype(form) }} class="form-float">
         {% if form_errors(form) %}
@@ -24,12 +18,12 @@
         </div>
             
         {% endif %}
-        
+            
         {{ form_widget(form) }}
             
         <div>
-            <a href="{{ path('user') }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
-            <button type="submit" class="btn btn-small btn-primary"><i class="icon-hdd"></i> Create</button>
+            <a href="{{ path('user') }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>
+            <button type="submit" class="btn btn-small btn-primary"><i class="icon-hdd"></i> {{ 'global.create' | trans }}</button>
         </div>
     </form>
 

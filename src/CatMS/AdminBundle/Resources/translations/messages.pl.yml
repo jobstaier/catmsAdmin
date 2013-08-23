@@ -44,16 +44,49 @@ auth:
         success: 'Zalogowano poprawnie. Witaj!'
     logout: Wyloguj
     welcome:  Witaj username!
+    login: Zaloguj
+    forgetPassword: Nie pamiętasz hasła?
+    password: Hasło
+    keepMeLoggedIn: Zapamiętaj mnie
+    userAuthentication: Autoryzacja użytkownika
+    pleaseTryAgain: Proszę wpisać poprawne dane.
 
 #Global
 global:
     success: Sukces!
     errorOccured: Wystąpił błąd!
     history:  Historia
+    yes: Tak
+    no: Nie
+    show: Pokaż
+    edit: Edytuj
+    actions: Operacje
+    action: Wykonaj
+    backToTheList: Powrót do listy
+    create: Dodaj
+    delete: Usuń
+    save: Zapisz
     
 #User account    
-users:
+user:
+    username: Nazwa użytkownika
+    isActive: Aktywny?
+    users: Użytkownicy
     yourAccount: Twoje konto
+    editPassword: Edytuj hasło
+    role: Rola
+    index:
+        createNewUser: Dodaj użytkownika
+    show:
+    breadcrumbs: 
+        userList: Lista użytkowników
+        createUser: Dodaj użytkownika
+    passwordEdit:
+        user: Edycja hasła użytkownika <i>username</i>
+    editUser:
+        user: Edycja danych użytkownika <i>username</i>
+    backToTheUserDetails: Powrót do szczegółów użytkownika 
+    
             
             
             
@@ -86,3 +119,6 @@ setting.remove.error: An error occured while deleting setting
 
 delete.error.delete.resticted: Delete this entity is forbidden
 delete.error.delete.developer: This entity can be removed only by developer
+
+#Vendor validators
+'Bad credentials': Brak uprawnień

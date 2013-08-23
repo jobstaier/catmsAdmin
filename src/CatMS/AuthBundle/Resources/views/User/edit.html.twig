@@ -1,20 +1,14 @@
 {% extends 'CatMSAdminBundle::base.html.twig' %}
 
-{% block stylesheets %}
-#user_isActive {
-    display: inline;
-}
-{% endblock %}
-
 {% block breadcrumb %}
     {{ parent() }}
     <li><a href="{{ path('user')}}">Users list</a></li> <span class="divider">/</span></li>
     <li><a href="{{ path('user_show', { 'id': entity.id })}}"> {{ entity.username }}</a></li> <span class="divider">/</span></li>
-    <li class="active">Edit data</li>
+    <li class="active">{% trans with {'username': entity.username } %}user.editUser.user{% endtrans %}</li>
 {% endblock %}
     
 {% block content -%}
-    <legend><i class="icon-large icon-user"></i> Edit user <i>{{  entity.username }}</i></legend>
+    <legend><i class="icon-large icon-user"></i> {% trans with {'username': entity.username } %}user.editUser.user{% endtrans %}</i></legend>
     
     <form action="{{ path('user_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="form-float">
         <input type="hidden" name="_method" value="PUT" />
@@ -22,9 +16,9 @@
         {{ form_widget(edit_form) }}
 
         <div>
-            <a class="btn btn-small" href="{{ path('user_show', {'id': entity.id }) }}"><i class="icon-user"></i> Back to the user details</a>
-            <a type="submit" data-view="top" class="btn btn-primary btn-small save-this"><i class="icon-hdd"></i> Save</a>
-            <a href="{{ path('edit_password', { 'id': entity.id }) }}" class="btn btn-small"><i class="icon-asterisk"></i> Edit password</a>   
+            <a class="btn btn-small" href="{{ path('user_show', {'id': entity.id }) }}"><i class="icon-user"></i> {{ 'user.backToTheUserDetails' | trans }}</a>
+            <a type="submit" data-view="top" class="btn btn-primary btn-small save-this"><i class="icon-hdd"></i> {{ 'global.save' | trans }}</a>
+            <a href="{{ path('edit_password', { 'id': entity.id }) }}" class="btn btn-small"><i class="icon-asterisk"></i> {{ 'user.editPassword' | trans }}</a>   
         </div>
         
         {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'edit', 'msg': 'Edit user data'} %}
@@ -34,7 +28,7 @@
     <form action="{{ path('user_delete', { 'id': entity.id }) }}" method="post" class="form-float clear" style="margin-top: 15px;">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
+        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
     </form>
 
 </ul>

@@ -41,9 +41,10 @@ nav:
 #Auth
 auth:
     signin:
-        success: 'Logged in. Hello!'
+        success: 'Logged successfuly. Hello!'
     logout: Logout
     welcome:  Hello username!
+    login: Sign in
 
 #Global
 global:

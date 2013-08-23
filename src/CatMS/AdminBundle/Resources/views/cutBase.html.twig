@@ -2,19 +2,28 @@
 <html lang="en">
 <head>
     <title>{% block title %}CatMS Admin - Login{% endblock %}</title>
+    
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ asset('css/catms-style.css') }}" type="text/css" media="screen" />
+    {#
     {% stylesheets 
         'bootstrap/css/bootstrap.min.css'
         'css/catms-style.css'
         filter='cssrewrite, yui_css' output="css/yui/cmp-cut.css" %}
         <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="screen" />
     {% endstylesheets %}
+    #}
 
+    <script type="text/javascript" src="{{ asset('js/jquery-1.7.2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    {#
     {% javascripts
         'js/jquery-1.7.2.min.js'
         'bootstrap/js/bootstrap.min.js'
         filter='yui_js' output="js/yui/cmp-cut.js" %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %} 
+    #}
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -28,7 +37,7 @@
     </div> 
         
     <div class="container">
-    <legend><i class="icon-lock" style="margin-top: 4px;"></i> User authentication</legend>
+    <legend><i class="icon-lock" style="margin-top: 4px;"></i> {{ 'auth.userAuthentication' | trans | trans }}</legend>
     {% for flashMessage in app.session.flashbag.get('noticeSuccess') %}
         <div class="alert alert-info">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -38,14 +47,14 @@
     {% for flashMessage in app.session.flashbag.get('noticeFailure') %}
         <div class="alert alert-error">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            {{ flashMessage }}
+            {{ flashMessage | trans }}
         </div>
     {% endfor %}
 
     {% if error %}
     <div class="alert">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ error.message }}. Please, try again.
+        {{ error.message | trans }}. {{ 'auth.pleaseTryAgain' | trans }}.
     </div>
     {% endif %}
 
