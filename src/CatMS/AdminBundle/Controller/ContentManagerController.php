@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use CatMS\AdminBundle\Entity\ContentManager;
 use CatMS\AdminBundle\Form\ContentManagerType;
-use CatMS\AdminBundle\Controller\CommonMethods;
+use CatMS\AdminBundle\Utility\CommonMethods;
 use CatMS\AdminBundle\Logger\History;
 use CatMS\AdminBundle\Entity\ContentArchive;
 use Symfony\Component\HttpFoundation\Response;

@@ -2,20 +2,20 @@
 
 {% block breadcrumb %}
     {{ parent() }}
-    <li class="active">Users List</li>
+    <li class="active">{{ 'user.breadcrumbs.userList' | trans }}</li>
 {% endblock %}
     
 {% block content -%}
-    <legend><i class="icon-large icon-parents"></i> Users</legend>
+    <legend><i class="icon-large icon-parents"></i> {{ 'user.users' | trans }}</legend>
 
     <table class="records_list table table-hover">
         <thead>
             <tr>
                 <th>{{ knp_pagination_sortable(pagination, 'Id', 'u.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Username', 'u.username') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'user.username' | trans, 'u.username') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Email', 'u.email') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Is active', 'u.isActive') }}</th>
-                <th style="width: 90px;">Actions</th>
+                <th>{{ knp_pagination_sortable(pagination, 'user.isActive'|trans , 'u.isActive') }}</th>
+                <th style="width: 90px;">{{ 'global.actions' | trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -24,10 +24,10 @@
                 <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.username }}</td>
                 <td>{{ entity.email }}</td>
-                <td>{% if entity.isActive != 0 %}Yes{% else %}No{% endif %}</td>
+                <td>{% if entity.isActive != 0 %}{{ 'global.yes' | trans }}{% else %}{{ 'global.no' | trans }}{% endif %}</td>
                 <td>
                     <div class="btn-group">
-                        <button class="btn">Action</button>
+                        <button class="btn">{{ 'global.action' | trans | raw }}</button>
                         <button class="btn dropdown-toggle" data-toggle="dropdown">
                             <span class="caret"></span>
                         </button>
@@ -35,13 +35,13 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ path('user_show', { 'id': entity.id }) }}"><i class="icon-info-sign"></i> Show</a>
+                                <a href="{{ path('user_show', { 'id': entity.id }) }}"><i class="icon-info-sign"></i> {{ 'global.show' | trans }}</a>
                             </li>
                             <li>
-                                <a href="{{ path('user_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> Edit</a>
+                                <a href="{{ path('user_edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> {{ 'global.edit' | trans }}</a>
                             </li>
                             <li>
-                                <a href="{{ path('edit_password', { 'id': entity.id }) }}"><i class="icon-asterisk"></i> Edit password</a>
+                                <a href="{{ path('edit_password', { 'id': entity.id }) }}"><i class="icon-asterisk"></i> {{ 'user.editPassword' | trans }}</a>
                             </li>
                         </ul>
                     </div>
@@ -56,6 +56,6 @@
     </div>
 
     <a href="{{ path('user_new') }}" class="btn btn-small btn-primary"><i class=" icon-user"></i> 
-        Create new user
+        {{ 'user.index.createNewUser' | trans }}
     </a>
     {% endblock %}

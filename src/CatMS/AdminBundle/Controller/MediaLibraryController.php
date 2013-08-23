@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use CatMS\AdminBundle\Entity\ImageUpload;
-use CatMS\AdminBundle\Controller\CommonMethods;
+use CatMS\AdminBundle\Utility\CommonMethods;
 use CatMS\AdminBundle\Logger\History;
 use Symfony\Component\HttpFoundation\Response;
 use CatMS\AdminBundle\Entity\ImageGroup;

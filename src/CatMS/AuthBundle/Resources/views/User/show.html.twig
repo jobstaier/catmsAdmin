@@ -2,8 +2,8 @@
 
 {% block breadcrumb %}
     {{ parent() }}
-    <li><a href="{{ path('user')}}">Users List</a></li> <span class="divider">/</span></li>
-    <li class="active">{{ entity.username }}</li>
+    <li><a href="{{ path('user')}}">{{ 'user.breadcrumbs.userList' | trans }}</a></li> <span class="divider">/</span></li>
+    <li class="active"><i>{{ entity.username }}</i></li>
 {% endblock %}
 
     
@@ -13,11 +13,11 @@
     <table class="record_properties table table-striped table-bordered">
         <tbody>
             <tr>
-                <th style="width: 120px;">Id</th>
+                <th style="width: 140px;">Id</th>
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Username</th>
+                <th>{{ 'user.username' | trans }}</th>
                 <td>{{ entity.username }}</td>
             </tr>
             <tr>
@@ -25,29 +25,29 @@
                 <td>{{ entity.email }}</td>
             </tr>
             <tr>
-                <th>Role</th>
+                <th>{{ 'user.role' | trans }}</th>
                 <td>{{ entity.roles[0] }}</td>
             </tr>
             <tr>
-                <th>Is active</th>
-                <td>{% if entity.isActive != 0 %}Yes{% else %}No{% endif %}</td>
+                <th>{{ 'user.isActive' | trans }}</th>
+                <td>{% if entity.isActive != 0 %}{{ 'global.yes' | trans }}{% else %}{{ 'global.no' | trans }}{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
     <div style="margin-bottom: 10px">
         <a href="{{ path('user') }}" class="btn btn-small"><i class="icon-list"></i> 
-            Back to the list
+            {{ 'global.backToTheList' | trans }}
         </a>
 
         <a href="{{ path('user_edit', { 'id': entity.id }) }}" class="btn btn-small"><i class="icon-edit"></i> 
-            Edit
+            {{ 'global.edit' | trans }}
         </a>
             
         <form action="{{ path('user_delete', { 'id': entity.id }) }}" method="post" style="float: right">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
-            <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
+            <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
         </form>
     </div>
            

@@ -478,3 +478,15 @@ thead {
 .ui-pnotify-icon {
     margin-top: 3px;
 }
+
+#user_isActive {
+    display: inline;
+}
+
+.icon-large.icon-asterisk {
+    background-position: -184px -93px;
+}
+
+#user_isActive {
+    display: inline;
+}
