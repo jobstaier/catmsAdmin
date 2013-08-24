@@ -7,6 +7,6 @@
 {% block content %}
     <div class="hero-unit" style="padding: 30px">
         <h2>{% trans with {'username': app.user.username } %}auth.welcome{% endtrans %}</h2>
-        <p><a class="btn btn-primary btn-small" href="{{ path('user_show', {'id': app.user.id })}}">{{ 'users.yourAccount' | trans }}</a></p>
+        <p><a class="btn btn-primary btn-small" href="{{ path('user_show', {'id': app.user.id })}}">{{ 'user.yourAccount' | trans }}</a></p>
     </div>
 {% endblock %}

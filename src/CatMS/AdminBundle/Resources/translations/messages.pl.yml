@@ -63,9 +63,30 @@ global:
     actions: Operacje
     action: Wykonaj
     backToTheList: Powrót do listy
+    backToTheGroup: Powrót do grupy
+    gotToTheGroupList: Pokaż listę grup
     create: Dodaj
     delete: Usuń
     save: Zapisz
+    mediaLibrary: Biblioteka mediów
+    list: Lista
+    grid: Siatka
+    warning: Uwaga
+    and: i
+    filename: Nazwa pliku
+    uploading: Ładowanie pliku . . .
+    upload: Załaduj
+    asset: Obraz/plik
+    markAll: Zaznacz wszystkie
+    unmarkAll: Odznacz wszystkie
+    removeAllSelected: Usuń wszystkie zaznaczone
+    copySource: Kopiuj źródło
+    notDefined: Nie zdefiniowano
+    group: Grupa
+    size: Rozmiar
+    
+    emptyDatabase: <strong>Pusta baza danych!</strong> Nie dodano żadnych wpisów. #<strong>Empty databse!</strong> No records defined
+    
     
 #User account    
 user:
@@ -87,9 +108,34 @@ user:
         user: Edycja danych użytkownika <i>username</i>
     backToTheUserDetails: Powrót do szczegółów użytkownika 
     
-            
-            
-            
+#Assets/Images            
+asset:
+    uploadFile: Załaduj plik
+    upload:
+        uploadSingleFileAndSetProperties : Załaduj pojedynczy plik #<small> i ustaw właściwości</small>
+        filenameCustom: Zdefiniowane nazwy pliku pozwala na jego identyfikację z użuciem podanej nazwy. W innym przypakdu nazwa pliku zostanie wygenerowana automatycznie #Define custom filename allows to identyfing Image/asset by this name. Otherwise filename will be generated automticaly.
+        imageAssetTitleCustom: Wartość atrybut title renderowana w HTML #Image title render into HTML img title attribute.
+        imageAssetPriorityCustom: Poprzez odopwiednie ustawienie priorytetów dla plików w grupie można określić ich kolejność wyświetlania #Priority of image display into defined group.
+        redirectAfterClickCustom: Przekierowanie po kliknięciu w element HTML #Redirect aftter click on image canvas.
+        imageAssetSlugCustom: Wartość używana podczas pobierania z bazy danych. UWAGA! Zachowaj ostrożność przy zmianie tego parametru. Nie zaleca się jego zmiany. #Image slug is using whlie identyfing and fetching.
+        mulitipleUpload: Ładowanie wielu plików jednocześnie #Multiple Files Upload
+    breadcrumbs: 
+    groupAssets: Pliki grupy <i>group</i>
+    canvasHasDimensions: Narzucony rozmiar pliku to
+    canvasWidth: szerokości
+    canvasHeight: wysokości
+    largerImageWillBeCroppedToCanvasDimensions: Większe obrazy zostaną przeskalowane
+    imageAssetTitle: Atrybut title html #Image/asset title
+    imageAssetPriority: Priorytet wyświetlania
+    redirectAfterClick: Przekierowanie po kliknięciu
+    imageAssetSlug: Właściwość 'Slug' obiektu
+    group:
+        title: Grupa #Image/asset group
+    
+    
+#Plupload
+plupload:
+    browserError: Twoja przeglądarka nie wspiera Flash, Silverlight, Gears, BrowserPlus ani HTML5 #You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.
             
             
 #CRUD
