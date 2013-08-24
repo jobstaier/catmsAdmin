@@ -131,7 +131,7 @@ function renderList(data, container) {
                 '<a data-placement="top" data-toggle="popover" title="Remove" class="remove-image"  href="' + obj.deletePath + '"><i class="icon-trash"></i></a>' +
                 '<a data-placement="top" data-toggle="tooltip" title="Copy Source" href="' + dir + obj.path + '" class="copy-source"><i class="icon-screenshot"></i></a>' +
                 '<a data-placement="top" data-toggle="tooltip" title="Quick edit" class="modal-trigger"   href="' + editPath + '/' + obj.id + '"><i class="icon-pencil"></i></a>' +
-                '<a data-placement="top" data-toggle="tooltip" title="Edit" href="' + editPath + '/' + obj.id + '/' + obj.imageGroupId +'"><i class="icon-edit"></i><a/>' +
+                '<a data-placement="top" data-toggle="tooltip" title="Edit" href="' + editPath + '/' + obj.id + '/' + obj.imageGroup +'"><i class="icon-edit"></i><a/>' +
             '</div></li>';
     });
     container.append(list);

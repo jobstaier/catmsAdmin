@@ -47,6 +47,8 @@
 
     {% endif %}
     
+    {{ group }}
+            
     <form novalidate action="{{ path('media-library-image-edit', {'id': image.id,'group': group}) }}" method="post" {{ form_enctype(form) }}>
         
         <div class="control-group" style="float: left; width: 360px;">
@@ -123,17 +125,17 @@
             {% else %}
                 <a href="{{ path('media-library') }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>    
             {% endif %}
-            <a role="button" href="#" class="btn btn-small btn-inverse" data-toggle="modal" data-target="#delete"><i class="icon-trash icon-white"></i> Delete</a>
+                
             {% if group is empty %}
                 {% set href = path('media-library-image-delete', { 'id': image.id }) %}
             {% else%}
                 {% set href = path('media-library-image-delete', { 'id': image.id, 'group': group }) %}
             {% endif %}
 
-            {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'delete', 'msg': 'Confirm delete?', 'btnTxt': 'Delete', 'content': 'Do you confirm delete?', 'href': href} %}    
-                
             <button class="show-loader btn btn-primary btn-small" type="submit"  data-loading-text="Updating..."><i class="icon-upload"></i> Update</button>
         </div>
     </form>
-    
+            
+    {% include 'CatMSAdminBundle:MediaLibrary:widgets/delete-form.html.twig' with {'image': image, 'delete_form': delete_form, 'group': group} %}
+            
 {% endblock %}

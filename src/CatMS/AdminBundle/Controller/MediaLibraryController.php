@@ -291,7 +291,9 @@ class MediaLibraryController extends Controller
             array(
                 'group' => $group,
                 'form' => $form->createView(), 
-                'image' => $image
+                'image' => $image,
+                'delete_form' => $this->createDeleteForm($image->getId())
+                    ->createView()
             )
         );
     }
