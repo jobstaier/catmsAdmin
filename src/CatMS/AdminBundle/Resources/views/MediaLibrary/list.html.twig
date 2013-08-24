@@ -76,21 +76,22 @@
         <tbody>
         {% for entity in pagination %}                
             <tr class="row_{{ entity.id }}">
-                <td rowspan="4">
+                <td rowspan=2">
                     <input type="checkbox" class="mark-it" value="{{ entity.id }}" />
                 </td>
-                <td rowspan="4"><a href="{{ path('content-manager-show', { 'id': entity.id }) }}">{{ entity.id }} <i class="icon-chevron-right"></i></a></td>
-                <td>
+                <td rowspan="2"><a href="{{ path('content-manager-show', { 'id': entity.id }) }}">{{ entity.id }} <i class="icon-chevron-right"></i></a></td>
+                <td rowspan="2">
                     {% include 'CatMSAdminBundle:Helpers:mime-type-thumb.html.twig' with {'entity': entity} %}
                 </td>
                 <td>
                     {{ entity.path }}<br />
-                    <a href="{{ asset('uploads/media-library/')~entity.path }}" class="btn btn-mini btn-success copy-source">Copy Source</a>
+                    <a href="{{ asset('uploads/media-library/')~entity.path }}" class="btn btn-mini btn-success copy-source"><i class="icon-screenshot"></i> Copy Source</a>
                 </td>
-                <td>{{ entity.title }}</td>
+                <td>{% if entity.title %}{{ entity.title }}{% else %}<span class="label">NOT DEFINED</span>{% endif %}</td>
 
                 <td width="150">{% if entity.slug %}{{ entity.slug }}{% else %}<span class="label">NOT DEFINED</span>{% endif %}</td>
-                <td rowspan="4">
+                
+                <td rowspan="2">
                     <div class="btn-group btn-group-vertical">
                         {% if entity.mimeType == 'image/jpeg' or entity.mimeType == 'image/png' %}
                             <a style="text-align: left;" href="{{ asset('uploads/media-library/')~entity.path }}" class="btn single-image btn-small"><i class="icon-fullscreen"></i> Show</a>
@@ -114,19 +115,20 @@
                     <form action="{{ href }}" method="post">
                         <input type="hidden" name="_method" value="DELETE" />
                         {{ form_widget(entity.deleteForm) }}
-                        <button type="submit" class="btn btn-small remove-this"><i class="icon-trash"></i> Delete</button>
+                        <button type="submit" class="btn btn-small remove-this" data-view="top"><i class="icon-trash"></i> Delete</button>
                     </form>
                 </td>
             </tr>
+            
             <tr class="row_{{ entity.id }}">
-                <th>Group</th><td colspan="3">{% if entity.imageGroup.description is defined %}<a href="{{ path('media-library', {'page': 1, 'slug': entity.imageGroup.slug }) }}">{{ entity.imageGroup.description }}</a>{% if is_granted('ROLE_DEVELOPER')%} [ {{ entity.imageGroup.slug }} ]{% endif %}{% else %}<span class="label ">NOT DEFINED</span>{% endif %}</td>
+                <td colspan="3">
+                    <strong>Group</strong>: {% if entity.imageGroup.description is defined %}<a href="{{ path('media-library', {'page': 1, 'slug': entity.imageGroup.slug }) }}">{{ entity.imageGroup.description }}</a>{% if is_granted('ROLE_DEVELOPER')%} [ {{ entity.imageGroup.slug }} ]{% endif %}{% else %}<span class="label ">NOT DEFINED</span>{% endif %}<br /><br />
+                    <strong>Redirect</strong>: {% if entity.redirect %}{{ entity.redirect }}{% else %}<span class="label">NOT DEFINED</span>{% endif %}<br /><br />
+                    <strong>Size</strong>: {{ get_image_size(entity) | raw }}
+                </td>
+
             </tr>
-            <tr class="row_{{ entity.id }}">
-                <th>Redirect</th><td colspan="3">{% if entity.redirect %}{{ entity.redirect }}{% else %}<span class="label">NOT DEFINED</span>{% endif %}</td>
-            </tr>
-            <tr class="row_{{ entity.id }}">
-                <th>Size</th><td colspan="3">{{ get_image_size(entity) | raw }}</td>
-            </tr>
+            
             <tr class="row_{{ entity.id }}">
                 <td colspan="7">
                     <div style="width: 100%; height: 1px; border-top: 1px dashed #888;"></div>

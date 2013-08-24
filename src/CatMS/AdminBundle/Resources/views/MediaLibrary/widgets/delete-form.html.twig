@@ -1,0 +1,13 @@
+{% if group %}
+<form action="{{ path('media-library-image-delete', { 'id': image.id, 'group': group }) }}" method="post" style="float: right;">
+    <input type="hidden" name="_method" value="DELETE" />
+    {{ form_widget(delete_form) }}
+    <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
+</form>
+{% else %}
+<form action="{{ path('media-library-image-delete', { 'id': image.id }) }}" method="post" style="float: right;">
+    <input type="hidden" name="_method" value="DELETE" />
+    {{ form_widget(delete_form) }}
+    <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
+</form>
+{% endif %}

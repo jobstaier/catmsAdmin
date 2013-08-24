@@ -183,7 +183,12 @@ class AjaxController extends Controller
         $results = array();
         
         foreach ($images as $image) {
-            $results['images'][] = $image->serialize();
+            $results['images'][] = $image->serialize()+ array(
+                'deletePath' => $this->generateUrl(
+                    'media-library-delete-inline',
+                    array('id' => $image->getId())
+                )
+            );
         }
         
         $count = $repository->createQueryBuilder('a')
