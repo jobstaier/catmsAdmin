@@ -21,7 +21,7 @@ $(function() {
             closeLoader();
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            pinesNotify('Error occured!', errorThrown, 'error');
+            pinesNotify(noticeErrorTitle, errorThrown, 'error');
             closeLoader();
         }
     });
@@ -41,7 +41,7 @@ $(function() {
                 $('.grid-list').attr('data-view', page);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
-                pinesNotify('Error occured!', errorThrown, 'error');
+                pinesNotify(noticeErrorTitle, errorThrown, 'error');
                 closeLoader();
             }
         });
@@ -72,8 +72,8 @@ $(function() {
 
         $(this).popover({
             content: 
-                    '<div class="delete-popvoer">Are you sure you want to delete this item?<br />' + 
-                    '<a data-path="' + url + '" href="" class="btn btn-primary btn-mini remove-image-confirm">Confirm</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-inverse btn-mini dismiss">Dismiss</a></div>',
+                '<div class="delete-popvoer">' + Translator.get('global.deleteConfirm') + '<br />' + 
+                '<a data-path="' + url + '" href="" class="btn btn-primary btn-mini remove-image-confirm">' + Translator.get('global.confirm') + '</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-inverse btn-mini dismiss">' + Translator.get('global.dissmiss') + '</a></div>',
             placement: placement,
             html: true           
         });
@@ -101,14 +101,14 @@ $(function() {
             data: null,
             success: function(data) {
                 if(data.result === 'success') {
-                    pinesNotify(noticeSuccessTitle, noticeSuccessDeleteText, 'success');
+                    pinesNotify(null, noticeSuccessDeleteText, 'success');
                     closeLoader();
                 } else if(data.result === 'error') {
                     pinesNotify(noticeErrorTitle, noticeErrorText, 'error');
                 }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
-                pinesNotify('Error occured!', errorThrown, 'error');
+                pinesNotify(noticeErrorTitle, errorThrown, 'error');
                 closeLoader();
             }
         });
@@ -128,10 +128,10 @@ function renderList(data, container) {
             '<div class="image-grid-btns">' + 
                 '<a class="hide image-id" rel="' + obj.id + '"></a>' +
                 '<div class="edit-form-prototype hide"></div>' +
-                '<a data-placement="top" data-toggle="popover" title="Remove" class="remove-image"  href="' + obj.deletePath + '"><i class="icon-trash"></i></a>' +
-                '<a data-placement="top" data-toggle="tooltip" title="Copy Source" href="' + dir + obj.path + '" class="copy-source"><i class="icon-screenshot"></i></a>' +
-                '<a data-placement="top" data-toggle="tooltip" title="Quick edit" class="modal-trigger"   href="' + editPath + '/' + obj.id + '"><i class="icon-pencil"></i></a>' +
-                '<a data-placement="top" data-toggle="tooltip" title="Edit" href="' + editPath + '/' + obj.id + '/' + obj.imageGroup +'"><i class="icon-edit"></i><a/>' +
+                '<a data-placement="top" data-toggle="popover" title="' + Translator.get('global.delete') + '" class="remove-image"  href="' + obj.deletePath + '"><i class="icon-trash"></i></a>' +
+                '<a data-placement="top" data-toggle="tooltip" title="' + Translator.get('global.copySource') + '" href="' + dir + obj.path + '" class="copy-source"><i class="icon-screenshot"></i></a>' +
+                '<a data-placement="top" data-toggle="tooltip" title="' + Translator.get('asset.quickEdit') + '" class="modal-trigger"   href="' + editPath + '/' + obj.id + '"><i class="icon-pencil"></i></a>' +
+                '<a data-placement="top" data-toggle="tooltip" title="' + Translator.get('global.edit') + '" href="' + editPath + '/' + obj.id + '/' + obj.imageGroup +'"><i class="icon-edit"></i><a/>' +
             '</div></li>';
     });
     container.append(list);
@@ -164,7 +164,7 @@ function saveChanges(el) {
         data: data,
         success: function(data) {
             if(data.result === 'success') {
-                pinesNotify(noticeSuccessTitle, noticeSuccessText, 'success');
+                pinesNotify(null, noticeSuccessText, 'success');
                 closeLoader();
                 $('#modalQuickEdit').modal('hide');
             } else if(data.result === 'error') {
@@ -178,7 +178,7 @@ function saveChanges(el) {
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            pinesNotify('Error occured!', errorThrown, 'error');
+            pinesNotify(noticeErrorTitle, errorThrown, 'error');
             $('#modalQuickEdit').modal('hide');
             closeLoader();
         }
@@ -200,7 +200,7 @@ function regenerateForm(assetId) {
             closeLoader();
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            pinesNotify('Error occured!', errorThrown, 'error');
+            pinesNotify(noticeErrorTitle, errorThrown, 'error');
             $('#modalQuickEdit').modal('hide');
             closeLoader();
         }
@@ -209,16 +209,16 @@ function regenerateForm(assetId) {
 }
 
 var notice = '<div class="alert">' +
-    '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-    '<strong>Empty databse!</strong> No records defined.' +
+    '<button type="button" class="close" data-dismiss="alert">&times;</button>' + 
+    Translator.get('global.emptyDatabase') +
     '</div>';
     
 var noticeSuccessTitle = 'Success!';
-var noticeSuccessText = 'Data has been updated successfuly.';
+var noticeSuccessText = Translator.get('crud.asset.updateSuccess');
 
-var noticeErrorTitle = 'Error occured!';
-var noticeErrorValidationTitle = "Validation error."
-var noticeErrorText = 'Data has not been updated successfuly.';
+var noticeErrorTitle = Translator.get('global.errorOccured');
+var noticeErrorValidationTitle = Translator.get('validation.error');;
+var noticeErrorText = Translator.get('crud.asset.updateFailure');
 
-var noticeSuccessDeleteText = 'Delete success!';
-var noticeSuccessDeleteText = 'Asset has been deleted successfuly.';    
+//var noticeSuccessDeleteText = 'Delete success!';
+var noticeSuccessDeleteText = Translator.get('crud.asset.deleteSuccess');

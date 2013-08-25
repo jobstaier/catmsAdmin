@@ -3,9 +3,9 @@
 {% block breadcrumb %}
     {{ parent() }}
     <li class="active">
-        <em>Media library</em> 
-        <a href="{{ path('media-library') }}"><i class="icon-list"></i>List</a>&nbsp;
-        <a href="{{ path('media-library-grid-list') }}"><i class="icon-th"></i>Grid</a>
+        <em>{{ 'global.mediaLibrary' | trans }}</em> 
+        <a href="{{ path('media-library') }}"><i class="icon-list"></i>{{ 'global.list' | trans }}</a>&nbsp;
+        <a href="{{ path('media-library-grid-list') }}"><i class="icon-th"></i>{{ 'global.grid' | trans }}</a>
     </li>
 {% endblock %}    
     
@@ -13,14 +13,14 @@
     <div class="notice-container"></div>
      
     <legend>
-        <i class="icon-large icon-picture"></i> Media library assets
-        <a href="{{ path('media-library', {'page': 1}) }}" data-toggle="tooltip" title="Details View" class="show-list-view" style="float: right;">
+        <i class="icon-large icon-picture"></i> {{ 'global.mediaLibrary' | trans }}
+        <a href="{{ path('media-library', {'page': 1}) }}" data-toggle="tooltip" title="{{ 'global.detailsView' | trans }}" class="show-list-view" style="float: right;">
             <i class="icon-large icon-list"></i>
         </a>
     </legend>
 
     <a href="{{ path('media-library-upload') }}" class="btn btn-small btn-success"><i class="icon-upload"></i> 
-        Upload file
+        {{ 'asset.uploadFile' | trans }}
     </a>
     <hr />
     
@@ -36,26 +36,26 @@
         </ul>
     </div>
     <div class="more-btn-container">
-        <a href="" class="btn btn-info btn-small"><i class="icon-chevron-down"></i> Show More</a>
+        <a href="" class="btn btn-info btn-small"><i class="icon-chevron-down"></i> {{ 'global.showMore' | trans }}</a>
     </div>
     
     <hr />
     <a href="{{ path('media-library-upload') }}" class="btn btn-small btn-success"><i class="icon-upload"></i> 
-        Upload file
+        {{ 'asset.uploadFile' | trans }}
     </a>
     <hr />
     
     <div id="modalQuickEdit" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel"><i class="icon-large icon-picture"></i> Asset Quick Edit</h3>
+            <h3 id="myModalLabel"><i class="icon-large icon-picture"></i> {{ 'asset.quickEdit' | trans }}</h3>
         </div>
         <div class="modal-body">
 
         </div>
         <div class="modal-footer">
-            <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button class="btn btn-small btn-primary save-trigger">Save changes</button>
+            <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">{{ 'global.close' | trans }}</button>
+            <button class="btn btn-small btn-primary save-trigger">{{ 'global.saveChanges' | trans }}</button>
         </div>
     </div>
     
