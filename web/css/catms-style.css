@@ -490,3 +490,11 @@ thead {
 #user_isActive {
     display: inline;
 }
+
+.cell-center {
+    text-align: center !important;
+}
+
+.cell-center a {
+    margin-top: 10px;
+}

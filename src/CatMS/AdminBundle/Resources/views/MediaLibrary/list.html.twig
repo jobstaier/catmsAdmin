@@ -4,15 +4,15 @@
     {{ parent() }}
     {% if group is empty %}
         <li>
-            <em>Media library</em> 
-            <a href="{{ path('media-library') }}">&nbsp;<i class="icon-list"></i>List</a>&nbsp; 
-            <a href="{{ path('media-library-grid-list') }}"><i class="icon-th"></i>Grid</a>
+            <em>{{ 'global.mediaLibrary' | trans }} </em> 
+            <a href="{{ path('media-library') }}"><i class="icon-list"></i>{{ 'global.list' | trans }}</a>&nbsp; 
+            <a href="{{ path('media-library-grid-list') }}"><i class="icon-th"></i>{{ 'global.grid' | trans }}</a>
         </li>
     {% else %}
         <li class="active">
-            <em>Group <i>{{ group.description }}</i> assets</em> 
-            <a href="{{ path('media-library', {'page': 1, 'slug': group.slug}) }}"><i class="icon-list"></i>List</a>&nbsp
-            <a href="{{ path('media-library-group-grid-list', {'group': group.id}) }}"><i class="icon-th"></i>Grid</a>
+            <em>{% trans with {'group': group.description} %}asset.groupAssets{% endtrans %}</em> 
+            <a href="{{ path('media-library', {'page': 1, 'slug': group.slug}) }}"><i class="icon-list"></i>{{ 'global.list' | trans }}</a>&nbsp
+            <a href="{{ path('media-library-group-grid-list', {'group': group.id}) }}"><i class="icon-th"></i>{{ 'global.grid' | trans }}</a>
         </li>
     {% endif %}
     
@@ -24,7 +24,7 @@
     <div class="notice-container"></div>
      
     <legend>
-        <i class="icon-large icon-picture"></i> Media library{% if group is not empty %} - <i>{{ group.description | raw }} assets</i>{% endif %}
+        <i class="icon-large icon-picture"></i> {{ 'global.mediaLibrary' | trans }}{% if group is not empty %} - <i>{{ group.description | raw }}</i>{% endif %}
         {% if not group %}
             <a data-toggle="tooltip" title="Grid View" href="{{ path('media-library-grid-list') }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
         {% else %}
@@ -38,24 +38,24 @@
         <thead>
             <tr>
                 <td colspan="7">
-                    <a class="btn btn-mini mark-all" href="#"><i class="icon-ok"></i> Mark all</a>
-                    <a class="btn btn-mini unmark-all" href="#"><i class="icon-remove-sign"></i> Unmark all</a>
+                    <a class="btn btn-mini mark-all" href="#"><i class="icon-ok"></i> {{ 'global.markAll' | trans }}</a>
+                    <a class="btn btn-mini unmark-all" href="#"><i class="icon-remove-sign"></i> {{ 'global.unmarkAll' | trans }}</a>
 
-                    <a class="btn btn-mini remove-all-marked" href="{{ path('delete-all-marked', {'token': multipleDeleteToken }) }}"><i class="icon-trash"></i> Remove all selected</a>
+                    <a class="btn btn-mini remove-all-marked" href="{{ path('delete-all-marked', {'token': multipleDeleteToken }) }}"><i class="icon-trash"></i> {{ 'global.removeAllSelected' | trans }}</a>
                
                 
                     <div style="float: right; display: inline;">
                     {% if group is not empty %}             
                     <a href="{{ path('media-library', {'page': 1, 'slug': group.slug}) }}" class="list-home-url hide"></a>
                     <div>
-                        <a href="{{ path('image-group') }}" class="btn btn-mini"><i class="icon-th-large"></i> Back to the group</a>
-                        <a href="{{ path('media-library-upload', {'group': group.slug }) }}" class="btn btn-mini btn-success"><i class="icon-upload"></i> Upload file</a>
+                        <a href="{{ path('image-group') }}" class="btn btn-mini"><i class="icon-th-large"></i> {{ 'global.backToTheGroup' | trans }}</a>
+                        <a href="{{ path('media-library-upload', {'group': group.slug }) }}" class="btn btn-mini btn-success"><i class="icon-upload"></i> {{ 'asset.uploadFile' | trans }}</a>
                     </div>
 
                     {% else %}
                         <a href="{{ path('media-library') }}" class="list-home-url hide"></a>
                         <a href="{{ path('media-library-upload') }}" class="btn btn-mini btn-success"><i class="icon-upload"></i> 
-                            Upload file
+                            {{ 'asset.uploadFile' | trans }}
                         </a>
                     {% endif %}
                     </div>
@@ -66,11 +66,11 @@
             <tr>
                 <th width=15></th>
                 <th width=40>{{ knp_pagination_sortable(pagination, 'ID', 'iu.id') }}</th>
-                <th width=180>Thumbnail</th>
-                <th width=140>{{ knp_pagination_sortable(pagination, 'Name', 'iu.path') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Attribute title', 'iu.title') }}</th>
+                <th width=180>{{ 'global.asset' | trans }}</th>
+                <th width=140>{{ knp_pagination_sortable(pagination, 'global.filename' | trans , 'iu.path') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'asset.imageAssetTitle' | trans , 'iu.title') }}</th>
                 <th>Slug</th>
-                <th width=80>Actions</th>
+                <th width=80>{{ 'global.actions' | trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -83,26 +83,26 @@
                 <td rowspan="2">
                     {% include 'CatMSAdminBundle:Helpers:mime-type-thumb.html.twig' with {'entity': entity} %}
                 </td>
-                <td>
+                <td class="cell-center">
                     {{ entity.path }}<br />
-                    <a href="{{ asset('uploads/media-library/')~entity.path }}" class="btn btn-mini btn-success copy-source"><i class="icon-screenshot"></i> Copy Source</a>
+                    <a href="{{ asset('uploads/media-library/')~entity.path }}" class="btn btn-mini btn-success copy-source"><i class="icon-screenshot"></i> {{ 'global.copySource' | trans }}</a>
                 </td>
-                <td>{% if entity.title %}{{ entity.title }}{% else %}<span class="label">NOT DEFINED</span>{% endif %}</td>
+                <td>{% if entity.title %}{{ entity.title }}{% else %}<span class="label">{{ 'global.notDefined' | trans }}</span>{% endif %}</td>
 
-                <td width="150">{% if entity.slug %}{{ entity.slug }}{% else %}<span class="label">NOT DEFINED</span>{% endif %}</td>
+                <td width="150">{% if entity.slug %}{{ entity.slug }}{% else %}<span class="label">{{ 'global.notDefined' | trans }}</span>{% endif %}</td>
                 
                 <td rowspan="2">
                     <div class="btn-group btn-group-vertical">
                         {% if entity.mimeType == 'image/jpeg' or entity.mimeType == 'image/png' %}
-                            <a style="text-align: left;" href="{{ asset('uploads/media-library/')~entity.path }}" class="btn single-image btn-small"><i class="icon-fullscreen"></i> Show</a>
+                            <a style="text-align: left;" href="{{ asset('uploads/media-library/')~entity.path }}" class="btn single-image btn-small"><i class="icon-fullscreen"></i> {{ 'global.show' | trans }}</a>
                         {% else %}
-                            <a style="text-align: left;" href="{{ asset('uploads/media-library/')~entity.path }}" class="btn btn-small"><i class="icon-download"></i> Show</a>
+                            <a style="text-align: left;" href="{{ asset('uploads/media-library/')~entity.path }}" class="btn btn-small"><i class="icon-download"></i> {{ 'global.show' | trans }}</a>
                         {% endif %}
                         
                         {% if group is not empty %}
-                        <a style="text-align: left;" href="{{ path('media-library-image-edit', {'id': entity.id, 'group': entity.imageGroup.slug }) }}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>
+                        <a style="text-align: left;" href="{{ path('media-library-image-edit', {'id': entity.id, 'group': entity.imageGroup.slug }) }}" class="btn btn-small"><i class="icon-edit"></i> {{ 'global.edit' | trans }}</a>
                         {% else %}
-                        <a style="text-align: left;" href="{{ path('media-library-image-edit', {'id': entity.id }) }}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>
+                        <a style="text-align: left;" href="{{ path('media-library-image-edit', {'id': entity.id }) }}" class="btn btn-small"><i class="icon-edit"></i> {{ 'global.edit' | trans }}</a>
                         {% endif %}
                     </div><br /><br />
                         
@@ -115,16 +115,16 @@
                     <form action="{{ href }}" method="post">
                         <input type="hidden" name="_method" value="DELETE" />
                         {{ form_widget(entity.deleteForm) }}
-                        <button type="submit" class="btn btn-small remove-this" data-view="top"><i class="icon-trash"></i> Delete</button>
+                        <button type="submit" class="btn btn-small remove-this" data-view="top"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
                     </form>
                 </td>
             </tr>
             
             <tr class="row_{{ entity.id }}">
                 <td colspan="3">
-                    <strong>Group</strong>: {% if entity.imageGroup.description is defined %}<a href="{{ path('media-library', {'page': 1, 'slug': entity.imageGroup.slug }) }}">{{ entity.imageGroup.description }}</a>{% if is_granted('ROLE_DEVELOPER')%} [ {{ entity.imageGroup.slug }} ]{% endif %}{% else %}<span class="label ">NOT DEFINED</span>{% endif %}<br /><br />
-                    <strong>Redirect</strong>: {% if entity.redirect %}{{ entity.redirect }}{% else %}<span class="label">NOT DEFINED</span>{% endif %}<br /><br />
-                    <strong>Size</strong>: {{ get_image_size(entity) | raw }}
+                    <strong>{{ 'global.group' | trans }}</strong>: {% if entity.imageGroup.description is defined %}<a href="{{ path('media-library', {'page': 1, 'slug': entity.imageGroup.slug }) }}">{{ entity.imageGroup.description }}</a>{% if is_granted('ROLE_DEVELOPER')%} [ {{ entity.imageGroup.slug }} ]{% endif %}{% else %}<span class="label ">{{ 'global.notDefined' | trans }}</span>{% endif %}<br /><br />
+                    <strong>{{ 'asset.redirectAfterClick' | trans }}</strong>: {% if entity.redirect %}{{ entity.redirect }}{% else %}<span class="label">{{ 'global.notDefined' | trans }}</span>{% endif %}<br /><br />
+                    <strong>{{ 'global.size' | trans }}</strong>: {{ get_image_size(entity) | raw }}
                 </td>
 
             </tr>
@@ -138,10 +138,10 @@
 
             <tr>
                 <td colspan="7">
-                    <a class="btn btn-mini mark-all" href="#"><i class="icon-ok"></i> Mark all</a>
-                    <a class="btn btn-mini unmark-all" href="#"><i class="icon-remove-sign"></i> Unmark all</a>
+                    <a class="btn btn-mini mark-all" href="#"><i class="icon-ok"></i> {{ 'global.markAll' | trans }}</a>
+                    <a class="btn btn-mini unmark-all" href="#"><i class="icon-remove-sign"></i> {{ 'global.unmarkAll' | trans }}</a>
                     
-                    <a class="btn btn-mini remove-all-marked" href="{{ path('delete-all-marked', {'token': multipleDeleteToken }) }}"><i class="icon-trash"></i> Remove all selected</a>
+                    <a class="btn btn-mini remove-all-marked" href="{{ path('delete-all-marked', {'token': multipleDeleteToken }) }}"><i class="icon-trash"></i> {{ 'global.removeAllSelected' | trans }}</a>
                 
                     {% include 'CatMSAdminBundle:MediaLibrary:widgets/list-buttons.html.twig' with {'group': group} %} 
                     
@@ -158,17 +158,17 @@
     
         <div class="alert">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Empty databse!</strong> No records defined
+        {{ 'global.emptyDatabase' | trans }}
         </div>
     
         {% if group is not empty %}
             <div style="margin-top: 20px;">
-                <a href="{{ path('image-group') }}" class="btn btn-small"><i class="icon-th-large"></i> Go to the group list</a>
-                <a href="{{ path('media-library-upload', {'group': group.slug }) }}" class="btn btn-success btn-small"><i class="icon-upload"></i> Upload file</a>
+                <a href="{{ path('image-group') }}" class="btn btn-small"><i class="icon-th-large"></i> {{ 'global.gotToTheGroupList' | trans }}</a>
+                <a href="{{ path('media-library-upload', {'group': group.slug }) }}" class="btn btn-success btn-small"><i class="icon-upload"></i> {{ 'asset.uploadFile' | trans }}</a>
             </div>
         {% else %}
             <a href="{{ path('media-library-upload') }}" class="btn btn-small btn-success"><i class="icon-upload"></i> 
-                Upload file
+                {{ 'asset.uploadFile' | trans }}
             </a>
         {% endif %}
     

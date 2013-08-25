@@ -15,18 +15,18 @@
     {{ parent() }}
     {% if group is empty %}
     <li>
-        <em>Media library</em> 
-        <a href="{{ path('media-library') }}"><i class="icon-list"></i>List</a>&nbsp 
-        <a href="{{ path('media-library-grid-list') }}"> <i class="icon-th"></i>Grid</a>
-    </li>
-    <li class="active">Upload file</li>
+        <em>{{ 'global.mediaLibrary' | trans }} </em> 
+        <a href="{{ path('media-library') }}"><i class="icon-list"></i>{{ 'global.list' | trans }}</a>&nbsp 
+        <a href="{{ path('media-library-grid-list') }}"> <i class="icon-th"></i>{{ 'global.grid' | trans }}</a>
+    </li> <span class="divider">/</span> 
+    <li class="active">{{ 'asset.uploadFile' | trans }}</li>
     {% else %}
     <li>
-        <em>Group <i>{{ groupEntity.description }}</i> assets</em> 
-        <a href="{{ path('media-library', {'page': 1, 'slug': groupEntity.slug}) }}"><i class="icon-list"></i>List</a>&nbsp
-        <a href="{{ path('media-library-group-grid-list', {'group': groupEntity.id}) }}"><i class="icon-th"></i>Grid</a>
+        <em>{% trans with {'group': groupEntity.description} %}asset.groupAssets{% endtrans %} </em> 
+        <a href="{{ path('media-library', {'page': 1, 'slug': groupEntity.slug}) }}"><i class="icon-list"></i>{{ 'global.list' | trans }}</a>&nbsp
+        <a href="{{ path('media-library-group-grid-list', {'group': groupEntity.id}) }}"><i class="icon-th"></i>{{ 'global.grid' | trans }}</a>
     </li> <span class="divider">/</span>          
-    <li class="active">Upload file</li>
+    <li class="active">{{ 'asset.uploadFile' | trans }}</li>
     {% endif %}
 {% endblock %}    
     
@@ -36,24 +36,24 @@
         
         <div class="alert alert-block">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <h4>Warning!</h4>
-            Canvas has dimensions 
-            {% if groupEntity.imageWidth %} {{ groupEntity.imageWidth }}px width {% endif %}
-            {% if groupEntity.imageWidth and groupEntity.imageHeight %} and {% endif %}
-            {% if groupEntity.imageHeight %}{{ groupEntity.imageHeight }}px height{% endif %}. Larger image will be cropped to canvas dimensions.
+            <h4>{{ 'global.warning' | trans }}!</h4>
+            {{ 'asset.canvasHasDimensions' | trans }}
+            {% if groupEntity.imageWidth %} {{ groupEntity.imageWidth }}px {{ 'global.canvasWidth' | trans }} {% endif %}
+            {% if groupEntity.imageWidth and groupEntity.imageHeight %} {{ 'global.and' }} {% endif %}
+            {% if groupEntity.imageHeight %}{{ groupEntity.imageHeight }}px {{ 'global.canvasHeight' | trans }}{% endif %}. {{ 'asset.largerImageWillBeCroppedToCanvasDimensions' | trans }}
         </div>
 
     {% endif %}
     
     <form novalidate action="{{ path('media-library-upload', {'group': group}) }}" method="post" {{ form_enctype(form) }} class="upload-form">
-        <legend><i class="icon-large icon-attach"></i> Upload single file <small>and set properties</small></legend>
+        <legend><i class="icon-large icon-attach"></i> {{ 'asset.upload.uploadSingleFileAndSetProperties' | trans | raw }}</legend>
          
         <div class="control-group">
         
             <div class="controls">
                 <div class="input-append">
-                    <input style="width: 280px;" id="form_name" type="text" maxlength="255" required="required" name="form[name]" placeholder="Filename">
-                    <a class="popoverButton" href="#" data-content="Define custom filename allows to identyfing Image/asset by this name. Otherwise filename will be generated automticaly." data-toggle="popover" data-original-title="Filename">
+                    <input style="width: 280px;" id="form_name" type="text" maxlength="255" required="required" name="form[name]" placeholder="{{ 'global.filename' | trans }}">
+                    <a class="popoverButton" href="#" data-content="{{ 'asset.upload.filenameCustom' | trans }}" data-toggle="popover" data-original-title="{{ 'global.filename' | trans }}">
                         <span class="add-on"><i class="icon-question-sign"></i></span>
                     </a>
                 </div>
@@ -62,8 +62,8 @@
             
             <div class="controls">
                 <div class="input-append">
-                <input style="width: 280px;" id="form_titl" type="text" maxlength="255" required="required" name="form[title]" placeholder="Image/asset title">
-                <a class="popoverButton" href="#" data-content="Image title render into HTML img title attribute." data-toggle="popover" data-original-title="Image/asset title">
+                <input style="width: 280px;" id="form_title" type="text" maxlength="255" required="required" name="form[title]" placeholder="{{ 'asset.imageAssetTitle' | trans }}">
+                <a class="popoverButton" href="#" data-content="{{ 'asset.upload.imageAssetTitleCustom' | trans }}" data-toggle="popover" data-original-title="{{ 'asset.imageAssetTitle' | trans }}">
                     <span class="add-on"><i class="icon-question-sign"></i></span>
                 </a>
                 </div>
@@ -72,8 +72,8 @@
         
             <div class="controls">
                 <div class="input-append">
-                <input style="width: 280px;" id="form_prioriy" type="text" maxlength="255" required="required" name="form[priority]" placeholder="Image/asset priority">
-                <a class="popoverButton" href="#" data-content="Priority of image display into defined group." data-toggle="popover" data-original-title="Image/asset priority">
+                <input style="width: 280px;" id="form_prioriy" type="text" maxlength="255" required="required" name="form[priority]" placeholder="{{ 'asset.imageAssetPriority' | trans }}">
+                <a class="popoverButton" href="#" data-content="{{ 'asset.upload.imageAssetPriorityCustom' | trans }}" data-toggle="popover" data-original-title="{{ 'asset.imageAssetPriority' | trans }}">
                     <span class="add-on"><i class="icon-question-sign"></i></span>
                 </a>
                 </div>
@@ -82,8 +82,8 @@
             
             <div class="controls">
                 <div class="input-append">
-                <input style="width: 280px;" id="form_redirect" type="text" maxlength="255" name="form[redirect]" placeholder="Redirect after click">
-                <a class="popoverButton" href="#" data-content="Redirect aftter click on image canvas." data-toggle="popover" data-original-title="Redirect after click">
+                <input style="width: 280px;" id="form_redirect" type="text" maxlength="255" name="form[redirect]" placeholder="{{ 'asset.redirectAfterClick' | trans }}">
+                <a class="popoverButton" href="#" data-content="{{ 'asset.upload.redirectAfterClickCustom' | trans }}" data-toggle="popover" data-original-title="{{ 'asset.redirectAfterClick' | trans }}">
                     <span class="add-on"><i class="icon-question-sign"></i></span>
                 </a>
                 </div>
@@ -92,8 +92,8 @@
             
             <div class="controls">
                 <div class="input-append">
-                <input style="width: 280px;" id="form_slug" type="text" maxlength="255" required="required" name="form[slug]" placeholder="Image/asset slug">
-                <a class="popoverButton" href="#" data-content="Image slug is using whlie identyfing and fetching." data-toggle="popover" data-original-title="Image/asset slug">
+                <input style="width: 280px;" id="form_slug" type="text" maxlength="255" required="required" name="form[slug]" placeholder="{{ 'asset.imageAssetSlug' | trans }}">
+                <a class="popoverButton" href="#" data-content="{{ 'asset.upload.imageAssetSlugCustom' | trans }}" data-toggle="popover" data-original-title="{{ 'asset.imageAssetSlug' | trans }}">
                     <span class="add-on"><i class="icon-question-sign"></i></span>
                 </a>
                 </div>
@@ -119,7 +119,7 @@
                 });
             </script>
             <div class="controls" style="margin-top: 15px;">
-                <label for="form_imageGroup"><i class="icon-chevron-down"></i> Image/asset group</label>
+                <label for="form_imageGroup"><i class="icon-chevron-down"></i> {{ 'asset.group.title' | trans }}</label>
                 {{ form_widget(form.imageGroup, {'attr': {'class': 'span4 selectpicker'}}) }}
                 {{ form_errors(form.imageGroup) }}
             </div>
@@ -131,11 +131,11 @@
         
         <div style="margin-top: 20px;">
             {% if group is not empty %}
-            <a href="{{ path('media-library', {'slug': group}) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
+            <a href="{{ path('media-library', {'slug': group}) }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>
             {% else %}    
-            <a href="{{ path('media-library') }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>    
+            <a href="{{ path('media-library') }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>    
             {% endif %}
-            <button class="show-loader btn btn-primary btn-small" type="submit"  data-loading-text="Uploading..."><i class="icon-upload"></i> Upload </button>
+            <button class="show-loader btn btn-primary btn-small" type="submit"  data-loading-text="{{ 'global.uploading' | trans }}"><i class="icon-upload"></i> {{ 'global.upload' | trans }} </button>
         </div>
     </form>
 
@@ -147,7 +147,7 @@
 <script type="text/javascript" src="{{ asset('js/catms-plupload.js') }}"></script>
 <a href="{{ path('media-library-plupload', {'group': group}) }}" id="pluploadUrl" style="display: none"></a>
 <div class="multiple-upload-form">
-    <legend><i class="icon-large icon-sort"></i> Multiple Files Upload
+    <legend><i class="icon-large icon-sort"></i> {{ 'asset.upload.mulitipleUpload' | trans }}
         {% if not group %}
             <a href="{{ path('media-library-grid-list') }}" data-toggle="tooltip" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
     {% else%}
@@ -157,7 +157,7 @@
     </legend>
 <form>
 <div id="uploader">
-    <p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
+    <p>{{ 'plupload.browserError' | trans }}</p>
 </div>
 </form>
 </div>
