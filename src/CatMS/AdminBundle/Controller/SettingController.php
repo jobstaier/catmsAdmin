@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use CatMS\AdminBundle\Entity\Setting;
 use CatMS\AdminBundle\Form\SettingType;
+use CatMS\AdminBundle\Utility\CommonMethods;
 
 /**
  * Setting controller.

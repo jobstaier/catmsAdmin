@@ -83,7 +83,7 @@
                 <td rowspan="2">
                     {% include 'CatMSAdminBundle:Helpers:mime-type-thumb.html.twig' with {'entity': entity} %}
                 </td>
-                <td>
+                <td class="cell-center">
                     {{ entity.path }}<br />
                     <a href="{{ asset('uploads/media-library/')~entity.path }}" class="btn btn-mini btn-success copy-source"><i class="icon-screenshot"></i> {{ 'global.copySource' | trans }}</a>
                 </td>
