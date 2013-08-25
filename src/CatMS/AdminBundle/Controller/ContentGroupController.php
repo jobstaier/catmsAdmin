@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use CatMS\AdminBundle\Entity\ContentGroup;
 use CatMS\AdminBundle\Form\ContentGroupType;
-use CatMS\AdminBundle\Utilty\CommonMethods;
+use CatMS\AdminBundle\Utility\CommonMethods;
 
 /**
  * ContentGroup controller.

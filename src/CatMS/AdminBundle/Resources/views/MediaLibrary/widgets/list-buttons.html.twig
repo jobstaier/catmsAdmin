@@ -1,7 +1,7 @@
 <div style="float: right; display: inline;">                
     {% if group is not empty %}
         <div class="btn-group">
-            <a href="{{ path('image-group') }}" class="btn btn-mini"><i class="icon-th-large"></i> {{ 'global.bactToTheGroup' | trans}}</a>
+            <a href="{{ path('image-group') }}" class="btn btn-mini"><i class="icon-th-large"></i> {{ 'global.bactToTheGroup' | trans }}</a>
             <a href="{{ path('media-library-upload', {'group': group.slug }) }}" class="btn btn-success btn-mini"><i class="icon-upload"></i> {{ 'asset.uploadFile' | trans}}</a>
         </div>
     {% else %}

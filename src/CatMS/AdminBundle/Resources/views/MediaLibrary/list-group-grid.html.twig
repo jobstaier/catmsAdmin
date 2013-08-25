@@ -14,7 +14,7 @@
      
     <legend>
         <i class="icon-large icon-picture"></i> {% trans with {'group': group.description} %}asset.groupAssets{% endtrans %}
-        <a href="{{ path('media-library', {'page': 1, 'slug': group.slug}) }}" data-toggle="tooltip" title="Details View" class="show-list-view" style="float: right;">
+        <a href="{{ path('media-library', {'page': 1, 'slug': group.slug}) }}" data-toggle="tooltip" title="{{ 'global.detailsView' | trans }}" class="show-list-view" style="float: right;">
             <i class="icon-large icon-list"></i>
         </a>
     </legend>
