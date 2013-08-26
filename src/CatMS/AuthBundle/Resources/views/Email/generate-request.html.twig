@@ -10,7 +10,7 @@
     </div>
         
     <p>
-        {% trans with {'url': app.request.httpHost ~ '/' ~ userHash } %}mailer.password.click-to-generate-new{% endtrans  %}
+        {% trans with {'url': app.request.httpHost ~ '/auth/generate-new-password/' ~ userHash } %}mailer.password.click-to-generate-new{% endtrans  %}
     </p>
 
     <hr />
