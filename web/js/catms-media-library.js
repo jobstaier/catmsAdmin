@@ -29,16 +29,16 @@ $(function(){
     
     $('.remove-all-marked').popover({
         content: 
-                '<div style="text-align: center;">Are you sure you want to delete all selected items?<br /><br />' + 
-                '<a href="" class="btn btn-primary btn-mini remove-all-marked-confirm">Confirm</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-inverse btn-mini dismiss">Dismiss</a></div>',
+                '<div style="text-align: center;">' + Translator.get('global.deleteConfirmAll') + '<br /><br />' + 
+                '<a href="" class="btn btn-primary btn-mini remove-all-marked-confirm">' + Translator.get('global.confirm') + '</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-inverse btn-mini dismiss">' + Translator.get('global.dissmiss') + '</a></div>',
         placement: 'top',
         html: true
     });
     
     $('.remove-this').popover({
         content: 
-                '<div style="text-align: center;">Are you sure you want to delete this item?<br /><br />' + 
-                '<a href="" class="btn btn-primary btn-mini remove-this-confirm">Confirm</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-inverse btn-mini dismiss">Dismiss</a></div>',
+                '<div style="text-align: center;">' + Translator.get('global.deleteConfirm') + '<br /><br />' + 
+                '<a href="" class="btn btn-primary btn-mini remove-this-confirm">' + Translator.get('global.confirm') + '</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-inverse btn-mini dismiss">' + Translator.get('global.dissmiss') + '</a></div>',
         placement: 'left',
         html: true
     });
@@ -90,7 +90,7 @@ $(function(){
                         window.setTimeout(function(){
                             tr.remove();  
 
-                            pinesNotify('Remove success!', 'Assets has been removed successfuly', 'success');
+                            pinesNotify(null, Translator.get('asset.assetsHasBeenRemovedSuccessfuly'), 'success');
                             
                             if ($('table tbody img').length === 0) {
                                 console.log($('.list-home-url').attr('href'));
@@ -107,7 +107,7 @@ $(function(){
                     closeLoader();
                     removeTrigger.html(defText);
                     removeTrigger.removeAttr('disabled');
-                    pinesNotify('Delete failure!', errorThrown, 'error');
+                    pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
                 }
             });
         }

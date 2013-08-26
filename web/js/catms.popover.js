@@ -6,8 +6,8 @@ $(function(){
     $('.remove-this').each(function(){
         $(this).popover({
             content: 
-                '<div style="text-align: center;">Are you sure you want to delete this item?<br /><br />' + 
-                '<a href="" class="btn btn-primary btn-mini remove-this-confirm">Confirm</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-inverse btn-mini dismiss">Dismiss</a></div>',
+                '<div style="text-align: center;">' + Translator.get('global.deleteConfirm') + '<br /><br />' + 
+                '<a href="" class="btn btn-primary btn-mini remove-this-confirm">' + Translator.get('global.confirm') + '</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-inverse btn-mini dismiss">' + Translator.get('global.dissmiss') + '</a></div>',
             placement: ($(this).attr('data-view')) ? $(this).attr('data-view') : 'right',
             html: true
         });
@@ -45,25 +45,4 @@ $(function(){
         $(this).parents('form').submit();
         return false;
     });   
-    
-/*  
-    $('.change-this').click(function(){
-        return false;
-    });        
-*/
-
-
-/*
-    $('.dismiss').live('click', function(){
-        $('.change-this').popover('hide');       
-        return false;
-    });
-*/
-/*
-    $('.remove-this-confirm').live('click', function(){
-        showLoader();
-        $(this).parents('form').submit();
-        return false;
-    });
-*/
 });

@@ -64,7 +64,7 @@ function getHistory(){
             $('.append-history-here').html(html);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            pinesNotify('Error occured!', errorThrown, 'error');
+            pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
         }
     });
 }
@@ -82,7 +82,7 @@ function setLocale(el) {
             window.location.reload(true);
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            pinesNotify('Error occured!', errorThrown, 'error');
+            pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
         }
     });
 }
