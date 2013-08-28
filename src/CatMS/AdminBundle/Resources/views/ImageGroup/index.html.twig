@@ -2,11 +2,11 @@
 
 {% block breadcrumb %}
     {{ parent() }}
-    <li class="active">Asset Groups</a>
+    <li class="active">{{ 'assetGroup.title' | trans }}</a>
 {% endblock %} 
 
 {% block content -%}
-    <legend><i class="icon-large icon-more-windows"></i> Asset group list</legend>
+    <legend><i class="icon-large icon-more-windows"></i> {{ 'assetGroup.list' | trans }}</legend>
 
     {% if pagination | length > 0 %}
     
@@ -15,12 +15,12 @@
             <tr>
                 <th width=40>{{ knp_pagination_sortable(pagination, 'ID', 'ig.id') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Slug', 'ig.slug') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Description', 'ig.description') }}</th>
-                <th width=120>Image width [px]</th>
-                <th width=125>Image height [px]</th>
-                <th width=90>Image count</th>
-                <th width=120>Has thumbnails?</th>
-                <th width=80>Actions</th>
+                <th>{{ knp_pagination_sortable(pagination, 'global.description' | trans , 'ig.description') }}</th>
+                <th width=120>{{ 'global.width' | trans }} [px]</th>
+                <th width=125>{{ 'global.height' | trans }} [px]</th>
+                <th width=90>{{ 'assetGroup.imageCount' | trans }}</th>
+                <th width=120>{{ 'assetGroup.imageHasThumnails' | trans }}</th>
+                <th width=80>{{ 'global.actions' | trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -29,31 +29,31 @@
                 <td><a href="{{ path('image-group-show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.slug }}</td>
                 <td>{{ entity.description }}</td>
-                <td>{% if entity.imageWidth is not empty %}{{ entity.imageWidth }}{% else %}<span class="label ">NOT DEFINED</span>{% endif %}</td>
-                <td>{% if entity.imageHeight is not empty %}{{ entity.imageHeight }}{% else %}<span class="label ">NOT DEFINED</span>{% endif %}</td>
+                <td>{% if entity.imageWidth is not empty %}{{ entity.imageWidth }}{% else %}<span class="label ">{{ 'global.notDefined' | trans }}</span>{% endif %}</td>
+                <td>{% if entity.imageHeight is not empty %}{{ entity.imageHeight }}{% else %}<span class="label ">{{ 'global.notDefined' | trans }}</span>{% endif %}</td>
                 <td><span class="badge">{{ entity.images | length }}</span></td>
-                <td>{% if entity.hasThumbnails %}<span class="label label-success">YES</span>{% else %}<span class="label">NO</span>{% endif %}</td>
+                <td>{% if entity.hasThumbnails %}<span class="label label-success">{{ 'global.yes' | trans }}</span>{% else %}<span class="label">{{ 'global.no' | trans }}</span>{% endif %}</td>
                 <td>
                     <div class="btn-group">
-                        <button class="btn">Action</button>
+                        <button class="btn">{{ 'global.action' | trans }}</button>
                         <button class="btn dropdown-toggle" data-toggle="dropdown">
                             <span class="caret"></span>
                         </button>
 
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ path('image-group-show', { 'id': entity.id }) }}"><i class="icon-fullscreen"></i> Show</a>
+                                <a href="{{ path('image-group-show', { 'id': entity.id }) }}"><i class="icon-fullscreen"></i> {{ 'global.show' | trans }}</a>
                             </li>
                             {% if is_granted('ROLE_DEVELOPER') %}
                             <li>
-                                <a href="{{ path('image-group-edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> Edit</a>
+                                <a href="{{ path('image-group-edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> {{ 'global.edit' | trans }}</a>
                             </li>
                             {% endif %}
                             <li>
-                                <a href="{{ path('media-library-group-grid-list', {'group': entity.id}) }}"><i class="icon-list"></i> Asset list</a>
+                                <a href="{{ path('media-library-group-grid-list', {'group': entity.id}) }}"><i class="icon-list"></i> {{ 'asset.list' | trans }}</a>
                             </li>
                             <li>
-                                <li><a href="{{ path('media-library-upload', {'group': entity.slug}) }}"><i class="icon-upload"></i> Upload</a></li>
+                                <li><a href="{{ path('media-library-upload', {'group': entity.slug}) }}"><i class="icon-upload"></i> {{ 'global.upload' | trans }}</a></li>
                             </li>
                         </ul>
                     </div>
@@ -70,12 +70,12 @@
     {% else %}
     <div class="alert">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Empty databse!</strong> No records defined
+    {{ 'global.emptyDatabase' | trans | raw }}
     </div>
     {% endif %}
     
     <a href="{{ path('image-group-new') }}" class="btn btn-small btn-primary"><i class="icon-pencil"></i> 
-        Create new group
+        {{ 'global.createGroup' | trans }}
     </a>
     
     {% endblock %}

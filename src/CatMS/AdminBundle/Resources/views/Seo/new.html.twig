@@ -7,24 +7,23 @@
 
 {% block breadcrumb %}
     {{ parent() }}
-    <li><a href="{{ path('seo') }}">SEO manager</a></li> <span class="divider">/</span>
-    <li class="active">New SEO page</li>
+    <li><a href="{{ path('seo') }}">{{ 'seo.pagesList' | trans }}</a></li> <span class="divider">/</span>
+    <li class="active">{{ 'seo.creatingNewSeoPAge' | trans }}</li>
 {% endblock %}
     
 {% block content -%}
     <legend>
-        <i class="icon-large icon-globe"></i> SEO page creation
+        <i class="icon-large icon-globe"></i> {{ 'seo.creatingNewSeoPAge' | trans }}
     </legend>
 
-    <form action="{{ path('seo-create') }}" method="post" {{ form_enctype(form) }} style="width: 220px;">
+    <form novalidate action="{{ path('seo-create') }}" method="post" {{ form_enctype(form) }} style="width: 220px;">
         {{ form_widget(form) }}
-        <p>
-            <button type="submit" data-toggle="button" class="btn btn-primary show-loader" data-loading-text="Saving..."><i class="icon-hdd"></i> Create</button>
-        </p>
-    </form>
 
-    
-    <div class="btn-group" style="margin-bottom: 10px">
-        <a href="{{ path('seo') }}" class="btn"><i class="icon-list"></i> Back to the list</a>
-    </div>
+        <button type="submit" data-toggle="button" class="btn btn-primary btn-small show-loader" data-loading-text="{{ 'global.saving' | trans }}"><i class="icon-hdd"></i> {{ 'global.create' | trans }}</button>
+
+    </form>
+        
+    <br />
+    <a href="{{ path('seo') }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
+        
 {% endblock %}

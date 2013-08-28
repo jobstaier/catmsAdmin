@@ -2,8 +2,8 @@
 
 {% block breadcrumb %}
     {{ parent() }}
-    <li><a href="{{ path('content-group') }}">Content groups</a></li> <span class="divider">/</span>
-    <li class="active">Create new group</a>
+    <li><a href="{{ path('content-group') }}">{{ 'contentGroup.title' | trans }}</a></li> <span class="divider">/</span>
+    <li class="active">{{ 'assetGroup.createNewGroup' | trans }}</a>
 {% endblock %}        
         
 {% block javascripts_bottom %}
@@ -13,12 +13,12 @@
 {% block content -%}
     {% include 'CatMSAdminBundle:Helpers:form-errors-div.html.twig' with {'form': form, 'errors': errors | default() } %}
     
-    <legend><i class="icon-large icon-pencil"></i> Content group creation</legend>
+    <legend><i class="icon-large icon-pencil"></i> {{ 'assetGroup.createNewGroup' | trans }}</legend>
     
     <form novalidate action="{{ path('content-group-create') }}" method="post" {{ form_enctype(form) }}>
         <div>
-            <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> Back to the list</a>
-            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="Creating..."><i class="icon-hdd icon-small"></i> Create</button>
+            <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> {{ 'global.backToTheList' | trans }}</a>
+            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="{{ 'global.creating' | trans }}"><i class="icon-hdd icon-small"></i> {{ 'global.create' | trans }}</button>
         </div> 
         
         <hr class="clear" />            
@@ -36,7 +36,7 @@
         
         {% include 'CatMSAdminBundle:ContentGroup:widgets/labelized.html.twig' with {'form': form, 'errors': errors | default() } %}
         
-        <legend class="legend-inside"><i class="icon-large icon-comment"></i> Manual</legend>
+        <legend class="legend-inside"><i class="icon-large icon-comment"></i> {{ 'global.manual' | trans }}</legend>
         <div class="row-fluid">
             <div class="span12 input-wrapper">
                 {{ form_widget(form.manual, {'attr': {'class': 'tiny_full_with_image'}}) }}
@@ -48,8 +48,8 @@
         <hr class="clear" />
 
         <div>
-            <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> Back to the list</a>
-            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="Creating..."><i class="icon-hdd icon-small"></i> Create</button>
+            <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> {{ 'global.backToTheList' | trans }}</a>
+            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="{{ 'global.creating' | trans }}"><i class="icon-hdd icon-small"></i> {{ 'global.create' | trans }}</button>
         </div>
         
         <hr class="clear" />

@@ -25,7 +25,7 @@
             <button style="float: right" type="submit" class="btn btn-primary">{{ 'auth.login' | trans }}</button><br/>
 
             <a href="#forgetPw" data-toggle="modal" data-target="#forgetPw">{{ 'auth.forgetPassword' | trans }}</a>
-            {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'forgetPw', 'msg': 'Generate new password', 'btnTxt': 'Generate', 'href': 'generate-new-password'} %}
+            {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'forgetPw', 'msg': 'auth.generateNewPassword' | trans, 'btnTxt': 'global.generate' | trans , 'href': 'generate-new-password'} %}
         </div>    
         
     </div>

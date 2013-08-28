@@ -10,12 +10,12 @@
 
 {% block breadcrumb %}
     {{ parent() }}
-    <li><a href="{{ path(pathname) }}">{{ module }} settings</a></li> <span class="divider">/</span>
-    <li  class="active">{{ entity.slug }} setting</li>
+    <li><a href="{{ path(pathname) }}">{{ module }} - {{ 'global.settings' }}</a></li> <span class="divider">/</span>
+    <li  class="active"><i>{{ entity.slug }}</i></li>
 {% endblock %}
     
 {% block content -%}
-    <legend><i class="icon-large icon-settings"></i> <i>{{ entity.description }}</i> setting</legend>
+    <legend><i class="icon-large icon-settings"></i> <i>{{ entity.description }}</i></legend>
 
     <table class="table table-bordered table-striped">
         <tbody>
@@ -28,24 +28,24 @@
                 <td>{{ entity.slug }}</td>
             </tr>
             <tr>
-                <th>Value</th>
+                <th>{{ 'global.value' | trans }}</th>
                 <td>{{ entity.value }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th>{{ 'global.description' | trans }}</th>
                 <td>{{ entity.description }}</td>
             </tr>
         </tbody>
     </table>
 
     <div style="margin-bottom: 10px">
-        <a href="{{ path(pathname) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
-        <a href="{{ path('settings-edit', { 'id': entity.id, 'range': range | lower }) }}" class="btn btn-small btn-primary"><i class="icon-edit"></i> Edit</a>
+        <a href="{{ path(pathname) }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>
+        <a href="{{ path('settings-edit', { 'id': entity.id, 'range': range | lower }) }}" class="btn btn-small btn-primary"><i class="icon-edit"></i> {{ 'global.edit' | trans }}</a>
         
         <form action="{{ path('settings-delete', { 'id': entity.id, 'range': range | lower }) }}" method="post" style="float: right;">
             <input type="hidden" name="_method" value="DELETE" />
             {{ form_widget(delete_form) }}
-            <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
+            <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
         </form>
     </div> 
 

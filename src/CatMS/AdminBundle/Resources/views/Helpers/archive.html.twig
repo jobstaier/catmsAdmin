@@ -1,20 +1,20 @@
 <script src={{ asset('js/catms.archive.js') }}></script>
 <div class="archive-trigger-container">
-    <a class="btn btn-inverse btn-small"><i class="icon-white icon-chevron-left"></i> Archive</a>
+    <a class="btn btn-inverse btn-small"><i class="icon-white icon-chevron-left"></i> {{ 'global.archive' | trans }}</a>
 </div>
 <div class="archive-container">
     <div class="archive">
         {% if archive | length > 0 %}
         <div class="page-header no-margin">
-            <h5>Archive <small>from {{ archive[0].createdAt | date("Y/m/d H:i:s") }} to {{ archive[archive | length - 1].createdAt | date("Y/m/d H:i:s") }}</small></h5>
+            <h5>{{ 'global.archive' | trans }} <small>{{ 'global.from' | trans }} {{ archive[0].createdAt | date("Y/m/d H:i:s") }} {{ 'global.to' | trans }} {{ archive[archive | length - 1].createdAt | date("Y/m/d H:i:s") }}</small></h5>
         </div>
         <!--<div class="loader-gif"></div>-->
         <div class="append-here-archive">
             <table class="table table-bordered archive-table">
                 <thead>
                     <tr>
-                        <th>Archive date</th>
-                        <th>Actions</th>
+                        <th>{{ 'global.archiveDate' | trans }}</th>
+                        <th>{{ 'global.actions' | trans }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,8 +30,8 @@
             </table>
         </div>
         {% else %}
-        <div class="alert alert-info">
-            No archives saved.
+        <div class="alert alert-info span5">
+            {{ 'global.noArchiveSaved' | trans }}
         </div>
         {% endif %}
     </div>

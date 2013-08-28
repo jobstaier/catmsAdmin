@@ -12,15 +12,15 @@
    
 {% block breadcrumb %}
     {{ parent() }}
-    <li><a href="{{ path('content-group') }}">Content groups</a></li> <span class="divider">/</span>
-    <li><a href="{{ path('content-manager-list', {'page': 1, 'slug': entity.contentGroup.slug }) }}">Group {{ entity.contentGroup.description | striptags }} contents</a></li> <span class="divider">/</span>
+    <li><a href="{{ path('content-group') }}">{{ 'contentGroup.title' | trans }}</a></li> <span class="divider">/</span>
+    <li><a href="{{ path('content-manager-list', {'page': 1, 'slug': entity.contentGroup.slug }) }}">{% trans with {'groupName': entity.contentGroup.description} %}contentManager.breadcrumbs.groupContents{% endtrans %}</a></li> <span class="divider">/</span>
     <li class="active">{{ entity.description | raw }}</li>
 {% endblock %}
     
 {% block content %}
     {% include 'CatMSAdminBundle:Helpers:form-errors-div.html.twig' with {'form': edit_form, 'errors': errors | default() } %}        
 
-    <legend><i class="icon-large icon-edit"></i> <i>{{ entity.description | striptags }}</i> edit {#<span class="label label-inverse">Draft</span> <span class="label label-info">Published</span>#}</legend>
+    <legend><i class="icon-large icon-edit"></i> {{'contentManager.edit' | trans }} <i>{{ entity.description | striptags }}</i>{#<span class="label label-inverse">Draft</span> <span class="label label-info">Published</span>#}</legend>
     
 
     {% include 'CatMSAdminBundle:Helpers:related-images.html.twig' with {'group': entity.contentGroup } %}
@@ -31,8 +31,8 @@
     {% if entity.contentGroup.manual %}
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <h4>Tutorial available!</h4>
-        This page has defined  manual. <a class="btn btn-primary  btn-mini" href="#tutorial">Read tutorial</a>
+        <h4>{{ 'global.tutorialAvailable' | trans }}</h4>
+        {{ 'global.thisPageHasDefinedTutorial' | trans }} <a class="btn btn-primary  btn-mini" href="#tutorial">{{ 'global.readTutorial' | trans }}</a>
     </div>
     {% endif %}
     
@@ -54,7 +54,7 @@
     <form action="{{ path('content-manager-delete', { 'id': entity.id, 'group': entity.contentGroup.slug }) }}" method="post" style="float: right;">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
+        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
     </form>
     
     {% if entity.contentGroup.manual %}

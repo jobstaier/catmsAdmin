@@ -50,6 +50,8 @@ auth:
     keepMeLoggedIn: Zapamiętaj mnie
     userAuthentication: Autoryzacja użytkownika
     pleaseTryAgain: Proszę wpisać poprawne dane.
+    generateNewPassword: Wygeneruj nowe hasło
+    generateNewPasswordText: Mail z potwierdzeniem prośby wygeneroawnia nowego hasła zostanie wysłany na wpisany poniżej adres email. #Generate new password request will be send to you after typing your registration e-mail addresss.
 
 #Global
 global:
@@ -76,8 +78,9 @@ global:
     warning: Uwaga
     and: i
     filename: Nazwa pliku
-    uploading: Ładowanie pliku . . .
+    uploading: Ładowanie pliku...
     upload: Załaduj
+    loading: Ładowanie...
     asset: Obraz/plik
     markAll: Zaznacz wszystkie
     unmarkAll: Odznacz wszystkie
@@ -87,17 +90,46 @@ global:
     group: Grupa
     size: Rozmiar
     update: Zapisz
-    updating: Zapisywanie . . .
+    updating: Zapisywanie...
     showMore: Pokaż więcej
     emptyDatabase: <strong>Pusta baza danych!</strong> Nie dodano żadnych wpisów. #<strong>Empty databse!</strong> No records defined
     close: Zamknij
     saveChanges: Zapisz zmiany
     detailsView: Widok szczegółowy
     deleteConfirmAll:  Na pewno chcesz usunąć wszystkie zaznaczone plik?
-    deleteConfirm: Na pewno chcesz usunąć ten plik? #Are you sure you want to delete this item?
-    confirm: Tak, usuń
+    deleteConfirm: 'Na pewno chcesz usunąć ten plik?' #Are you sure you want to delete this item?
+    confirm: 'Tak, usuń'
     dissmiss: Anuluj
-    
+    generate: Wygeneruj
+    areYouSure: 'Jesteś pewny?'
+    send: 'Wyślij'
+    description: Opis
+    createGroup: Stwórz grupę
+    width: Szerokość
+    height: Wysokość
+    addAsset: Dodaj zawartość
+    creating: Tworzenie...
+    createNewGroup: Stwórz nową grupę
+    manual: Samouczek
+    records: Wpisy
+    forbidden: Zabronione
+    addContent: Dodaj treść
+    contentList: Lista treści
+    settings: ustawienia
+    value: Wartość
+    directEdit: Edytuj
+    qucikEdit: Szybka edycja
+    saving: Zapisywanie...
+    page: Strona
+    updateDate: Data aktualzacji
+    archive: Archiwum
+    from: od
+    to: do
+    archiveDate: Data archiwizacji
+    noArchiveSaved: Brak wpisów archiwalnych
+    tutorialAvailable: Samouczek dostępny! #Tutorial available!
+    thisPageHasDefinedTutorial: Ta strona posiada zdefiniowany samouczek
+    readTutorial: Przeczytaj #Read tutorial
     
 #User account    
 user:
@@ -130,7 +162,6 @@ asset:
         redirectAfterClickCustom: Przekierowanie po kliknięciu w element HTML #Redirect aftter click on image canvas.
         imageAssetSlugCustom: Wartość używana podczas pobierania z bazy danych. UWAGA! Zachowaj ostrożność przy zmianie tego parametru. Nie zaleca się jego zmiany. #Image slug is using whlie identyfing and fetching.
         mulitipleUpload: Ładowanie wielu plików jednocześnie #Multiple Files Upload
-    breadcrumbs: 
     groupAssets: Pliki grupy <i>group</i>
     canvasHasDimensions: Narzucony rozmiar pliku to
     canvasWidth: szerokości
@@ -143,13 +174,61 @@ asset:
     editImageAsset: Edycja pliku
     quickEdit: Szybka edycja
     assetsHasBeenRemovedSuccessfuly: Poprawnie usunięto wszystkie zaznaczone pliki
+    list: List plików
     group:
         title: Grupa #Image/asset group       
+    
+#Asset group
+assetGroup:
+    title: Grupy Biblioteki Mediów
+    list: Lista grup Biblioteki Mediów
+    imageWidth: Szerokość obrazów
+    imageHeight: Wysokość obrazów
+    imageCount: Ilość plików
+    imageHasThumnails: Miniaturki?
+    thumbnailWidth: Szerokośc miniaturki
+    thumbnailHeight: Wysokość miniaturki
+    editGroup: Edycja grupy
+    createNewGroup: Tworzenie nowej grupy
+
+#contentGroups
+contentGroup:
+    title: Grupy treści
+    list: Lista group treści
+    isRemovable: Można usunąć?
+    onlyByDeveloper: Tylko developer
+    edit: Edycja grupy
+    contentGroupFieldsAndLabels: Pola i etykiety grupy
+    
+#Content Manager
+contentManager:
+    breadcrumbs:
+        groupContents: Zawartość grupy <i>groupName</i>
+    relatedImagesFromImageGroups: Powiązane obrazy <small>- grupy</small>
+    relatedImages: Powiązane obrazy
+    editGroup: Edytuj grupę
+    createNewContent: Dodaj treść    
+    edit: Edycja
+    creatingNewContent: Dodawanie treści
     
 #Plupload
 plupload:
     browserError: Twoja przeglądarka nie wspiera Flash, Silverlight, Gears, BrowserPlus ani HTML5 #You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.
             
+#Settings
+settings:
+    edit: Edycja
+    createNewSetting: Dodaj nowe ustawienie
+    creatingNewSetting: Dodawanie nowej opcji
+           
+#SEO
+seo:
+    settings: Ustawienia SEO
+    pagesList: List zdefiniowanych stron
+    createNewSeoPage: Zdefiniuj nową stronę
+    creatingNewSeoPAge: Definiowanie nowej strony
+    edit: Edytowanie
+    deleteSeoPage: Usuń stronę SEO
             
 #CRUD
 crud:

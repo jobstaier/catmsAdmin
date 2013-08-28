@@ -9,12 +9,16 @@
 
 {% block breadcrumb %}
     {{ parent() }}    
-    <li><a href="{{ path('content-group') }}">Content groups</a></li> <span class="divider">/</span>
-    <li class="active">Group {{ group.description | raw }} contents</li>
+    <li><a href="{{ path('content-group') }}">{{ 'contentGroup.title' | trans }}</a></li> <span class="divider">/</span>
+    <li class="active">{% trans with {'groupName': group.description} %}contentManager.breadcrumbs.groupContents{% endtrans %}</li>
 {% endblock %}    
     
 {% block content -%}
-    <legend><i class="icon-large icon-list"></i> Content list{% if group is not empty %} - <i>{{ group.description | raw }}</i>{% endif %}</legend>
+    <legend><i class="icon-large icon-list"></i>
+        {% if group is not empty %}
+                {% trans with {'groupName': group.description} %}contentManager.breadcrumbs.groupContents{% endtrans %}
+        {% endif %}
+    </legend>
 
     {% include 'CatMSAdminBundle:Helpers:related-images.html.twig' with {'group': group} %}
 
@@ -27,10 +31,10 @@
         <thead>
             <tr>
                 <th width=35>{{ knp_pagination_sortable(pagination, 'ID', 'cm.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'Description', 'cm.description') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'global.description' | trans, 'cm.description') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Slug', 'cm.slug') }}</th>
-                <th width=200>{{ knp_pagination_sortable(pagination, 'Update date', 'cm.updatedAt') }}</th>
-                <th width=80>Actions</th>
+                <th width=200>{{ knp_pagination_sortable(pagination, 'global.updateDate' | trans, 'cm.updatedAt') }}</th>
+                <th width=90>{{ 'global.actions' | trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -42,7 +46,7 @@
                 
                 <td>{% if entity.updatedAt %}{{ entity.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td rowspan="2">
-                    <a href="{{ path('content-manager-edit', { 'id': entity.id }) }}" class="btn brn-small"><i class="icon-edit"></i> Edit</a>
+                    <a href="{{ path('content-manager-edit', { 'id': entity.id }) }}" class="btn btn-small"><i class="icon-edit"></i> {{ 'global.edit' | trans }}</a>
                 </td>
             </tr>
             <tr>
@@ -66,7 +70,7 @@
     {% else %}
     <div class="alert clear" style="margin-top: 20px;">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Empty databse!</strong> No records defined
+        {{ 'global.emptyDatabase' | trans }}
     </div>
     {% endif %}
 
