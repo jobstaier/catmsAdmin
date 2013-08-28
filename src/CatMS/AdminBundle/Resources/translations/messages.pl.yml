@@ -215,13 +215,8 @@ contentManager:
 plupload:
     browserError: Twoja przeglądarka nie wspiera Flash, Silverlight, Gears, BrowserPlus ani HTML5 #You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.
             
-       
 #Settings
 settings:
-    panel:
-        title: Ustawienia panelu CatMS
-    frontend:
-        title: Ustawienia strony
     edit: Edycja
     createNewSetting: Dodaj nowe ustawienie
     creatingNewSetting: Dodawanie nowej opcji

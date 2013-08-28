@@ -45,16 +45,196 @@ auth:
     logout: Logout
     welcome:  Hello username!
     login: Sign in
-
+    forgetPassword: Forgot password?
+    password: Password
+    keepMeLoggedIn: Remember me
+    userAuthentication: User Authentication
+    pleaseTryAgain: Validation error. Type valid data and try again
+    generateNewPassword: Generate new password
+    generateNewPasswordText: Generate new password request will be send to you after typing your registration e-mail addresss.    
+    
 #Global
 global:
     success: Success!
     errorOccured: Error occured!
     history:  History
+    yes: Yes
+    no: No
+    show: Show
+    edit: Edit
+    actions: Action
+    action: Action
+    backToTheList: Back to the list
+    backToTheGroup: Back to the group
+    gotToTheGroupList: Go to the group list
+    backToTheGridView: Grid view
+    backToTheListView: List view
+    create: Create
+    delete: Delete
+    save: Save
+    mediaLibrary: Media Library
+    list: List
+    grid: Grid
+    warning: Warning!
+    and: and
+    filename: filename
+    uploading: Uploading...
+    upload: Upload
+    loading: Loading...
+    asset: Asset/image
+    markAll: Mark all
+    unmarkAll: Unmark all
+    removeAllSelected: Remove all selected
+    copySource: Copy source
+    notDefined: Not defined
+    group: Group
+    size: Size
+    update: Update
+    updating: Updating...
+    showMore: Show more
+    emptyDatabase: <strong>Empty databse!</strong> No records defined
+    close: Close
+    saveChanges: Save changes
+    detailsView: Details view
+    deleteConfirmAll:  Are you sure you want to delete all selected items?
+    deleteConfirm: Are you sure you want to delete this item?
+    confirm: Yes, remove
+    dissmiss: Dismiss
+    generate: Generate
+    areYouSure: Are you sure?
+    send: Send
+    description: Description
+    createGroup: Create group
+    width: Width
+    height: Height
+    addAsset: Add asset
+    creating: Creating...
+    createNewGroup: Create new group
+    manual: Tutorial
+    records: Records
+    forbidden: Forbidden
+    addContent: Add content
+    contentList: Content list
+    settings: Settings
+    value: Value
+    directEdit: Edit
+    qucikEdit: Quick edit
+    saving: Saving...
+    page: Page
+    updateDate: Update date
+    archive: Archive
+    from: from
+    to: to
+    archiveDate: Archive date
+    noArchiveSaved: No archive saves
+    tutorialAvailable: Tutorial available!
+    thisPageHasDefinedTutorial: This page has tutorial
+    readTutorial: Read tutorial
+        
     
 #User account    
-users:
+user:
+    username: Username
+    isActive: Is active?
+    users: Users
     yourAccount: Your account
+    editPassword: Edit password
+    role: Role
+    index:
+        createNewUser: Create new user
+    show:
+    breadcrumbs: 
+        userList: User list
+        createUser: Create user
+    passwordEdit:
+        user: Edit <i>username's</i> password
+    editUser:
+        user: Edit <i>username's</i> details
+    backToTheUserDetails: Back to the user detals
+    
+#Assets/Images            
+asset:
+    uploadFile: Załaduj plik
+    upload:
+        uploadSingleFileAndSetProperties : Upload single file <small> and set properties</small>
+        filenameCustom: Define custom filename allows to identyfing Image/asset by this name. Otherwise filename will be generated automticaly.
+        imageAssetTitleCustom: Asset title render into HTML img title attribute.
+        imageAssetPriorityCustom: Priority of image display into defined group.
+        redirectAfterClickCustom: Redirect aftter click on image canvas.
+        imageAssetSlugCustom: Image slug is using whlie identyfing and fetching.
+        mulitipleUpload: Multiple Files Upload
+    groupAssets: <i>group</i> assets
+    canvasHasDimensions: Canvas has dimensions
+    canvasWidth: width
+    canvasHeight: height
+    largerImageWillBeCroppedToCanvasDimensions: Larger image will be cropped to canvas dimensions.
+    imageAssetTitle: Image/asset title
+    imageAssetPriority: Image/asset priority
+    redirectAfterClick: Redirect after click
+    imageAssetSlug: Image/asset slug
+    editImageAsset: Edit image/asset
+    quickEdit: Quick edit
+    assetsHasBeenRemovedSuccessfuly: Assets has been removed successfuly
+    list: File list
+    group:
+        title: Image/asset group        
+        
+#Asset group
+assetGroup:
+    title: Media Library
+    list: Group list
+    imageWidth: Image width
+    imageHeight: Image height
+    imageCount: Files count
+    imageHasThumnails: Has thumbnails?
+    thumbnailWidth: Thumbnail width
+    thumbnailHeight: Thumbnail height
+    editGroup: Edit group
+    createNewGroup: Create new group
+    
+#contentGroups
+contentGroup:
+    title: Content groups
+    list: Content groups list
+    isRemovable: Is removable?
+    onlyByDeveloper: Only by developer
+    edit: Edit group
+    contentGroupFieldsAndLabels: Content group fields and labels
+    
+#Content Manager
+contentManager:
+    breadcrumbs:
+        groupContents: Group <i>groupName</i> conents
+    relatedImagesFromImageGroups: Related images <small>- from grups</small>
+    relatedImages: Related images
+    editGroup: Edit group
+    createNewContent: Add content
+    edit: Edit
+    creatingNewContent: Creating new conent
+        
+#Plupload
+plupload:
+    browserError: You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.
+            
+       
+#Settings
+settings:
+    edit: Edit
+    createNewSetting: Create new setting
+    creatingNewSetting: Creating new setting
+           
+#SEO
+seo:
+    settings: SEO settings
+    pagesList: Pages list
+    createNewSeoPage: Define new SEO page
+    creatingNewSeoPAge: Defining new SEO page
+    edit: Edit
+    deleteSeoPage: Remove SEO page
+    
+#Validation
+validation:
+    error: Validation error  
 
 #CRUD
 edit.error: An error occured while editing
@@ -83,3 +263,6 @@ setting.remove.error: An error occured while deleting setting
 
 delete.error.delete.resticted: Delete this entity is forbidden
 delete.error.delete.developer: This entity can be removed only by developer
+
+#Vendor validators
+'Bad credentials': Bad credentials
