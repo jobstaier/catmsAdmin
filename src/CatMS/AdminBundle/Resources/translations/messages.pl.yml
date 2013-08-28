@@ -119,6 +119,8 @@ global:
     value: Wartość
     directEdit: Edytuj
     qucikEdit: Szybka edycja
+    saving: Zapisywanie...
+    page: Strona
     
 #User account    
 user:
@@ -203,6 +205,14 @@ settings:
     edit: Edycja
     createNewSetting: Dodaj nowe ustawienie
     creatingNewSetting: Dodawanie nowej opcji
+           
+#SEO
+seo:
+    settings: Ustawienia SEO
+    pagesList: List zdefiniowanych stron
+    createNewSeoPage: Zdefiniuj nową stronę
+    creatingNewSeoPAge: Definiowanie nowej strony
+    edit: Edytowanie
             
 #CRUD
 crud:

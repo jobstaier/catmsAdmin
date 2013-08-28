@@ -7,30 +7,32 @@
 
 {% block breadcrumb %}
     {{ parent() }}
-    <li><a href="{{ path('seo') }}">SEO manager</a></li> <span class="divider">/</span>
-    <li class="active">Edit page {{ entity.slug }} SEO</li>
+    <li><a href="{{ path('seo') }}">{{ 'seo.pagesList' | trans }}</a></li> <span class="divider">/</span>
+    <li class="active">{{ 'seo.edit' | trans }} <i>{{ entity.slug }}</i> SEO</li>
 {% endblock %}
     
 {% block content -%}
     <legend>
-        <i class="icon-large icon-globe"></i> Edit page <i>{{ entity.slug }}</i> SEO
+        <i class="icon-large icon-globe"></i> {{ 'seo.edit' | trans }} <i>{{ entity.slug }}</i></i> SEO
     </legend>
 
     <form action="{{ path('seo-update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} style="width: 225px">
         <input type="hidden" name="_method" value="PUT" />
         {{ form_widget(edit_form) }}
+
         <div class="btn-group">
-            <a href="{{ path('seo') }}" class="btn"><i class="icon-list"></i> Back to the list</a>
-            <a href="{{ path('seo-show', { 'id': entity.id }) }}" class="btn"><i class="icon-fullscreen"></i> Show</a>
-            <button type="submit" class="btn btn-primary show-loader" data-loading-text="Saving..."><i class="icon-hdd"></i> Save</button>
+            <a href="{{ path('seo') }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>
+            <a href="{{ path('seo-show', { 'id': entity.id }) }}" class="btn btn-small"><i class="icon-fullscreen"></i> {{ 'global.show' | trans }}</a>
+            <button type="submit" class="btn btn-primary btn-small show-loader" data-loading-text="{{ 'global.saving' | trans }}"><i class="icon-hdd"></i> {{ 'global.save' | trans }}</button>
         </div>
     </form>
+    <br />
 
     <form action="{{ path('seo-delete', { 'id': entity.id }) }}" method="post">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" class="btn" data-toggle="modal" data-target="#delete"><i class="icon-trash"></i> Delete</button>
-        {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'delete', 'msg': 'Delete SEO page', 'btnTxt': 'Delete'} %}
+        <button type="submit" class="btn btn-small" data-toggle="modal" data-target="#delete"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
+        {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'delete', 'msg': 'global.deleteSeoPage' | trans, 'btnTxt': 'global.delete' | trans} %}
     </form>    
     
 {% endblock %}
