@@ -16,17 +16,17 @@
 
 {% block breadcrumb %}
     {{ parent() }}
-    <li><a href="{{ path(pathname) }}">{{ module }} settings</a></li> <span class="divider">/</span>
-    <li class="active">{{ module }} setting creation</li>
+    <li><a href="{{ path(pathname) }}">{{ module }} - {{ 'global.settings' }}</a></li> <span class="divider">/</span>
+    <li class="active">{{ 'settings.creatingNewSetting' | trans }}</li>
 {% endblock %}
     
 {% block content -%}
-    <legend><i class="icon-large icon-settings"></i> {{ module }} setting creation</legend>
+    <legend><i class="icon-large icon-settings"></i> <i>{{ module }}</i> -  {{ 'settings.creatingNewSetting' | trans }}</legend>
 
     <form novalidate action="{{ path('settings-create', {'range': range | lower }) }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
 
         <a href="{{ path(pathname) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
-        <button type="submit" data-toggle="button" class="btn btn-small btn-primary show-loader" data-loading-text="Creating..."><i class="icon-hdd"></i> Create</button>
+        <button type="submit" data-toggle="button" class="btn btn-small btn-primary show-loader" data-loading-text="{{ 'global.creating' | trans }}"><i class="icon-hdd"></i> {{ 'global.create' | trans }}</button>
     </form>  
 {% endblock %}

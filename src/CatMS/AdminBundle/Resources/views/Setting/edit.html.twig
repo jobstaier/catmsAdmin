@@ -24,12 +24,12 @@
     
 {% block breadcrumb %}
     {{ parent() }}
-    <li><a href="{{ path(pathname) }}">{{ module }} settings</a></li> <span class="divider">/</span>
-    <li  class="active">{{ entity.slug }} setting</li>
+    <li><a href="{{ path(pathname) }}">{{ module }} - {{ 'global.settings' }}</a></li> <span class="divider">/</span>
+    <li  class="active"><i>{{ entity.slug | capitalize }}</i></li>
 {% endblock %}
     
 {% block content -%}
-    <legend><i class="icon-large icon-settings"></i>Editing  <i>{{ entity.slug | capitalize }}</i> setting</legend>
+    <legend><i class="icon-large icon-settings"></i> <i>{{ entity.slug | capitalize }}</i></legend>
 
     <form novalidate action="{{ path('settings-update', { 'id': entity.id, 'range': range | lower }) }}" method="post" {{ form_enctype(edit_form) }} class="form-float">
         <input type="hidden" name="_method" value="PUT" />
@@ -49,9 +49,9 @@
         {% endif %}
         {{ form_rest(edit_form)}}
         <div>
-            <a href="{{ path(pathname) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
-            <a href="{{ path('settings-show', { 'id': entity.id, 'range': range | lower  }) }}" class="btn btn-small"><i class="icon-fullscreen"></i> Show</a>
-            <button type="submit" class="btn btn-small btn-primary show-loader" data-loading-text="Saving..."><i class="icon-hdd"></i> Save</button>
+            <a href="{{ path(pathname) }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>
+            <a href="{{ path('settings-show', { 'id': entity.id, 'range': range | lower  }) }}" class="btn btn-small"><i class="icon-fullscreen"></i> {{ 'global.show' | trans }}</a>
+            <button type="submit" class="btn btn-small btn-primary show-loader" data-loading-text="{{ 'global.saving' | trans }}"><i class="icon-hdd"></i> {{ 'global.save' | trans }}</button>
         </div>
     </form>
 
@@ -59,7 +59,7 @@
     <form action="{{ path('settings-delete', { 'id': entity.id, 'range': range | lower }) }}" method="post" class="clear" style="margin-top: 15px;">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
+        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
     </form>
     {% endif %}
 
