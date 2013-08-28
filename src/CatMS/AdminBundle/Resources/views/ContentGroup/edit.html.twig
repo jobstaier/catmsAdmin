@@ -2,8 +2,8 @@
 
 {% block breadcrumb %}
     {{ parent() }}
-    <li><a href="{{ path('content-group') }}">Content Groups</a></li> <span class="divider">/</span>
-    <li class="active">Edit group {{ truncate(entity.description | striptags | raw, 40) }}</a>
+    <li><a href="{{ path('content-group') }}">{{ 'contentGroup.title' | trans }}</a></li> <span class="divider">/</span>
+    <li class="active">{{ 'contentGroup.edit' | trans }} <i>{{ truncate(entity.description | striptags | raw, 40) }}</i></a>
 {% endblock %}
 
 {% block javascripts_bottom %}
@@ -18,15 +18,15 @@
 {% block content -%}
     {% include 'CatMSAdminBundle:Helpers:form-errors-div.html.twig' with {'form': edit_form, 'errors': errors | default() } %}
     
-    <legend><i class="icon-large icon-edit"></i> Content group <i>{{ entity.description | striptags | raw }}</i> edit</legend>
+    <legend><i class="icon-large icon-edit"></i> {{ 'contentGroup.edit' | trans }} <i>{{ entity.description | striptags | raw }}</i></legend>
 
     <form novalidate action="{{ path('content-group-update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }} class="content-manager-form">
         
         <div class="btns-up">
-            <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> Back to the list</a>
-            <a href="{{ path('content-manager-list', { 'slug': entity.slug }) }}"class="btn btn-small"><i class="icon-list"></i> Content list</a>
-            <a href="{{ path('content-manager-new', { 'group': entity.slug }) }}"class="btn btn-primary btn-small"><i class="icon-font"></i> Add content</a>
-            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="Saving..."><i class="icon-hdd icon-small"></i> Save</button>
+            <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> {{ 'global.backToTheList' | trans }}</a>
+            <a href="{{ path('content-manager-list', { 'slug': entity.slug }) }}"class="btn btn-small"><i class="icon-list"></i>  {{ 'global.contentList' | trans }}</a>
+            <a href="{{ path('content-manager-new', { 'group': entity.slug }) }}"class="btn btn-primary btn-small"><i class="icon-font"></i>  {{ 'global.addContent' | trans }}</a>
+            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="Saving..."><i class="icon-hdd icon-small"></i>  {{ 'global.save' | trans }}</button>
         </div> 
         
         <hr class="clear" />
@@ -45,7 +45,7 @@
 
         {% include 'CatMSAdminBundle:ContentGroup:widgets/labelized.html.twig' with {'form': edit_form, 'errors': errors | default() } %}
         
-        <legend class="legend-inside"><i class="icon-large icon-comment"></i> Manual</legend>
+        <legend class="legend-inside"><i class="icon-large icon-comment"></i>  {{ 'global.manual' | trans }}</legend>
         <div class="row-fluid">
             <div class="span12 input-wrapper">
                 {{ form_widget(edit_form.manual, {'attr': {'class': 'tiny_full_with_image'}}) }}
@@ -59,10 +59,10 @@
         <hr class="clear" />
         <div class="btns-bottom">
             
-            <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> Back to the list</a>
-            <a href="{{ path('content-manager-list', { 'slug': entity.slug }) }}"class="btn btn-small"><i class="icon-list"></i> Content list</a>
-            <a href="{{ path('content-manager-new', { 'group': entity.slug }) }}"class="btn btn-primary btn-small"><i class="icon-font"></i> Add content</a>
-            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="Saving..."><i class="icon-hdd icon-small"></i> Save</button>
+            <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i>  {{ 'global.backToTheList' | trans }}</a>
+            <a href="{{ path('content-manager-list', { 'slug': entity.slug }) }}"class="btn btn-small"><i class="icon-list"></i>  {{ 'global.contentList' | trans }}</a>
+            <a href="{{ path('content-manager-new', { 'group': entity.slug }) }}"class="btn btn-primary btn-small"><i class="icon-font"></i>  {{ 'global.addContent' | trans }}</a>
+            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="Saving..."><i class="icon-hdd icon-small"></i>  {{ 'global.save' | trans }}</button>
         </div> 
 
     </form>
@@ -70,7 +70,7 @@
     <form action="{{ path('content-group-delete', { 'id': entity.id }) }}" method="post" style="float: right;">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
+        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i>  {{ 'global.delete' | trans }}</button>
     </form>
     
     <hr class="clear" />

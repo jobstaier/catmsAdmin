@@ -78,9 +78,9 @@ global:
     warning: Uwaga
     and: i
     filename: Nazwa pliku
-    uploading: Ładowanie pliku . . .
+    uploading: Ładowanie pliku...
     upload: Załaduj
-    loading: Ładowanie . . .
+    loading: Ładowanie...
     asset: Obraz/plik
     markAll: Zaznacz wszystkie
     unmarkAll: Odznacz wszystkie
@@ -90,7 +90,7 @@ global:
     group: Grupa
     size: Rozmiar
     update: Zapisz
-    updating: Zapisywanie . . .
+    updating: Zapisywanie...
     showMore: Pokaż więcej
     emptyDatabase: <strong>Pusta baza danych!</strong> Nie dodano żadnych wpisów. #<strong>Empty databse!</strong> No records defined
     close: Zamknij
@@ -109,6 +109,12 @@ global:
     height: Wysokość
     addAsset: Dodaj zawartość
     creating: Tworzenie...
+    createNewGroup: Stwórz nową grupę
+    manual: Samouczek
+    records: Wpisy
+    forbidden: Zabronione
+    addContent: Dodaj treść
+    contentList: Lista treści
     
 #User account    
 user:
@@ -169,7 +175,15 @@ assetGroup:
     thumbnailHeight: Wysokość miniaturki
     editGroup: Edycja grupy
     createNewGroup: Tworzenie nowej grupy
-    
+
+#contentGroups
+contentGroup:
+    title: Grupy treści
+    list: Lista group treści
+    isRemovable: Można usunąć?
+    onlyByDeveloper: Tylko developer
+    edit: Edycja grupy
+    contentGroupFieldsAndLabels: Pola i etykiety grupy
     
 #Plupload
 plupload:
