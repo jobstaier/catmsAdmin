@@ -46,7 +46,7 @@ function getRelatedImageGroup(){
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            alert(errorThrown);
+            pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
         }
     });
 }
@@ -61,8 +61,8 @@ function renderThumbs(data, container){
             html = html + '<li><div class="image-wrapper"><a href="' + imgDirectory + properties.path + '" class="single-image"><img class="img-polaroid" src="' + imgDirectory + 
                     properties.path + '" title="' + properties.title + '"/></a></div>' +
                     '<div class="caption">'+ title +'</div>' +
-                    '<a href="' + imgDirectory + properties.path + '" class="btn btn-mini btn-success copy-source">Copy Source</a>' + 
-                    '<a href="' + editUrl+ '/' + id + '" class="btn edit btn-mini btn-primary">Edit</a>' + 
+                    '<a href="' + imgDirectory + properties.path + '" class="btn btn-mini btn-success copy-source">' + Translator.get('global.copySource') + '</a>' + 
+                    '<a href="' + editUrl+ '/' + id + '" class="btn edit btn-mini btn-primary">' + Translator.get('global.edit') + '</a>' + 
                     '</li>';
         });
     });

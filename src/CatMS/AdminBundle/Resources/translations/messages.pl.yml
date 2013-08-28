@@ -121,6 +121,15 @@ global:
     qucikEdit: Szybka edycja
     saving: Zapisywanie...
     page: Strona
+    updateDate: Data aktualzacji
+    archive: Archiwum
+    from: od
+    to: do
+    archiveDate: Data archiwizacji
+    noArchiveSaved: Brak wpisów archiwalnych
+    tutorialAvailable: Samouczek dostępny! #Tutorial available!
+    thisPageHasDefinedTutorial: Ta strona posiada zdefiniowany samouczek
+    readTutorial: Przeczytaj #Read tutorial
     
 #User account    
 user:
@@ -191,6 +200,17 @@ contentGroup:
     edit: Edycja grupy
     contentGroupFieldsAndLabels: Pola i etykiety grupy
     
+#Content Manager
+contentManager:
+    breadcrumbs:
+        groupContents: Zawartość grupy <i>groupName</i>
+    relatedImagesFromImageGroups: Powiązane obrazy <small>- grupy</small>
+    relatedImages: Powiązane obrazy
+    editGroup: Edytuj grupę
+    createNewContent: Dodaj treść    
+    edit: Edycja
+    creatingNewContent: Dodawanie treści
+    
 #Plupload
 plupload:
     browserError: Twoja przeglądarka nie wspiera Flash, Silverlight, Gears, BrowserPlus ani HTML5 #You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.
@@ -213,6 +233,7 @@ seo:
     createNewSeoPage: Zdefiniuj nową stronę
     creatingNewSeoPAge: Definiowanie nowej strony
     edit: Edytowanie
+    deleteSeoPage: Usuń stronę SEO
             
 #CRUD
 crud:

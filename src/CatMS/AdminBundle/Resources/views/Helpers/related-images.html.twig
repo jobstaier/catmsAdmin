@@ -1,12 +1,12 @@
 <script src={{ asset('js/catms.related-image.js') }}></script>
 <div class="related-images-trigger-container">
-    <a class="btn btn-small btn-success"><i class="icon-chevron-left"></i> Related images</a>
+    <a class="btn btn-small btn-success"><i class="icon-chevron-left"></i> {{ 'contentManager.relatedImages' | trans }}</a>
 </div>
 <div class="related-images-container">
     <a href="{{ path('media-library-image-edit-pure') }}" style="display: none" id="editImageUrl"></a>
     <div class="related-from-group">
         <div class="page-header no-margin">
-            <h5>Related images <small>from image group</small></h5>
+            <h5>{{ 'contentManager.relatedImagesFromImageGroups' | trans | raw }}</h5>
         </div>
         <a href="{{ path('ajax-get-related-image-groups', {'group': group.id }) }}" style="display: none" id="getRelatedImageGroupUrl"></a>
         <a href="{{ asset('uploads/media-library/') }}" style="display: none" id="getImagesDirectroyUrl"></a>

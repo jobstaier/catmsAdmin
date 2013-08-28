@@ -1,7 +1,7 @@
 <div class="btns-{{ position }}">
-    <a href="{{ path('content-manager-list', {'page': 1, 'slug': entity.contentGroup.slug }) }}" class="btn btn-small"><i class="icon-list"></i> Conent list</a>
-    <a href="{{ path('content-group-edit', {'id': entity.ContentGroup.id }) }}" class="btn btn-small"><i class="icon-tags"></i> Edit group</a>
-    <a href="{{ path('content-manager-new', {'group': entity.ContentGroup.slug }) }}" class="btn btn-primary btn-small"><i class="icon-pencil"></i> Create new content</a>
-    <button type="submit" class="btn btn-primary btn-small show-loader" data-loading-text="Loading..."><i class="icon-hdd"></i> Save</button>
+    <a href="{{ path('content-manager-list', {'page': 1, 'slug': entity.contentGroup.slug }) }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.contentList' | trans }}</a>
+    <a href="{{ path('content-group-edit', {'id': entity.ContentGroup.id }) }}" class="btn btn-small"><i class="icon-tags"></i> {{ 'contentManager.editGroup' | trans }}</a>
+    <a href="{{ path('content-manager-new', {'group': entity.ContentGroup.slug }) }}" class="btn btn-primary btn-small"><i class="icon-pencil"></i> {{ 'contentManager.createNewContent' | trans }}</a>
+    <button type="submit" class="btn btn-primary btn-small show-loader" data-loading-text="Loading..."><i class="icon-hdd"></i> {{ 'global.save' | trans }}</button>
     {#<button type="submit" disabled="disabled" class="btn btn-inverse btn-small show-loader" data-loading-text="Loading..."><i class="icon-pencil"></i> Save as draft</button>#}
 </div>
