@@ -2,12 +2,12 @@
 
 {% block breadcrumb %}
     {{ parent() }}
-    <li><a href="{{ path('image-group') }}">Image Groups</a></li> <span class="divider">/</span>
-    <li class="active">Show group {{ truncate(entity.description | striptags | raw, 40) }}</a>
+    <li><a href="{{ path('image-group') }}">{{ 'assetGroup.title' | trans }}</a></li> <span class="divider">/</span>
+    <li class="active">{{ 'global.group' | trans }} <i>{{ truncate(entity.description | striptags | raw, 40) }}</i></a>
 {% endblock %} 
         
 {% block content %}
-    <legend><i class="icon-large icon-picture"></i> Group <i>{{ entity.description | striptags | raw }}</i></legend>
+    <legend><i class="icon-large icon-picture"></i> {{ 'global.group' | trans }} <i>{{ entity.description | striptags | raw }}</i></legend>
 
     <table class="table table-striped table-hover table-bordered">
         <tbody>
@@ -20,42 +20,42 @@
                 <td>{{ entity.slug }}</td>
             </tr>
             <tr>
-                <th>Description</th>
+                <th>{{ 'global.description' | trans }}</th>
                 <td>{{ entity.description | striptags | raw }}</td>
             </tr>
             <tr>
-                <th>Image width</th>
+                <th>{{ 'assetGroup.imageWidth' | trans }}</th>
                 <td>{% if entity.imageWidth is not empty %}{{ entity.imageWidth }} px{% else %}<span class="label ">NOT DEFINED</span>{% endif %}</td>
             </tr>
             <tr>
-                <th>Image height</th>
+                <th>{{ 'assetGroup.imageHeight' | trans }}</th>
                 <td>{% if entity.imageHeight is not empty %}{{ entity.imageHeight }} px{% else %}<span class="label ">NOT DEFINED</span>{% endif %}</td>
             </tr>
             <tr>
-                <th>Has Thumbnails?</th>
-                <td>{% if entity.hasThumbnails %}<span class="label label-success">YES</span>{% else %}<span class="label label-warning">NO</span>{% endif %}</td>
+                <th>{{ 'assetGroup.imageHasThumnails' | trans }}</th>
+                <td>{% if entity.hasThumbnails %}<span class="label label-success">{{ 'global.yes' | trans }}</span>{% else %}<span class="label label-warning">{{ 'global.no' | trans }}</span>{% endif %}</td>
             </tr>
             <tr>
-                <th>Thumbnail width</th>
-                <td>{% if entity.thumbnailWidth is not empty %}{{ entity.thumbnailWidth }}px{% else %}<span class="label ">NOT DEFINED</span>{% endif %}</td>
+                <th>{{ 'assetGroup.thumbnailWidth' | trans }}</th>
+                <td>{% if entity.thumbnailWidth is not empty %}{{ entity.thumbnailWidth }}px{% else %}<span class="label ">{{ 'global.notDefined' | trans }}</span>{% endif %}</td>
             </tr>
             <tr>
-                <th>Thumbnail height</th>
-                <td>{% if entity.thumbnailHeight is not empty %}{{ entity.thumbnailHeight }}px{% else %}<span class="label ">NOT DEFINED</span>{% endif %}</td>
+                <th>{{ 'assetGroup.thumbnailHeight' | trans }}</th>
+                <td>{% if entity.thumbnailHeight is not empty %}{{ entity.thumbnailHeight }}px{% else %}<span class="label ">{{ 'global.notDefined' | trans }}</span>{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
     <div style="margin-bottom: 10px; float: left;">
-        <a href="{{ path('image-group') }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
-        <a href="{{ path('image-group-edit', { 'id': entity.id }) }}"class="btn btn-small"><i class="icon-edit"></i> Edit</a>
-        <a href="{{ path('media-library-upload', { 'group': entity.slug }) }}"class="btn btn-primary btn-small"><i class="icon-picture"></i> Add asset</a>
+        <a href="{{ path('image-group') }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>
+        <a href="{{ path('image-group-edit', { 'id': entity.id }) }}"class="btn btn-small"><i class="icon-edit"></i> {{ 'global.edit' | trans }}</a>
+        <a href="{{ path('media-library-upload', { 'group': entity.slug }) }}"class="btn btn-primary btn-small"><i class="icon-picture"></i> {{ 'global.addAsset' | trans }}</a>
     </div>
 
     <form action="{{ path('image-group-delete', { 'id': entity.id }) }}" method="post">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button style="float: right;" type="submit" data-view="left" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
+        <button style="float: right;" type="submit" data-view="left" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
     </form>
 
 {% endblock %}

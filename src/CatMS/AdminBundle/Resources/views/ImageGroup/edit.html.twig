@@ -2,8 +2,9 @@
 
 {% block breadcrumb %}
     {{ parent() }}
-    <li><a href="{{ path('image-group') }}">Asset Groups</a></li> <span class="divider">/</span>
-    <li class="active">Edit group {{ truncate(entity.description | striptags | raw, 40) }}</a>
+    <li><a href="{{ path('image-group') }}">{{ 'assetGroup.title' | trans }}</a></li> <span class="divider">/</span>
+    <li><a href="{{ path('image-group-show', {'id': entity.id}) }}">{{ 'global.group' | trans }} <i>{{ truncate(entity.description | striptags | raw, 40) }}</i></a> <span class="divider">/</span>
+    <li class="active">{{ 'assetGroup.editGroup' | trans }} <i>{{ truncate(entity.description | striptags | raw, 40) }}</i>
 {% endblock %}
 
 {% block content -%}
@@ -18,7 +19,7 @@
                 {{ form_row(edit_form.imageHeight) }}
             </div>
             <div class="span6">
-                <label for="catms_adminbundle_imagegrouptype_hasThumbnails">Has thumbnails? {{ form_widget(edit_form.hasThumbnails)}}</label><br />
+                <label for="catms_adminbundle_imagegrouptype_hasThumbnails">{{ 'assetGroup.imageHasThumnails' | trans }} {{ form_widget(edit_form.hasThumbnails)}}</label><br />
                 {{ form_row(edit_form.thumbnailWidth) }}
                 {{ form_row(edit_form.thumbnailHeight) }}
             </div>
@@ -29,15 +30,15 @@
         
         <br />
         <div style="float: left;">
-            <a href="{{ path('image-group') }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
-            <button type="submit" class="btn btn-primary btn-small show-loader" data-loading-text="Saving..."><i class="icon-hdd"></i> Save</button>
+            <a href="{{ path('image-group') }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>
+            <button type="submit" class="btn btn-primary btn-small show-loader" data-loading-text="Saving..."><i class="icon-hdd"></i> {{ 'global.save' | trans }}</button>
         </div>
     </form>
     
     <form action="{{ path('image-group-delete', { 'id': entity.id }) }}" method="post" style="float: right;">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" data-view="left" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> Delete</button>
+        <button type="submit" data-view="left" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
     </form>
     
 {% endblock %}
