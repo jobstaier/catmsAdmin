@@ -128,10 +128,20 @@ class TwigCatMSGetters extends \Twig_Extension {
         }  
     }
     
-    public function getImageFunction($slug)
+    public function getImageFunction($slug, $fetchType = 'all')
     {
         $image = $this->em->getRepository('CatMSAdminBundle:ImageUpload')
             ->findOneBySlug($slug);
-        return $image;
+        
+        if ($image != null) {
+            switch ($fetchType) {
+                case 'all':
+                    return $image;
+                case 'path':
+                    return $image->getPath();                 
+            }
+        } else {
+            return null;
+        }
     }
 }

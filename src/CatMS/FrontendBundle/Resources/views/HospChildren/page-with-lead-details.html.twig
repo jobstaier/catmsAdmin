@@ -1,0 +1,19 @@
+{% extends 'CatMSFrontendBundle::base.html.twig' %}
+
+{% block seo %}
+    {% include 'CatMSFrontendBundle:Helpers:page-seo.html.twig' with {'pageName': slug} %}
+{% endblock %}
+
+{% block content %}
+
+<div class="page-content">
+
+    <a href="{{ path('hosp-children-page', {'slug': slug }) }}">Wróć do listy</a>
+
+    <h3>{{ content.title }}</h3>
+    <div>
+        {{ content.fullText | parse_gallery | raw }}
+    </div>
+
+</div>
+{% endblock %}

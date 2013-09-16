@@ -1,0 +1,17 @@
+<div>
+    {% for item in pagination %}
+        <h3>{{ item.title }}</h3>
+        <div>
+            {{ item.shortText | raw }}
+                {% set path = get_image(item.slug, 'path') %}
+                {% if path %}
+                    <img src="{{ asset('uploads/media-library/thmb_'~path) }}" />
+                {% endif %}
+                <a href="{{ path('hosp-lead-page-details', {'slug': slug, 'contentSlug': item.slug }) }}">Czytaj więcej...</a>
+        </div>
+    {% endfor %}
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>      
+</div>

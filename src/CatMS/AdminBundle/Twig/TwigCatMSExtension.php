@@ -25,7 +25,8 @@ class TwigCatMSExtension extends \Twig_Extension {
 
     public function getFilters() {
         return array(
-            new \Twig_SimpleFilter('parse_image', array($this, 'parseImageFilter'))
+            new \Twig_SimpleFilter('parse_image', array($this, 'parseImageFilter')),
+            new \Twig_SimpleFilter('parse_gallery', array($this, 'parseGalleryFilter')),
         );
     }
 
@@ -146,6 +147,75 @@ class TwigCatMSExtension extends \Twig_Extension {
     public function varDumpFunction($var)
     {
         return var_dump($var);
+    }
+    
+        public function parseGalleryFilter($content)
+    {
+        $pattern = "(#gallery=([a-zA-Z0-9_-])+#)";
+        $matches = array();
+        preg_match_all($pattern, $content, $matches);
+        
+		$tmpContent = '';
+		
+        if ($matches) {
+            foreach($matches[0] as $key => $code) {
+
+                preg_match("(\=[a-zA-Z0-9_-]+)", $code, $idMatch);
+                    
+                $id = $idMatch[0];
+                    
+                if (isset($idMatch[0])) {
+                    $slug = ltrim($idMatch[0], '=');
+                    $imageGroup = $this->em->getRepository('CatMSAdminBundle:ImageGroup')->findOneBySlug($slug);
+                        
+                    if (is_object($imageGroup)) {
+
+                        if (count($imageGroup->getImages()) > 0) {
+                            $tmpContent = '<div class="catms-gallery-container"><h2>'.$imageGroup->getDescription().'</h2><div class="thumbs">';
+
+                            foreach ($imageGroup->getImages() as $imgId => $image) {
+                                if ($imageGroup->getHasThumbnails()) {
+
+                                    $frameHtml = 
+                                        '<a class="fancy-gallery" rel="'.$image->getImageGroup()->getSlug().'" href="'.$this->request->getBasePath().'/'.$image->getWebPath().'" alt="">'.
+                                                '<img class="catms-img" src="'.$this->request->getBasePath().'/'.$image->getThumbWebPath().'" />'.
+                                        '</a>';
+
+                                } else {
+                                    $width = ($image->getImageGroup()->getThumbnailWidth()) ? $image->getImageGroup()->getThumbnailWidth() : 150;
+                                    $height = ($image->getImageGroup()->getThumbnailHeight()) ? $image->getImageGroup()->getThumbnailHeight() : 150;
+
+                                    $frameHtml = 
+                                            '<a class="fancy-gallery" rel="'.$image->getImageGroup()->getSlug().'" href="'.$this->request->getBasePath().'/'.$image->getWebPath().'" alt="">'.
+                                                    '<img class="catms-img" style="max-width='.$width.'px; max-height='.$height.'px;" src="'.$this->request->getBasePath().'/'.$image->getThumbWebPath().'" />'.
+                                            '</a>';
+                                }
+
+                                $tmpContent .= $frameHtml;
+                            }
+
+                            $tmpContent .= 
+                                '<script>'.
+                                    '$(function(){'.
+                                            '$("a.fancy-gallery").fancybox({});'.
+                                     '})'.
+                                '</script>'.
+                            '</div></div>'; 
+                        }
+
+                    }
+						
+                }
+                    
+                $parsedContent = str_replace($code, $tmpContent, $content);
+                    
+                $content = $parsedContent;
+            }
+        } else {
+            return $content;
+        }
+
+        return $content;       
     }
     
 }

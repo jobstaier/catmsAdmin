@@ -1,0 +1,37 @@
+{% extends 'CatMSFrontendBundle::base.html.twig' %}
+
+{% block seo %}
+    {% include 'CatMSFrontendBundle:Helpers:page-seo.html.twig' with {'pageName': slug} %}
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="subpage-left">
+        <ul>
+            <li{% if slug == 'zdjecia-hospicjum'%} class="active"{% endif %}>
+                <a href="{{ path('hosp-gallery', {'slug': 'zdjecia-hospicjum'}) }}">Zdjęcia</a>
+            </li>
+            <li{% if slug == 'filmy-hospicjum'%} class="active"{% endif %}>
+                <a href="{{ path('hosp-gallery', {'slug': 'filmy-hospicjum'}) }}">Filmy</a>
+            </li>                
+        </ul>
+    </div>
+    <div class="subpage-right">
+        {% if pagination | length > 0 %}
+            {% for gallery in pagination %}
+                <h3>{{ gallery.title  }}</h3>
+                {{ gallery.fullText | parse_gallery | raw  }}
+            {% endfor %}
+                
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>                
+                
+        {% else %}
+            <span>Brak dodanych galerii</span>        
+        {% endif %}
+    </div>
+        
+    
+</div>
+{% endblock %}

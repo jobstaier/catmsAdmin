@@ -25,7 +25,7 @@ class ContentGroupController extends Controller
     public function indexAction($page)
     {
         $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT cg FROM CatMSAdminBundle:ContentGroup cg";
+        $dql   = "SELECT cg FROM CatMSAdminBundle:ContentGroup cg ORDER BY cg.slug ASC";
         $query = $em->createQuery($dql);
         
         $paginator  = $this->get('knp_paginator');
@@ -61,7 +61,7 @@ class ContentGroupController extends Controller
             $em->flush();
 
             $this->get('session')->getFlashBag()->add('noticeSuccess', 'create.success');
-            return $this->redirect($this->generateUrl('content-group-show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('content-group'));
         } else {
             $this->get('session')->getFlashBag()->add('noticeError', 'create.error');
         }
@@ -156,7 +156,7 @@ class ContentGroupController extends Controller
         $editForm->bind($request);
 
         if ($editForm->isValid()) {
-            //echo 'Controller'; die();
+            
             $em->persist($entity);
             $em->flush();
 

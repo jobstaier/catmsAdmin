@@ -1,5 +1,3 @@
-var loaderGif = '/img/loading.gif';
-
 function showAlert(header, message, type){
 var html = '<div class="alert alert-'+ type +'">' + 
        '<button type="button" class="close" data-dismiss="alert">&times;</button>' +

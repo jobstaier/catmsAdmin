@@ -13,7 +13,6 @@ $(function(){
         if (!$(this).hasClass('ready')){
             $(this).addClass('ready');
             getRelatedImageGroup();
-            getRelatedImageInjected();
         }
 
         return false;
@@ -62,7 +61,7 @@ function renderThumbs(data, container){
                     properties.path + '" title="' + properties.title + '"/></a></div>' +
                     '<div class="caption">'+ title +'</div>' +
                     '<a href="' + imgDirectory + properties.path + '" class="btn btn-mini btn-success copy-source">' + Translator.get('global.copySource') + '</a>' + 
-                    '<a href="' + editUrl+ '/' + id + '" class="btn edit btn-mini btn-primary">' + Translator.get('global.edit') + '</a>' + 
+                    '<a href="' + editUrl + '/' + id + '/' + properties.group + '" class="btn edit btn-mini btn-primary">' + Translator.get('global.edit') + '</a>' + 
                     '</li>';
         });
     });
