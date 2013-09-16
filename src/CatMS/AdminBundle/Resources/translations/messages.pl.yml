@@ -130,6 +130,7 @@ global:
     tutorialAvailable: Samouczek dostępny! #Tutorial available!
     thisPageHasDefinedTutorial: Ta strona posiada zdefiniowany samouczek
     readTutorial: Przeczytaj #Read tutorial
+    sampleContent: Wypełnij treścią
     
 #User account    
 user:
@@ -190,13 +191,13 @@ assetGroup:
     thumbnailHeight: Wysokość miniaturki
     editGroup: Edycja grupy
     createNewGroup: Tworzenie nowej grupy
+    onlyByDeveloper: Tylko developer
 
 #contentGroups
 contentGroup:
     title: Grupy treści
     list: Lista group treści
     isRemovable: Można usunąć?
-    onlyByDeveloper: Tylko developer
     edit: Edycja grupy
     contentGroupFieldsAndLabels: Pola i etykiety grupy
     
@@ -241,31 +242,37 @@ crud:
 validation:
     error: Błąd walidacji
 
-edit.error: An error occured while editing
-edit.success: Data has been changed successfuly
-upload.success: File has been uploaded successfuly
-upload.error: An error occured while uploading
-update.error: An error occured while updating 
-remove.success: Image has been removed successfuly
-remove.error: An error occured while removing file
+edit.error: Podczas edycji wystapił błąd
+edit.success: Dane zostały zmienione poprawnie
+upload.success: Plik został załadowany poprawnie
+upload.error: Podczas dodawania pliku wystapił błąd
+update.error: Podczas aktualizacji wystąpił błąd
+remove.success: Poprawnie usunięto plik
+remove.error: Podczas usuwania pliku wystąpił błąd
 
-delete.success: Data has been deleted successfuly  
-delete.error: An error occured while deleting data
+delete.success: Poprawnie usunięto dane
+delete.error: Podczas usuwanie danych wystapił błąd
 
-seo.create.success: SEO page has been created successfuly
-seo.create.error: An error occured while saving SEO page
-seo.update.success: SEO page has been updated successfuly
-seo.delete.success: SEO page has been deleted successfuly
-seo.delete.error: An error occured while deleting SEO page
+seo.create.success: Poprawnie stworzono ustawienie SEO strony
+seo.create.error: Podczas zapisu wystąpił błąd
+seo.update.success: Poprawnie zaktualizowano ustawienie SEO strony
+seo.delete.success: Poprawnie usunięto ustawienie SEO strony
+seo.delete.error: Podczas usuwanie wystąpił błąd
 
-create.success: Data has been created successfuly
-create.error: An error occured while creating data
+create.success: Poprawnie zapisano dane
+create.error: Podczas zapisu wystąpił błąd
 
-setting.remove.success: Setting has been deleted successfuly
-setting.remove.error: An error occured while deleting setting
+setting.remove.success: Poprawnie usnięto ustawienie
+setting.remove.error: Nie udało się usunąć ustawienia
 
-delete.error.delete.resticted: Delete this entity is forbidden
-delete.error.delete.developer: This entity can be removed only by developer
+delete.error.delete.resticted: Usinięcie tej treści jest zabronione
+delete.error.delete.developer: Ta treść może zostać usunięta tylko przez developera
+
+update.success: Dane zostały zmienione poprawnie
 
 #Vendor validators
 'Bad credentials': Brak uprawnień
+
+#Pagination
+Previous: Poprzednia
+Next: Następna

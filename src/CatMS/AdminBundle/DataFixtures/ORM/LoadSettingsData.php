@@ -64,6 +64,20 @@ class LoadSettingsData extends AbstractFixture  implements OrderedFixtureInterfa
         $manager->flush();
         
         
+        $entity5 = new Setting();
+        
+        $entity5->setSlug('image-groups-list-records-per-page');
+        $entity5->setDescription('Records per asset groups list page');
+        $entity5->setValue(8);
+        $entity5->setRange('panel');
+        $entity5->setFieldType('text');
+        
+        $manager->persist($entity5);
+        $manager->flush();        
+        
+        
+        
+        
     }
 
     /**

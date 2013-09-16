@@ -29,7 +29,7 @@ class ContentManagerController extends Controller
         
         $dql = "SELECT cm FROM CatMSAdminBundle:ContentManager cm 
                 JOIN cm.contentGroup cg WHERE cg.slug = :slug 
-                ORDER BY cm.priority ASC";
+                ORDER BY cm.createdAt DESC";
         
         $group = $em->getRepository('CatMSAdminBundle:ContentGroup')
             ->findOneBySlug($slug);

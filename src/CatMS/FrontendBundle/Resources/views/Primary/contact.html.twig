@@ -1,0 +1,53 @@
+{% extends 'CatMSFrontendBundle::base.html.twig' %}
+
+{% block seo %}
+    {% include 'CatMSFrontendBundle:Helpers:page-seo.html.twig' with {'pageName': 'contact'} %}
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    
+    {% for flashMessage in app.session.flashbag.get('noticeSuccess') %}
+    <div class="notice-success">
+        {{ flashMessage | trans }}
+    </div>
+    {% endfor %}
+    
+    <h2>{{ content.title }}</h2>
+    
+    <div>
+        {{ content.fullText | raw }}
+    </div>
+    
+    <form action="{{ path('nzoz-contact') }}" class="contact-form" method="post">
+        
+        <div>
+            <label for="name">Imię i Nazwisko</label>
+            <input type="text" name="name" id="name" required />
+        </div>
+        
+        <div>
+            <label for="email">Adres email</label>
+            <input type="text" name="email" id="email" />
+        </div>
+        
+        <div>
+            <label for="phone">Telefon kontaktowy</label>
+            <input type="text" name="phone" id="phone" required />
+        </div>
+        
+        <div>
+            <label for="subject">Temat</label>
+            <input type="text" name="subject" id="subject" required />
+        </div>
+        
+        <div>
+            <label for="message">Wiadomość</label>
+            <textarea name="message" id="message" required></textarea>
+        </div>
+        
+        <input type="submit" value="Wyślij" />
+    </form>
+    
+</div>
+{% endblock %}

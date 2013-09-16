@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        {% block seo %}{% endblock %}
+        <title>Hospicjum</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/reset.css') }}" />
+        <!--<link rel="stylesheet" type="text/css" href="{{ asset('css/fontface.css') }}" />-->
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />     
+        <link rel="stylesheet" href="{{ asset('fancybox/jquery.fancybox-1.3.4.css') }}" type="text/css" media="screen" />
+        
+        <!-- jQuery -->
+        <script type="text/javascript" src="{{ asset('js/jquery-1.7.2.min.js') }}"></script>              
+        <script type="text/javascript" src="{{ asset('js/jquery-ui-1.10.3.custom.min.js') }}"></script>        
+        <script type="text/javascript" src="{{ asset('js/fancybox/jquery.fancybox-1.3.4.pack.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/fancybox/jquery.easing-1.3.pack.js') }}"></script>    
+        <script type="text/javascript" src="{{ asset('js/nav.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
+        <!-- grid960 -->        
+        <link rel="stylesheet" type="text/css" media="all" href="{{ asset('css/960_12_5_5.css') }}" />        
+
+        {% block javascripts %}{% endblock %}    
+
+        <!-- css3 for ie<9 -->
+        <!--[if lt IE 9]><script src="js/IE9.js"></script><![endif]-->        
+
+    </head>
+    <body>
+       <img class="loader" src="{{ asset('img/loading.gif') }}" style="display: none;" />
+        
+       {% block slider %}{% endblock %}
+
+        <div id="top">
+            <div class="container_12">
+                <div id="header" class="grid_12">               
+                    <div class="alpha grid_8">
+                        <div id="logoBox">                            
+                            <ul>
+                                <li>
+                                    <p>
+                                        <a href="{{ path('nzoz-homepage') }}"><strong>nzoz</strong> zdrowie
+                                            <span>spółka cywilna</span>
+                                        </a>
+                                    </p>
+
+                                </li>
+                                <li>
+                                    <p>
+                                        <a href="{{ path('nzoz-homepage') }}"><strong>hospicjum</strong> domowe
+                                            <span>królowej apostołów wiśniowej</span>
+                                        </a>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="omega grid_4">
+                        <div class="callBox">
+                            <p>zadzwoń do nas</p>
+                            <strong>{{ get_setting('call-us-phone-number') | striptags }}</strong>
+                        </div>
+                    </div>
+                </div>            
+            </div>
+        </div>
+
+
+        {% include 'CatMSFrontendBundle:Helpers:navigation.html.twig' %}
+
+        {% if is_active_nav_button('primary', 'index') %}
+        <div id="sliderContainer"></div>
+        {% endif %}
+        
+        <div id="content">
+            <div class="container_12">
+                {% block content %}{% endblock %}
+                <div class="clear"> </div>
+            </div>
+        </div>
+
+
+        <!--<div class="foot_container">-->
+            <div id="footer">
+                <div  class="container_12">
+                    <div class="grid_6 left_foot" style="width: 403px;">
+                        <p>Wszelkie prawa zastrzeżone dla NZOZ zdrowie s.c.</p>
+                        <span>Wdrożenie i obsługa:</span> <a href="www.catdesign.pl">Catdesign.pl</a>
+                        <em>
+                            {{ get_setting('footer-content') | striptags }}
+                        </em>
+                    </div>
+
+                    <div class="grid_6 right_foot" style="width: 503px;">
+                        <ul>
+                            <li>Informacje</li>
+                            <li><a href="{{ path('nzoz-simple-subpage', {'slug': 'wazne-telefony'}) }}">ważne telefony dla pacjentów</a></li>
+                            <li><a href="{{ path('nzoz-simple-subpage', {'slug': 'gdzie-szukac-pomocy'}) }}">gdzie szukać pomocy</a></li>
+                            <li><a href="{{ path('nzoz-simple-subpage', {'slug': 'faq'}) }}">najczęściej zadawane pytania</a></li>
+                            <li><a href="{{ path('nzoz-contact') }}">kontakt</a></li>
+                        </ul>
+                        <ul>
+                            <li>NZOZ</li>
+                            <li><a href="{{ path('nzoz-gallery') }}">galeria</a></li>
+                            <li><a href="{{ path('nzoz-simple-subpage', {'slug': 'nasz-zespol'}) }}">personel</a></li>
+                            <li><a href="{{ path('nzoz-news-all', {'slug': 'aktualnosci'}) }}">aktualności</a></li>
+                            <li><a href="{{ path('nzoz-simple-subpage', {'slug': 'reklama'}) }}">reklama</a></li>
+                        </ul>
+                        <ul>
+                            <li>Hospicjum</li>
+                            <li><a href="{{ path('hosp-children-page', {'slug': 'historia-dzieci'}) }}">histoia naszych dzieci</a></li>
+                            <li><a href="{{ path('hosp-events-page', {'slug': 'my-w-mediach'}) }}">my w mediach</a></li>
+                            <li><a href="{{ path('hosp-gallery', {'slug': 'zdjecia-hospicjum'}) }}">galeria</a></li>
+                            <li><a href="{{ path('nzoz-simple-subpage', {'slug': 'partnerzy'}) }}">nasi partnerzy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        <!--</div>-->
+
+    </body>
+</html>

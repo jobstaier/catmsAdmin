@@ -130,7 +130,7 @@ global:
     tutorialAvailable: Tutorial available!
     thisPageHasDefinedTutorial: This page has tutorial
     readTutorial: Read tutorial
-        
+    sampleContent: Sample Content
     
 #User account    
 user:
@@ -191,13 +191,13 @@ assetGroup:
     thumbnailHeight: Thumbnail height
     editGroup: Edit group
     createNewGroup: Create new group
+    onlyByDeveloper: Only by developer
     
 #contentGroups
 contentGroup:
     title: Content groups
     list: Content groups list
     isRemovable: Is removable?
-    onlyByDeveloper: Only by developer
     edit: Edit group
     contentGroupFieldsAndLabels: Content group fields and labels
     
@@ -263,6 +263,8 @@ setting.remove.error: An error occured while deleting setting
 
 delete.error.delete.resticted: Delete this entity is forbidden
 delete.error.delete.developer: This entity can be removed only by developer
+
+update.success: Update success
 
 #Vendor validators
 'Bad credentials': Bad credentials

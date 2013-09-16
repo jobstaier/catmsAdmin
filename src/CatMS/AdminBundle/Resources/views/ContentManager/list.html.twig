@@ -70,7 +70,7 @@
     {% else %}
     <div class="alert clear" style="margin-top: 20px;">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ 'global.emptyDatabase' | trans }}
+        {{ 'global.emptyDatabase' | trans | raw }}
     </div>
     {% endif %}
 

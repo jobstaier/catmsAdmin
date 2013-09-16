@@ -1,0 +1,164 @@
+<div id="faqModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width: 800px; margin-left: -400px;">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 id="myModalLabel">FAQ - Najczęściej zadawane pytania</h4>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li>
+                <h4>Jak dodawać zdjęcia do wpisu?</h4>
+                <div>
+                    <p> do wpisu najłatwiej dodać w następujący sposób:
+                    Przeglądając bibliotekę mediów klikamy na ikonkę Kopiuj Źródło <i class="icon-screenshot"></i> interesującego nas zdjęcia i kopiujemy 
+                    wyświetlony tam adres źródła.<br />
+                    Następnie w Edytorze Tekstowym dowolnej treści klikamy ikonkę Insert/edit image i wklejamy w wyświetlone okno skopiowany wszęśniej adres
+                    źródła.</p>
+                </div>
+            </li><br />
+            <li>
+                <h4>Jak dodawać galerie do wpisu?</h4>
+                <div>
+                    <p>Aby dodać galerię można wykorzystać istniejącą już Grupę Biblioteki Mediów, lub stworzyć nową Grupę Biblioteki Mediów.<br />
+                    Galerie tworzone są na podstawie właściwości Slug Grupy Biblioteki Mediów.<br />
+                    Załóżmy, że mam stworzoną grupę Biblioteki Mediów: "Przykładowa Galeria" o zdefiniowanej właściwości Slug równej "przykladowa-galeria".<br />
+                    Jeżeli dany wpis przewiduje możliwość implementacji galerii informacja taka znajduje się w Saouczku do danej grupy Treści (guzik Przeczytaj).<br />
+                    Sama implementacja galerii polega na wpisaniu w treści następującego kodu:
+<pre>
+#gallery=SLUG_GRUPY_BIBLIOTEKI_MEDIÓW# - czyli np. #gallery=przykladowa_galeria# - nagłówkiem tej galerii będzie "Przykładowa Galeria", zgodnie
+z opisem Grupy Biblioteki Mediów.    
+</pre>
+                    </p>
+                </div>
+            </li><br />
+            <li>
+                <h4>Jak wygląda struktura aplikacji odpowiedzialna za treść na stronie?</h4>
+                <div>
+                    <p>Treść wyświetlana na implementowanej witrynie podzielona jest na Grupy Treści, Grupy Mediów, Ustawienie Frontend oraz SEO.</p>
+                    <p>Jedna Grupa Mediów może zawierać wiele pojedynczych Wpisów, które w zależności o skonfigurowania przez programistę witryny mogę pełnić rolę dowolnej
+                    podstrony, listy skrótów artykułów wraz i ich pełną treścią i/lub paginacją, podstron dostępnych z menu witryny i wiele innych możliwości.</p>
+
+                    <p>Obrazy/pliki grupowane są w obrębie grup Biblioteki Mediów. Biblioteki można swobodnie dodawać i usuwać. Nie ma jednak możlwości usunięcia grupy
+                    Undefined, która jest kontenerem dla wszystkich obrazów nie przyporządkowanych do konkretnej grupy.</p>
+                </div>
+            </li><br />
+            <li>
+                <h4>Jaki jest podział i uprawnienia użytkowników w systemie.</h4>
+                <div>
+                    <p>W systemie wyróżniamy następujące role użytkowinika:<br /><br />
+                    Użytkownik - aktualnie brak uprawnieni admministracyjncych, jednak obecność tej roli może zostać wykorzystana w przyszłości w przypadku rozwoju
+                    aplikacji o autentykację użytkownika nie administracyjengo.<br />
+                    Administrator - posiada uprawnienie logowania do Panelu Administracyjnego, edytowania większości treści. Posiada jednak ograniczenia edycji
+                    zawartości istotnej dla działani i struktury aplikacji.<br />
+                    Developer - twórca aplikacji, ze względu na pełnioną rolę posiada najwyższe uprawnienia. Nie zaleca się tworzenia nowych użytkowników o tej roli, 
+                    jeżeli nie jesteś twórcą aplikacji.</p>
+                </div>
+            </li><br />
+            <li>
+                <h4>Jak dodać nowego użytkownika?</h4>
+                <div>
+                    <p>Dodawanie nowe użytkownika odbywa się z module Użytkownicy > Dodaj nowego użytkownika. Po stworzeniu nowego użytkownika zostanie dle niego automatycznie
+                    wygenerowane hasło, które zostenie wysłane na jego adres mailowy wraz z informacją o doddaniu go do systemu.</p>
+                </div>
+            </li><br />             
+            <li>
+                <h4>Zapomniałem hasła, co teraz?</h4>
+                <div>
+                    <p>Jeżeli jesteś użytkownikiem CatMS a zapomniałeś hasła, wystarczy że w formularzu logowanie klikniesz Zapomniałem hasła? oraz podacz adres mailowy
+                    podany podczas rejestracji. Następnie postępuj zgodnie z wytycznymi przesłanymi na twój adres mailowy.</p>
+                </div>
+            </li><br />              
+            <li>
+                <h4>Ilu użytkowników można dodać do systemu?</h4>
+                <div>
+                    <p>Właściwie to nie istnieje maksymalna dopuszczalana ilość użytkowników dodanych do systemu.</p>
+                </div>
+            </li><br />              
+            <li>
+                <h4>Jak prywrócić wpis archiwalny?</h4>
+                <div>
+                    <p>Aby przywrócić treść archiwalną dowolnego wpisu tekstowego wystarczy kliknąć przycis Archiwum, wybrać odpowiednią wersję wpisy oraz kliknięciu w
+                    przycisk Importuj.</p>
+                </div>
+            </li><br />  
+            <li>
+                <h4>Jak mogę zmieniać ustawienia SEO?</h4>
+                <div>
+                    <p>Dla większości podstron istnieje możliwość edycji ustawień istotnych dla SEO taki jak:<br /><br />
+
+                    Page Title (Tytuł strony)<br />
+                    Meta Description (Opis strony)<br />
+                    Meta Keywords (Słowa kluczowe)<br /><br />
+
+                    Iche edcyja dostępna jest w module SEO.</p>
+                </div>
+            </li><br />              
+            <li>
+                <h4>W jaki sposób dodawać zdjęcia/pliki do systemu?</h4>
+                <div>
+                    <p>Zdjęcia do systemu dodaje się w module Bibliotelka mediów. Są dwie metedy dodawania zdjęć.<br /> 
+                    Dodawanie pojedynczego zdjęcia do grupy<br /><br />
+                    Dodawanie kliku zdjęć jednocześnie. Tą metodą nie można dodawać innych plików niż pliki graficzne.<br />
+                    Jeżeli nie istnieje grupa zdjęć powiązana tematycznie z zawartością dodawanego zdjęcia można je dodać do grupy Undefined,
+                    lub stworzyć nową grupę, która będzie odpowiadała ze przechowywanie zdjęć o danej tematyce.</p>
+                </div>
+            </li><br />     
+            <li>
+                <h4>Czy mogę dodać do systemu inne pliki niż pliki graficzne?</h4>
+                <div>
+                    <p>Tak, do sytemu można dodać pliki z dowolnym rozszeżeniem. Jednak listowania zawartości poszczególnych grup
+                    jest dostosowane do ich zawartości. <br />Dlatego też nie należy dodawać np. pliku w formacie PDF do przykładowej
+                    grupy Galeria Kwiatów</p>
+                </div>
+            </li><br />             
+            <li>
+                <h4>Jak dodać zdjęcie nagłówkowe wpisu na liście wpisów?</h4>
+                <div>
+                    <p>Aby dodać zdjęcie nagłówkego do wpisu należy w pierwszej kolejności upewnić się, że taka funkcjonalność
+                    została dodana do danej grupy wpisów. Informację o tym można znaleźć w Samouczku dostępnym przy tworzeniu
+                    lub edycji wpisu w wybranej grupie. <br />Jeżeli informacja o tym, że istnieje taka możliwość znajdcuje się
+                    w samouczku zdjęcie nagłówkowe dodaje się w opisany poniżej sposób.</p>
+
+                    <p>Przy edycji danego wpisu sprawdzamy wartość "Właściwość Slug", a w momencie dodawania nowego wpisu ustawiamy
+                    dowolną i zapamiętujemy. <br />Następnie dodajemy nowe zdjęcie do Biblioteki Mediów i ustawiamy w polu Właściwość Slug
+                    taką samą wartość jak ma wpis do którego chcemy dodać zdjęcie nagłówkowe.</p>
+
+                    <p>Zdjęcie warto odpowiednio grupować, żeby zachować porządek w systemie. Dlatego też dodawaj zdjęcia do grup już
+                    istniejących powiązancyh treścią z dodwanym obrazem. <br />Jeżeli nie ma takiej grupy do możesz dodać plik do grupy Undefined 
+                    lub stworzyć nową grupę.</p>
+                </div>
+            </li><br /> 
+            <li>
+                <h4>Co to jest Slug?</h4>
+                <div>
+                    <p>Wartość Slug to unikatowa nazwa wybranego wpisu lub pliku w systemie. Dzięki możliwości ich modyfikowania podczas tworzenia
+                    nowej zawartości możemy uzyskać przejrzystą identyfikację danego wpisu w adresie URL, co jest bardzo wskazane przy pozycjonowaniu strony.
+                    UWAGA! Zachowaj szczególną ostrożność przy edycji istniejących już wpisów. System bardzo często jest już skonfigurowany aby korzystać 
+                    z istniejących wartości Slug, a ich zmiana może spowodaować nieoczekiwane błędy w działaniu.</p>
+                </div>
+            </li><br />     
+            <li>
+                <h4>Jak stworzyć Grupę Biblioteki Mediów?</h4>
+                <div>
+                    <p>Stworzenie Biblioteki Mediów dodajemy poprzez wyklikanie:<br /><br />
+                    Menu Główne -> [Biblioteka Mediów] Stwórz Grupę -> Wypełnienie właściwości grupy.<br />
+                    Zaznaczenie opcji Has Thumbnails? spowoduje automatyczne generowanie miniaturki dla każdego dodawanego do tej grupy zdjęcia. Zaznaczenie
+                    tej opcji pozwala na zdefiniowanie rozmiarów miniatruki. <br />
+                    Wypełnienie opcji Wysokość i Szerokość obrazu spowoduje automatyczne skalowanie każdego dodawanego do grupy obrazu.</p>
+                </div>
+            </li><br />   
+            <li>
+                <h4>Jak powiązać Grupę Treści z Grupą Biblioteki Mediów? Jakie są z tego korzyści?</h4>
+                <div>
+                    <p>Aby powiązać Grupę Mediów z Grupą Treści, należy wejść w tryb edycji Grupy Treści i wybrać odpowiednią Grupę Mediów z listy w prawej górnej
+                    części ekranu. <br />Jeżeli chcesz połączyć z Grupą Treśći kilka Grup Mediów, należy przy wybieraniu (kliknięciu w grupę) powiązanych Grup Mediów 
+                    przytrzymać klawisz CTRL.</p>
+                    <p>Powiązanie grup umożliwa łatwiejszy dostęp do dodanych do Grup Mediów obrazów podczas edycji treści. Obrazy z powiązanych grup wyświetlą się
+                    gdy klikniemy pomarańczowy przyski Powiązane Obrazy, widoczny z prawej strony ekranu podczas edycji wpisu lub przeglądania wpsiów Grupy Treści.  </p>
+                </div>
+            </li>                    
+        </ul>        
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" data-dismiss="modal" aria-hidden="true">{{ 'global.close' | trans }}</button>
+    </div>
+</div>
