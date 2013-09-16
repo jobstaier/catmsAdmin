@@ -22,7 +22,7 @@
         {% for entity in pagination %}
             <tr>
                 <td>{#<a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.id }}</a>#}
-                    <img class="gravatar" src="{{ entity.gravatar }}" alt="{{ entity.email }}">
+                    <img style="padding: 5px;" class="gravatar" src="{{ entity.gravatar }}" alt="{{ entity.email }}">
                 </td>
                 <td>{{ entity.username }}</td>
                 <td>{{ entity.email }}</td>
