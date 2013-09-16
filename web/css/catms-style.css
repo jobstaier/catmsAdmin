@@ -498,3 +498,16 @@ thead {
 .cell-center a {
     margin-top: 10px;
 }
+
+.gravatar {
+    border-radius: 500px;
+}
+
+.user-list td {
+    vertical-align: middle;
+}
+
+.user-list td:nth-child(1) {
+    width: 90px;
+    text-align: center;
+}

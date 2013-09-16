@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use CatMS\AuthBundle\Entity\User;
 use CatMS\AuthBundle\Form\UserType;
 use CatMS\AuthBundle\Form\ChangePasswordType;
+use CatMS\AdminBundle\Utility\Gravatar;
 
 /**
  * User controller.
@@ -33,6 +34,13 @@ class UserController extends Controller
             $this->get('request')->query->get('page', $page),
             $this->container->getParameter('knp_paginator.page_range')
         );
+        
+        $gravatar = new Gravatar;
+        foreach ($pagination as $user) {
+            $user->setGravatar(
+                $gravatar->getGravatar($user->getEmail())
+            );
+        }
 
         return array(
             'pagination' => $pagination,
@@ -118,6 +126,9 @@ class UserController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
+        
+        $gravatar = new Gravatar();
+        $entity->setGravatar($gravatar->getGravatar($entity->getEmail()));
 
         $deleteForm = $this->createDeleteForm($id);
 

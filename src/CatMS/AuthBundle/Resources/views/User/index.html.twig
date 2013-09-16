@@ -8,10 +8,10 @@
 {% block content -%}
     <legend><i class="icon-large icon-parents"></i> {{ 'user.users' | trans }}</legend>
 
-    <table class="records_list table table-hover">
+    <table class="records_list table table-hover user-list">
         <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'Id', 'u.id') }}</th>
+                <th>{# knp_pagination_sortable(pagination, 'Id', 'u.id') #}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'user.username' | trans, 'u.username') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'Email', 'u.email') }}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'user.isActive'|trans , 'u.isActive') }}</th>
@@ -21,7 +21,9 @@
         <tbody>
         {% for entity in pagination %}
             <tr>
-                <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{#<a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.id }}</a>#}
+                    <img class="gravatar" src="{{ entity.gravatar }}" alt="{{ entity.email }}">
+                </td>
                 <td>{{ entity.username }}</td>
                 <td>{{ entity.email }}</td>
                 <td>{% if entity.isActive != 0 %}{{ 'global.yes' | trans }}{% else %}{{ 'global.no' | trans }}{% endif %}</td>
