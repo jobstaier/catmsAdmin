@@ -111,12 +111,14 @@
             
         </div>
         <div style="float: right">
+            {% if image.mimeType == 'image/jpeg' or image.mimeType == 'image/png' %}
             <a class="single-image" href="{{ asset('uploads/media-library/')~image.path }}">
                 <img src="{{ asset('uploads/media-library/')~image.path }}" class="img-polaroid" style="max-width: 500px" />
             </a>
+            {% endif %}
         </div>
         
-        <div style="margin-top: 20px; float: left;">
+        <div style="margin-top: 20px; float: left; clear: both;">
             {% if group is defined %}
                 <a href="{{ path('media-library', {'page': 1, 'slug': group}) }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>    
             {% else %}

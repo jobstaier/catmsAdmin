@@ -9,7 +9,7 @@ tinymce.init({
     paste_remove_styles_if_webkit: true,
     paste_strip_class_attributes: true,
     tools: "inserttable",
-    toolbar: "undo redo | styleselect | bold italic underline strikethrough | lignleft aligncenter alignright alignjustify | numlist bullist outdent indent | code | forecolor | image | link"
+    toolbar: "undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent | code | forecolor | image | link"
 });
 
 tinymce.init({

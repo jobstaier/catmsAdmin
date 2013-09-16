@@ -53,6 +53,7 @@
         {% if is_granted('ROLE_DEVELOPER') %}
         <li {% if is_active_nav_button('imagegroup', 'new') %}class="active"{% endif %}><a href="{{ path('image-group-new') }}"><i class="icon-pencil"></i> {{ 'nav.contentManager.list.createGroup' | trans }}</a></li>
         {% endif %}
+           
     </ul>
 </li>
 
@@ -102,4 +103,9 @@
         <li><a href="{{ path('seo-new') }}"><i class="icon-plus"></i> {{ 'nav.seo.list.createSeoSettings' | trans }}</a></li>
         {% endif %}
     </ul>
+</li>
+
+<li class="divider-vertical"></li>
+<li>
+    <a href="#faqModal" role="button" data-toggle="modal">FAQ</a>
 </li>

@@ -1,0 +1,64 @@
+nzoz-homepage:
+    pattern:  /
+    defaults: { _controller: CatMSFrontendBundle:Primary:index }
+    
+nzoz-news-all:    
+    pattern:  /nzoz/archiwum/{slug}/{page}
+    defaults: { _controller: CatMSFrontendBundle:Primary:newsAll, page: 1 }
+    requirements: {page: \d+}
+    
+nzoz-news-details:
+    pattern:  /aktualnosci/{slug}
+    defaults: { _controller: CatMSFrontendBundle:Primary:newsDetails }
+    
+nzoz-contact:
+    pattern:  /kontakt
+    defaults: { _controller: CatMSFrontendBundle:Primary:contact }    
+    
+nzoz-gallery:
+    pattern:  /nzoz/galeria/{page}
+    defaults: { _controller: CatMSFrontendBundle:Gallery:nzozGallery, page: 1 }         
+    
+hosp-gallery:
+    pattern:  /hospiscjum/galeria/{slug}/{page}
+    defaults: { _controller: CatMSFrontendBundle:Gallery:hospGallery, page: 1 }     
+    
+nzoz-assets:
+    pattern:  /nzoz/dokumenty-do-pobrania
+    defaults: { _controller: CatMSFrontendBundle:Assets:nzozAssets }         
+    
+hosp-assets:
+    pattern:  /hospiscjum/dokumenty-do-pobrania
+    defaults: { _controller: CatMSFrontendBundle:Assets:hospAssets }     
+    
+hosp-group-page:
+    pattern:  /hospicjum/{slug}
+    defaults: { _controller: CatMSFrontendBundle:GroupPage:hospGroupPage }     
+    
+nzoz-group-page:
+    pattern:  /nzoz/{slug}
+    defaults: { _controller: CatMSFrontendBundle:GroupPage:nzozGroupPage }      
+    
+hosp-children-page:
+    pattern:  /hospicjum/nasze-dzieci/{slug}/{page}
+    defaults: { _controller: CatMSFrontendBundle:HospChildren:hospGroupPage, page: 1 }   
+    requirements: {page: \d+}
+    
+hosp-lead-page-details:    
+    pattern:  /hospicjum/nasze-dzieci/{slug}/{contentSlug}
+    defaults: { _controller: CatMSFrontendBundle:HospChildren:hospGroupPageDetails }   
+    
+hosp-events-page:    
+    pattern:  /hospicjum/wydarzenia/{slug}/{page}
+    defaults: { _controller: CatMSFrontendBundle:Events:eventsPage, page: 1 }   
+    requirements: {page: \d+}  
+    
+hosp-events-lead-page-details:    
+    pattern:  /hospicjum/wydarzenia/{slug}/{contentSlug}
+    defaults: { _controller: CatMSFrontendBundle:Events:eventsPageDetails }      
+    
+nzoz-simple-subpage:
+    pattern:  /{slug}
+    defaults: { _controller: CatMSFrontendBundle:Primary:simpleSubpage }    
+    
+ 

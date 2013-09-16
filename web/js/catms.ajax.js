@@ -22,6 +22,11 @@ $(document).ready(function(){
                             handler.append('<li><a href="' + tmpImageGroupUrl + '/' + obj.id + '"><i class="icon-picture"></i> ' + obj.description  + '</a></li>');
                         });
                         
+                        $('#image-groups-submenu').css({
+                            'max-height': parseInt($(window).height() - 150) + 'px',
+                            'overflow-y': 'scroll'
+                        });
+                        
                     } else {
                         handler.append('<li><a href="#"><i class="icon-remove-sign"></i> No groups defined</a></li>')
                     }
@@ -62,6 +67,12 @@ $(document).ready(function(){
                         for (slug in groups) {
                             cHandler.append('<li><a href="' + tmpImageGroupUrl + '/1/' + slug + '"><i class="icon-tag"></i> ' + groups[slug]  + '</a></li>')
                         }
+
+                        $('#content-groups-submenu').css({
+                            'max-height': parseInt($(window).height() - 150) + 'px',
+                            'overflow-y': 'scroll'
+                        });
+                        
                     } else {
                         cHandler.append('<li><a href="#"><i class="icon-remove-sign"></i> No groups defined</a></li>')
                     } 

@@ -27,7 +27,7 @@ class ImageUpload
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
      *      min = "5",
-     *      max = "50",
+     *      max = "255",
      *      minMessage = "Title must be at least {{ limit }} characters length",
      *      maxMessage = "Title cannot be longer than {{ limit }} characters length"
      * )
@@ -233,6 +233,7 @@ class ImageUpload
     {
         if (null !== $this->getFile()) {
             if ($this->name != null) {
+                $this->name = $this->slugify($this->name);
                 $i = 0;
                 while (file_exists($this->getUploadRootDir().'/'.$this->name.'.'.$this->getFile()->guessExtension())) {
                    $i++;
@@ -543,5 +544,33 @@ class ImageUpload
     public function getSystemThmbPrefix()
     {
         return 'sThmb_';
+    }
+    
+    public function slugify($text)
+    {
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\\pL\d]+~u', '-', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // transliterate
+        if (function_exists('iconv'))
+        {
+            $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+        }
+
+        // lowercase
+        $text = strtolower($text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        if (empty($text))
+        {
+            return 'n-a';
+        }
+
+        return $text;
     }
 }

@@ -115,13 +115,14 @@ class MediaLibraryController extends Controller
             $groupEntity = null;
         }
         
+        
         if ($this->getRequest()->isMethod('POST')) {
 
             $form->bind($this->getRequest());
-
-            if ($form->isValid()) {
+            
+            $formFile = $this->getRequest()->files->get('form');
+            if ($form->isValid() && is_object($formFile['file'])) {
                 $em = $this->getDoctrine()->getManager();
-                
                 
                 $files = $this->getRequest()->files->get('form');
                 if ($files['file'] == null) {

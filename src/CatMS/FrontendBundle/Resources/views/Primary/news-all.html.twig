@@ -1,0 +1,51 @@
+{% extends 'CatMSFrontendBundle::base.html.twig' %}
+
+{% block seo %}
+    {% include 'CatMSFrontendBundle:Helpers:page-seo.html.twig' with {'pageName': 'news-list' } %}
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <h2>Archiwum {{ header }}</h2>
+    
+    <div>
+        <div class="subpage-left">
+            <ul>
+                <li>
+                    <a href="{{ path('nzoz-news-all', {'slug': 'aktualnosci'}) }}">Aktualności</a>
+                </li>
+                <li>
+                    <a href="{{ path('nzoz-news-all', {'slug': 'ochrona-zdrowia'}) }}">Ochrona Zdrowia</a>
+                </li>                
+            </ul>
+        </div>
+        <div class="subpage-right">
+            {% if pagination | length > 0 %}
+            <ul class="news-list">
+                {% for tweet in pagination %}
+                    <li>
+                    <h5 class="created-at">{{ tweet.createdAt | date('d.m.Y H:i:s') }}</h5>
+                    <div class="tweet-container">
+                        {% set imgPath = get_image(tweet.slug, 'path') %}
+                        {% if imgPath %}
+                            <img class="downBorder" src="{{ asset('uploads/system-thumbs/sThmb_' ~ imgPath) }}" alt="#" />
+                        {% endif %}
+                            <h3 class="tweet-header"><a href="{{ path('nzoz-news-details', {'slug': tweet.slug}) }}">{{ tweet.title }}</a></h3>
+                        <p>
+                            {{ tweet.shortText | stripp }}
+                        </p>
+                    </div>   
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+            {% else %}    
+                <span>Brak wpisów archiwalnych</span>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

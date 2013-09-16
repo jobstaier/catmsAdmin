@@ -1,0 +1,25 @@
+{% extends 'CatMSFrontendBundle::base.html.twig' %}
+
+{% block seo %}
+    {% include 'CatMSFrontendBundle:Helpers:page-seo.html.twig' with {'pageName': suf~'-assets'} %}
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <h2>{{ content.title }}</h2>
+    <div>
+        {{ content.fullText | raw }}
+    </div>
+    <hr />
+    
+    {% if assets | length > 0 %}
+    <ul>
+        {% for asset in assets %}
+        <li>
+            <a href="{{ asset('uploads/media-library/')~asset.path }}">{{ asset.title | default('Dokument')}}</a>
+        </li>
+        {% endfor %}
+    </ul>        
+    {% endif %}
+</div>
+{% endblock %}

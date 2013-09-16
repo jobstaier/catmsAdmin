@@ -1,0 +1,52 @@
+{% extends 'CatMSFrontendBundle::base.html.twig' %}
+
+{% block seo %}
+    {% include 'CatMSFrontendBundle:Helpers:page-seo.html.twig' with {'pageName': content.slug} %}
+{% endblock %}
+
+{% block content %}
+
+<div class="page-content">
+    <div>
+        <h2>Nasze dzieci</h2>
+        <div class="subpage-left">
+            {% if subpages | length > 0 %}
+                <ul>
+                {% for page in subpages %}
+                <li{% if content.slug == page.slug %} class="active"{% endif %}>
+                    <a href="{{ path('hosp-children-page', {'slug': page.slug}) }}">
+                        {{ page.title }}
+                    </a>    
+                </li>
+                {% endfor %}  
+                </ul>
+            {% endif %}
+        </div>
+        <div class="subpage-right">
+            <div class="subpage-content">
+                <h4>{{ content.title }}</h4>
+                <div class="conent-wrapper">
+                    {% if not pagination or (pagination and pagination.currentPageNumber == 1) %}
+                        {{ content.fullText | parse_gallery | raw }}
+                    {% endif %}
+                    {% if subpages | length > 0 %}
+                        {% for leaded in pagesWithLead %}
+                            {% if content.slug in leaded %}
+                                {% include 'CatMSFrontendBundle:HospChildren:page-with-lead.html.twig' with {'pagination': pagination, 'slug': content.slug} %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}                        
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+<script>
+$(function(){
+    $('.subpage-left ul li a').click(function(){
+        //showLoader();
+    });
+});
+</script>
+{% endblock %}

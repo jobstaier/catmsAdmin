@@ -74,9 +74,8 @@ class UserController extends Controller
                     'CatMSAuthBundle:Email:create-account.html.twig',
                     array('newPw' => $plainPassword, 'username' => $entity->getUsername())
                 )
-            )
-        ;
-        $this->get('mailer')->send($message);
+            );
+            $this->get('mailer')->send($message);
 
             $this->get('session')->getFlashBag()->add('noticeSuccess', 'User has been create. Temporary password is '.$plainPassword);
             

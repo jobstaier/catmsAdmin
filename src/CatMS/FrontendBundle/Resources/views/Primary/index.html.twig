@@ -1,0 +1,91 @@
+{% extends 'CatMSFrontendBundle::base.html.twig' %}
+
+{% block seo %}
+    {% include 'CatMSFrontendBundle:Helpers:page-seo.html.twig' with {'pageName': 'index'} %}
+{% endblock %}
+
+{% block javascripts %}     
+    <link rel="stylesheet" type="text/css" media="all" href="{{ asset('css/bjqs.css') }}" />
+    <script type="text/javascript" src="{{ asset('js/bjqs-1.3.js') }}"></script>     
+    <script>
+        $(function(){
+            $('#banner-fade').bjqs({
+                'height' : 982,
+                'width' : 1400,
+                'responsive' : true
+            });          
+        });
+    </script>
+{% endblock %}
+
+
+{% block slider %}
+<div id="slCont" style="width: 100%; text-align: center; display: block; position: absolute; top: 0px;">
+    <div id="banner-fade" style="">
+        <ul class="bjqs">
+            {% if slides | length > 0 %}
+                {% for slide in slides %}
+                <li>
+                    <div class="slContent" style="background-image:url('{{ asset('uploads/media-library/')~slide.path }}'); width: 100%; height: 982px; text-align: center;">
+                        <div class="slide" style="  margin: 0 auto;  display: block; min-height: 200px; width: 995px;">
+                            {{ slide.title | raw }}
+                        </div>
+                    </div>
+                </li>                
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div  class="grid_6">      
+    <div class="boxContent">
+        <span><a href="{{ path('nzoz-news-all', {'slug': 'aktualnosci'}) }}">aktualności</a></span>
+
+        {% if news | length > 0 %}
+            {% for tweet in news %}
+                <div class="photoBox">
+                    {% set imgPath = get_image(tweet.slug, 'path') %}
+                    {% if imgPath %}
+                        <img class="downBorder" src="{{ asset('uploads/media-library/thmb_' ~ imgPath) }}" alt="#" />
+                    {% endif %}
+                    <span>{{ tweet.title }}</span>
+                    <p>
+                        {{ tweet.shortText | stripp }}
+                    </p>
+                    <a class="readMore" href="{{ path('nzoz-news-details', {'slug': tweet.slug }) }}">czytaj więcej</a>
+                </div>                
+            {% endfor %}
+        {% endif %}
+
+    </div>
+</div>
+<div  class="grid_6">                                        
+    <div class="boxContent rightBC">
+
+        <span>o nas</span>
+        <div class="about_us"> 
+            <p class="italic">
+                {{ get_content('o-nas-content-1', 'fullText') | stripp | raw }}
+            </p>
+            <img class="downBorder" src="{{ asset('uploads/media-library/')~get_image('team-photo', 'path') }}" alt="#" />
+            <img src="{{ asset('uploads/media-library/')~get_image('nfz', 'path') }}" alt="#" />
+            <a class="readMore button" href="{{ path('nzoz-simple-subpage', {'slug': 'nasz-zespol'}) }}">nasz zespół</a>
+            <p>
+                {{ get_content('o-nas-content-1', 'fullText') | stripp | raw }}
+            </p>
+        </div>  
+
+        <span>dokumenty</span>
+        <ul class="listFiles">
+            {% if docs | length > 0 %}
+                {% for doc in docs %}
+                    <li><a href="{{ asset('uploads/media-library/')~doc.path }}"><img src="{{ asset('img/i2.png') }}" alt="#" /> {{ doc.title }}</a></li>
+                {% endfor %}
+            {% endif %}
+        </ul>                                             
+    </div>
+</div>
+{% endblock %}

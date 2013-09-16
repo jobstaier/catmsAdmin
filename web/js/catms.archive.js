@@ -56,8 +56,5 @@ function importContent(data) {
         tinymce.editors[1].execCommand('mceSetContent', false, content);
     } catch(err) {
         console.log(err);
-    }
-        
-
-
+    } 
 }

@@ -87,6 +87,8 @@ class AjaxController extends Controller
                     $img->getPath();
                 $relatedArr[$imageGroup->getDescription()][$img->getId()]['title'] = 
                     $img->getTitle();
+                $relatedArr[$imageGroup->getDescription()][$img->getId()]['group'] = 
+                    $img->getImageGroup()->getSlug();
             }
         }
 
