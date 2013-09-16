@@ -14,7 +14,6 @@ Galerie tworzone są na podstawie właściwości Slug Grupy Biblioteki Mediów.
 Załóżmy, że mam stworzoną grupę Biblioteki Mediów: "Przykładowa Galeria" o zdefiniowanej właściwości Slug równej "przykladowa-galeria".
 Jeżeli dany wpis przewiduje możliwość implementacji galerii informacja taka znajduje się w Saouczku do danej grupy Treści (guzik Przeczytaj).
 Samo implementacja galerii polega na wpisaniu w treści następującego kodu:
-
 #gallery=SLUG_GRUPY_BIBLIOTEKI_MEDIÓW# - czyli np. #gallery=przykladowa_galeria# - nagłówkiem tej galerii będzie "Przykładowa Galeria", zgodnie
 z opisem Grupy Biblioteki Mediów.
 
