@@ -1,174 +1,107 @@
-Symfony Standard Edition
+CatMS Admin - FAQ
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
-application that you can use as the skeleton for your new applications.
+1. Jak dodawać zdjęcia do wpisu?
+Zdjęcie do wpisu najłatwiej dodać w następujący sposób:
+Przeglądając bibliotekę mediów klikamy na ikonkę Kopiuj Źródło <i class="icon-screenshot"></i> interesującego nas zdjęcia i kopiujemy 
+wyświetlony tam adres źródła.
+Następnie w Edytorze Tekstowym dowolnej treści klikamy ikonkę Insert/edit image i wklejamy w wyświetlone okno skopiowany wszęśniej adres
+źródła.
 
-This document contains information on how to download, install, and start
-using Symfony. For a more detailed explanation, see the [Installation][1]
-chapter of the Symfony Documentation.
+2. Jak dodawać galerie do wpisu?
+Aby dodać galerię można wykorzystać istniejącą już Grupę Biblioteki Mediów, lub stworzyć nową Grupę Biblioteki Mediów.
+Galerie tworzone są na podstawie właściwości Slug Grupy Biblioteki Mediów.
+Załóżmy, że mam stworzoną grupę Biblioteki Mediów: "Przykładowa Galeria" o zdefiniowanej właściwości Slug równej "przykladowa-galeria".
+Jeżeli dany wpis przewiduje możliwość implementacji galerii informacja taka znajduje się w Saouczku do danej grupy Treści (guzik Przeczytaj).
+Samo implementacja galerii polega na wpisaniu w treści następującego kodu:
 
-1) Installing the Standard Edition
-----------------------------------
+#gallery=SLUG_GRUPY_BIBLIOTEKI_MEDIÓW# - czyli np. #gallery=przykladowa_galeria# - nagłówkiem tej galerii będzie "Przykładowa Galeria", zgodnie
+z opisem Grupy Biblioteki Mediów.
 
-When it comes to installing the Symfony Standard Edition, you have the
-following options.
+3. Jak wygląda struktura aplikacji odpowiedzialna za treść na stronie?
+Treść wyświetlana na implementowanej witrynie podzielona jest na Grupy Treści, Grupy Mediów, Ustawienie Frontend oraz SEO.
 
-### Use Composer (*recommended*)
+Jedna Grupa Mediów może zawierać wiele pojedynczych Wpisów, które w zależności o skonfigurowania przez programistę witryny mogę pełnić rolę dowolnej
+podstrony, listy skrótów artykułów wraz i ich pełną treścią i/lub paginacją, podstron dostępnych z menu witryny i wiele innych możliwości.
 
-As Symfony uses [Composer][2] to manage its dependencies, the recommended way
-to create a new project is to use it.
+Obrazy/pliki grupowane są w obrębie grup Biblioteki Mediów. Biblioteki można swobodnie dodawać i usuwać. Nie ma jednak możlwości usunięcia grupy
+Undefined, która jest kontenerem dla wszystkich obrazów nie przyporządkowanych do konkretnej grupy.
 
-If you don't have Composer yet, download it following the instructions on
-http://getcomposer.org/ or just run the following command:
+4. Jaki jest podział i uprawnienia użytkowników w systemie.
+W systemie wyróżniamy następujące role użytkowinika:
+Użytkownik - aktualnie brak uprawnieni admministracyjncych, jednak obecność tej roli może zostać wykorzystana w przyszłości w przypadku rozwojy
+	aplikacji o autentykację użytkownika nie administracyjengo.
+Administrator - posiada uprawnienie logowania do Panelu Administracyjnego, edytowania większości treści. Posiada jednak ograniczenia edycji
+	zawartości istotnej dla działani i struktury aplikacji.
+Developer - twórca aplikacji, ze względu na pełnioną rolę posiada najwyższe uprawnienia. Nie zaleca się tworzenia nowych użytkowników o tej roli, 
+	jeżeli nie jesteś twórcą aplikacji.
 
-    curl -s http://getcomposer.org/installer | php
+5. Jak dodać nowego użytkownika?
+Dodawanie nowe użytkownika odbywa się z module Użytkownicy > Dodaj nowego użytkownika. Po stworzeniu nowego użytkownika zostanie dle niego automatycznie
+wygenerowane hasło, które zostenie wysłane na jego adres mailowy wraz z informacją o doddaniu go do systemu.
 
-Then, use the `create-project` command to generate a new Symfony application:
+6. Zapomniałem hasła, co teraz?
+Jeżeli jesteś użytkownikiem CatMS a zapomniałeś hasła, wystarczy że w formularzu logowanie klikniesz Zapomniałem hasła? oraz podacz adres mailowy
+podany podczas rejestracji. Następnie postępuj zgodnie z wytycznymi przesłanymi na twój adres mailowy.
 
-    php composer.phar create-project symfony/framework-standard-edition path/to/install
+7. Ilu użytkowników można dodać do systemu?
+Właściwie to nie istnieje maksymalna dopuszczalana ilość użytkowników dodanych do systemu.
 
-Composer will install Symfony and all its dependencies under the
-`path/to/install` directory.
+8. Jak prywrócić wpis archiwalny?
+Aby przywrócić treść archiwalną dowolnego wpisu tekstowego wystarczy kliknąć przycis Archiwum, wybrać odpowiednią wersję wpisy oraz kliknięciu w
+przycisk Importuj.
 
-### Download an Archive File
+9. Jak mogę zmieniać ustawienia SEO?
+Dla większości podstron istnieje możliwość edycji ustawień istotnych dla SEO taki jak:
 
-To quickly test Symfony, you can also download an [archive][3] of the Standard
-Edition and unpack it somewhere under your web server root directory.
+Page Title (Tytuł strony)
+Meta Description (Opis strony)
+Meta Keywords (Słowa kluczowe)
 
-If you downloaded an archive "without vendors", you also need to install all
-the necessary dependencies. Download composer (see above) and run the
-following command:
+Iche edcyja dostępna jest w module SEO.
 
-    php composer.phar install
+10. W jaki sposób dodawać zdjęcia/pliki do systemu?
+Zdjęcia do systemu dodaje się w module Bibliotelka mediów. Są dwie metedy dodawania zdjęć. 
+Dodawanie pojedynczego zdjęcia do grupy.
+Dodawanie kliku zdjęć jednocześnie. Tą metodą nie można dodawać innych plików niż pliki graficzne.
+Jeżeli nie istnieje grupa zdjęć powiązana tematycznie z zawartością dodawanego zdjęcia można je dodać do grupy Undefined,
+lub stworzyć nową grupę, która będzie odpowiadała ze przechowywanie zdjęć o danej tematyce. 
 
-2) Checking your System Configuration
--------------------------------------
+11. Czy mogę dodać do systemu inne pliki niż pliki graficzne?
+Tak, do sytemu można dodać pliki z dowolnym rozszeżeniem. Jednak listowania zawartości poszczególnych grup
+jest dostosowane do ich zawartości. Dlatego też nie należy dodawać np. pliku w formacie PDF do przykładowej
+grupy Galeria Kwiatów
 
-Before starting coding, make sure that your local system is properly
-configured for Symfony.
+12. Jak dodać zdjęcie nagłówkowe wpisu na liście wpisów?
+Aby dodać zdjęcie nagłówkego do wpisu należy w pierwszej kolejności upewnić się, że taka funkcjonalność
+została dodana do danej grupy wpisów. Informację o tym można znaleźć w Samouczku dostępnym przy tworzeniu
+lub edycji wpisu w wybranej grupie. Jeżeli informacja o tym, że istnieje taka możliwość znajdcuje się
+w samouczku zdjęcie nagłówkowe dodaje się w opisany poniżej sposób.
 
-Execute the `check.php` script from the command line:
+Przy edycji danego wpisu sprawdzamy wartość "Właściwość Slug", a w momencie dodawania nowego wpisu ustawiamy
+dowolną i zapamiętujemy. Następnie dodajemy nowe zdjęcie do Biblioteki Mediów i ustawiamy w polu Właściwość Slug
+taką samą wartość jak ma wpis do którego chcemy dodać zdjęcie nagłówkowe. 
 
-    php app/check.php
+Zdjęcie warto odpowiednio grupować, żeby zachować porządek w systemie. Dlatego też dodawaj zdjęcia do grup już
+istniejących powiązancyh treścią z dodwanym obrazem. Jeżeli nie ma takiej grupy do możesz dodać plik do grupy Undefined 
+lub stworzyć nową grupę.
 
-Access the `config.php` script from a browser:
+13. Co to jest Slug?
+Wartość Slug to unikatowa nazwa wybranego wpisu lub pliku w systemie. Dzięki możliwości ich modyfikowania podczas tworzenia
+nowej zawartości możemy uzyskać przejrzystą identyfikację danego wpisu w adresie URL, co jest bardzo wskazane przy pozycjonowaniu strony.
+UWAGA! Zachowaj szczególną ostrożność przy edycji istniejących już wpisów. System bardzo często jest już skonfigurowany aby korzystać 
+z istniejących wartości Slug, a ich zmiana może spowodaować nieoczekiwane błędy w działaniu.
 
-    http://localhost/path/to/symfony/app/web/config.php
+14. Jak stworzyć Grupę Biblioteki Mediów?
+Stworzenie Biblioteki Mediów dodajemy poprzez wyklikanie:
+Menu Główne -> [Biblioteka Mediów] Stwórz Grupę -> Wypełnienie właściwości grupy.
+Zaznaczenie opcji Has Thumbnails? spowoduje automatyczne generowanie miniaturki dla każdego dodawanego do tej grupy zdjęcia. Zaznaczenie
+tej opcji pozwala na zdefiniowanie rozmiarów miniatruki. 
+Wypełnienie opcji Wysokość i Szerokość obrazu spowoduje automatyczne skalowanie każdego dodawanego do grupy obrazu.
 
-If you get any warnings or recommendations, fix them before moving on.
-
-3) Browsing the Demo Application
---------------------------------
-
-Congratulations! You're now ready to use Symfony.
-
-From the `config.php` page, click the "Bypass configuration and go to the
-Welcome page" link to load up your first Symfony page.
-
-You can also use a web-based configurator by clicking on the "Configure your
-Symfony Application online" link of the `config.php` page.
-
-To see a real-live Symfony page in action, access the following page:
-
-    web/app_dev.php/demo/hello/Fabien
-
-4) Getting started with Symfony
--------------------------------
-
-This distribution is meant to be the starting point for your Symfony
-applications, but it also contains some sample code that you can learn from
-and play with.
-
-A great way to start learning Symfony is via the [Quick Tour][4], which will
-take you through all the basic features of Symfony2.
-
-Once you're feeling good, you can move onto reading the official
-[Symfony2 book][5].
-
-A default bundle, `AcmeDemoBundle`, shows you Symfony2 in action. After
-playing with it, you can remove it by following these steps:
-
-  * delete the `src/Acme` directory;
-
-  * remove the routing entries referencing AcmeBundle in
-    `app/config/routing_dev.yml`;
-
-  * remove the AcmeBundle from the registered bundles in `app/AppKernel.php`;
-
-  * remove the `web/bundles/acmedemo` directory;
-
-  * remove the `security.providers`, `security.firewalls.login` and
-    `security.firewalls.secured_area` entries in the `security.yml` file or
-    tweak the security configuration to fit your needs.
-
-What's inside?
----------------
-
-The Symfony Standard Edition is configured with the following defaults:
-
-  * Twig is the only configured template engine;
-
-  * Doctrine ORM/DBAL is configured;
-
-  * Swiftmailer is configured;
-
-  * Annotations for everything are enabled.
-
-It comes pre-configured with the following bundles:
-
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * [**AsseticBundle**][12] - Adds support for Assetic, an asset processing
-    library
-
-  * [**JMSSecurityExtraBundle**][13] - Allows security to be added via
-    annotations
-
-  * [**JMSDiExtraBundle**][14] - Adds more powerful dependency injection
-    features
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][15] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **AcmeDemoBundle** (in dev/test env) - A demo bundle with some example
-    code
-
-Enjoy!
-
-[1]:  http://symfony.com/doc/2.1/book/installation.html
-[2]:  http://getcomposer.org/
-[3]:  http://symfony.com/download
-[4]:  http://symfony.com/doc/2.1/quick_tour/the_big_picture.html
-[5]:  http://symfony.com/doc/2.1/index.html
-[6]:  http://symfony.com/doc/2.1/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  http://symfony.com/doc/2.1/book/doctrine.html
-[8]:  http://symfony.com/doc/2.1/book/templating.html
-[9]:  http://symfony.com/doc/2.1/book/security.html
-[10]: http://symfony.com/doc/2.1/cookbook/email.html
-[11]: http://symfony.com/doc/2.1/cookbook/logging/monolog.html
-[12]: http://symfony.com/doc/2.1/cookbook/assetic/asset_management.html
-[13]: http://jmsyst.com/bundles/JMSSecurityExtraBundle/master
-[14]: http://jmsyst.com/bundles/JMSDiExtraBundle/master
-[15]: http://symfony.com/doc/2.1/bundles/SensioGeneratorBundle/index.html
+15. Jak powiązać Grupę Treści z Grupą Biblioteki Mediów? Jakie są z tego korzyści?
+Aby powiązać Grupę Mediów z Grupą Treści, należy wejść w tryb edycji Grupy Treści i wybrać odpowiednią Grupę Mediów z listy w prawej górnej
+części ekranu. Jeżeli chcesz połączyć z Grupą Treśći kilka Grup Mediów, należy przy wybieraniu (kliknięciu w grupę) powiązanych Grup Mediów 
+przytrzymać klawisz CTRL.
+Powiązanie grup umożliwa łatwiejszy dostęp do dodanych do Grup Mediów obrazów podczas edycji treści. Obrazy z powiązanych grup wyświetlą się
+gdy klikniemy pomarańczowy przyski Powiązane Obrazy, widoczny z prawej strony ekranu podczas edycji wpisu lub przeglądania wpsiów Grupy Treści.
