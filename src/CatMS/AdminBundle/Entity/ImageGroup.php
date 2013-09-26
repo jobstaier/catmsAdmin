@@ -36,7 +36,8 @@ class ImageGroup
     private $slug;
     
     /**
-     * @ORM\Column(type="string", length=510, nullable=true)
+     * @ORM\Column(type="string", length=510, nullable=false)
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      max="510",
      *      maxMessage="Image group description must have no more than {{ limit }} characters."
