@@ -1,10 +1,10 @@
 function showAlert(header, message, type){
-var html = '<div class="alert alert-'+ type +'">' + 
-       '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
-       '<strong>'+ header +'</strong> ' + message +
-       '</div>';
+    var html = '<div class="alert alert-'+ type +'">' + 
+           '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+           '<strong>'+ header +'</strong> ' + message +
+           '</div>';
 
-$('.notice-container').html(html);
+    $('.notice-container').html(html);
 }
 
 function showLoader(){
@@ -73,7 +73,7 @@ function renderMimeTypeThumbnail(obj, dir) {
 
 
 $(function() {
-    $('.copy-source').live('click', function() {
+    $('body').on('click', '.copy-source', function() {
         copyToClipboard($(this).attr('href'));
         return false; 
     });

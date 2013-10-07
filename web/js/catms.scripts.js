@@ -1,6 +1,6 @@
 $(document).ready(function(){
     /* Modal form confirm */
-    $('a.confirm').live('click', function(){
+    $('body').on('click', 'a.confirm', function(){
         $(this).parents('form').submit();
         console.log('Confirm');
         return false;
@@ -9,7 +9,7 @@ $(document).ready(function(){
     
     $('.popoverButton').popover();
 
-    $("a.single-image").live('mouseenter', function(){
+    $('body').on('mouseenter', 'a.single-image', function(){
         $(this).fancybox();
     });
     

@@ -33,14 +33,14 @@ $(function(){
         });
     }); 
 
-    $('.dismiss').live('click', function(){
+    $('body').on('click', 'a.confirm', function(){
         $('.remove-this').popover('hide');
         $('.change-this').popover('hide');
         $('.save-this').popover('hide');
         return false;
     });
 
-    $('.remove-this-confirm').live('click', function(){
+    $('body').on('click', '.remove-this-confirm', function(){
         showLoader();
         $(this).parents('form').submit();
         return false;
