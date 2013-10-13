@@ -1,5 +1,5 @@
 $(function() {
-    showLoader();
+    window.modalLoader.showLoader();
     
     $('.more-btn-container').hide();
     
@@ -18,17 +18,17 @@ $(function() {
             } else {
                 $('.grid').html(notice);
             }
-            closeLoader();
+            window.modalLoader.hideLoader();
             
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            pinesNotify(noticeErrorTitle, errorThrown, 'error');
-            closeLoader();
+            window.baseView.pinesNotify(noticeErrorTitle, errorThrown, 'error');
+            window.modalLoader.hideLoader();
         }
     });
     
     $('.more-btn-container a.btn').click(function() {
-        showLoader();
+        window.modalLoader.showLoader();
         var page = parseInt($('.grid-list').attr('data-view')) + 1;
 
         $.ajax({
@@ -38,36 +38,36 @@ $(function() {
             data: {'page': page},
             success: function(data) {
                 renderList(data, $('.grid-list'));
-                closeLoader();
+                window.modalLoader.hideLoader();
                 $('.grid-list').attr('data-view', page);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
-                pinesNotify(noticeErrorTitle, errorThrown, 'error');
-                closeLoader();                
+                window.baseView.pinesNotify(noticeErrorTitle, errorThrown, 'error');
+                window.modalLoader.hideLoader();                
             }
         });
         return false;
     });
 
-    $('.modal-trigger').live('click', function() {
+    $('body').on('click', '.modal-trigger', function() {
         
         regenerateForm($(this).parents('li').find('.image-id').attr('rel'));
         
         $('#modalQuickEdit').modal();
-        showModalLoader();
+        //window.modalLoader.showModalContentLoader();
         return false;
     });
    
-    $('.save-trigger').live('click', function() {
+    $('body').on('click', '.save-trigger', function() {
         saveChanges($(this));
     });
     
    
-    $('.remove-image').live('click', function() {
+    $('body').on('click', '.remove-image', function() {
         return false;
     });
     
-    $('.remove-image').live('mousedown', function() {
+    $('body').on('mousedown', '.remove-image', function() {
         var placement = ($(this).data('placement') !== 'undefined') ? $(this).data('placement') : 'left';
         var url = $(this).attr('href');
 
@@ -80,11 +80,12 @@ $(function() {
         });
     });
 
-    $('.dismiss').live('click', function() {
+/*
+    $('body').on('click', '.dismiss', function() {
         $(this).parents('div.popover').prev('a.remove-image').popover('hide');
     });
-
-    $('.remove-image-confirm').live('click', function() {
+*/
+    $('body').on('click', '.remove-image-confirm', function() {
         $(this).parents('div.popover').prev('a.remove-image').popover('hide');
         $(this).parents('li').fadeOut(500);
         window.setTimeout(function() {
@@ -102,15 +103,15 @@ $(function() {
             data: null,
             success: function(data) {
                 if(data.result === 'success') {
-                    pinesNotify(null, noticeSuccessDeleteText, 'success');
-                    closeLoader();
+                    window.baseView.pinesNotify(null, noticeSuccessDeleteText, 'success');
+                    window.modalLoader.hideLoader();
                 } else if(data.result === 'error') {
-                    pinesNotify(noticeErrorTitle, noticeErrorText, 'error');
+                    window.baseView.pinesNotify(noticeErrorTitle, noticeErrorText, 'error');
                 }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
-                pinesNotify(noticeErrorTitle, errorThrown, 'error');
-                closeLoader();
+                window.baseView.pinesNotify(noticeErrorTitle, errorThrown, 'error');
+                window.modalLoader.hideLoader();
             }
         });
 
@@ -123,7 +124,7 @@ function renderList(data, container) {
     var dir = $('#dirPath').attr('href');
     var editPath = $('#editPath').attr('href');
     $.each(data.images, function(i, obj){
-        list = list + '<li>' + renderMimeTypeThumbnail(obj, dir) +
+        list = list + '<li>' + window.fileExtension.renderMimeTypeThumbnail(obj, dir) +
             '<div class="image-grid-btns">' + 
                 '<a class="hide image-id" rel="' + obj.id + '"></a>' +
                 '<div class="edit-form-prototype hide"></div>' +
@@ -144,7 +145,7 @@ function renderList(data, container) {
 
 
 function saveChanges(el) {
-    showLoader();
+    //window.modalLoader.showLoader();
     
     var form = el.parents('#modalQuickEdit').find($('form.inline-edit-form'));
     var data = {
@@ -164,23 +165,23 @@ function saveChanges(el) {
         data: data,
         success: function(data) {
             if(data.result === 'success') {
-                pinesNotify(null, noticeSuccessText, 'success');
-                closeLoader();
+                window.baseView.pinesNotify(null, noticeSuccessText, 'success');
+                //window.modalLoader.hideLoader();
                 $('#modalQuickEdit').modal('hide');
             } else if(data.result === 'error') {
-                closeLoader();
-                pinesNotify(noticeErrorValidationTitle, noticeErrorText, 'error');
+                //window.modalLoader.hideLoader();
+                window.baseView.pinesNotify(noticeErrorValidationTitle, noticeErrorText, 'error');
                 $.each(data.errors, function(key, error) {
                     $.each(error, function(i, message) {
-                    pinesNotify(noticeErrorTitle, message, 'error');
+                    window.baseView.pinesNotify(noticeErrorTitle, message, 'error');
                     });
                 });
             }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            pinesNotify(noticeErrorTitle, errorThrown, 'error');
+            window.baseView.pinesNotify(noticeErrorTitle, errorThrown, 'error');
             $('#modalQuickEdit').modal('hide');
-            closeLoader();
+            //window.modalLoader.hideLoader();
         }
     });
     
@@ -188,7 +189,7 @@ function saveChanges(el) {
 }
 
 function regenerateForm(assetId) {
-    showLoader();
+    window.modalLoader.showLoader(true);
     var URL = $('#editInlineRegeneratePath').attr('href');
     $.ajax({
         type: 'GET',
@@ -197,15 +198,15 @@ function regenerateForm(assetId) {
         data: {'id': assetId},
         success: function(data) {
             $('.modal-body').html(data.editFormPrototype);
-            closeLoader();
+            //window.modalLoader.hideLoader();
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            pinesNotify(noticeErrorTitle, errorThrown, 'error');
+            window.baseView.pinesNotify(noticeErrorTitle, errorThrown, 'error');
             $('#modalQuickEdit').modal('hide');
-            closeLoader();
+            //window.modalLoader.hideLoader();
         }
     });
-    closeLoader();
+    //window.modalLoader.hideLoader();
 }
 
 var notice = '<div class="alert">' +

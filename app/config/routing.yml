@@ -1,6 +1,6 @@
-cat_ms_frontend:
-    resource: "@CatMSFrontendBundle/Resources/config/routing.yml"
-    prefix:   /
+#cat_ms_frontend:
+#    resource: "@CatMSFrontendBundle/Resources/config/routing.yml"
+#    prefix:   /
 
 _bazinga_exposetranslation:
     resource: "@BazingaExposeTranslationBundle/Resources/config/routing/routing.yml"

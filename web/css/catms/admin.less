@@ -1,26 +1,69 @@
 body {
     padding-top: 60px;
+
+    a, img {
+        outline: none !important;
+    }
+
     .form-float {
         float: left;
     }
-}
 
+    .modal-backdrop.fade.in {
+        opacity: 0.05;
+    }
 
+    #modalLoader {
+        .modal-body {
+            text-align: center;
+            margin: 15px;
+            img {
 
-#modalLoader {
-    .modal-body {
-        text-align: center;
-        margin: 15px;
-        img {
-
+            }
         }
     }
-}
 
-.modal-backdrop.fade.in {
-    opacity: 0.05;
-}
+    .modal-loader {
+        text-align: center;
+    }
 
+    .loader-gif, .loader-gif-bottom, .loader-history-gif {
+        width: 66px;
+        height: 66px;
+        background: url('../../img/catms/loading.gif') no-repeat 0 0;
+        margin: 40px auto;
+    }
+
+    .pdf-icon-32 {
+        display: block;
+        width: 32px;
+        height: 32px;
+        background: url('../../img/catms/file-icons/pdf32x32.png') 0 0 no-repeat;
+    }
+
+    .pdf-icon-48 {
+        display: block;
+        width: 48px;
+        height: 48px;
+        background: url('../../img/catms/file-icons/pdf48x48.png') 0 0 no-repeat;
+    }
+
+    .rar-icon-48 {
+        display: block;
+        width: 48px;
+        height: 48px;
+        background: url('../../img/catms/file-icons/rar48x48.png') 0 0 no-repeat;
+    }
+
+    .zip-icon-48 {
+        display: block;
+        width: 48px;
+        height: 48px;
+        background: url('../../img/catms/file-icons/zip48x48.png') 0 0 no-repeat;
+    }
+
+
+}
 
 
 
@@ -46,13 +89,6 @@ body {
 .popup-text-input {
     margin-bottom: 1px !important;
     margin-left: 5px !important;
-}
-
-.loader-gif, .loader-gif-bottom, .loader-history-gif {
-    width: 66px;
-    height: 66px;
-    background: url('../img/loading.gif') no-repeat 0 0;
-    margin: 40px auto;
 }
 
 .related-images-trigger-container {
@@ -200,34 +236,6 @@ body {
 .append-history-here ul li {
     list-style: decimal;
     margin: 6px 0;
-}
-
-.pdf-icon-32 {
-    display: block;
-    width: 32px;
-    height: 32px;
-    background: url('../img/pdf32x32.png') 0 0 no-repeat;
-}
-
-.pdf-icon-48 {
-    display: block;
-    width: 48px;
-    height: 48px;
-    background: url('../img/pdf48x48.png') 0 0 no-repeat;
-}
-
-.rar-icon-48 {
-    display: block;
-    width: 48px;
-    height: 48px;
-    background: url('../img/rar48x48.png') 0 0 no-repeat;
-}
-
-.zip-icon-48 {
-    display: block;
-    width: 48px;
-    height: 48px;
-    background: url('../img/zip48x48.png') 0 0 no-repeat;
 }
 
 .footer-bottom {
@@ -477,7 +485,7 @@ thead {
 .flag {
     width: 16px;
     height: 11px;
-    background:url('../img/flags.png') no-repeat
+    background: url('../../img/catms/flags.png') no-repeat
 }
 
 .flag.flag-gb {background-position: -16px 0}

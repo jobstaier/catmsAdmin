@@ -40,9 +40,11 @@ $(function(){
         return false;
     });
 
+/*
     $('body').on('click', '.remove-this-confirm', function(){
         showLoader();
         $(this).parents('form').submit();
         return false;
     });   
+    */
 });

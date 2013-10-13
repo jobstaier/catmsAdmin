@@ -1,3 +1,4 @@
+/*
 function showAlert(header, message, type){
     var html = '<div class="alert alert-'+ type +'">' + 
            '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
@@ -7,6 +8,7 @@ function showAlert(header, message, type){
     $('.notice-container').html(html);
 }
 
+/*
 function showLoader(){
     $.fancybox(
         '<div style="text-align: center"><img src="' + loaderGif + '" /></div>',
@@ -27,7 +29,9 @@ function showLoader(){
 function closeLoader(){
     $.fancybox.close();
 }
+*/
 
+/*
 function copyToClipboard(text) {
     var modalStr =
         '<div id="promptModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
@@ -48,7 +52,9 @@ function copyToClipboard(text) {
 
     //window.prompt ("Copy to clipboard: Ctrl+C, Enter", text);
 }
+*/
 
+/*
 function renderMimeTypeThumbnail(obj, dir) {
     if (obj.mimeType === 'image/jpeg' || obj.mimeType === 'image/png') {
         return  '<a href="' + dir + obj.path + '" class="thumbnail single-image">' +
@@ -70,20 +76,28 @@ function renderMimeTypeThumbnail(obj, dir) {
     
     return '<a href="' + dir + obj.path + '" class="thumbnail single-image"</a><i>' + obj.title + '</i>';
 }
+*/
 
-
+/*
 $(function() {
+    
     $('body').on('click', '.copy-source', function() {
         copyToClipboard($(this).attr('href'));
         return false; 
     });
-    
+    */
+   
+   /*
     $('body').tooltip({
         selector: '[data-toggle=tooltip]'
     });
-    
+    */
+   
+    /*
     $('.selectpicker').selectpicker();
+
 });
+
 
 function pinesNotify(title, text, type) {
     $.pnotify({
@@ -92,7 +106,4 @@ function pinesNotify(title, text, type) {
         type: type
     });
 }
-
-function showModalLoader() {
-    $('.modal-body').html('<div class="modal-loader" style="text-align: center"><img src="' + loaderGif + '" /></div>');
-}
+*/

@@ -11,7 +11,7 @@
     
 {% block content -%}
     <div class="notice-container"></div>
-     
+
     <legend>
         <i class="icon-large icon-picture"></i> {{ 'global.mediaLibrary' | trans }}
         <a href="{{ path('media-library', {'page': 1}) }}" data-toggle="tooltip" title="{{ 'global.detailsView' | trans }}" class="show-list-view" style="float: right;">
@@ -31,12 +31,11 @@
         <a href="{{ path('media-library-image-inline-edit') }}" id="editInlinePath" class="hide"></a>
         <a href="{{ path('media-library-image-inline-edit-regenerate-form') }}" id="editInlineRegeneratePath" class="hide"></a>
         
-        <ul class="grid-list" data-view="0">
-
-        </ul>
+        <ul class="grid-list" data-view="0"></ul>
+        
     </div>
     <div class="more-btn-container">
-        <a href="" class="btn btn-info btn-small"><i class="icon-chevron-down"></i> {{ 'global.showMore' | trans }}</a>
+        <a href="javascript:void(0)" class="btn btn-info btn-small"><i class="icon-chevron-down"></i> {{ 'global.showMore' | trans }}</a>
     </div>
     
     <hr />
@@ -55,10 +54,27 @@
         </div>
         <div class="modal-footer">
             <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">{{ 'global.close' | trans }}</button>
-            <button class="btn btn-small btn-primary save-trigger">{{ 'global.saveChanges' | trans }}</button>
+            <button class="btn btn-small btn-primary save-trigger show-btn-loader" data-loading-text="{{ 'global.saving' | trans }}">{{ 'global.saveChanges' | trans }}</button>
         </div>
     </div>
     
     <script src="{{ asset('js/catms.asset-grid-list.js') }}"></script>
 
 {% endblock %}
+    
+{% block templates %}
+    {{ parent() }}
+    {% include 'CatMSAdminBundle:Templates:clipboard.html.twig' %}
+{% endblock %}
+    
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/catms/views/ClipboardView.js') }}"></script>
+    <script src="{{ asset('js/catms/views/FileExtensionView.js') }}"></script>
+    <script>
+        $(function() {
+            window.cliboard = new ClipboardView();
+            window.fileExtension = new FileExtensionView();
+        });
+    </script>
+{% endblock %}    

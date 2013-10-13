@@ -43,7 +43,7 @@ $(function(){
         html: true
     });
     
-    $('.dismiss').live('click', function(){
+    $('body').on('.dismiss', 'click', function(){
         $('a.remove-all-marked, .remove-this').popover('hide');
     });
     
@@ -51,12 +51,12 @@ $(function(){
         return false;
     });
      
-    $('.remove-this-confirm').live('click', function(){
+    $('body').on('.remove-this-confirm', 'click', function(){
         $(this).parents('form').submit();
         return false;
     });
     
-    $('.remove-all-marked-confirm').live('click', function(){
+    $('body').on('.remove-all-marked-confirm', 'click', function(){
         if ($('.mark-it:checked').length === 0) {
             
         } else {

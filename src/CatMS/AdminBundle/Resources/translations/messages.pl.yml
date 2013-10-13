@@ -247,7 +247,7 @@ edit.success: Dane zostały zmienione poprawnie
 upload.success: Plik został załadowany poprawnie
 upload.error: Podczas dodawania pliku wystapił błąd
 update.error: Podczas aktualizacji wystąpił błąd
-remove.success: Poprawnie usunięto plik
+remove.success: Poprawnie usunięto dane
 remove.error: Podczas usuwania pliku wystąpił błąd
 
 delete.success: Poprawnie usunięto dane

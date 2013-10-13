@@ -289,6 +289,13 @@ class ContentManagerController extends Controller
 
             $em->remove($entity);
             $em->flush();
+            
+            $this->get('session')->getFlashBag()
+                ->add('noticeSuccess', 'remove.success');            
+            
+        } else {
+            $this->get('session')->getFlashBag()
+                ->add('noticeFailure', 'remove.error');            
         }
 
         return $this->redirect(
