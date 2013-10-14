@@ -174,7 +174,7 @@ asset:
     imageAssetSlug: Właściwość 'Slug' obiektu
     editImageAsset: Edycja pliku
     quickEdit: Szybka edycja
-    assetsHasBeenRemovedSuccessfuly: Poprawnie usunięto wszystkie zaznaczone pliki
+    assetsHasBeenRemovedSuccessfuly: Poprawnie usunięto zaznaczony plik
     list: List plików
     group:
         title: Grupa #Image/asset group       

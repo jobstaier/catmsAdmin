@@ -19,8 +19,6 @@
 {% endblock %}    
     
 {% block content -%}
-    <script src="{{ asset('js/catms-media-library.js') }}"></script>
-    
     <div class="notice-container"></div>
      
     <legend>
@@ -34,15 +32,13 @@
     
     {% if pagination | length > 0 %}
 
-    <table class="table table-bordered table-hover table-striped">
+    <table class="table table-bordered table-hover table-striped" id="assetList">
         <thead>
             <tr>
                 <td colspan="7">
                     <a class="btn btn-mini mark-all" href="#"><i class="icon-ok"></i> {{ 'global.markAll' | trans }}</a>
                     <a class="btn btn-mini unmark-all" href="#"><i class="icon-remove-sign"></i> {{ 'global.unmarkAll' | trans }}</a>
-
                     <a class="btn btn-mini remove-all-marked" href="{{ path('delete-all-marked', {'token': multipleDeleteToken }) }}"><i class="icon-trash"></i> {{ 'global.removeAllSelected' | trans }}</a>
-               
                 
                     <div style="float: right; display: inline;">
                     {% if group is not empty %}             
@@ -175,3 +171,22 @@
     {% endif %}
 
 {% endblock %}
+    
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/catms/views/AssetListView.js') }}"></script>
+    <script src="{{ asset('js/catms/views/ClipboardView.js') }}"></script>
+    <script>
+        $(function() {
+            var assetList = new AssetListView();
+            var clipboardView = new ClipboardView();
+        });
+    </script>
+{% endblock %}    
+    
+{% block templates %}
+    {{ parent() }}
+    {% include 'CatMSAdminBundle:Templates:clipboard.html.twig' %}
+    {% include 'CatMSAdminBundle:Templates:popover-remove-all-marked.html.twig' %}
+    {% include 'CatMSAdminBundle:Templates:popover-remove-this.html.twig' %}
+{% endblock %}    

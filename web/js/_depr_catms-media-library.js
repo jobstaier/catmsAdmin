@@ -1,22 +1,27 @@
-$(function(){
-    $('.overlay-loader').hide();
+//$(function(){
+    //$('.overlay-loader').hide();
     
-    $('.unmark-all').hide();
+    //$('.unmark-all').hide();
 
+    /*
     $('.mark-all').click(function(){
         $('.mark-it').attr('checked', 'checked');
         $('.unmark-all').show();
         $('.mark-all').hide();
         return false;
     });
-    
+    */
+   
+    /*
     $('.unmark-all').click(function(){
         $('.mark-it').removeAttr('checked');
         $('.mark-all').show();
         $('.unmark-all').hide();
         return false;
     });
-    
+    */
+   
+    /*
     $('.mark-it').change(function(){
         if ($('.mark-it:checked').length === 0) {
             $('.unmark-all').hide();
@@ -25,8 +30,9 @@ $(function(){
         }
         $('.mark-all').show();
     });
+    */
     
-    
+    /*
     $('.remove-all-marked').popover({
         content: 
                 '<div style="text-align: center;">' + Translator.get('global.deleteConfirmAll') + '<br /><br />' + 
@@ -42,20 +48,28 @@ $(function(){
         placement: 'left',
         html: true
     });
+    */
     
+    /*
     $('body').on('.dismiss', 'click', function(){
         $('a.remove-all-marked, .remove-this').popover('hide');
     });
-    
+    */
+   
+    /*
     $('.remove-all-marked, .remove-this').click(function(){
         return false;
     });
-     
+    */
+    
+    /*
     $('body').on('.remove-this-confirm', 'click', function(){
         $(this).parents('form').submit();
         return false;
     });
+    */
     
+    /*
     $('body').on('.remove-all-marked-confirm', 'click', function(){
         if ($('.mark-it:checked').length === 0) {
             
@@ -114,4 +128,5 @@ $(function(){
         
         return false;
     });
-});
+    */
+//});

@@ -15,8 +15,9 @@ var ConfirmView = BaseView.extend({
         return false;
     },
             
-    dismissRemove: function(event) {
-        console.log('Im hrere');
+    dismissRemove: function(event, triggerClass) {
+        var triggerClass = (triggerClass) ? triggerClass : '.remove-this';
+
         $(event.target).parents('.popover').prev('.remove-this').popover('hide');
     }
 });
