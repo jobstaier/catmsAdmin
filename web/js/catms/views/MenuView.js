@@ -58,7 +58,7 @@ var MenuView = Backbone.View.extend({
                     }
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown) {
-                    pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
+                    //window.baseView.pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
                 }   
             });
         } else {
@@ -99,7 +99,7 @@ var MenuView = Backbone.View.extend({
                     //cHandler.hide().fadeIn(150);  
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown) {
-                    pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
+                     //window.baseView.pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
                 }  
             });
         } else {

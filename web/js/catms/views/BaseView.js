@@ -4,7 +4,6 @@ var BaseView = Backbone.View.extend({
     
     events: {
         'click .set-locale': 'setLocale',
-        'mouseenter a.single-image': 'showLightbox',
         'click .show-btn-loader': 'showButtonLoader',
         'click .history-trigger-container a': 'showHistory'
     },
@@ -18,6 +17,11 @@ var BaseView = Backbone.View.extend({
         this.$el.find('popoverButton').popover();
         
         this.cleanErrorFields();
+        
+        var context = this;
+        this.$el.find('a.single-image').map(function() {
+            context.showLightbox(this);
+        });
     },        
             
     setLocale: function(event) {
@@ -45,12 +49,8 @@ var BaseView = Backbone.View.extend({
         return false;
     },
     
-    showLightbox: function(event) {
-        $(event.target).colorbox({
-            scalePhotos: true,
-            maxWidth: '100%',
-            maxHeight: '100%'
-        });
+    showLightbox: function(el) {
+        $(el).colorbox({});            
     },
             
     pinesNotify: function(title, text, type) {

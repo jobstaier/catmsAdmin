@@ -29,7 +29,7 @@ class AjaxController extends Controller
      */
     public function getGroupsAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $groups = $em->getRepository('CatMSAdminBundle:ImageGroup')
             ->findBy(array(), array('description' => 'asc'));
         
@@ -54,7 +54,7 @@ class AjaxController extends Controller
      */
     public function getContentGroupsAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $groups = $em->getRepository('CatMSAdminBundle:ContentGroup')
             ->findBy(array(), array('description' => 'asc'));
         
