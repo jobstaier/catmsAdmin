@@ -1,11 +1,13 @@
-$(function() {
-    window.modalLoader.showLoader();
+//$(function() {
+    //console.log('xxx');
+    //window.modalLoader.showLoader();
     
-    $('.more-btn-container').hide();
+    //$('.more-btn-container').hide();
     
-    var URL = $('#getImagesList').attr('href');
-    var page = parseInt($('.grid-list').attr('data-view') + 1);
+    //var URL = $('#getImagesList').attr('href');
+    //var page = parseInt($('.grid-list').attr('data-view') + 1);
     
+    /*
     $.ajax({
         type: 'GET',
         url: URL,
@@ -26,7 +28,9 @@ $(function() {
             window.modalLoader.hideLoader();
         }
     });
-    
+    */
+   
+   /*
     $('.more-btn-container a.btn').click(function() {
         window.modalLoader.showLoader();
         var page = parseInt($('.grid-list').attr('data-view')) + 1;
@@ -48,7 +52,8 @@ $(function() {
         });
         return false;
     });
-
+*/
+    /*
     $('body').on('click', '.modal-trigger', function() {
         
         regenerateForm($(this).parents('li').find('.image-id').attr('rel'));
@@ -57,16 +62,21 @@ $(function() {
         //window.modalLoader.showModalContentLoader();
         return false;
     });
+    */
    
+   /*
     $('body').on('click', '.save-trigger', function() {
         saveChanges($(this));
     });
-    
+    */
    
+    /*
     $('body').on('click', '.remove-image', function() {
         return false;
     });
-    
+    */
+   
+   /*
     $('body').on('mousedown', '.remove-image', function() {
         var placement = ($(this).data('placement') !== 'undefined') ? $(this).data('placement') : 'left';
         var url = $(this).attr('href');
@@ -79,12 +89,13 @@ $(function() {
             html: true           
         });
     });
-
+*/
 /*
     $('body').on('click', '.dismiss', function() {
         $(this).parents('div.popover').prev('a.remove-image').popover('hide');
     });
 */
+/*
     $('body').on('click', '.remove-image-confirm', function() {
         $(this).parents('div.popover').prev('a.remove-image').popover('hide');
         $(this).parents('li').fadeOut(500);
@@ -92,7 +103,7 @@ $(function() {
             $(this).parents('li').remove();
         }, 500);
         
-        showLoader();
+        window.modalLoader.loader('show');
         
         var URL = $(this).data('path');
 
@@ -118,7 +129,9 @@ $(function() {
         return false;
     });
 });
+*/
 
+/*
 function renderList(data, container) {
     var list = '';
     var dir = $('#dirPath').attr('href');
@@ -142,8 +155,9 @@ function renderList(data, container) {
         $('.more-btn-container').hide();
     }
 }
+*/
 
-
+/*
 function saveChanges(el) {
     //window.modalLoader.showLoader();
     
@@ -187,7 +201,9 @@ function saveChanges(el) {
     
     return false;
 }
+*/
 
+/*
 function regenerateForm(assetId) {
     window.modalLoader.showLoader(true);
     var URL = $('#editInlineRegeneratePath').attr('href');
@@ -208,18 +224,22 @@ function regenerateForm(assetId) {
     });
     //window.modalLoader.hideLoader();
 }
+*/
 
+/*
 var notice = '<div class="alert">' +
     '<button type="button" class="close" data-dismiss="alert">&times;</button>' + 
     Translator.get('global.emptyDatabase') +
     '</div>';
-    
-var noticeSuccessTitle = 'Success!';
-var noticeSuccessText = Translator.get('crud.asset.updateSuccess');
+*/
+  
+//var noticeSuccessTitle = 'Success!';
+//var noticeSuccessText = Translator.get('crud.asset.updateSuccess');
 
-var noticeErrorTitle = Translator.get('global.errorOccured');
-var noticeErrorValidationTitle = Translator.get('validation.error');;
-var noticeErrorText = Translator.get('crud.asset.updateFailure');
+//var noticeErrorTitle = Translator.get('global.errorOccured');
+//var noticeErrorValidationTitle = Translator.get('validation.error');;
+//var noticeErrorText = Translator.get('crud.asset.updateFailure');
 
 //var noticeSuccessDeleteText = 'Delete success!';
-var noticeSuccessDeleteText = Translator.get('crud.asset.deleteSuccess');
+//var noticeSuccessDeleteText = Translator.get('crud.asset.deleteSuccess');
+//});

@@ -54,11 +54,9 @@
         </div>
         <div class="modal-footer">
             <button class="btn btn-small" data-dismiss="modal" aria-hidden="true">{{ 'global.close' | trans }}</button>
-            <button class="btn btn-small btn-primary save-trigger show-btn-loader" data-loading-text="{{ 'global.saving' | trans }}">{{ 'global.saveChanges' | trans }}</button>
+            <button class="btn btn-small btn-primary save-trigger" data-loading-text="{{ 'global.saving' | trans }}">{{ 'global.saveChanges' | trans }}</button>
         </div>
     </div>
-    
-    <script src="{{ asset('js/catms.asset-grid-list.js') }}"></script>
 
 {% endblock %}
     
@@ -69,12 +67,15 @@
     
 {% block javascripts %}
     {{ parent() }}
+    <script src="{{ asset('js/catms/views/AssetGridView.js') }}"></script>
     <script src="{{ asset('js/catms/views/ClipboardView.js') }}"></script>
     <script src="{{ asset('js/catms/views/FileExtensionView.js') }}"></script>
     <script>
         $(function() {
+            var assetGridView = new AssetGridView();
             window.cliboard = new ClipboardView();
             window.fileExtension = new FileExtensionView();
+            window.confirmView = new ConfirmView();
         });
     </script>
 {% endblock %}    
