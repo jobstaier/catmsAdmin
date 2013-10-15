@@ -16,6 +16,8 @@ var BaseView = Backbone.View.extend({
         
         this.$el.find('.selectpicker').selectpicker();
         this.$el.find('popoverButton').popover();
+        
+        this.cleanErrorFields();
     },        
             
     setLocale: function(event) {
@@ -24,17 +26,19 @@ var BaseView = Backbone.View.extend({
         loader.showLoader();
 
         var URL = $(event.target).attr('href');
+        var self = this;
 
         $.ajax({
             type: 'GET',
             url: URL,
             dataType: 'json',
             data: null,
+            context: this,
             success: function(data) {
                 window.location.reload(true);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
-                pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
+                self.pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
             }
         });
 
@@ -114,6 +118,13 @@ var BaseView = Backbone.View.extend({
                 pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
             }
         });
+    },
+    
+    cleanErrorFields: function() {
+        var container = $('.error-field ul');
+        var msg = container.text();
+        container.remove();
+        $('.error-field').append(msg);
     }
     
 });

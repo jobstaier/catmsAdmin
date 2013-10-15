@@ -1,8 +1,9 @@
-$(document).ready(function(){
+//$(document).ready(function(){
     
     /* Image groups */
-    var handler = $('.ajax-image-groups-preloder').parent();
+    //var handler = $('.ajax-image-groups-preloder').parent();
     
+    /*
     $('.ajax-get-groups').hover(function(){
 
         if (!$(this).hasClass('ready')) {
@@ -37,20 +38,25 @@ $(document).ready(function(){
             handler.fadeIn(150);
         }
     }, function(){});
+    */
     
+    /*
     handler.parent().mouseleave(function() {
         handler.fadeOut(150);
     });
-    
+    */
+   
+    /*
     $('.ajax-get-groups, .tmp-image-group-url').click(function() {
         return false;
     });
+    */
     /* End image groups */
     
     
     /* Content groups */
-    var cHandler = $('.ajax-content-groups-preloder').parent();
-    
+    //var cHandler = $('.ajax-content-groups-preloder').parent();
+    /*
     $('.ajax-get-content-groups').hover(function(){
         if (!$(this).hasClass('ready')) {
             $(this).addClass('ready');
@@ -84,14 +90,17 @@ $(document).ready(function(){
             cHandler.fadeIn(150);
         }
     }, function(){});
-    
+    */
+    /*
     cHandler.parent().mouseleave(function() {
         cHandler.fadeOut(150);
     });
-    
+    */
+    /*
     $('.ajax-get-content-groups, .tmp-content-group-url').click(function() {
         return false;
     });
+    */
     /* End content groups */
 
-});
+//});

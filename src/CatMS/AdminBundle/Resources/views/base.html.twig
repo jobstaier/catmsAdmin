@@ -5,7 +5,6 @@
     
     <title>{% block title %}CatMS Admin{% endblock %}</title>
 
-
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.icon-large.min.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('bootstrap/css/glyphicons.css') }}" type="text/css" media="screen" />
@@ -15,8 +14,6 @@
     
     <link rel="stylesheet" href="{{ asset('js/pines-notify/jquery.pnotify.default.css') }}" type="text/css" media="screen" />
     {#<link rel="stylesheet" href="{{ asset('css/catms-style.css') }}" type="text/css" media="screen" />#}
-    
-    
     
     {# Less #}
     <link href="{{ asset('css/catms/admin.less') }}" rel="stylesheet/less" type="text/css" />
@@ -47,16 +44,17 @@
     <script type="text/javascript" src="{{ asset('js/catms.popover.js') }}"></script>
     {#<script type="text/javascript" src="{{ asset('js/catms.global.js') }}"></script>#}
     {#<script type="text/javascript" src="{{ asset('js/catms.scripts.js') }}"></script>#}
-    <script type="text/javascript" src="{{ asset('js/catms.ajax.js') }}"></script>
-    {% block javascripts_bottom %}{% endblock %}
+    {#<script type="text/javascript" src="{{ asset('js/catms.ajax.js') }}"></script>#}
    
     <script src="{{ asset('js/catms/views/BaseView.js') }}"></script>
     <script src="{{ asset('js/catms/views/ConfirmView.js') }}"></script>
+    <script src="{{ asset('js/catms/views/MenuView.js') }}"></script>
     <script>
         $(function() {
            window.baseView = new BaseView();
            window.modalLoader = new ModalLoaderView();
            window.confirmView = new ConfirmView();
+           window.menuView = new MenuView();
         });
     </script>
     {% block javascripts %}{% endblock %}
@@ -155,5 +153,7 @@
         {% include 'CatMSAdminBundle:Templates:templates.html.twig' %}
         {% include 'CatMSAdminBundle:Templates:loader.html.twig' %}
     {% endblock %}
+    
+    {% block javascripts_bottom %}{% endblock %}
 </body>
 </html>
