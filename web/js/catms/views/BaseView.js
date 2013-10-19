@@ -102,7 +102,7 @@ var BaseView = Backbone.View.extend({
 
         return false;
     },
-            
+                  
     getHistory: function() {
         $('.loader-history-gif').show();
         var URL = $('#getHistoryUrl').attr('href');
