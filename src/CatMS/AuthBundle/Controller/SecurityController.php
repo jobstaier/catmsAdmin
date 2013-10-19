@@ -63,7 +63,7 @@ class SecurityController extends Controller
         if ($request->getMethod() == 'POST') {
             $email = $request->request->get('email');
             
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $emailExist = $em->getRepository('CatMSAuthBundle:User')->findEmail($email);
 
             if($emailExist) {
@@ -104,7 +104,7 @@ class SecurityController extends Controller
      */
     public function generateNewPasswordAction($userHash)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('CatMSAuthBundle:User')->findBy(array('userHash' => $userHash));
         $user = $entity[0];
         

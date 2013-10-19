@@ -10,11 +10,8 @@
     <link rel="stylesheet" href="{{ asset('bootstrap/css/glyphicons.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap-select.min.css') }}" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ asset('css/vendor/colorbox.css') }}" type="text/css" media="screen" />
-    {#<link rel="stylesheet" href="{{ asset('fancybox/jquery.fancybox-1.3.4.css') }}" type="text/css" media="screen" />#}
-    
-    <link rel="stylesheet" href="{{ asset('js/pines-notify/jquery.pnotify.default.css') }}" type="text/css" media="screen" />
-    {#<link rel="stylesheet" href="{{ asset('css/catms-style.css') }}" type="text/css" media="screen" />#}
-    
+    <link rel="stylesheet" href="{{ asset('css/vendor/jquery.pnotify.default.css') }}" type="text/css" media="screen" />
+
     {# Less #}
     <link href="{{ asset('css/catms/admin.less') }}" rel="stylesheet/less" type="text/css" />
     {# End Less #}
@@ -28,10 +25,8 @@
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap-select.min.js') }}"></script>
     <script src="{{ asset('js/vendor/jquery.colorbox-min.js') }}"></script>
-    {#<script src="{{ asset('fancybox/jquery.fancybox-1.3.4.pack.js') }}"></script>#}
-    <script src="{{ asset('fancybox/jquery.easing-1.3.pack.js') }}"></script>
     <script src="{{ asset('js/tinymce/tinymce.min.js')}}"></script>
-    <script src="{{ asset('js/pines-notify/jquery.pnotify.min.js')}}"></script>
+    <script src="{{ asset('js/vendor/jquery.pnotify.min.js')}}"></script>
     <script src="{{ asset('js/vendor/less-1.4.1.min.js') }}"></script>
     <script src="{{ asset('js/catms/less-bootstrap.js') }}"></script>  
     
@@ -40,12 +35,9 @@
     <script type="text/javascript" src="{{ url('bazinga_exposetranslation_js', {'_locale' : app.request.locale }) }}"></script>
     {# End #}
     
-    <script type="text/javascript" src="{{ asset('js/catms.text-editor.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/catms/catms.text-editor.js')}}"></script>
     <script type="text/javascript" src="{{ asset('js/catms.popover.js') }}"></script>
-    {#<script type="text/javascript" src="{{ asset('js/catms.global.js') }}"></script>#}
-    {#<script type="text/javascript" src="{{ asset('js/catms.scripts.js') }}"></script>#}
-    {#<script type="text/javascript" src="{{ asset('js/catms.ajax.js') }}"></script>#}
-   
+
     <script src="{{ asset('js/catms/views/BaseView.js') }}"></script>
     <script src="{{ asset('js/catms/views/ConfirmView.js') }}"></script>
     <script src="{{ asset('js/catms/views/MenuView.js') }}"></script>

@@ -13,7 +13,7 @@ class ShopAddressRepository extends EntityRepository
 {
     public function findPlaces($slug)
     {
-        return $this->getEntityManager()
+        return $this->getManager()
             ->createQuery('SELECT p FROM CatMSAdminBundle:ShopAddress p JOIN p.province pr WHERE pr.slug = :slug ORDER BY p.name DESC')
             ->setParameter('slug', $slug)
             ->getResult();
@@ -21,7 +21,7 @@ class ShopAddressRepository extends EntityRepository
     
     public function findPlacesArray($slug)
     {
-        return $this->getEntityManager()
+        return $this->getManager()
             ->createQuery('SELECT p FROM CatMSAdminBundle:ShopAddress p JOIN p.province pr WHERE pr.slug = :slug ORDER BY p.name DESC')
             ->setParameter('slug', $slug)
             ->getScalarResult();
@@ -30,7 +30,7 @@ class ShopAddressRepository extends EntityRepository
     public function findPlacesFromStringArray($city)
     {
         $city = '%'.$city.'%';
-        return $this->getEntityManager()
+        return $this->getManager()
             ->createQuery('SELECT p FROM CatMSAdminBundle:ShopAddress p JOIN p.province pr WHERE p.address LIKE :city ORDER BY p.name DESC')
             ->setParameter('city', $city)
             ->getScalarResult();   

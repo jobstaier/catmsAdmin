@@ -5,7 +5,8 @@ var BaseView = Backbone.View.extend({
     events: {
         'click .set-locale': 'setLocale',
         'click .show-btn-loader': 'showButtonLoader',
-        'click .history-trigger-container a': 'showHistory'
+        'click .history-trigger-container a': 'showHistory',
+        'click .show-submit-loader' : 'showSubmitLoader'
     },
     
     initialize: function() {
@@ -76,6 +77,12 @@ var BaseView = Backbone.View.extend({
         $(event.target).button('loading');
     },
             
+    showSubmitLoader: function(event) {
+        $(event.target).parents('form').submit(function() {
+            window.modalLoader.showLoader();
+        });
+    },
+            
     showHistory: function(event) {
         var clicked = $(event.target);
         if (clicked.hasClass('active')){
@@ -99,6 +106,8 @@ var BaseView = Backbone.View.extend({
     getHistory: function() {
         $('.loader-history-gif').show();
         var URL = $('#getHistoryUrl').attr('href');
+        var context = this;
+        
         $.ajax({
             type: 'POST',
             url: URL,
@@ -115,7 +124,7 @@ var BaseView = Backbone.View.extend({
                 $('.append-history-here').html(html);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
-                pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
+                context.pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
             }
         });
     },
@@ -139,7 +148,7 @@ var ModalLoaderView = BaseView.extend({
     },
      
     initialize: function() {
-        BaseView.prototype.initialize.apply( this );
+        BaseView.prototype.initialize.apply(this);
 
         var variables = { loaderGif: this.loaderGif };
 

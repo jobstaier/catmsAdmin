@@ -58,6 +58,26 @@
             <button class="btn btn-small btn-primary save-trigger">{{ 'global.saveChanges' | trans }}</button>
         </div>
     </div>
+
+{% endblock %}
     
-    <script src="{{ asset('js/catms.asset-group-grid-list.js') }}"></script>
+{% block templates %}
+    {{ parent() }}
+    {% include 'CatMSAdminBundle:Templates:clipboard.html.twig' %}
+{% endblock %}    
+    
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/catms/views/AssetGridView.js') }}"></script>
+    <script src="{{ asset('js/catms/views/AssetGroupGridView.js') }}"></script>
+    <script src="{{ asset('js/catms/views/ClipboardView.js') }}"></script>
+    <script src="{{ asset('js/catms/views/FileExtensionView.js') }}"></script>    
+    <script>
+        $(function() {
+            var assetGroupGrid = new AssetGroupGridView();
+            window.cliboard = new ClipboardView();
+            window.fileExtension = new FileExtensionView();
+            window.confirmView = new ConfirmView();
+        });
+    </script>
 {% endblock %}

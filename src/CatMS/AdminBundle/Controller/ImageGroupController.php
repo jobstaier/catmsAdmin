@@ -68,7 +68,7 @@ class ImageGroupController extends Controller
             ));
         } else {
             $this->get('session')->getFlashBag()
-                ->add('noticeError', 'create.error');
+                ->add('noticeFailure', 'create.error');
         }
 
         return array(
@@ -180,7 +180,7 @@ class ImageGroupController extends Controller
             ));
         } else {
             $this->get('session')->getFlashBag()
-                ->add('noticeError', 'edit.error');
+                ->add('noticeFailure', 'edit.error');
         }
 
         return array(
@@ -216,7 +216,7 @@ class ImageGroupController extends Controller
                 ->add('noticeSuccess', 'delete.success');
         } else {
             $this->get('session')->getFlashBag()
-                ->add('noticeError', 'delete.error');
+                ->add('noticeFailure', 'delete.error');
         }
 
         return $this->redirect($this->generateUrl('image-group'));

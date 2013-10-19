@@ -63,7 +63,7 @@ class ContentGroupController extends Controller
             $this->get('session')->getFlashBag()->add('noticeSuccess', 'create.success');
             return $this->redirect($this->generateUrl('content-group'));
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'create.error');
+            $this->get('session')->getFlashBag()->add('noticeFailure', 'create.error');
         }
 
         return array(
@@ -163,7 +163,7 @@ class ContentGroupController extends Controller
             $this->get('session')->getFlashBag()->add('noticeSuccess', 'update.success');
             return $this->redirect($this->generateUrl('content-group-edit', array('id' => $id)));
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'update.error');
+            $this->get('session')->getFlashBag()->add('noticeFailure', 'update.error');
         }
 
         return array(

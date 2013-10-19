@@ -1,14 +1,4 @@
 {% extends 'CatMSAdminBundle::base.html.twig' %}   
-
-{% block javascripts_bottom %}
-    {% if not is_granted('ROLE_DEVELOPER') %}
-    <script>
-        $(function(){
-            $('.checkDeveloper').attr('readonly', 'readonly');
-        });
-    </script>
-    {% endif %}
-{% endblock %}
    
 {% block breadcrumb %}
     {{ parent() }}
@@ -65,3 +55,22 @@
     {% endif %}
     
 {% endblock %}
+    
+{% block javascripts %}    
+    <script src="{{ asset('js/catms/views/ContentView.js') }}"></script>
+    <script>
+        $(function() {
+            var contentView = new ContentView();
+        });
+    </script>
+{% endblock %}
+    
+{% block javascripts_bottom %}
+    {% if not is_granted('ROLE_DEVELOPER') %}
+    <script>
+        $(function(){
+            $('.checkDeveloper').attr('readonly', 'readonly');
+        });
+    </script>
+    {% endif %}
+{% endblock %}    

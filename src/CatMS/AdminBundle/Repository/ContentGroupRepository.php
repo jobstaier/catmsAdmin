@@ -13,7 +13,7 @@ class ContentGroupRepository extends EntityRepository
 {
     public function fetchGroupContent($slug)
     {
-        return $this->getEntityManager()
+        return $this->getManager()
             ->createQuery('SELECT c FROM CatMSAdminBundle:ContentManager c JOIN c.contentGroup cg WHERE cg.slug = :slug ORDER BY c.priority ASC')
             ->setParameter('slug', $slug)
             ->getResult();
