@@ -149,7 +149,7 @@ class TwigCatMSExtension extends \Twig_Extension {
         return var_dump($var);
     }
     
-        public function parseGalleryFilter($content)
+    public function parseGalleryFilter($content)
     {
         $pattern = "(#gallery=([a-zA-Z0-9_-])+#)";
         $matches = array();
@@ -177,7 +177,7 @@ class TwigCatMSExtension extends \Twig_Extension {
                                 if ($imageGroup->getHasThumbnails()) {
 
                                     $frameHtml = 
-                                        '<a class="fancy-gallery" rel="'.$image->getImageGroup()->getSlug().'" href="'.$this->request->getBasePath().'/'.$image->getWebPath().'" alt="">'.
+                                        '<a class="colorbox-gallery" rel="'.$image->getImageGroup()->getSlug().'" href="'.$this->request->getBasePath().'/'.$image->getWebPath().'" alt="">'.
                                                 '<img class="catms-img" src="'.$this->request->getBasePath().'/'.$image->getThumbWebPath().'" />'.
                                         '</a>';
 
@@ -186,8 +186,8 @@ class TwigCatMSExtension extends \Twig_Extension {
                                     $height = ($image->getImageGroup()->getThumbnailHeight()) ? $image->getImageGroup()->getThumbnailHeight() : 150;
 
                                     $frameHtml = 
-                                            '<a class="fancy-gallery" rel="'.$image->getImageGroup()->getSlug().'" href="'.$this->request->getBasePath().'/'.$image->getWebPath().'" alt="">'.
-                                                    '<img class="catms-img" style="max-width='.$width.'px; max-height='.$height.'px;" src="'.$this->request->getBasePath().'/'.$image->getThumbWebPath().'" />'.
+                                            '<a class="colorbox-gallery" rel="'.$image->getImageGroup()->getSlug().'" href="'.$this->request->getBasePath().'/'.$image->getWebPath().'" alt="">'.
+                                                '<img class="catms-img" style="max-width='.$width.'px; max-height='.$height.'px;" src="'.$this->request->getBasePath().'/'.$image->getThumbWebPath().'" />'.
                                             '</a>';
                                 }
 
@@ -197,7 +197,7 @@ class TwigCatMSExtension extends \Twig_Extension {
                             $tmpContent .= 
                                 '<script>'.
                                     '$(function(){'.
-                                            '$("a.fancy-gallery").fancybox({});'.
+                                            '$("a.colorbox-gallery").colorbox({});'.
                                      '})'.
                                 '</script>'.
                             '</div></div>'; 
