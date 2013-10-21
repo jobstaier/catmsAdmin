@@ -26,7 +26,7 @@ class ImageUpload
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Length(
-     *      min = "5",
+     *      min = "2",
      *      max = "255",
      *      minMessage = "Title must be at least {{ limit }} characters length",
      *      maxMessage = "Title cannot be longer than {{ limit }} characters length"

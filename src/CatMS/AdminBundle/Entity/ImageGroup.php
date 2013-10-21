@@ -26,7 +26,7 @@ class ImageGroup
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      min="4",
+     *      min="2",
      *      max="255",
      *      minMessage="Slug must have at least {{ limit }} characters.",
      *      maxMessage="Slug must have no more than {{ limit }} characters."
