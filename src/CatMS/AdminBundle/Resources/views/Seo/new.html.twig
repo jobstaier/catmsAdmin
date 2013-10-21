@@ -19,7 +19,7 @@
     <form novalidate action="{{ path('seo-create') }}" method="post" {{ form_enctype(form) }} style="width: 220px;">
         {{ form_widget(form) }}
 
-        <button type="submit" data-toggle="button" class="btn btn-primary btn-small show-loader" data-loading-text="{{ 'global.saving' | trans }}"><i class="icon-hdd"></i> {{ 'global.create' | trans }}</button>
+        <button type="submit" data-toggle="button" class="btn btn-primary btn-small show-btn-loader show-submit-loader" data-loading-text="{{ 'global.saving' | trans }}"><i class="icon-hdd"></i> {{ 'global.create' | trans }}</button>
 
     </form>
         
