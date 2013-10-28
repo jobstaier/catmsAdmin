@@ -246,7 +246,7 @@ class UserController extends Controller
      */
     public function changePasswordAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('CatMSAuthBundle:User')->find($id);
         
         if (!$entity) {

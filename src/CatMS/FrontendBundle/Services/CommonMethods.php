@@ -1,6 +1,6 @@
 <?php
 
-namespace CatMS\FrontendBundle\Resources;
+namespace CatMS\FrontendBundle\Services;
 
 class CommonMethods
 {

@@ -37,7 +37,7 @@ class LoginListener
         if ($user) {
             //$user->setLastSuccessfulLogin(new \DateTime());
             //$user->setLoginFailureAttemps(0);  
-            //$em = $this->doctrine->getEntityManager();
+            //$em = $this->doctrine->getManager();
             //$em->flush();
             
             //$username = $user->getUsername();

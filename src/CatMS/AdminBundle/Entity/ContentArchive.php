@@ -27,7 +27,7 @@ class ContentArchive
      * @ORM\Column(type="string", length=255, unique=false)
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      min="4",
+     *      min="2",
      *      max="255",
      *      minMessage="Content slug must have at least {{ limit }} characters.",
      *      maxMessage="Content slug must have no more than {{ limit }} characters."

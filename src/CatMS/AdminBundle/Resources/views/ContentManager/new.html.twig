@@ -1,8 +1,4 @@
 {% extends 'CatMSAdminBundle::base.html.twig' %}
-
-{% block javascripts_bottom %}
-
-{% endblock %}
    
 {% block breadcrumb %}
     {{ parent() }}
@@ -17,7 +13,6 @@
     <legend><i class="icon-large icon-font"></i> {{ 'contentManager.creatingNewContent' | trans }}</legend>
 
     {% include 'CatMSAdminBundle:Helpers:related-images.html.twig' with {'group': contentGroup } %}
-    
     
     {% if contentGroup.manual %}
         <div class="alert alert-success">
@@ -49,3 +44,12 @@
     {% endif %}
     
 {% endblock %}
+    
+{% block javascripts %}    
+    <script src="{{ asset('js/catms/views/ContentView.js') }}"></script>
+    <script>
+        $(function() {
+            var contentView = new ContentView();
+        });
+    </script>
+{% endblock %}    

@@ -4,9 +4,9 @@ var BaseView = Backbone.View.extend({
     
     events: {
         'click .set-locale': 'setLocale',
-        'mouseenter a.single-image': 'showLightbox',
         'click .show-btn-loader': 'showButtonLoader',
-        'click .history-trigger-container a': 'showHistory'
+        'click .history-trigger-container a': 'showHistory',
+        'click .show-submit-loader' : 'showSubmitLoader'
     },
     
     initialize: function() {
@@ -18,6 +18,11 @@ var BaseView = Backbone.View.extend({
         this.$el.find('popoverButton').popover();
         
         this.cleanErrorFields();
+        
+        var context = this;
+        this.$el.find('a.single-image').map(function() {
+            context.showLightbox(this);
+        });
     },        
             
     setLocale: function(event) {
@@ -45,12 +50,8 @@ var BaseView = Backbone.View.extend({
         return false;
     },
     
-    showLightbox: function(event) {
-        $(event.target).colorbox({
-            scalePhotos: true,
-            maxWidth: '100%',
-            maxHeight: '100%'
-        });
+    showLightbox: function(el) {
+        $(el).colorbox({});            
     },
             
     pinesNotify: function(title, text, type) {
@@ -76,6 +77,12 @@ var BaseView = Backbone.View.extend({
         $(event.target).button('loading');
     },
             
+    showSubmitLoader: function(event) {
+        $(event.target).parents('form').submit(function() {
+            window.modalLoader.showLoader();
+        });
+    },
+            
     showHistory: function(event) {
         var clicked = $(event.target);
         if (clicked.hasClass('active')){
@@ -95,10 +102,12 @@ var BaseView = Backbone.View.extend({
 
         return false;
     },
-            
+                  
     getHistory: function() {
         $('.loader-history-gif').show();
         var URL = $('#getHistoryUrl').attr('href');
+        var context = this;
+        
         $.ajax({
             type: 'POST',
             url: URL,
@@ -115,7 +124,7 @@ var BaseView = Backbone.View.extend({
                 $('.append-history-here').html(html);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
-                pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
+                context.pinesNotify(Translator.get('global.errorOccured'), errorThrown, 'error');
             }
         });
     },
@@ -139,7 +148,7 @@ var ModalLoaderView = BaseView.extend({
     },
      
     initialize: function() {
-        BaseView.prototype.initialize.apply( this );
+        BaseView.prototype.initialize.apply(this);
 
         var variables = { loaderGif: this.loaderGif };
 

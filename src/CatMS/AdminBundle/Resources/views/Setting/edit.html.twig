@@ -51,7 +51,7 @@
         <div>
             <a href="{{ path(pathname) }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>
             <a href="{{ path('settings-show', { 'id': entity.id, 'range': range | lower  }) }}" class="btn btn-small"><i class="icon-fullscreen"></i> {{ 'global.show' | trans }}</a>
-            <button type="submit" class="btn btn-small btn-primary show-loader" data-loading-text="{{ 'global.saving' | trans }}"><i class="icon-hdd"></i> {{ 'global.save' | trans }}</button>
+            <button type="submit" class="btn btn-small btn-primary show-btn-loader show-submit-loader" data-loading-text="{{ 'global.saving' | trans }}"><i class="icon-hdd"></i> {{ 'global.save' | trans }}</button>
         </div>
     </form>
 
@@ -59,7 +59,7 @@
     <form action="{{ path('settings-delete', { 'id': entity.id, 'range': range | lower }) }}" method="post" class="clear" style="margin-top: 15px;">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
+        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this show-submit-loader"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
     </form>
     {% endif %}
 

@@ -53,7 +53,7 @@ var AssetGridView = Backbone.View.extend({
                 window.modalLoader.hideLoader();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown){
-                window.baseView.pinesNotify(noticeErrorTitle, errorThrown, 'error');
+                window.baseView.pinesNotify(self.noticeErrorTitle, errorThrown, 'error');
                 window.modalLoader.hideLoader();
             }
         });
@@ -146,6 +146,10 @@ var AssetGridView = Backbone.View.extend({
                 '</div></li>';
         });
         container.append(list);
+        
+        container.find('a.single-image').map(function() {
+            window.baseView.showLightbox(this);
+        });
 
         if (data.hasMore) {
             $('.more-btn-container').show();

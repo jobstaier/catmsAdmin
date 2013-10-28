@@ -188,7 +188,7 @@ class SettingController extends Controller
             $this->get('session')->getFlashBag()->add('noticeSuccess', 'create.success');
             return $this->redirect($this->generateUrl($pathname));
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'create.error');
+            $this->get('session')->getFlashBag()->add('noticeFailure', 'create.error');
         }
 
         return array(
@@ -314,7 +314,7 @@ class SettingController extends Controller
                 return $this->redirect($this->generateUrl('settings-edit', array('id' => $id, 'range' => $range)));
             }
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'edit.error');
+            $this->get('session')->getFlashBag()->add('noticeFailure', 'edit.error');
         }
 
         return array(
@@ -354,7 +354,7 @@ class SettingController extends Controller
             $em->flush();
             $this->get('session')->getFlashBag()->add('noticeSuccess', 'setting.remove.success');
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'setting.remove.error');
+            $this->get('session')->getFlashBag()->add('noticeFailure', 'setting.remove.error');
         }
 
         return $this->redirect($this->generateUrl($pathname));

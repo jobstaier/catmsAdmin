@@ -1,7 +1,7 @@
 parameters:
-#    cat_ms_frontend.example.class: CatMS\FrontendBundle\Example
-
+    common_methods.class: CatMS\FrontendBundle\Services\CommonMethods
+    
 services:
-#    cat_ms_frontend.example:
-#        class: %cat_ms_frontend.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    common_methods:
+        class: "%common_methods.class%"
+        arguments: ["@doctrine.orm.entity_manager"]    

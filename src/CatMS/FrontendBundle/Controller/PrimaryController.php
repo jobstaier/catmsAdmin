@@ -4,29 +4,19 @@ namespace CatMS\FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use CatMS\FrontendBundle\Resources\CommonMethods;
-
 class PrimaryController extends Controller
 {
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $common = new CommonMethods($em);
-
         return $this->render(
             'CatMSFrontendBundle:Primary:index.html.twig', 
             array(
-                'docs' => $common->getImageGroup('mainpage-docs'),
-                'news' => $common->getContentGroupCreateOrderLimited(
-                    'aktualnosci', 
-                    $limit = $common->getSetting('homepage-news-max')
-                ),
-                'team' => $common->getContent('o-nas'),
-                'slides' => $common->getImageGroup('slider')
+                  'content' => $this->get('common_methods')->getContent('index-content-1')
             )
         );
     }
     
+    /*
     public function newsDetailsAction($slug) 
     {
         $em = $this->getDoctrine()->getManager();
@@ -126,4 +116,5 @@ class PrimaryController extends Controller
             )
         );        
     }
+    */
 }

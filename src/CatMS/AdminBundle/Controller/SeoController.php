@@ -56,7 +56,7 @@ class SeoController extends Controller
             $this->get('session')->getFlashBag()->add('noticeSuccess', 'seo.create.success');
             return $this->redirect($this->generateUrl('seo-show', array('id' => $entity->getId())));
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'seo.create.error');
+            $this->get('session')->getFlashBag()->add('noticeFailure', 'seo.create.error');
         }
 
         return array(
@@ -163,7 +163,7 @@ class SeoController extends Controller
             $this->get('session')->getFlashBag()->add('noticeSuccess', 'seo.update.success');
             return $this->redirect($this->generateUrl('seo-edit', array('id' => $id)));
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'edit.error');
+            $this->get('session')->getFlashBag()->add('noticeFailure', 'edit.error');
         }
 
         return array(

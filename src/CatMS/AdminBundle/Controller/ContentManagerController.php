@@ -88,7 +88,7 @@ class ContentManagerController extends Controller
             ));
         } else {
             $this->get('session')->getFlashBag()
-                ->add('noticeError', 'create.error');
+                ->add('noticeFailure', 'create.error');
         }
 
         return array(
@@ -107,7 +107,7 @@ class ContentManagerController extends Controller
     {
         $entity = new ContentManager();
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $contentGroup = $em->getRepository('CatMSAdminBundle:ContentGroup')
             ->findOneBySlug($group);
 
