@@ -31,7 +31,7 @@ table {
 }
 
 body {
-	background-image:url(_gfx/cary-bg.jpg);
+	background-image:url(../img/cary-bg.jpg);
 	background-repeat:repeat-x;
 	background-position:top center;
 	padding:0px;
@@ -47,7 +47,7 @@ body#reference {
 }
 
 body#contact {
-	background-position:-817px 0px;
+	background-position:-817px 0;
 }
 
 body#project-detail {
@@ -57,11 +57,11 @@ body#project-detail {
 
 @font-face {
     font-family: 'titillium_webregular';
-    src: url('_fonts/titilliumweb-regular-webfont.eot');
-    src: url('_fonts/titilliumweb-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('_fonts/titilliumweb-regular-webfont.woff') format('woff'),
-         url('_fonts/titilliumweb-regular-webfont.ttf') format('truetype'),
-         url('_fonts/titilliumweb-regular-webfont.svg#titillium_webregular') format('svg');
+    src: url('../font/titilliumweb-regular-webfont.eot');
+    src: url('../font/titilliumweb-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/titilliumweb-regular-webfont.woff') format('woff'),
+         url('../font/titilliumweb-regular-webfont.ttf') format('truetype'),
+         url('../font/titilliumweb-regular-webfont.svg#titillium_webregular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -69,11 +69,11 @@ body#project-detail {
 
 @font-face {
     font-family: 'titillium_webbold';
-    src: url('_fonts/titilliumweb-bold-webfont.eot');
-    src: url('_fonts/titilliumweb-bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('_fonts/titilliumweb-bold-webfont.woff') format('woff'),
-         url('_fonts/titilliumweb-bold-webfont.ttf') format('truetype'),
-         url('_fonts/titilliumweb-bold-webfont.svg#titillium_webbold') format('svg');
+    src: url('../font/titilliumweb-bold-webfont.eot');
+    src: url('../font/titilliumweb-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/titilliumweb-bold-webfont.woff') format('woff'),
+         url('../font/titilliumweb-bold-webfont.ttf') format('truetype'),
+         url('../font/titilliumweb-bold-webfont.svg#titillium_webbold') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -81,11 +81,11 @@ body#project-detail {
 
 @font-face {
     font-family: 'tecna_heavyregular';
-    src: url('_fonts/corradine_fonts_-_tecnaheavy-webfont.eot');
-    src: url('_fonts/corradine_fonts_-_tecnaheavy-webfont.eot?#iefix') format('embedded-opentype'),
-         url('_fonts/corradine_fonts_-_tecnaheavy-webfont.woff') format('woff'),
-         url('_fonts/corradine_fonts_-_tecnaheavy-webfont.ttf') format('truetype'),
-         url('_fonts/corradine_fonts_-_tecnaheavy-webfont.svg#tecna_heavyregular') format('svg');
+    src: url('../font/corradine_fonts_-_tecnaheavy-webfont.eot');
+    src: url('../font/corradine_fonts_-_tecnaheavy-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/corradine_fonts_-_tecnaheavy-webfont.woff') format('woff'),
+         url('../font/corradine_fonts_-_tecnaheavy-webfont.ttf') format('truetype'),
+         url('../font/corradine_fonts_-_tecnaheavy-webfont.svg#tecna_heavyregular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -93,11 +93,11 @@ body#project-detail {
 
 @font-face {
     font-family: 'tecna_extralightregular';
-    src: url('_fonts/corradine_fonts_-_tecnaextralight-webfont.eot');
-    src: url('_fonts/corradine_fonts_-_tecnaextralight-webfont.eot?#iefix') format('embedded-opentype'),
-         url('_fonts/corradine_fonts_-_tecnaextralight-webfont.woff') format('woff'),
-         url('_fonts/corradine_fonts_-_tecnaextralight-webfont.ttf') format('truetype'),
-         url('_fonts/corradine_fonts_-_tecnaextralight-webfont.svg#tecna_extralightregular') format('svg');
+    src: url('../font/corradine_fonts_-_tecnaextralight-webfont.eot');
+    src: url('../font/corradine_fonts_-_tecnaextralight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/corradine_fonts_-_tecnaextralight-webfont.woff') format('woff'),
+         url('../font/corradine_fonts_-_tecnaextralight-webfont.ttf') format('truetype'),
+         url('../font/corradine_fonts_-_tecnaextralight-webfont.svg#tecna_extralightregular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -106,6 +106,7 @@ body#project-detail {
 #wrapper {
 	width:996px;
 	margin:0 auto;
+    position: relative;
 }
 
 #top {
@@ -118,11 +119,11 @@ body#project-detail #top-top {
 	display:block;
 	float:left;
 	width:100%;
-	padding:0px;
-	margin:0px;
+	padding:0;
+	margin:0;
 	height:100px;
 	position:fixed;
-	background-image:url(_gfx/top-bg.png);
+	background-image:url(../img/top-bg.png);
 	background-repeat:repeat-x;
 	z-index:1000;
 }
@@ -134,7 +135,7 @@ body#project-detail #top {
 }
 
 #top h1 {
-	background-image:url(_gfx/logo-cary.png);
+	background-image:url(../img/logo-cary.png);
 	background-repeat:no-repeat;
 	width:259px;
 	height:52px;
@@ -176,7 +177,7 @@ body#project-detail #top {
 	color:#fff;
 	font-family: 'titillium_webregular';
 	text-transform:uppercase;
-	font-16px;
+	font-size: 16px;
 	text-decoration:none;
 }
 
@@ -302,7 +303,7 @@ body#project-detail #top {
 }
 
 #projects .projects #nav-top a {
-	background-image:url(_gfx/prev.png);
+	background-image:url(../img/prev.png);
 	background-repeat:no-repeat;
 	background-position:0 2px;
 	color:#fff;
@@ -324,7 +325,7 @@ body#project-detail #top {
 }
 
 #projects .projects #nav-bottom a {
-	background-image:url(_gfx/next.png);
+	background-image:url(../img/next.png);
 	background-repeat:no-repeat;
 	background-position:82px 0px;
 	color:#fff;
@@ -402,7 +403,7 @@ body#project-detail #top {
 }
 
 #projects .projects #middle div span {
-	background-image:url(_gfx/project-bg.png);
+	background-image:url(../img/project-bg.png);
 	background-repeat:repeat;
 	float:left;
 	width:240px;
@@ -432,7 +433,7 @@ body#project-detail #top {
 }
 
 #projects-detail a#close {
-	background-image:url(_gfx/ico-close.png);
+	background-image:url(../img/ico-close.png);
 	background-repeat:no-repeat;
 	background-position:top right;
 	overflow:hidden;
@@ -514,7 +515,7 @@ body#project-detail #top {
 }
 
 #projects-detail a.p-right {
-	background-image:url(_gfx/p-next.png);
+	background-image:url(../img/p-next.png);
 	width:90px;
 	height:70px;
 	position:fixed;
@@ -527,7 +528,7 @@ body#project-detail #top {
 }
 
 #projects-detail a.p-left {
-	background-image:url(_gfx/p-prev.png);
+	background-image:url(../img/p-prev.png);
 	width:90px;
 	height:70px;
 	position:fixed;
@@ -570,7 +571,7 @@ body#project-detail #top {
 }
 
 #referencje #quotes {
-	background-image:url(_gfx/quotes.png);
+	background-image:url(../img/quotes.png);
 	background-repeat:no-repeat;
 	background-position:30px 0px;
 	width:478px;
@@ -663,7 +664,7 @@ body#project-detail #top {
 }
 
 #kontakt ul li.web {
-	background-image:url(_gfx/ico-web.png);
+	background-image:url(../img/ico-web.png);
 	background-repeat:no-repeat;
 	padding-left:25px;
 }
@@ -674,7 +675,7 @@ body#project-detail #top {
 }
 
 #kontakt ul li.phone {
-	background-image:url(_gfx/ico-phone.png);
+	background-image:url(../img/ico-phone.png);
 	background-repeat:no-repeat;
 	color:#fff;
 	padding-left:20px;
@@ -716,7 +717,7 @@ body#project-detail #top {
 }
 
 #kontakt form input[type="submit"] {
-	background-image:url(_gfx/button.png);
+	background-image:url(../img/button.png);
 	width:120px;
 	height:40px;
 	float:right;
@@ -764,20 +765,20 @@ body#project-detail #top {
 
 /*NAWIGACJA*/
 a.right {
-	background-image:url(_gfx/arrow-right.png);
+	background-image:url(../img/arrow-right.png);
 	width:90px;
 	height:70px;
-	position:absolute;
+	position:fixed;
 	top:370px;
 	right:0px;
 	text-indent:-3333px;
 }
 
 a.left {
-	background-image:url(_gfx/arrow-left.png);
+	background-image:url(../img/arrow-left.png);
 	width:90px;
 	height:70px;
-	position:absolute;
+	position:fixed;
 	top:370px;
 	left:0px;
 	text-indent:-3333px;
@@ -787,5 +788,3 @@ a.right:hover,
 a.left:hover {
 	opacity:0.9;
 }
-	
-
