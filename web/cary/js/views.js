@@ -4,7 +4,7 @@ var BaseView = Backbone.View.extend({
     moveLeftBtn: null,
     moveRightBtn: null,
 
-    moveBgStep: 40,
+    moveBgStep: 70,
     moveBgSpeed: 500,
     showNavButtonsSpeed: 400,
     backgroundPosition: null,
@@ -66,12 +66,12 @@ var BaseView = Backbone.View.extend({
         this.animateButtons('show', 'right');
 
         this.$el.css({
-            'background-position-x': '250px'
+            'width': window.innerWidth,
+            'height': window.innerHeight,
+            'background-position': '250px 0'
         });
 
-        this.$el.animate({
-            backgroundPositionX: '0px'
-        }, 750);
+        this.$el.animateBG(0, 0, 750);
         this.backgroundPosition = 0;
 
         this.showHomepage();
@@ -89,9 +89,7 @@ var BaseView = Backbone.View.extend({
             }
 
             this.backgroundPosition = this.backgroundPosition - this.moveBgStep;
-            this.$el.animate({
-                backgroundPositionX: this.backgroundPosition + 'px'
-            }, this.moveBgSpeed);
+            this.$el.animateBG(this.backgroundPosition, 0, this.moveBgSpeed);
 
         } else {
             this.animateButtons('hide', 'right');
@@ -112,9 +110,7 @@ var BaseView = Backbone.View.extend({
             }
 
             this.backgroundPosition = this.backgroundPosition - this.moveBgStep;
-            this.$el.animate({
-                backgroundPositionX: this.backgroundPosition
-            }, this.moveBgSpeed);
+            this.$el.animateBG(this.backgroundPosition, 0, this.moveBgSpeed);
         } else {
             this.animateButtons('hide', 'left');
         }
@@ -282,6 +278,21 @@ var BaseView = Backbone.View.extend({
         }
     }
 });
+
+$.fn.animateBG = function(x, y, speed) {
+    var pos = this.css('background-position').split(' ');
+    this.x = parseInt(pos[0]) || 0;
+    this.y = parseInt(pos[1]) || 0;
+    $.Animation( this, {
+        x: x,
+        y: y
+    }, {
+        duration: speed
+    }).progress(function(e) {
+            this.css('background-position', e.tweens[0].now+'px '+e.tweens[1].now+'px');
+        });
+    return this;
+}
 
 $(function() {
     new BaseView();
