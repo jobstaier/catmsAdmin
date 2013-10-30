@@ -5,10 +5,7 @@
 {% endblock %}
 
 {% block stylesheets %}
-#uploader_browse {margin-right: 10px; !important;}
-#uploader_filelist {height: 242px;}
-#uploader {float: right; width: 520px; margin-top: -10px;}
-.plupload_scroll .plupload_filelist {background: none; border-left: 1px dashed #DDD;}
+
 {% endblock %}
 
 {% block breadcrumb %}
@@ -31,7 +28,7 @@
 {% endblock %}    
     
 {% block content -%}    
-    
+<div class="uploader-view">
     {% if group is not empty and groupEntity is defined and (groupEntity.imageWidth or groupEntity.imageHeight) %}
         
         <div class="alert alert-block">
@@ -135,31 +132,31 @@
             {% else %}    
             <a href="{{ path('media-library') }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>    
             {% endif %}
-            <button class="show-loader btn btn-primary btn-small" type="submit"  data-loading-text="{{ 'global.uploading' | trans }}"><i class="icon-upload"></i> {{ 'global.upload' | trans }} </button>
+            <button class="btn btn-primary btn-small show-loader show-submit-loader" type="submit"  data-loading-text="{{ 'global.uploading' | trans }}"><i class="icon-upload"></i> {{ 'global.upload' | trans }} </button>
         </div>
     </form>
 
-{# plupload #}
-<script type="text/javascript" src="{{ asset('js/lib/browserplus-min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/plupload/js/plupload.full.js')}}"></script>
-<script type="text/javascript" src="{{ asset('js/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js')}}"></script>
+    {# plupload #}
+    <script type="text/javascript" src="{{ asset('js/lib/browserplus-min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/plupload/js/plupload.full.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('js/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js')}}"></script>
 
-<script type="text/javascript" src="{{ asset('js/catms/catms-plupload.js') }}"></script>
-<a href="{{ path('media-library-plupload', {'group': group}) }}" id="pluploadUrl" style="display: none"></a>
-<div class="multiple-upload-form">
-    <legend><i class="icon-large icon-sort"></i> {{ 'asset.upload.mulitipleUpload' | trans }}
-        {% if not group %}
-            <a href="{{ path('media-library-grid-list') }}" data-toggle="tooltip" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
-    {% else%}
-            <a href="{{ path('media-library-group-grid-list', {'group': groupEntity.id }) }}" data-toggle="tooltip" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
-        </a>
-    {% endif %}
-    </legend>
-<form>
-<div id="uploader">
-    <p>{{ 'plupload.browserError' | trans }}</p>
+    <script type="text/javascript" src="{{ asset('js/catms/catms-plupload.js') }}"></script>
+    <a href="{{ path('media-library-plupload', {'group': group}) }}" id="pluploadUrl" style="display: none"></a>
+    <div class="multiple-upload-form">
+        <legend><i class="icon-large icon-sort"></i> {{ 'asset.upload.mulitipleUpload' | trans }}
+            {% if not group %}
+                <a href="{{ path('media-library-grid-list') }}" data-toggle="tooltip" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
+        {% else%}
+                <a href="{{ path('media-library-group-grid-list', {'group': groupEntity.id }) }}" data-toggle="tooltip" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
+            </a>
+        {% endif %}
+        </legend>
+        <form>
+        <div id="uploader">
+            <p>{{ 'plupload.browserError' | trans }}</p>
+        </div>
+        </form>
+    </div>
 </div>
-</form>
-</div>
-    
 {% endblock %}

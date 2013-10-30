@@ -70,7 +70,7 @@
     <form action="{{ path('content-group-delete', { 'id': entity.id }) }}" method="post" style="float: right;">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this"><i class="icon-trash"></i>  {{ 'global.delete' | trans }}</button>
+        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this-form"><i class="icon-trash"></i>  {{ 'global.delete' | trans }}</button>
     </form>
     
     <hr class="clear" />

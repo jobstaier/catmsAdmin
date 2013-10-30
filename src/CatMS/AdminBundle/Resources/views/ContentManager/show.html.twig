@@ -64,11 +64,10 @@
         <a href="{{ path('content-manager-new') }}"class="btn btn-primary"><i class="icon-pencil"></i> Add another</a>
         {% endif %}
     </div>
-    
-    <form action="{{ path('content-manager-delete', { 'id': entity.id, 'slug': group }) }}" method="post">
+
+    <form action="{{ path('content-manager-delete', { 'id': entity.id, 'group': entity.contentGroup.slug }) }}" method="post" style="float: right;">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" class="btn" data-toggle="modal" data-target="#delete"><i class="icon-trash"></i> Delete</button>
-        {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'delete', 'msg': 'Delete content', 'btnTxt': 'Delete'} %}
+        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this-form"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
     </form>
 {% endblock %}

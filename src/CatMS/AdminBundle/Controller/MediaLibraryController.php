@@ -171,7 +171,7 @@ class MediaLibraryController extends Controller
      * @param string $group Image group slug
      */
     public function deleteImageAction(Request $request, ImageUpload $image, $group)
-    {  
+    {
         $form = $this->createDeleteForm($image->getId());
         $form->bind($request);
         
@@ -193,7 +193,7 @@ class MediaLibraryController extends Controller
                 ->add('noticeSuccess', 'remove.success');
         } else {
             $this->get('session')->getFlashBag()
-                ->add('noticFailure', 'delete.error');
+                ->add('noticeFailure', 'delete.error');
         }
 
         return $this->redirect($this->generateUrl(

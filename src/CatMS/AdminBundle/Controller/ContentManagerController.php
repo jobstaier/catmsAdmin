@@ -299,11 +299,11 @@ class ContentManagerController extends Controller
         }
 
         return $this->redirect(
-                $this->generateUrl('content-manager-list', array(
-                    'page' => 1, 
-                    'slug' => $group
-                ))
-            );
+            $this->generateUrl('content-manager-list', array(
+                'page' => 1,
+                'slug' => $group
+            ))
+    );
     }
 
     /**

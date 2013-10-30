@@ -24,7 +24,8 @@
 {% endblock %}    
     
     
-{% block content -%}    
+{% block content -%}
+<div class="uploader-view">
     <legend>
         <i class="icon-large icon-brush"></i> {{ 'asset.editImageAsset' | trans }} {% if group is not empty %} - {{ 'global.group' | trans }} <i>{{ image.imageGroup.description | raw }}</i>{% endif %}
         {% if not group %}
@@ -47,7 +48,7 @@
 
     {% endif %}
             
-    <form novalidate action="{{ path('media-library-image-edit', {'id': image.id,'group': group}) }}" method="post" {{ form_enctype(form) }}>
+    <form class="edit-image-form" novalidate action="{{ path('media-library-image-edit', {'id': image.id,'group': group}) }}" method="post" {{ form_enctype(form) }}>
         
         <div class="control-group" style="float: left; width: 360px;">
             
@@ -131,10 +132,11 @@
                 {% set href = path('media-library-image-delete', { 'id': image.id, 'group': group }) %}
             {% endif %}
 
-            <button class="show-loader btn btn-primary btn-small" type="submit"  data-loading-text="{{ 'global.updating' | trans }}"><i class="icon-upload"></i> {{ 'global.update' | trans }}</button>
+            <button class="btn btn-primary btn-small show-loader show-submit-loader" type="submit"  data-loading-text="{{ 'global.updating' | trans }}"><i class="icon-upload"></i> {{ 'global.update' | trans }}</button>
         </div>
     </form>
             
     {% include 'CatMSAdminBundle:MediaLibrary:widgets/delete-form.html.twig' with {'image': image, 'delete_form': delete_form, 'group': group} %}
-            
+
+</div>
 {% endblock %}
