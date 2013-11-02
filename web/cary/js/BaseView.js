@@ -36,10 +36,18 @@ var BaseView = Backbone.View.extend({
         this.reference = this.$('#referencje').hide();
         this.contact = this.$('#kontakt').hide();
 
+        this.$('#menu li:eq(0) a').addClass('active');
+
         this.initialState();
     },
 
     showView: function(event) {
+        this.prevPage =  this.$('ul#menu').find('li a.active').parent().index();
+
+        $(event.target).parents('ul').find('li a').removeClass('active');
+        $(event.target).addClass('active');
+
+
         event.preventDefault();
         this.currentPage = $(event.target).parent().index();
         this.showPage(this.currentPage, true);
@@ -116,7 +124,7 @@ var BaseView = Backbone.View.extend({
                 this.animateButtons('hide', 'left');
             }
 
-            this.backgroundPosition = this.backgroundPosition - this.moveBgStep;
+            this.backgroundPosition = this.backgroundPosition + this.moveBgStep;
             this.$el.animateBG(this.backgroundPosition, 0, this.moveBgSpeed);
         } else {
             this.animateButtons('hide', 'left');
@@ -136,16 +144,36 @@ var BaseView = Backbone.View.extend({
 
         if (all) {
             this.moveOutAllPage();
+            this.checkNavigation();
+
+            var step = this.moveBgStep * Math.abs(this.currentPage - this.prevPage);
+
+            if (this.currentPage > this.prevPage) {
+                this.backgroundPosition = this.backgroundPosition + step;
+                this.$el.animateBG(this.backgroundPosition, 0, this.moveBgSpeed);
+            } else if (this.currentPage < this.prevPage) {
+                this.backgroundPosition = this.backgroundPosition - step;
+                this.$el.animateBG(this.backgroundPosition, 0, this.moveBgSpeed);
+            }
+
         } else {
             this.moveOutPage();
         }
 
-        console.log(funcCall);
         var ret = eval(funcCall);
     },
 
+    checkNavigation: function() {
+        this.animateButtons('show', 'left');
+        this.animateButtons('show', 'right');
+        if (this.currentPage == 3) {
+            this.animateButtons('hide', 'right');
+        } else if (this.currentPage == 0) {
+            this.animateButtons('hide', 'left');
+        }
+    },
+
     moveOutPage: function() {
-        console.log('Move out page - ' + this.currentPage);
         if (this.currentPage == 0)  {
             eval('this.hide' + this.pages[1].capitalize() + '()');
         } else if (this.currentPage > 0 && this.currentPage < 3) {
