@@ -23,19 +23,26 @@ var BaseView = Backbone.View.extend({
     events: {
         'click .right': 'moveRight',
         'click .left': 'moveLeft',
-        'keydown': 'logKey'
+        'keydown': 'logKey',
+        'click #menu li a': 'showView'
     },
 
     initialize: function() {
-        this.moveRightBtn = this.$el.find('.right');
-        this.moveLeftBtn = this.$el.find('.left');
+        this.moveRightBtn = this.$('.right');
+        this.moveLeftBtn = this.$('.left');
 
-        this.homepage = this.$el.find('#homepage').hide();
-        this.projects = this.$el.find('#projects').hide();
-        this.reference = this.$el.find('#referencje').hide();
-        this.contact = this.$el.find('#kontakt').hide();
+        this.homepage = this.$('#homepage').hide();
+        this.projects = this.$('#projects').hide();
+        this.reference = this.$('#referencje').hide();
+        this.contact = this.$('#kontakt').hide();
 
         this.initialState();
+    },
+
+    showView: function(event) {
+        event.preventDefault();
+        this.currentPage = $(event.target).parent().index();
+        this.showPage(this.currentPage, true);
     },
 
     logKey: function(event) {
@@ -118,7 +125,7 @@ var BaseView = Backbone.View.extend({
         this.animateButtons('show', 'right');
     },
 
-    showPage: function(dataPage) {
+    showPage: function(dataPage, all) {
         String.prototype.capitalize = function() {
             return this.charAt(0).toUpperCase() + this.slice(1);
         }
@@ -127,11 +134,18 @@ var BaseView = Backbone.View.extend({
 
         var funcCall = 'this.show' + page + '()';
 
-        this.moveOutPage();
+        if (all) {
+            this.moveOutAllPage();
+        } else {
+            this.moveOutPage();
+        }
+
+        console.log(funcCall);
         var ret = eval(funcCall);
     },
 
     moveOutPage: function() {
+        console.log('Move out page - ' + this.currentPage);
         if (this.currentPage == 0)  {
             eval('this.hide' + this.pages[1].capitalize() + '()');
         } else if (this.currentPage > 0 && this.currentPage < 3) {
@@ -145,8 +159,13 @@ var BaseView = Backbone.View.extend({
         }
     },
 
+    moveOutAllPage: function() {
+        for (page in this.pages) {
+            eval('this.hide' + this.pages[page].capitalize() + '()');
+        }
+    },
+
     showHomepage: function() {
-        this.homepage.show();
         this.homepage.css({
             'position': 'absolute',
             'top': '0px',
@@ -155,6 +174,7 @@ var BaseView = Backbone.View.extend({
 
         var context = this;
         window.setTimeout(function() {
+            context.homepage.show();
             context.homepage.animate({
                 'top': '70px',
                 opacity: 1

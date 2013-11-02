@@ -322,6 +322,9 @@ body#project-detail #top {
 	width:926px;
 	float:left;
 	padding:8px 0;
+
+    position: absolute;
+    top: 450px;
 }
 
 #projects .projects #nav-bottom a {
@@ -374,9 +377,14 @@ body#project-detail #top {
 	display:block;
 	float:left;
 	margin:25px 0px 20px -20px;
+    height: 230px;
 }
 
-#projects .projects #middle div {
+#projects .projects #middle .part {
+    height: 230px;
+}
+
+#projects .projects #middle .part div {
 	float:left;
 	display:inline;
 	width:280px;
@@ -388,21 +396,21 @@ body#project-detail #top {
 	overflow:hidden;
 }
 
-#projects .projects #middle div:last-child {
+#projects .projects #middle .part div:last-child {
 	margin-right:0px;
 }
 
-#projects .projects #middle div:first-child {
+#projects .projects #middle .part div:first-child {
 	padding-left:20px;
 	border-left:1px solid #5f6065;
 }
 
-#projects .projects #middle div img {
+#projects .projects #middle .part div img {
 	float:left;
 	display:block;
 }
 
-#projects .projects #middle div span {
+#projects .projects #middle .part div span {
 	background-image:url(../img/project-bg.png);
 	background-repeat:repeat;
 	float:left;
@@ -414,7 +422,7 @@ body#project-detail #top {
 	color:#fff;
 }
 
-#projects .projects #middle div span em {
+#projects .projects #middle .part div span em {
 	font-style:normal;
 	color:#be1a7a;
 	font-family: 'titillium_webbold';
