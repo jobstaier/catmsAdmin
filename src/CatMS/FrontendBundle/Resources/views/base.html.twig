@@ -14,6 +14,7 @@
     <script src="{{ asset('cary/js/BaseView.js') }}"></script>
     <script src="{{ asset('cary/js/SliderView.js') }}"></script>
     <script src="{{ asset('cary/js/NavigatedSliderView.js') }}"></script>
+    <script src="{{ asset('cary/js/ProjectDetailsView.js') }}"></script>
 
 </head>
 <body>
@@ -21,21 +22,28 @@
     <a href="javascript:void(0);" class="right">Dalej</a>
     <a href="javascript:void(0);" class="left">Wstecz</a>
 
-    <div id="wrapper">
-        <div id="top">
-            <a href="#"><h1>Cary.pl</h1></a>
 
-            <ul id="menu">
-                <li><a href="#">o mnie</a></li>
-                <li><a href="#">realizacje</a></li>
-                <li><a href="#">referencje</a></li>
-                <li><a href="#">kontakt</a></li>
-            </ul>
+    <div class="fixed">
+        <div class="wrapper">
+            <div id="top">
+                <a href="#"><h1>Cary.pl</h1></a>
+
+                <ul id="menu">
+                    <li class="active"><a href="#">o mnie</a></li>
+                    <li><a href="#">realizacje</a></li>
+                    <li><a href="#">referencje</a></li>
+                    <li><a href="#">kontakt</a></li>
+                </ul>
+            </div>
         </div>
+    </div>
+
+    <div class="wrapper">
 
         {% block content %}{% endblock %}
 
     </div>
+
 
 </body>
 </html>

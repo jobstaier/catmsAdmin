@@ -103,7 +103,7 @@ body#project-detail {
 
 }
 
-#wrapper {
+.wrapper, .fixed {
 	width:996px;
 	margin:0 auto;
     position: relative;
@@ -153,11 +153,11 @@ body#project-detail #top {
 	cursor: default;
 }
 
-#top #menu.active li a {
+#top #menu li a {
 	color:#b3b8c6;
 }
 
-#top #menu.active li.active a {
+#top #menu li.active a {
 	color:#fff;
 }
 
@@ -174,7 +174,6 @@ body#project-detail #top {
 }
 
 #top #menu li a {
-	color:#fff;
 	font-family: 'titillium_webregular';
 	text-transform:uppercase;
 	font-size: 16px;
@@ -384,6 +383,10 @@ body#project-detail #top {
     height: 230px;
 }
 
+#projects .projects #middle .part i.createdFor {
+    display: none;
+}
+
 #projects .projects #middle .part div {
 	float:left;
 	display:inline;
@@ -394,6 +397,7 @@ body#project-detail #top {
 	padding-right:20px;
 	border-left:0px;
 	overflow:hidden;
+    cursor: pointer;
 }
 
 #projects .projects #middle .part div:last-child {
@@ -465,6 +469,7 @@ body#project-detail #top {
 
 #projects-detail #project {
 	padding:30px 48px;
+    position: relative;
 }
 
 #projects-detail #project #title {
@@ -472,6 +477,8 @@ body#project-detail #top {
 	display:block;
 	float:left;
 	width:100%;
+    position: absolute;
+    left: 40px;
 }
 
 #projects-detail #project #title strong {
@@ -520,6 +527,9 @@ body#project-detail #top {
 
 #projects-detail #project #image {
 	margin-bottom:30px;
+    position: absolute;
+    top: 100px;
+    left: 40px;
 }
 
 #projects-detail a.p-right {

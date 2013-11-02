@@ -36,16 +36,16 @@ var BaseView = Backbone.View.extend({
         this.reference = this.$('#referencje').hide();
         this.contact = this.$('#kontakt').hide();
 
-        this.$('#menu li:eq(0) a').addClass('active');
+        this.$('#menu li:eq(0)').addClass('active');
 
         this.initialState();
     },
 
     showView: function(event) {
-        this.prevPage =  this.$('ul#menu').find('li a.active').parent().index();
+        this.prevPage =  this.$('ul#menu').find('li.active').index();
 
-        $(event.target).parents('ul').find('li a').removeClass('active');
-        $(event.target).addClass('active');
+        this.$('ul#menu li').removeClass('active');
+        $(event.target).parent().addClass('active');
 
 
         event.preventDefault();
@@ -106,6 +106,8 @@ var BaseView = Backbone.View.extend({
             this.backgroundPosition = this.backgroundPosition - this.moveBgStep;
             this.$el.animateBG(this.backgroundPosition, 0, this.moveBgSpeed);
 
+            this.$('ul#menu li').removeClass('active');
+            this.$('ul#menu li:eq(' + this.currentPage + ')').addClass('active');
         } else {
             this.animateButtons('hide', 'right');
         }
@@ -126,6 +128,9 @@ var BaseView = Backbone.View.extend({
 
             this.backgroundPosition = this.backgroundPosition + this.moveBgStep;
             this.$el.animateBG(this.backgroundPosition, 0, this.moveBgSpeed);
+
+            this.$('ul#menu li').removeClass('active');
+            this.$('ul#menu li:eq(' + this.currentPage + ')').addClass('active');
         } else {
             this.animateButtons('hide', 'left');
         }
@@ -138,6 +143,8 @@ var BaseView = Backbone.View.extend({
             return this.charAt(0).toUpperCase() + this.slice(1);
         }
 
+        window.projectDetails.closeDetails();
+
         var page = this.pages[dataPage].capitalize();
 
         var funcCall = 'this.show' + page + '()';
@@ -149,10 +156,10 @@ var BaseView = Backbone.View.extend({
             var step = this.moveBgStep * Math.abs(this.currentPage - this.prevPage);
 
             if (this.currentPage > this.prevPage) {
-                this.backgroundPosition = this.backgroundPosition + step;
+                this.backgroundPosition = this.backgroundPosition - step;
                 this.$el.animateBG(this.backgroundPosition, 0, this.moveBgSpeed);
             } else if (this.currentPage < this.prevPage) {
-                this.backgroundPosition = this.backgroundPosition - step;
+                this.backgroundPosition = this.backgroundPosition + step;
                 this.$el.animateBG(this.backgroundPosition, 0, this.moveBgSpeed);
             }
 
@@ -194,6 +201,7 @@ var BaseView = Backbone.View.extend({
     },
 
     showHomepage: function() {
+        this.$el.attr('id', '');
         this.homepage.css({
             'position': 'absolute',
             'top': '0px',
@@ -223,6 +231,7 @@ var BaseView = Backbone.View.extend({
     },
 
     showProjects: function() {
+        this.$el.attr('id', '');
         this.projects.css({
             bottom: '0px',
             position: 'absolute',
@@ -253,6 +262,7 @@ var BaseView = Backbone.View.extend({
     },
 
     showReference: function() {
+        this.$el.attr('id', '');
         this.reference.css({
             left: '0px',
             position: 'absolute',
@@ -288,6 +298,7 @@ var BaseView = Backbone.View.extend({
     },
 
     showContact: function() {
+        this.$el.attr('id', '');
         var context = this;
         window.setTimeout(function() {
             context.contact.fadeIn(750);
@@ -343,5 +354,5 @@ $.fn.animateBG = function(x, y, speed) {
 }
 
 $(function() {
-    new BaseView();
+    window.baseView = new BaseView();
 });
