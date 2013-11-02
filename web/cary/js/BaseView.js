@@ -86,8 +86,25 @@ var BaseView = Backbone.View.extend({
             'background-position': '250px 0'
         });
 
-        this.$el.animateBG(0, 0, 750);
-        this.backgroundPosition = 0;
+        this.$el.css('width', window.innerWidth - 20);
+
+        if (window.innerWidth < 1920) {
+            var bgStart = (1920 - window.innerWidth) / 2;
+
+            this.$el.css({
+                'background-position': bgStart + 'px 0px'
+            });
+
+            this.$el.animateBG('-' + bgStart, 0, 750);
+
+            this.backgroundPosition = bgStart;
+        } else {
+            this.$el.animateBG(0, 0, 750);
+            this.backgroundPosition = 0;
+        }
+
+        console.log(this.backgroundPosition);
+
 
         this.showHomepage();
     },
@@ -103,7 +120,7 @@ var BaseView = Backbone.View.extend({
                 this.animateButtons('hide', 'right');
             }
 
-            this.backgroundPosition = this.backgroundPosition - this.moveBgStep;
+            this.backgroundPosition =- (Math.abs(this.backgroundPosition) + this.moveBgStep);
             this.$el.animateBG(this.backgroundPosition, 0, this.moveBgSpeed);
 
             this.$('ul#menu li').removeClass('active');

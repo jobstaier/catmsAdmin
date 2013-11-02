@@ -13,9 +13,6 @@ var ProjectDetailsView = Backbone.View.extend({
     activeDetail: 0,
 
     initialize: function() {
-        //this.template =  _.template($("#projectDetails").html(), {});
-        console.log('Init');
-
         var context = this;
         this.$('.part div').each(function() {
             var nodeValues = {

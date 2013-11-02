@@ -1,3 +1,8 @@
 homepage:
     pattern:  /
     defaults: { _controller: CatMSFrontendBundle:Primary:index }
+
+mailer:
+    pattern:  /send-mail
+    defaults: { _controller: CatMSFrontendBundle:Primary:sendMail }
+    methods: [POST]
