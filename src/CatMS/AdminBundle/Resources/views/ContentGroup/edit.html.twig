@@ -26,7 +26,7 @@
             <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> {{ 'global.backToTheList' | trans }}</a>
             <a href="{{ path('content-manager-list', { 'slug': entity.slug }) }}"class="btn btn-small"><i class="icon-list"></i>  {{ 'global.contentList' | trans }}</a>
             <a href="{{ path('content-manager-new', { 'group': entity.slug }) }}"class="btn btn-primary btn-small"><i class="icon-font"></i>  {{ 'global.addContent' | trans }}</a>
-            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="Saving..."><i class="icon-hdd icon-small"></i>  {{ 'global.save' | trans }}</button>
+            <button type="submit" class="btn btn-primary show-loader btn-small show-submit-loader" data-loading-text="Saving..."><i class="icon-hdd icon-small"></i>  {{ 'global.save' | trans }}</button>
         </div> 
         
         <hr class="clear" />
@@ -62,7 +62,7 @@
             <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i>  {{ 'global.backToTheList' | trans }}</a>
             <a href="{{ path('content-manager-list', { 'slug': entity.slug }) }}"class="btn btn-small"><i class="icon-list"></i>  {{ 'global.contentList' | trans }}</a>
             <a href="{{ path('content-manager-new', { 'group': entity.slug }) }}"class="btn btn-primary btn-small"><i class="icon-font"></i>  {{ 'global.addContent' | trans }}</a>
-            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="Saving..."><i class="icon-hdd icon-small"></i>  {{ 'global.save' | trans }}</button>
+            <button type="submit" class="btn btn-primary show-loader btn-small show-submit-loader" data-loading-text="Saving..."><i class="icon-hdd icon-small"></i>  {{ 'global.save' | trans }}</button>
         </div> 
 
     </form>

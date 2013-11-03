@@ -2,8 +2,8 @@
     <h3><strong>KONTAKT</strong></h3>
 
     <ul>
-        <li class="web"><a href="mailto:karol@cary.pl">karol@cary.pl</a></li>
-        <li class="phone">+48 609 200 000</li>
+        <li class="web"><a href="mailto:karol@cary.pl">{{ get_setting('contact-mailer-address') }}</a></li>
+        <li class="phone">{{ get_setting('contact-phone') }}</li>
     </ul>
 
     <div class="form">
@@ -18,17 +18,8 @@
 
     <h5><span>Dziękuję</span> za wizytę!</h5>
 
-    <p>
-        Web Designer: opracowuje dostępny interfejs strony oraz szatę graficzną. Webdesigner to wyspecjalizowany grafik,
-        który tworzy szatę graficzną przeznaczoną dla serwisów WWW. Często także implementuje szablony graficzne współtworzonych serwisów.
-        Web Designer pochodzi od słowa web design - projektowanie na potrzeby internetu.
-    </p>
+    {{ get_content('contact-content-1', 'fullText') | raw }}
 
-    <p>
-        Freelancer: osoba pracująca bez etatu, realizująca projekty na zlecenie, najczęściej specjalizująca się w danej dziedzinie.
-        Do profesji szczególnie popularnych wśród wolnych strzelców należą: fotografia, dziennikarstwo, copywriting, tłumaczenie, programowanie,
-        malarstwo, grafika, doradztwo i inne zawody (głównie związane z pracą twórczą). Określenia „wolny strzelec” zazwyczaj nie
-        nadaje się osobom wykonującym pracę fizyczną.
-    </p>
+    {{ get_content('contact-content-2', 'fullText') | raw }}
 
 </div>

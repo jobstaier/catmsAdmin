@@ -92,19 +92,16 @@ var BaseView = Backbone.View.extend({
             var bgStart = (1920 - window.innerWidth) / 2;
 
             this.$el.css({
-                'background-position': bgStart + 'px 0px'
+                'background-position': '-' + bgStart + 'px 0px'
             });
 
             this.$el.animateBG('-' + bgStart, 0, 750);
 
-            this.backgroundPosition = bgStart;
+            this.backgroundPosition = bgStart * -1;
         } else {
             this.$el.animateBG(0, 0, 750);
             this.backgroundPosition = 0;
         }
-
-        console.log(this.backgroundPosition);
-
 
         this.showHomepage();
     },

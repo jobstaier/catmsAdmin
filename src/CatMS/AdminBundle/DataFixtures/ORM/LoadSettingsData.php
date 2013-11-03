@@ -84,9 +84,8 @@ class LoadSettingsData extends AbstractFixture  implements OrderedFixtureInterfa
         $entity6->setRange('frontend');
         $entity6->setFieldType('text');
 
-        $manager->persist($entity8);
+        $manager->persist($entity6);
         $manager->flush();
-
 
     }
 

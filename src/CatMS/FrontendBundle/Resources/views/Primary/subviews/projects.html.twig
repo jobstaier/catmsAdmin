@@ -3,99 +3,39 @@
 
     <div class="projects">
         <div id="nav-top">
-            <a href="#" class="prev">Poprzednie</a>
+            <a href="javascript:void(0);" class="prev">Poprzednie</a>
         </div>
 
         <div id="middle">
-            <div class="part">
-                <div>
-                    <img src="{{ asset('cary/img/p-1.png') }}" alt="{{ asset('cary/img/p-detail.png') }}" />
-                    <span>
-                        <em class="title">Hosting.wp.pl</em>
-                        <i class="lead">UX & Web design</i>
-                        <i class="createdFor">Dla Symetria.pl</i>
-                    </span>
-                </div>
-                <div>
-                    <img src="{{ asset('cary/img/p-2.png') }}" alt="{{ asset('cary/img/p-detail.png') }}" />
-                    <span>
-                        <em class="title">Domeny.allegro.pl</em>
-                        <i class="lead">UX & Web design</i>
-                        <i class="createdFor">Dla Allegro.pl</i>
-                    </span>
-                </div>
-                <div>
-                    <img src="{{ asset('cary/img/p-3.png') }}" alt="{{ asset('cary/img/p-detail.png') }}" />
-                    <span>
-                        <em class="title">Hosting.wp.pl</em>
-                        <i class="lead">UX & Web design</i>
-                        <i class="createdFor">Dla Symetria.pl</i>
-                    </span>
-                </div>
-            </div>
+            {% set projects = get_content_group('projects') %}
 
-            <div class="part">
-                <div>
-                    <img src="{{ asset('cary/img/p-1.png') }}" alt="{{ asset('cary/img/p-detail.png') }}" />
-                    <span>
-                        <em class="title">Hosting.wp.pl</em>
-                        <i class="lead">UX & Web design</i>
-                        <i class="createdFor">Dla Symetria.pl</i>
-                    </span>
+            {% for project in projects %}
+                {% if loop.index0 is divisibleby(3) %}
+                <div class="part">
+                {% endif %}
+                    <div>
+                        {% set image = get_image(project.slug) %}
+                        <img src="{{ asset('/uploads/media-library/thmb_')~image.path }}" alt="{{ asset('/uploads/media-library/')~image.path }}" />
+                        <span>
+                            <em class="title">{{ project.title | striptags | raw }}</em>
+                            <i class="lead">{{ project.fullText | striptags | raw }}</i>
+                            <i class="createdFor">{{ project.shortText | striptags | raw }}</i>
+                        </span>
+                    </div>
+                {% if loop.index0 is divisibleby(3) %}
                 </div>
-                <div>
-                    <img src="{{ asset('cary/img/p-2.png') }}" alt="{{ asset('cary/img/p-detail.png') }}" />
-                    <span>
-                        <em class="title">Domeny.allegro.pl</em>
-                        <i class="lead">UX & Web design</i>
-                        <i class="createdFor">Dla Allegro.pl</i>
-                    </span>
-                </div>
-                <div>
-                    <img src="{{ asset('cary/img/p-3.png') }}" alt="{{ asset('cary/img/p-detail.png') }}" />
-                    <span>
-                        <em class="title">Hosting.wp.pl</em>
-                        <i class="lead">UX & Web design</i>
-                        <i class="createdFor">Dla Symetria.pl</i>
-                    </span>
-                </div>
-            </div>
-
-            <div class="part">
-                <div>
-                    <img src="{{ asset('cary/img/p-1.png') }}" alt="{{ asset('cary/img/p-detail.png') }}" />
-                    <span>
-                        <em class="title">Hosting.wp.pl</em>
-                        <i class="lead">UX & Web design</i>
-                        <i class="createdFor">Dla Symetria.pl</i>
-                    </span>
-                </div>
-                <div>
-                    <img src="{{ asset('cary/img/p-2.png') }}" alt="{{ asset('cary/img/p-detail.png') }}" />
-                    <span>
-                        <em class="title">Domeny.allegro.pl</em>
-                        <i class="lead">UX & Web design</i>
-                        <i class="createdFor">Dla Allegro.pl</i>
-                    </span>
-                </div>
-                <div>
-                    <img src="{{ asset('cary/img/p-3.png') }}" alt="{{ asset('cary/img/p-detail.png') }}" />
-                    <span>
-                        <em class="title">Hosting.wp.pl</em>
-                        <i class="lead">UX & Web design</i>
-                        <i class="createdFor">Dla Symetria.pl</i>
-                    </span>
-                </div>
-            </div>
+                {% endif %}
+            {% endfor %}
         </div>
 
         <div id="nav-bottom">
             <ul>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
+                {% set pagesCount = ceil((projects | length) / 3) %}
+                {% for i in 1..pagesCount %}
+                    <li{% if i == 1 %} class="active"{% endif %}><a href="javascript:void(0);">{{ i }}</a></li>
+                {% endfor %}
             </ul>
-            <a href="#" class="next">Następne</a>
+            <a href="javascript:void(0);" class="next">Następne</a>
         </div>
     </div>
 
