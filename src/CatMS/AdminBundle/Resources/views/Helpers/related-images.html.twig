@@ -1,4 +1,14 @@
-<script src={{ asset('js/catms/catms.related-image.js') }}></script>
+<script src={{ asset('js/catms/views/RelatedImagesView.js') }}></script>
+<script src={{ asset('js/catms/views/ClipboardView.js') }}></script>
+<script>
+    $(function() {
+        new RelatedImagesView();
+        new ClipboardView();
+    });
+</script>
+
+{% include 'CatMSAdminBundle:Templates:clipboard.html.twig' %}
+
 <div class="related-images-trigger-container">
     <a class="btn btn-small btn-success"><i class="icon-chevron-left"></i> {{ 'contentManager.relatedImages' | trans }}</a>
 </div>
@@ -9,7 +19,7 @@
             <h5>{{ 'contentManager.relatedImagesFromImageGroups' | trans | raw }}</h5>
         </div>
         <a href="{{ path('ajax-get-related-image-groups', {'group': group.id }) }}" style="display: none" id="getRelatedImageGroupUrl"></a>
-        <a href="{{ asset('uploads/media-library/') }}" style="display: none" id="getImagesDirectroyUrl"></a>
+        <a href="{{ asset('uploads/') }}" style="display: none" id="getImagesDirectroyUrl"></a>
         <div class="loader-gif"></div>
         <div class="append-here"></div>
     </div>

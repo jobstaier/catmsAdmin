@@ -211,7 +211,12 @@ contentManager:
     createNewContent: Add content
     edit: Edit
     creatingNewContent: Creating new conent
-        
+
+#Related Images
+relatedImages:
+    noRelationsDefined: No relations defined!
+    checkOptions: Check Content Group properties if you want display apropriate images here.
+
 #Plupload
 plupload:
     browserError: You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.
