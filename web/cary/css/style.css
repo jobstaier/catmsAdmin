@@ -398,6 +398,7 @@ body#project-detail #top {
 	border-left:0px;
 	overflow:hidden;
     cursor: pointer;
+    position: relative;
 }
 
 #projects .projects #middle .part div:last-child {
@@ -412,6 +413,9 @@ body#project-detail #top {
 #projects .projects #middle .part div img {
 	float:left;
 	display:block;
+    position: absolute;
+    top: -80px;
+    z-index: 2;
 }
 
 #projects .projects #middle .part div span {
@@ -424,6 +428,8 @@ body#project-detail #top {
 	font-size:12px;
 	font-family:Arial, Helvetica, sans-serif;
 	color:#fff;
+    position: absolute;
+    bottom: 0px;
 }
 
 #projects .projects #middle .part div span em {
@@ -655,6 +661,7 @@ body#project-detail #top {
 #referencje ul li a:hover,
 #referencje ul li.active a {
 	background-color:#ee1191;
+    color: #fff;
 }
 
 #kontakt {

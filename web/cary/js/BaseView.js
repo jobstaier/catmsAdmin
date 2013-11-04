@@ -51,6 +51,8 @@ var BaseView = Backbone.View.extend({
         event.preventDefault();
         this.currentPage = $(event.target).parent().index();
         this.showPage(this.currentPage, true);
+
+        this.checkMenu();
     },
 
     logKey: function(event) {
@@ -62,6 +64,8 @@ var BaseView = Backbone.View.extend({
     },
 
     initialState: function() {
+
+        $('#top #menu li a').css('color', '#fff');
 
         this.moveLeftBtn.css({
             'left': '-90px',
@@ -106,6 +110,15 @@ var BaseView = Backbone.View.extend({
         this.showHomepage();
     },
 
+    checkMenu: function() {
+        if (this.currentPage == 0) {
+            $('#top #menu li a').css('color', '#fff');
+        } else {
+            $('#top #menu li a').css('color', '#b3b8c6');
+            $('#top #menu li.active a').css('color', '#fff');
+        }
+    },
+
     moveRight: function() {
         this.prevPage = this.currentPage;
         var nextPage = this.currentPage + 1;
@@ -126,6 +139,7 @@ var BaseView = Backbone.View.extend({
             this.animateButtons('hide', 'right');
         }
 
+        this.checkMenu();
         this.animateButtons('show', 'left');
     },
 
@@ -149,6 +163,7 @@ var BaseView = Backbone.View.extend({
             this.animateButtons('hide', 'left');
         }
 
+        this.checkMenu();
         this.animateButtons('show', 'right');
     },
 

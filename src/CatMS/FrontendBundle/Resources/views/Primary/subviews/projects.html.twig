@@ -9,22 +9,50 @@
         <div id="middle">
             {% set projects = get_content_group('projects') %}
 
-            {% for project in projects %}
-                {% if loop.index0 is divisibleby(3) %}
-                <div class="part">
-                {% endif %}
-                    <div>
-                        {% set image = get_image(project.slug) %}
-                        <img src="{{ asset('/uploads/media-library/thmb_')~image.path }}" alt="{{ asset('/uploads/media-library/')~image.path }}" />
+            {% if  projects | length == 1 %}
+                {% set step = 1 %}
+            {% elseif  projects | length == 2 %}
+                {% set step = 2 %}
+            {% elseif  projects | length >= 3 %}
+                {% set step = 3 %}
+            {% endif %}
+
+            {% for i in range(0, projects | length, step)  %}
+            <div class="part">
+                {% if projects[i] is defined %}
+                <div>
+                    {% set image = get_image(projects[i].slug) %}
+                    <img src="{{ asset('/uploads/media-library/thmb_')~image.path }}" alt="{{ asset('/uploads/media-library/')~image.path }}" />
                         <span>
-                            <em class="title">{{ project.title | striptags | raw }}</em>
-                            <i class="lead">{{ project.fullText | striptags | raw }}</i>
-                            <i class="createdFor">{{ project.shortText | striptags | raw }}</i>
+                            <em class="title">{{ projects[i].title | striptags | raw }}</em>
+                            <i class="lead">{{ projects[i].fullText | striptags | raw }}</i>
+                            <i class="createdFor">{{ projects[i].shortText | striptags | raw }}</i>
                         </span>
-                    </div>
-                {% if loop.index0 is divisibleby(3) %}
                 </div>
                 {% endif %}
+                {% if projects[i+1] is defined %}
+                <div>
+                    {% set image = get_image(projects[i+1].slug) %}
+                    <img src="{{ asset('/uploads/media-library/thmb_')~image.path }}" alt="{{ asset('/uploads/media-library/')~image.path }}" />
+                        <span>
+                            <em class="title">{{ projects[i+1].title | striptags | raw }}</em>
+                            <i class="lead">{{ projects[i+1].fullText | striptags | raw }}</i>
+                            <i class="createdFor">{{ projects[i+1].shortText | striptags | raw }}</i>
+                        </span>
+                </div>
+                {% endif %}
+                {% if projects[i+2] is defined %}
+                <div>
+                    {% set image = get_image(projects[i+2].slug) %}
+                    <img src="{{ asset('/uploads/media-library/thmb_')~image.path }}" alt="{{ asset('/uploads/media-library/')~image.path }}" />
+                        <span>
+                            <em class="title">{{ projects[i+2].title | striptags | raw }}</em>
+                            <i class="lead">{{ projects[i+2].fullText | striptags | raw }}</i>
+                            <i class="createdFor">{{ projects[i+2].shortText | striptags | raw }}</i>
+                        </span>
+                </div>
+                {% endif %}
+            </div>
             {% endfor %}
         </div>
 

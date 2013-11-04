@@ -1,12 +1,12 @@
 var NavigatedSliderView = Backbone.View.extend({
-    el: '',
+    el: 'body',
     navigation: '',
 
     slides: new Array(),
     count: 0,
     currentSlide: 0,
-    autoPlayTime: 7000,
-    pauseTime: 5000,
+    //autoPlayTime: 7000,
+    //pauseTime: 5000,
     initSlide: 0,
 
     timer: null,
@@ -14,7 +14,9 @@ var NavigatedSliderView = Backbone.View.extend({
     events: {
         'click #nav-bottom ul li': 'animate',
         'click .prev': 'navigatePrev',
-        'click .next': 'navigateNext'
+        'click .next': 'navigateNext',
+        'mouseenter .part div': 'slideImageIn',
+        'mouseleave .part div': 'slideImageOut'
     },
 
     initialize: function(options) {
@@ -28,7 +30,23 @@ var NavigatedSliderView = Backbone.View.extend({
         });
 
         this.initialState();
-        this.autoPlay();
+        //this.autoPlay();
+    },
+
+    slideImageIn: function(event) {
+        var hovered = $(event.currentTarget);
+
+        hovered.find('img').stop(true, false).animate({
+            top: '0px'
+        }, 350, 'swing');
+    },
+
+    slideImageOut: function(event) {
+        var hovered = $(event.currentTarget);
+
+        hovered.find('img').stop(true, false).animate({
+            top: '-80px'
+        }, 350, 'swing');
     },
 
     initialState: function() {
@@ -64,11 +82,14 @@ var NavigatedSliderView = Backbone.View.extend({
             $(context.slides[context.currentSlide]).fadeIn(500);
         }, 600);
 
+        /*
         window.setTimeout(function() {
             context.autoPlay(true, context);
         }, this.pauseTime);
+        */
     },
 
+    /*
     autoPlay: function(restart, context) {
         var restart = (restart) ? false : restart;
 
@@ -81,6 +102,7 @@ var NavigatedSliderView = Backbone.View.extend({
             context.autoAnimate();
         }, context.autoPlayTime);
     },
+    */
 
     autoAnimate: function() {
         if (this.currentSlide < (this.count - 1)) {
