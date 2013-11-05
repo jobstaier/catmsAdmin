@@ -18,7 +18,7 @@
     <form novalidate action="{{ path('content-group-create') }}" method="post" {{ form_enctype(form) }}>
         <div>
             <a href="{{ path('content-group') }}" class="btn btn-small"><i class="icon-tags"></i> {{ 'global.backToTheList' | trans }}</a>
-            <button type="submit" class="btn btn-primary show-loader btn-small" data-loading-text="{{ 'global.creating' | trans }}"><i class="icon-hdd icon-small"></i> {{ 'global.create' | trans }}</button>
+            <button type="submit" class="btn btn-primary show-loader btn-small show-submit-loader" data-loading-text="{{ 'global.creating' | trans }}"><i class="icon-hdd icon-small"></i> {{ 'global.create' | trans }}</button>
         </div> 
         
         <hr class="clear" />            

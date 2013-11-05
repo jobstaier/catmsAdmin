@@ -38,16 +38,15 @@
         </tbody>
     </table>
 
-    <div class="btn-group" style="margin-bottom: 10px">
+    <div style="margin-bottom: 10px">
         <a href="{{ path('seo') }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>
-        <a href="{{ path('seo-edit', { 'id': entity.id }) }}"class="btn btn-small"><i class="icon-edit"></i> {{ 'global.edit' | trans }}</a>
+        <a href="{{ path('seo-edit', { 'id': entity.id }) }}"class="btn btn-primary btn-small"><i class="icon-edit"></i> {{ 'global.edit' | trans }}</a>
     </div>
 
     <form action="{{ path('seo-delete', { 'id': entity.id }) }}" method="post">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" class="btn btn-small" data-toggle="modal" data-target="#delete"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
-        {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'delete', 'msg': 'global.deleteSeoPage' | trans, 'btnTxt': 'global.delete' | trans } %}
+        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this-form"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
     </form>
     
 {% endblock %}

@@ -70,11 +70,11 @@ class TwigCatMSGetters extends \Twig_Extension {
             ->createQueryBuilder('c');
         
         $results = $qb->join('c.contentGroup', 'cg')
-                ->where('cg.slug = :slug')
-                ->orderBy('c.priority', 'ASC')
-                ->setParameter('slug', $slug)
-                ->getQuery()
-                ->getResult();
+            ->where('cg.slug = :slug')
+            ->orderBy('c.priority', 'ASC')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getResult();
         
         
         

@@ -26,7 +26,7 @@
     <form novalidate action="{{ path('settings-create', {'range': range | lower }) }}" method="post" {{ form_enctype(form) }}>
         {{ form_widget(form) }}
 
-        <a href="{{ path(pathname) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>
-        <button type="submit" data-toggle="button" class="btn btn-small btn-primary show-btn-loader show-submit-loader" data-loading-text="{{ 'global.creating' | trans }}"><i class="icon-hdd"></i> {{ 'global.create' | trans }}</button>
-    </form>  
+        <a href="{{ path(pathname) }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>
+        <button type="submit" data-toggle="button" class="btn btn-primary btn-small show-loader show-submit-loader" data-loading-text="{{ 'global.creating' | trans }}"><i class="icon-hdd"></i> {{ 'global.create' | trans }}</button>
+    </form>
 {% endblock %}

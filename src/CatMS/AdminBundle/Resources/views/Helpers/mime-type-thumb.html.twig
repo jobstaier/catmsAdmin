@@ -1,6 +1,6 @@
 {% if entity.mimeType == 'image/jpeg' or entity.mimeType == 'image/png' %}
 <a href="{{ asset('uploads/media-library/')~entity.path }}" class="thumbnail single-image">
-    <img style="max-width: 160px;" src="{{ asset('uploads/media-library/')~entity.path }}" title="{{ entity.title }}"/>
+    <img style="max-width: 160px;" src="{{ asset('uploads/system-thumbs/sThmb_')~entity.path }}" title="{{ entity.title }}"/>
 </a>
 {% elseif entity.mimeType == 'application/pdf' %}
     <a href="{{ asset('uploads/media-library/')~entity.path }}" class="pdf-icon-48"></a>

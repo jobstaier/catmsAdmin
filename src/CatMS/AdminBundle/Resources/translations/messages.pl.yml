@@ -211,6 +211,11 @@ contentManager:
     createNewContent: Dodaj treść    
     edit: Edycja
     creatingNewContent: Dodawanie treści
+
+#Related Images
+relatedImages:
+    noRelationsDefined: Nie zdefionowano żadnych realcji!
+    checkOptions: Przejdź do menadżera grup tekstowych i powiąż odpowiednią grupę.
     
 #Plupload
 plupload:

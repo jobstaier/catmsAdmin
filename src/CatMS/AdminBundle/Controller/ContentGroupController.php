@@ -197,7 +197,7 @@ class ContentGroupController extends Controller
                 $this->get('session')->getFlashBag()->add('noticeFailure', 'delete.error.delete.developer');
                 return $this->redirect($this->generateUrl('content-group'));    
             }
-            
+
             $em->remove($entity);
             $em->flush();
             $this->get('session')->getFlashBag()->add('noticeSuccess', 'delete.success');

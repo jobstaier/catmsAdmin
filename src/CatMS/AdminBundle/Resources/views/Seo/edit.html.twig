@@ -12,6 +12,7 @@
 {% endblock %}
     
 {% block content -%}
+<div class="seo-edit-view">
     <legend>
         <i class="icon-large icon-globe"></i> {{ 'seo.edit' | trans }} <i>{{ entity.slug }}</i></i> SEO
     </legend>
@@ -20,10 +21,10 @@
         <input type="hidden" name="_method" value="PUT" />
         {{ form_widget(edit_form) }}
 
-        <div class="btn-group">
+        <div class="buttons">
             <a href="{{ path('seo') }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>
             <a href="{{ path('seo-show', { 'id': entity.id }) }}" class="btn btn-small"><i class="icon-fullscreen"></i> {{ 'global.show' | trans }}</a>
-            <button type="submit" class="btn btn-primary btn-small show-btn-loader show-submit-loader" data-loading-text="{{ 'global.saving' | trans }}"><i class="icon-hdd"></i> {{ 'global.save' | trans }}</button>
+            <button type="submit" class="btn btn-primary btn-small show-loader show-submit-loader" data-loading-text="{{ 'global.saving' | trans }}"><i class="icon-hdd"></i> {{ 'global.save' | trans }}</button>
         </div>
     </form>
     <br />
@@ -31,8 +32,7 @@
     <form action="{{ path('seo-delete', { 'id': entity.id }) }}" method="post">
         <input type="hidden" name="_method" value="DELETE" />
         {{ form_widget(delete_form) }}
-        <button type="submit" class="btn btn-small show-btn-loader" data-toggle="modal" data-target="#delete"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
-        {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'delete', 'msg': 'global.deleteSeoPage' | trans, 'btnTxt': 'global.delete' | trans} %}
-    </form>    
-    
+        <button type="submit" data-view="top" class="btn btn-small btn-warning remove-this-form"><i class="icon-trash"></i> {{ 'global.delete' | trans }}</button>
+    </form>
+</div>
 {% endblock %}

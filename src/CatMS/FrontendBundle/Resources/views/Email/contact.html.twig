@@ -2,20 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Wiadomość ze strony NZOZ</title>
+<title>Wiadomość ze Cary.pl</title>
 </head>
 <body>
     <div style="background-color: #000">
+        <img src="https://dl.dropboxusercontent.com/u/25855328/catms-mail-header.jpg" alt="CatMS Admin" />
     </div>
-    <h3>{{ subject }}</h3>
+    <h3>Treść wiadomości:</h3>
     <p>
-        {{ content }}
+        {{ vars['content'] }}
     </p>
     <p>
         <h3>Nadawca:</h3>
-        {{ name }}<br />
-        {{ phone }}<br />
-        {{ email }}<br />
+        {{ vars['contactName'] }}<br />
+        {{ vars['contactMail'] }}<br />
     </p>
         
     <hr />

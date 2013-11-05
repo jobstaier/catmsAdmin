@@ -78,16 +78,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "d0e4447707a064a5814b18cb0dcc2f24185f6179"
+                "reference": "e16d7adf45664a50fa86f515b6d5e7f670130449"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/d0e4447707a064a5814b18cb0dcc2f24185f6179",
-                "reference": "d0e4447707a064a5814b18cb0dcc2f24185f6179",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/e16d7adf45664a50fa86f515b6d5e7f670130449",
+                "reference": "e16d7adf45664a50fa86f515b6d5e7f670130449",
                 "shasum": ""
             },
             "require": {
@@ -95,6 +95,10 @@
             },
             "conflict": {
                 "doctrine/common": ">2.2,<2.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=3.7",
+                "satooshi/php-coveralls": "~0.6"
             },
             "type": "library",
             "extra": {
@@ -143,7 +147,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2013-09-26 19:23:25"
+            "time": "2013-10-25 19:04:14"
         },
         {
             "name": "doctrine/collections",
@@ -481,16 +485,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
-                "reference": "3caec4826e58fe47520b591f965b4adcdfc8a6c8"
+                "reference": "e018cf34f6c8642eba40ca44871fead97616922a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/3caec4826e58fe47520b591f965b4adcdfc8a6c8",
-                "reference": "3caec4826e58fe47520b591f965b4adcdfc8a6c8",
+                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/e018cf34f6c8642eba40ca44871fead97616922a",
+                "reference": "e018cf34f6c8642eba40ca44871fead97616922a",
                 "shasum": ""
             },
             "require": {
-                "doctrine/data-fixtures": "~1.0",
+                "doctrine/data-fixtures": "*",
                 "doctrine/doctrine-bundle": "~1.0",
                 "php": ">=5.3.2",
                 "symfony/doctrine-bridge": "~2.1"
@@ -498,7 +502,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2.x-dev"
+                    "dev-master": "2.1.x-dev"
                 }
             },
             "autoload": {
@@ -530,7 +534,7 @@
                 "Fixture",
                 "persistence"
             ],
-            "time": "2013-09-16 10:15:05"
+            "time": "2013-08-05 08:41:18"
         },
         {
             "name": "doctrine/inflector",
@@ -723,12 +727,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/l3pp4rd/DoctrineExtensions.git",
-                "reference": "67615ac3fa45369e25806ac1932235b3a09e3f35"
+                "reference": "8f9f41b1218eb3084fec41140337ffd407bd3785"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/67615ac3fa45369e25806ac1932235b3a09e3f35",
-                "reference": "67615ac3fa45369e25806ac1932235b3a09e3f35",
+                "url": "https://api.github.com/repos/l3pp4rd/DoctrineExtensions/zipball/8f9f41b1218eb3084fec41140337ffd407bd3785",
+                "reference": "8f9f41b1218eb3084fec41140337ffd407bd3785",
                 "shasum": ""
             },
             "require": {
@@ -795,7 +799,7 @@
                 "tree",
                 "uploadable"
             ],
-            "time": "2013-10-10 07:21:45"
+            "time": "2013-08-22 17:42:52"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1275,12 +1279,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpPaginatorBundle.git",
-                "reference": "769b83d01b3f76b011522599bd48e5e202d94ff4"
+                "reference": "ce6b7b36d3bed5cb6bfb9645018dd407395fce15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/769b83d01b3f76b011522599bd48e5e202d94ff4",
-                "reference": "769b83d01b3f76b011522599bd48e5e202d94ff4",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/ce6b7b36d3bed5cb6bfb9645018dd407395fce15",
+                "reference": "ce6b7b36d3bed5cb6bfb9645018dd407395fce15",
                 "shasum": ""
             },
             "require": {
@@ -1325,7 +1329,7 @@
                 "pagination",
                 "paginator"
             ],
-            "time": "2013-09-23 09:04:09"
+            "time": "2013-07-30 20:36:09"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -1802,21 +1806,20 @@
         },
         {
             "name": "symfony/icu",
-            "version": "v1.2.0",
+            "version": "v1.0.0",
             "target-dir": "Symfony/Component/Icu",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Icu.git",
-                "reference": "7299cd3d8d6602103d1ebff5d0a9917b7bc6de72"
+                "reference": "cac3fdfb111adbe590155f491594636d45129783"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Icu/zipball/7299cd3d8d6602103d1ebff5d0a9917b7bc6de72",
-                "reference": "7299cd3d8d6602103d1ebff5d0a9917b7bc6de72",
+                "url": "https://api.github.com/repos/symfony/Icu/zipball/cac3fdfb111adbe590155f491594636d45129783",
+                "reference": "cac3fdfb111adbe590155f491594636d45129783",
                 "shasum": ""
             },
             "require": {
-                "lib-icu": ">=4.4",
                 "php": ">=5.3.3",
                 "symfony/intl": "~2.3"
             },
@@ -1846,7 +1849,7 @@
                 "icu",
                 "intl"
             ],
-            "time": "2013-06-03 18:32:58"
+            "time": "2013-06-03 18:32:07"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -2172,27 +2175,27 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/willdurand/BazingaExposeTranslationBundle.git",
-                "reference": "b435bae01f6c3540214cd83306b7fb297cf82186"
+                "reference": "6df1246d89d1eb36242c8ee12d57f46a6a43f195"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/willdurand/BazingaExposeTranslationBundle/zipball/b435bae01f6c3540214cd83306b7fb297cf82186",
-                "reference": "b435bae01f6c3540214cd83306b7fb297cf82186",
+                "url": "https://api.github.com/repos/willdurand/BazingaExposeTranslationBundle/zipball/6df1246d89d1eb36242c8ee12d57f46a6a43f195",
+                "reference": "6df1246d89d1eb36242c8ee12d57f46a6a43f195",
                 "shasum": ""
             },
             "require": {
-                "symfony/console": "~2.0",
-                "symfony/finder": "~2.0",
-                "symfony/framework-bundle": "~2.0"
+                "symfony/console": ">=2.0,<2.4-dev",
+                "symfony/finder": ">=2.0,<2.4-dev",
+                "symfony/framework-bundle": ">=2.0,<2.4-dev"
             },
             "require-dev": {
-                "symfony/browser-kit": "~2.0",
-                "symfony/yaml": "~2.0"
+                "symfony/browser-kit": ">=2.0,<2.4-dev",
+                "symfony/yaml": ">=2.0,<2.4-dev"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "0.3.x-dev"
                 }
             },
             "autoload": {
@@ -2216,7 +2219,7 @@
                 "javascript",
                 "translation"
             ],
-            "time": "2013-10-13 17:23:14"
+            "time": "2013-06-20 15:42:20"
         }
     ],
     "packages-dev": [

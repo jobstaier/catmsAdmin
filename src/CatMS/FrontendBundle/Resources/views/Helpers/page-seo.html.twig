@@ -6,8 +6,8 @@
     {% set metaKeywords = seoObj.metaKeywords %}
 {% endif %}
 
-<title>{{ get_seo('default-prefix', 'title') }}{% if seoObj %} :: {% endif %}{{ pageTitle | default('') }}</title>
-<meta name="description" content="{{ get_seo('default-prefix', 'description') }} {{ metaDescription | default('')}}">
-<meta name="keywords" content="{{ get_seo('default-prefix', 'keywords') }} {{ metaKeywords| default('') }}">
+<title>{{ get_seo('default-prefix', 'title') }}{% if seoObj %} :: {% endif %}{{ pageTitle | default('') -}}</title>
+<meta name="description" content="{{- get_seo('default-prefix', 'description') }}{{- metaDescription | default('') -}}">
+<meta name="keywords" content="{{- get_seo('default-prefix', 'keywords') }}{{- metaKeywords| default('') -}}">
 
 

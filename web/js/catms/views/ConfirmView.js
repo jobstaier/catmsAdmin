@@ -1,10 +1,13 @@
 var ConfirmView = BaseView.extend({
 
     events: {
-       'click .remove-this-confirm': 'confirmRemove',
-       'click a.dismiss': 'dismissRemove'
+        'click .remove-this-form': 'preventDefault',
+        'click .remove-this-confirm': 'confirmRemove',
+        'click .remove-this-form-confirm': 'confirmFormRemove',
+        'click a.dismiss': 'dismissRemove',
+        'click .dismiss-form': 'dismissFormRemove'
     },
-    
+
     initialize: function() {
         BaseView.prototype.initialize.apply(this);
         $('.remove-this').each(function(){
@@ -16,7 +19,17 @@ var ConfirmView = BaseView.extend({
                 html: true
             });
         });
-        
+
+        $('.remove-this-form').each(function(){
+            $(this).popover({
+                content:
+                    '<div style="text-align: center;">' + Translator.get('global.deleteConfirm') + '<br /><br />' +
+                        '<a href="" class="btn btn-primary btn-mini remove-this-form-confirm">' + Translator.get('global.confirm') + '</a>&nbsp;&nbsp;&nbsp;<a class="btn btn-inverse btn-mini dismiss-form">' + Translator.get('global.dissmiss') + '</a></div>',
+                placement: ($(this).attr('data-view')) ? $(this).attr('data-view') : 'right',
+                html: true
+            });
+        });
+
         $('.change-this').each(function(){
             $(this).popover({
                 content: 
@@ -39,6 +52,7 @@ var ConfirmView = BaseView.extend({
 
         $('body').on('click', 'a.confirm', function(){
             $('.remove-this').popover('hide');
+            $('.remove-this-form').popover('hide');
             $('.change-this').popover('hide');
             $('.save-this').popover('hide');
             return false;
@@ -46,15 +60,29 @@ var ConfirmView = BaseView.extend({
         
     },
 
+    preventDefault: function(event) {
+        event.preventDefault();
+    },
+
+    confirmFormRemove: function(event) {
+        event.preventDefault();
+        $(event.currentTarget).parents('form').submit();
+        window.modalLoader.showLoader();
+    },
+
     confirmRemove: function(event) {
         $(event.target).parents('form').submit();
         window.modalLoader.showLoader();
         return false;
     },
-            
+
     dismissRemove: function(event, triggerClass) {
         var triggerClass = (triggerClass) ? triggerClass : '.remove-this';
 
         $(event.target).parents('.popover').prev(triggerClass).popover('hide');
-    },        
+    },
+
+    dismissFormRemove: function(event) {
+        $(event.target).parents('.popover').prev('.remove-this-form').popover('hide');
+    }
 });

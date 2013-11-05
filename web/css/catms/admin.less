@@ -62,7 +62,48 @@ body {
         background: url('../../img/catms/file-icons/zip48x48.png') 0 0 no-repeat;
     }
 
+  input[type="file"] {
+    height: 22px;
+    line-height: 22px;
+  }
 
+  .uploader-view {
+    #uploader_browse {
+      margin-right: 10px: !important;
+    }
+    #uploader_filelist {
+      height: 242px;
+    }
+    #uploader {
+      float: right;
+      width: 520px;
+      margin-top: -10px;
+    }
+    .plupload_scroll .plupload_filelist {
+      background: none;
+      border-left: 1px dashed #DDD;
+    }
+    .image-form-delete {
+      float: right;
+      margin-top: 20px;
+    }
+
+    .user-list td {
+      vertical-align: middle !important;
+    }
+  }
+
+  .seo-edit-view {
+    form {
+      .buttons {
+        width: 500px;
+        a, btn {
+          float: left;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
 }
 
 
@@ -162,7 +203,12 @@ body {
 }
 
 .image-wrapper {
-    height: 110px;
+  height: 95px;
+
+  a:nth-child(1) {
+    float: left;
+    margin-left: 6px
+  }
 }
 
 .no-margin {
@@ -211,7 +257,7 @@ body {
     display: inline-block;
     width: 150px;
     text-align: center;
-    margin: 5px 0;
+    margin: 5px 0 15px;
     vertical-align: top;
 }
 
@@ -521,10 +567,6 @@ thead {
 
 .gravatar {
     border-radius: 500px;
-}
-
-.user-list td {
-    vertical-align: middle;
 }
 
 .user-list td:nth-child(1) {

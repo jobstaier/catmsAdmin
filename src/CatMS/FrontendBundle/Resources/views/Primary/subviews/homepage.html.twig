@@ -1,0 +1,9 @@
+<div id="homepage">
+    {{ get_content('homepage-top', 'fullText') | stripp | raw }}
+
+    {{ get_content('homepage-main', 'fullText') | raw }}
+
+    <a id="user" href="{{ path('homepage') }}"><span>Karol Połubiński<br /><strong>Freelance Web Designer</strong></span></a>
+
+    <a target="_blank" href="{{ get_setting('goldenline-url') }}"><img src="{{ asset('cary/img/image-goldenline.png') }}" alt="Goldenline" /></a>
+</div>
