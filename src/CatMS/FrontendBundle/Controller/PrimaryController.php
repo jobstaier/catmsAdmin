@@ -36,8 +36,8 @@ class PrimaryController extends Controller
                 $mailTo = $common->getSetting('contact-mailer-address');
                 $message = \Swift_Message::newInstance()
                     ->setContentType('text/html')
-                    ->setSubject('Wiadomość ze strony Cary.pl')
-                    ->setFrom(array('catms.mail@gmail.com' => 'Cary.pl - formularz kontaktowy'))
+                    ->setSubject('')
+                    ->setFrom(array('catms.mail@gmail.com' => ' - formularz kontaktowy'))
                     ->setTo($mailTo)
                     ->setBody(
                         $this->renderView(

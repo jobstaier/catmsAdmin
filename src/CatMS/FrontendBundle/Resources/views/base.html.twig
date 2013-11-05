@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     {% block seo %}{% endblock %}
 
-    <link rel="stylesheet" href="{{  asset('cary/css/style.css') }}" />
+    <link rel="stylesheet" href="" />
 
     <script src="{{ asset('js/vendor/jquery-1.10.2.min.js') }}"></script>
     <script src="{{ asset('js/vendor/jquery.colorbox-min.js') }}"></script>
@@ -12,40 +12,11 @@
     <script src="{{ asset('js/vendor/backbone-min.js') }}"></script>
     <script src="{{ asset('js/vendor/jquery.colorbox-min.js') }}"></script>
     <script src="{{ asset('cary/js/vendor/jquery.easing.1.3.js') }}"></script>
-    <script src="{{ asset('cary/js/BaseView.js') }}"></script>
-    <script src="{{ asset('cary/js/SliderView.js') }}"></script>
-    <script src="{{ asset('cary/js/NavigatedSliderView.js') }}"></script>
-    <script src="{{ asset('cary/js/ProjectDetailsView.js') }}"></script>
-    <script src="{{ asset('cary/js/MailerView.js') }}"></script>
 
 </head>
 <body>
 
-    <a href="javascript:void(0);" class="right">Dalej</a>
-    <a href="javascript:void(0);" class="left">Wstecz</a>
-
-
-    <div class="fixed">
-        <div class="wrapper">
-            <div id="top">
-                <a href="{{ path('homepage') }}"><h1>Cary.pl</h1></a>
-
-                <ul id="menu">
-                    <li class="active"><a href="javascript:void(0);">o mnie</a></li>
-                    <li><a href="javascript:void(0);">realizacje</a></li>
-                    <li><a href="javascript:void(0);">referencje</a></li>
-                    <li><a href="javascript:void(0);">kontakt</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="wrapper">
-
-        {% block content %}{% endblock %}
-
-    </div>
-
+    {% block content %}{% endblock %}
 
 </body>
 </html>
