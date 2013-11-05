@@ -73,13 +73,13 @@ class ContentFields
      * ) 
      * @var string
      */
-    private $fieldDescriptionLabel;
+    private $fieldDescriptionLabel = 'Description';
     
     /**
      * @ORM\Column(type="text", 
      *  name="label_short_text", 
      *  unique=false, 
-     *  nullable=false
+     *  nullable=true
      * )
      * @Assert\Length(
      *      min="3",
@@ -93,7 +93,7 @@ class ContentFields
      * @ORM\Column(type="text", 
      *  name="label_title", 
      *  unique=false, 
-     *  nullable=false
+     *  nullable=true
      * )
      * @Assert\Length(
      *      min="3",
@@ -115,7 +115,7 @@ class ContentFields
      * ) 
      * @var string
      */
-    private $fieldFullTextLabel;    
+    private $fieldFullTextLabel = 'Full Text';    
 
     /**
      * Get id

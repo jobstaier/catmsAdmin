@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Wiadomość ze Cary.pl</title>
+</head>
+<body>
+    <div style="background-color: #000">
+        <img src="https://dl.dropboxusercontent.com/u/25855328/catms-mail-header.jpg" alt="CatMS Admin" />
+    </div>
+    <h3>Treść wiadomości:</h3>
+    <p>
+        {{ vars['content'] }}
+    </p>
+    <p>
+        <h3>Nadawca:</h3>
+        {{ vars['contactName'] }}<br />
+        {{ vars['contactMail'] }}<br />
+    </p>
+        
+    <hr />
+    <p style="color: #999">
+    <i>{{ 'mailer.regards' | trans | raw }}</i>
+    </p>
+</body>
+</html>

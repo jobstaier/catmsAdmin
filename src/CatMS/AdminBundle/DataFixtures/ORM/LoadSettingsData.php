@@ -64,6 +64,29 @@ class LoadSettingsData extends AbstractFixture  implements OrderedFixtureInterfa
         $manager->flush();
         
         
+        $entity5 = new Setting();
+        
+        $entity5->setSlug('image-groups-list-records-per-page');
+        $entity5->setDescription('Records per asset groups list page');
+        $entity5->setValue(8);
+        $entity5->setRange('panel');
+        $entity5->setFieldType('text');
+        
+        $manager->persist($entity5);
+        $manager->flush();
+
+
+        $entity6 = new Setting();
+
+        $entity6->setSlug('contact-mailer-address');
+        $entity6->setDescription('Email kontaktowy');
+        $entity6->setValue('d.job@catdesign.pl');
+        $entity6->setRange('frontend');
+        $entity6->setFieldType('text');
+
+        $manager->persist($entity6);
+        $manager->flush();
+
     }
 
     /**

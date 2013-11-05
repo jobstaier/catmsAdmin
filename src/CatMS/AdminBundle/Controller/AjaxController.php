@@ -29,7 +29,7 @@ class AjaxController extends Controller
      */
     public function getGroupsAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $groups = $em->getRepository('CatMSAdminBundle:ImageGroup')
             ->findBy(array(), array('description' => 'asc'));
         
@@ -54,7 +54,7 @@ class AjaxController extends Controller
      */
     public function getContentGroupsAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $groups = $em->getRepository('CatMSAdminBundle:ContentGroup')
             ->findBy(array(), array('description' => 'asc'));
         
@@ -87,6 +87,8 @@ class AjaxController extends Controller
                     $img->getPath();
                 $relatedArr[$imageGroup->getDescription()][$img->getId()]['title'] = 
                     $img->getTitle();
+                $relatedArr[$imageGroup->getDescription()][$img->getId()]['group'] = 
+                    $img->getImageGroup()->getSlug();
             }
         }
 
@@ -161,7 +163,7 @@ class AjaxController extends Controller
      * Get group images list
      * 
      */
-    public function getGroupImagesListAjax($group)
+    public function getGroupImagesListAjaxAction($group)
     {
         $request = $this->getRequest();
         
@@ -183,7 +185,12 @@ class AjaxController extends Controller
         $results = array();
         
         foreach ($images as $image) {
-            $results['images'][] = $image->serialize();
+            $results['images'][] = $image->serialize()+ array(
+                'deletePath' => $this->generateUrl(
+                    'media-library-delete-inline',
+                    array('id' => $image->getId())
+                )
+            );
         }
         
         $count = $repository->createQueryBuilder('a')

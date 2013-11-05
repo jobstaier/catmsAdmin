@@ -26,7 +26,7 @@ class Seo
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      min="4",
+     *      min="2",
      *      max="255",
      *      minMessage="Seo slug must have at least {{ limit }} characters.",
      *      maxMessage="Seo slug must have no more than {{ limit }} characters."

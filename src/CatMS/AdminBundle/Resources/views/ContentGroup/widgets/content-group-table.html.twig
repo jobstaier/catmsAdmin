@@ -3,11 +3,11 @@
         <tr>
             <th width=40>{{ knp_pagination_sortable(pagination, 'ID', 'cg.id') }}</th>
             <th>{{ knp_pagination_sortable(pagination, 'Slug', 'cg.slug') }}</th>
-            <th>{{ knp_pagination_sortable(pagination, 'Description', 'cg.description') }}</th>
-            <th width=40>Manual</th>
-            <th width=110>Is Removable?</th>
-            <th width=45>Records</th>
-            <th width=90>Actions</th>
+            <th>{{ knp_pagination_sortable(pagination, 'global.description' | trans , 'cg.description') }}</th>
+            <th width=40>{{ 'global.manual' | trans }}</th>
+            <th width=110>{{ 'contentGroup.isRemovable' | trans }}</th>
+            <th width=45>{{ 'global.records' | trans }}</th>
+            <th width=90>{{ 'global.action' | trans }}</th>
         </tr>
     </thead>
     <tbody>
@@ -16,30 +16,30 @@
             <td><a href="{{ path('content-group-show', { 'id': entity.id }) }}">{{ entity.id }} <i class="icon-chevron-right"></i></a></td>
             <td>{{ entity.slug }}</td>
             <td>{{ entity.description }}</td>
-            <td>{% if entity.manual %}<span class="label label-success"><i class="icon-white icon-ok-circle"></i> YES</span>{% else %}<span class="label label-warning"><i class="icon-white icon-warning-sign"></i> NO</span>{% endif %}</td>
+            <td>{% if entity.manual %}<span class="label label-success"><i class="icon-white icon-ok-circle"></i> {{ 'global.yes' | trans }}</span>{% else %}<span class="label label-warning"><i class="icon-white icon-warning-sign"></i> {{ 'global.no' | trans }}</span>{% endif %}</td>
             <td>
-                {% if entity.isRemovable == '777' %}<span class="label label-success"><i class="icon-white icon-ok-circle"></i> YES</span>
-                {% elseif entity.isRemovable == '755' %}<span class="label label-warning"><i class="icon-white icon-warning-sign"></i> Only by Developer</span>
-                {% elseif entity.isRemovable == '000' %}<span class="label label-error"><i class="icon-white icon-remove-circle"></i> Forbidden</span>
+                {% if entity.isRemovable == '777' %}<span class="label label-success"><i class="icon-white icon-ok-circle"></i> {{ 'global.yes' | trans }}</span>
+                {% elseif entity.isRemovable == '755' %}<span class="label label-warning"><i class="icon-white icon-warning-sign"></i> {{ 'assetGroup.onlyByDeveloper' | trans }}</span>
+                {% elseif entity.isRemovable == '000' %}<span class="label label-error"><i class="icon-white icon-remove-circle"></i> {{ 'global.forbidden' | trans }}</span>
                 {% endif %}
             </td>
             <td><span class="label">{{ entity.contents | length }}</span></td>
             <td>
                 <div class="btn-group">
-                    <button class="btn btn-small">Action</button>
+                    <button class="btn btn-small">{{ 'global.action' | trans }}</button>
                     <button class="btn btn-small dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
                     </button>
 
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="{{ path('content-group-edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> Edit</a>
+                            <a href="{{ path('content-group-edit', { 'id': entity.id }) }}"><i class="icon-edit"></i> {{ 'global.edit' | trans }}</a>
                         </li>
                         <li>
-                            <a href="{{ path('content-manager-list', {'page': 1, 'slug': entity.slug }) }}"><i class="icon-list"></i> Content list</a>
+                            <a href="{{ path('content-manager-list', {'page': 1, 'slug': entity.slug }) }}"><i class="icon-list"></i> {{ 'global.contentList' | trans }}</a>
                         </li>
                         <li>
-                            <a href="{{ path('content-manager-new', {'group': entity.slug }) }}"><i class="icon-font"></i> Add content</a>
+                            <a href="{{ path('content-manager-new', {'group': entity.slug }) }}"><i class="icon-font"></i> {{ 'global.addContent' | trans }}</a>
                         </li>
                     </ul>
                 </div>

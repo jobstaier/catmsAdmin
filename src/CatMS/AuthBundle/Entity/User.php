@@ -81,6 +81,8 @@ class User implements AdvancedUserInterface, \Serializable
     private $roles;
     
     private $setNewPassword = false;
+    
+    private $gravatar;
 
     public function __construct()
     {
@@ -328,5 +330,16 @@ class User implements AdvancedUserInterface, \Serializable
     public function setUserHash($userHash) 
     {
         $this->userHash = $userHash;
+    }
+    
+    public function setGravatar($gravatarUrl) 
+    {
+        $this->gravatar = $gravatarUrl;
+        return $this;
+    }
+    
+    public function getGravatar()
+    {
+        return $this->gravatar;
     }
 }

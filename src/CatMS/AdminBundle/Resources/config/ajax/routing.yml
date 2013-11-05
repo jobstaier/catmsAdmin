@@ -22,4 +22,4 @@ get-images-list-ajax:
 
 get-group-images-list-ajax:
     path:     /get-group-images-list-ajax/{group}
-    defaults:  { _controller: CatMSAdminBundle:Ajax:getImagesList }
+    defaults:  { _controller: CatMSAdminBundle:Ajax:getGroupImagesListAjax }

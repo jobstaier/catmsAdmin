@@ -11,7 +11,7 @@
     
     <p>
         {{ 'mailer.account.created' | trans }} <strong>{{ username }}</strong>.<br />
-        {% trans with {'page_url': app.request.httpHost} %}mailer.affiliate{% endtrans %}:
+        {% trans with {'page_url': app.request.httpHost~'/admin'} %}mailer.affiliate{% endtrans %}:
     </p>
         
     <table>

@@ -1,0 +1,283 @@
+#Top navigation    
+nav:
+    users:
+        tabTitle: Użytkownicy
+        create: Dodaj
+        list: Lista
+        dropdownHeaders:
+            registered: Zarejestrowani
+    contentManager:
+        tabTitle: Zarządzanie treścią
+        dropdownHeaders:
+            directAccessEdit: Szybki dostęp
+            textContent: Treść tekstowa
+            mediaLibrary: Biblioteka mediów
+        list:
+            imageAssetGroups: Obrazy/pliki
+            contentGroups:  Treść tekstowa
+            groups: Grupy
+            allImagesAndAssets: Wszystkie obrazy & pliki
+            uploadFile: Załaduj plik
+            createGroup: Stwórz grupę
+    settings:
+        tabTitle: Ustawienia
+        dropdownHeaders:
+            panelSettings:  Ustawienie panelu
+            otherSettings:  Ustawienie strony
+            cache:  Cache
+            appLanguage:  Język aplikacji
+        list:
+            showSettings: Pokaż opcje
+            addNew: Dodaj nową
+            clearCache: Wyczyść Cache
+    seo:
+        tabTitle: SEO
+        dropdownHeaders:
+            seoSettings: Ustawienia SEO
+        list:
+            pagesList: Lista stron
+            createSeoSettings: Dodaj ustawienia
+
+#Auth
+auth:
+    signin:
+        success: 'Zalogowano poprawnie. Witaj!'
+    logout: Wyloguj
+    welcome:  Witaj username!
+    login: Zaloguj
+    forgetPassword: Nie pamiętasz hasła?
+    password: Hasło
+    keepMeLoggedIn: Zapamiętaj mnie
+    userAuthentication: Autoryzacja użytkownika
+    pleaseTryAgain: Proszę wpisać poprawne dane.
+    generateNewPassword: Wygeneruj nowe hasło
+    generateNewPasswordText: Mail z potwierdzeniem prośby wygeneroawnia nowego hasła zostanie wysłany na wpisany poniżej adres email. #Generate new password request will be send to you after typing your registration e-mail addresss.
+
+#Global
+global:
+    success: Sukces!
+    errorOccured: Wystąpił błąd!
+    history:  Historia
+    yes: Tak
+    no: Nie
+    show: Pokaż
+    edit: Edytuj
+    actions: Operacje
+    action: Wykonaj
+    backToTheList: Powrót do listy
+    backToTheGroup: Powrót do grupy
+    gotToTheGroupList: Pokaż listę grup
+    backToTheGridView: Pokaż siatkę
+    backToTheListView: Pokaż listę
+    create: Dodaj
+    delete: Usuń
+    save: Zapisz
+    mediaLibrary: Biblioteka mediów
+    list: Lista
+    grid: Siatka
+    warning: Uwaga
+    and: i
+    filename: Nazwa pliku
+    uploading: Ładowanie pliku...
+    upload: Załaduj
+    loading: Ładowanie...
+    asset: Obraz/plik
+    markAll: Zaznacz wszystkie
+    unmarkAll: Odznacz wszystkie
+    removeAllSelected: Usuń wszystkie zaznaczone
+    copySource: Kopiuj źródło
+    notDefined: Nie zdefiniowano
+    group: Grupa
+    size: Rozmiar
+    update: Zapisz
+    updating: Zapisywanie...
+    showMore: Pokaż więcej
+    emptyDatabase: <strong>Pusta baza danych!</strong> Nie dodano żadnych wpisów. #<strong>Empty databse!</strong> No records defined
+    close: Zamknij
+    saveChanges: Zapisz zmiany
+    detailsView: Widok szczegółowy
+    deleteConfirmAll:  Na pewno chcesz usunąć wszystkie zaznaczone plik?
+    deleteConfirm: 'Na pewno chcesz usunąć ten wpis?' #Are you sure you want to delete this item?
+    confirm: 'Tak, usuń'
+    dissmiss: Anuluj
+    generate: Wygeneruj
+    areYouSure: 'Jesteś pewny?'
+    send: 'Wyślij'
+    description: Opis
+    createGroup: Stwórz grupę
+    width: Szerokość
+    height: Wysokość
+    addAsset: Dodaj zawartość
+    creating: Tworzenie...
+    createNewGroup: Stwórz nową grupę
+    manual: Samouczek
+    records: Wpisy
+    forbidden: Zabronione
+    addContent: Dodaj treść
+    contentList: Lista treści
+    settings: ustawienia
+    value: Wartość
+    directEdit: Edytuj
+    qucikEdit: Szybka edycja
+    saving: Zapisywanie...
+    page: Strona
+    updateDate: Data aktualzacji
+    archive: Archiwum
+    from: od
+    to: do
+    archiveDate: Data archiwizacji
+    noArchiveSaved: Brak wpisów archiwalnych
+    tutorialAvailable: Samouczek dostępny! #Tutorial available!
+    thisPageHasDefinedTutorial: Ta strona posiada zdefiniowany samouczek
+    readTutorial: Przeczytaj #Read tutorial
+    sampleContent: Wypełnij treścią
+    
+#User account    
+user:
+    username: Nazwa użytkownika
+    isActive: Aktywny?
+    users: Użytkownicy
+    yourAccount: Twoje konto
+    editPassword: Edytuj hasło
+    role: Rola
+    index:
+        createNewUser: Dodaj użytkownika
+    show:
+    breadcrumbs: 
+        userList: Lista użytkowników
+        createUser: Dodaj użytkownika
+    passwordEdit:
+        user: Edycja hasła użytkownika <i>username</i>
+    editUser:
+        user: Edycja danych użytkownika <i>username</i>
+    backToTheUserDetails: Powrót do szczegółów użytkownika 
+    
+#Assets/Images            
+asset:
+    uploadFile: Załaduj plik
+    upload:
+        uploadSingleFileAndSetProperties : Załaduj pojedynczy plik #<small> i ustaw właściwości</small>
+        filenameCustom: Zdefiniowane nazwy pliku pozwala na jego identyfikację z użuciem podanej nazwy. W innym przypakdu nazwa pliku zostanie wygenerowana automatycznie #Define custom filename allows to identyfing Image/asset by this name. Otherwise filename will be generated automticaly.
+        imageAssetTitleCustom: Wartość atrybut title renderowana w HTML #Image title render into HTML img title attribute.
+        imageAssetPriorityCustom: Poprzez odopwiednie ustawienie priorytetów dla plików w grupie można określić ich kolejność wyświetlania #Priority of image display into defined group.
+        redirectAfterClickCustom: Przekierowanie po kliknięciu w element HTML #Redirect aftter click on image canvas.
+        imageAssetSlugCustom: Wartość używana podczas pobierania z bazy danych. UWAGA! Zachowaj ostrożność przy zmianie tego parametru. Nie zaleca się jego zmiany. #Image slug is using whlie identyfing and fetching.
+        mulitipleUpload: Ładowanie wielu plików jednocześnie #Multiple Files Upload
+    groupAssets: Pliki grupy <i>group</i>
+    canvasHasDimensions: Narzucony rozmiar pliku to
+    canvasWidth: szerokości
+    canvasHeight: wysokości
+    largerImageWillBeCroppedToCanvasDimensions: Większe obrazy zostaną przeskalowane
+    imageAssetTitle: Atrybut title html #Image/asset title
+    imageAssetPriority: Priorytet wyświetlania
+    redirectAfterClick: Przekierowanie po kliknięciu
+    imageAssetSlug: Właściwość 'Slug' obiektu
+    editImageAsset: Edycja pliku
+    quickEdit: Szybka edycja
+    assetsHasBeenRemovedSuccessfuly: Poprawnie usunięto zaznaczony plik
+    list: List plików
+    group:
+        title: Grupa #Image/asset group       
+    
+#Asset group
+assetGroup:
+    title: Grupy Biblioteki Mediów
+    list: Lista grup Biblioteki Mediów
+    imageWidth: Szerokość obrazów
+    imageHeight: Wysokość obrazów
+    imageCount: Ilość plików
+    imageHasThumnails: Miniaturki?
+    thumbnailWidth: Szerokośc miniaturki
+    thumbnailHeight: Wysokość miniaturki
+    editGroup: Edycja grupy
+    createNewGroup: Tworzenie nowej grupy
+    onlyByDeveloper: Tylko developer
+
+#contentGroups
+contentGroup:
+    title: Grupy treści
+    list: Lista group treści
+    isRemovable: Można usunąć?
+    edit: Edycja grupy
+    contentGroupFieldsAndLabels: Pola i etykiety grupy
+    
+#Content Manager
+contentManager:
+    breadcrumbs:
+        groupContents: Zawartość grupy <i>groupName</i>
+    relatedImagesFromImageGroups: Powiązane obrazy <small>- grupy</small>
+    relatedImages: Powiązane obrazy
+    editGroup: Edytuj grupę
+    createNewContent: Dodaj treść    
+    edit: Edycja
+    creatingNewContent: Dodawanie treści
+
+#Related Images
+relatedImages:
+    noRelationsDefined: Nie zdefionowano żadnych realcji!
+    checkOptions: Przejdź do menadżera grup tekstowych i powiąż odpowiednią grupę.
+    
+#Plupload
+plupload:
+    browserError: Twoja przeglądarka nie wspiera Flash, Silverlight, Gears, BrowserPlus ani HTML5 #You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.
+            
+#Settings
+settings:
+    edit: Edycja
+    createNewSetting: Dodaj nowe ustawienie
+    creatingNewSetting: Dodawanie nowej opcji
+           
+#SEO
+seo:
+    settings: Ustawienia SEO
+    pagesList: List zdefiniowanych stron
+    createNewSeoPage: Zdefiniuj nową stronę
+    creatingNewSeoPAge: Definiowanie nowej strony
+    edit: Edytowanie
+    deleteSeoPage: Usuń stronę SEO
+            
+#CRUD
+crud:
+    asset:
+        updateSuccess: Poprawnie zapisano zmiany
+        updateFailure: Nie udało się zapisać zmian
+        deleteSuccess: Usunięto plik
+        
+#Validation
+validation:
+    error: Błąd walidacji
+
+edit.error: Podczas edycji wystapił błąd
+edit.success: Dane zostały zmienione poprawnie
+upload.success: Plik został załadowany poprawnie
+upload.error: Podczas dodawania pliku wystapił błąd
+update.error: Podczas aktualizacji wystąpił błąd
+remove.success: Poprawnie usunięto dane
+remove.error: Podczas usuwania pliku wystąpił błąd
+
+delete.success: Poprawnie usunięto dane
+delete.error: Podczas usuwanie danych wystapił błąd
+
+seo.create.success: Poprawnie stworzono ustawienie SEO strony
+seo.create.error: Podczas zapisu wystąpił błąd
+seo.update.success: Poprawnie zaktualizowano ustawienie SEO strony
+seo.delete.success: Poprawnie usunięto ustawienie SEO strony
+seo.delete.error: Podczas usuwanie wystąpił błąd
+
+create.success: Poprawnie zapisano dane
+create.error: Podczas zapisu wystąpił błąd
+
+setting.remove.success: Poprawnie usnięto ustawienie
+setting.remove.error: Nie udało się usunąć ustawienia
+
+delete.error.delete.resticted: Usinięcie tej treści jest zabronione
+delete.error.delete.developer: Ta treść może zostać usunięta tylko przez developera
+
+update.success: Dane zostały zmienione poprawnie
+
+#Vendor validators
+'Bad credentials': Brak uprawnień
+
+#Pagination
+Previous: Poprzednia
+Next: Następna

@@ -2,14 +2,14 @@
 
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        Users
+        {{ 'nav.users.tabTitle' | trans }}
     <b class="caret"></b>
     </a>
 
     <ul class="dropdown-menu">
-        <li class="nav-header">Registered</li>
-        <li {% if is_active_nav_button('user', 'index') %}class="active"{% endif %}><a href="{{ path('user') }}"><i class="icon-list"></i> List</a></li>
-        <li {% if is_active_nav_button('user', 'new') %}class="active"{% endif %}><a href="{{ path('user_new') }}"><i class="icon-user"></i> Create</a></li>
+        <li class="nav-header">{{ 'nav.users.dropdownHeaders.registered' | trans }}</li>
+        <li {% if is_active_nav_button('user', 'index') %}class="active"{% endif %}><a href="{{ path('user') }}"><i class="icon-list"></i> {{ 'nav.users.list' | trans }}</a></li>
+        <li {% if is_active_nav_button('user', 'new') %}class="active"{% endif %}><a href="{{ path('user_new') }}"><i class="icon-user"></i> {{ 'nav.users.create' | trans }}</a></li>
     </ul>
 </li>
 
@@ -17,21 +17,21 @@
 
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        Content Manager
+        {{ 'nav.contentManager.tabTitle' | trans }}
     <b class="caret"></b>
     </a>
 
     <ul class="dropdown-menu">
-        <li class="nav-header">Direct access edit</li>
+        <li class="nav-header">{{ 'nav.contentManager.dropdownHeaders.directAccessEdit' | trans }}</li>
         <li class="dropdown-submenu">
-            <a class="ajax-get-groups" tabindex="-1" href="{{ path('ajax-get-groups') }}"><i class="icon-folder-open"></i> Image/asset groups </a>
+            <a class="ajax-get-groups" tabindex="-1" href="{{ path('ajax-get-groups') }}"><i class="icon-folder-open"></i> {{ 'nav.contentManager.list.imageAssetGroups' | trans }}</a>
             <ul class="dropdown-menu" id="image-groups-submenu">
                 <li class="ajax-image-groups-preloder"><a class="tmp-image-group-url" href="{{ path('media-library-group-grid-list-pure') }}"><img src="{{ asset('img/loader.gif') }}" alt="Loading..." /></a></li>
             </ul>
         </li>
         
         <li class="dropdown-submenu">
-            <a class="ajax-get-content-groups" tabindex="-1" href="{{ path('ajax-get-content-groups') }}"><i class="icon-tags"></i> Content groups</a>
+            <a class="ajax-get-content-groups" tabindex="-1" href="{{ path('ajax-get-content-groups') }}"><i class="icon-tags"></i> {{ 'nav.contentManager.list.contentGroups' | trans }}</a>
             <ul class="dropdown-menu" id="content-groups-submenu">
                 <li class="ajax-content-groups-preloder"><a class="tmp-content-group-url" href="{{ path('content-manager-pure-url') }}"><img src="{{ asset('img/loader.gif') }}" alt="Loading..." /></a></li>
             </ul>
@@ -39,20 +39,21 @@
         
         <li class="divider"></li>
         
-        <li class="nav-header">Text content</li>
-        <li {% if is_active_nav_button('contentgroup', 'index') %}class="active"{% endif %}><a href="{{ path('content-group') }}"><i class="icon-tags"></i> Groups</a></li>
+        <li class="nav-header">{{ 'nav.contentManager.dropdownHeaders.textContent' | trans }}</li>
+        <li {% if is_active_nav_button('contentgroup', 'index') %}class="active"{% endif %}><a href="{{ path('content-group') }}"><i class="icon-tags"></i> {{ 'nav.contentManager.list.groups' | trans }}</a></li>
         {% if is_granted('ROLE_DEVELOPER') %}
-        <li {% if is_active_nav_button('contentgroup', 'new') %}class="active"{% endif %}><a href="{{ path('content-group-new') }}"><i class="icon-pencil"></i> Create group</a></li>
+        <li {% if is_active_nav_button('contentgroup', 'new') %}class="active"{% endif %}><a href="{{ path('content-group-new') }}"><i class="icon-pencil"></i> {{ 'nav.contentManager.list.createGroup' | trans }}</a></li>
         {% endif %}
         
         <li class="divider"></li>
-        <li class="nav-header">Media library</li>
-        <li {% if is_active_nav_button('medialibrary', 'list') %}class="active"{% endif %}><a href="{{ path('media-library-grid-list') }}"><i class="icon-picture"></i> All images & assets</a></li>
-        <li {% if is_active_nav_button('mediaibrary', 'upload') %}class="active"{% endif %}><a href="{{ path('media-library-upload') }}"><i class="icon-upload"></i> Upload file</a></li>
-        <li {% if is_active_nav_button('imagegroup', 'index') %}class="active"{% endif %}><a href="{{ path('image-group') }}"><i class="icon-folder-open"></i> Groups</a></li>
+        <li class="nav-header">{{ 'nav.contentManager.dropdownHeaders.mediaLibrary' | trans }}</li>
+        <li {% if is_active_nav_button('medialibrary', 'list') %}class="active"{% endif %}><a href="{{ path('media-library-grid-list') }}"><i class="icon-picture"></i> {{ 'nav.contentManager.list.allImagesAndAssets' | trans }}</a></li>
+        <li {% if is_active_nav_button('mediaibrary', 'upload') %}class="active"{% endif %}><a href="{{ path('media-library-upload') }}"><i class="icon-upload"></i> {{ 'nav.contentManager.list.uploadFile' | trans }}</a></li>
+        <li {% if is_active_nav_button('imagegroup', 'index') %}class="active"{% endif %}><a href="{{ path('image-group') }}"><i class="icon-folder-open"></i> {{ 'nav.contentManager.list.groups' | trans }}</a></li>
         {% if is_granted('ROLE_DEVELOPER') %}
-        <li {% if is_active_nav_button('imagegroup', 'new') %}class="active"{% endif %}><a href="{{ path('image-group-new') }}"><i class="icon-pencil"></i> Create group</a></li>
+        <li {% if is_active_nav_button('imagegroup', 'new') %}class="active"{% endif %}><a href="{{ path('image-group-new') }}"><i class="icon-pencil"></i> {{ 'nav.contentManager.list.createGroup' | trans }}</a></li>
         {% endif %}
+           
     </ul>
 </li>
 
@@ -60,25 +61,30 @@
 
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        Settings
+        {{ 'nav.settings.tabTitle' | trans }}
     <b class="caret"></b>
     </a>
 
     <ul class="dropdown-menu">
-        <li class="nav-header">Panel settings</li>
-        <li {% if is_active_nav_button('setting', 'panelSetting') %}class="active"{% endif %}><a href="{{ path('panel-settings') }}"><i class="icon-wrench"></i> Show settings</a></li>
+        <li class="nav-header">{{ 'nav.settings.dropdownHeaders.panelSettings' | trans }}</li>
+        <li {% if is_active_nav_button('setting', 'panelSetting') %}class="active"{% endif %}><a href="{{ path('panel-settings') }}"><i class="icon-wrench"></i> {{ 'nav.settings.list.showSettings' | trans }}</a></li>
         {% if is_granted('ROLE_DEVELOPER') %}
-        <li><a href="{{ path('settings-new', {'range': 'panel'}) }}"><i class="icon-plus"></i> Add new</a></li>
+        <li><a href="{{ path('settings-new', {'range': 'panel'}) }}"><i class="icon-plus"></i> {{ 'nav.settings.list.addNew' | trans }}</a></li>
         {% endif %}
         <li class="divider"></li>
-        <li class="nav-header">Other settings</li>
-        <li {% if is_active_nav_button('setting', 'frontendSetting') %}class="active"{% endif %}><a href="{{ path('frontend-settings') }}"><i class="icon-wrench"></i> Show settings</a></li>
+        <li class="nav-header">{{ 'nav.settings.dropdownHeaders.otherSettings' | trans }}</li>
+        <li {% if is_active_nav_button('setting', 'frontendSetting') %}class="active"{% endif %}><a href="{{ path('frontend-settings') }}"><i class="icon-wrench"></i> {{ 'nav.settings.list.showSettings' | trans }}</a></li>
         {% if is_granted('ROLE_DEVELOPER') %}
-        <li><a href="{{ path('settings-new', {'range': 'frontend'}) }}"><i class="icon-plus"></i> Add new</a></li>
+        <li><a href="{{ path('settings-new', {'range': 'frontend'}) }}"><i class="icon-plus"></i> {{ 'nav.settings.list.addNew' | trans }}</a></li>
         <li class="divider"></li>
-        <li class="nav-header">Cache</li>
-        <li><a href="{{ path('clear-cache') }}"><i class="icon-trash"></i> Clear cache</a></li>
+        <li class="nav-header">{{ 'nav.settings.dropdownHeaders.cache' | trans }}</li>
+        <li><a href="{{ path('clear-cache') }}"><i class="icon-trash"></i> {{ 'nav.settings.list.clearCache' | trans }}</a></li>
         {% endif %}
+            
+        <li class="divider"></li>
+        <li class="nav-header">{{ 'nav.settings.dropdownHeaders.appLanguage' | trans }}</li>
+        <li class="lang-dropdown"><a class="set-locale" href="{{ path('set-current-locale', {'locale': 'en'}) }}"><span class="flag flag-gb">English</span></a></li>
+        <li class="lang-dropdown"><a class="set-locale" href="{{ path('set-current-locale', {'locale': 'pl'}) }}"><span class="flag flag-pl">Polski</span></a></li>
     </ul>
 </li>
 
@@ -86,15 +92,20 @@
 
 <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        SEO
+        {{ 'nav.seo.tabTitle' | trans }}
     <b class="caret"></b>
     </a>
 
     <ul class="dropdown-menu">
-        <li class="nav-header">SEO settings</li>
-        <li><a href="{{ path('seo') }}"><i class="icon-wrench"></i> Pages list</a></li>
+        <li class="nav-header">{{ 'nav.seo.dropdownHeaders.seoSettings' | trans }}</li>
+        <li><a href="{{ path('seo') }}"><i class="icon-wrench"></i> {{ 'nav.seo.list.pagesList' | trans }}</a></li>
         {% if is_granted('ROLE_DEVELOPER') %}
-        <li><a href="{{ path('seo-new') }}"><i class="icon-plus"></i> Create seo settings</a></li>
+        <li><a href="{{ path('seo-new') }}"><i class="icon-plus"></i> {{ 'nav.seo.list.createSeoSettings' | trans }}</a></li>
         {% endif %}
     </ul>
+</li>
+
+<li class="divider-vertical"></li>
+<li>
+    <a href="#faqModal" role="button" data-toggle="modal">FAQ</a>
 </li>

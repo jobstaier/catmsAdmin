@@ -8,29 +8,30 @@
     {{ parent() }}
     {% if group is empty %}
         <li>
-            <em>Media library</em> 
-            <a href="{{ path('media-library') }}"><i class="icon-list"></i>List</a>&nbsp;
-            <a href="{{ path('media-library-grid-list') }}"> <i class="icon-th"></i>Grid</a>
+            <em>{{ 'global.mediaLibrary' | trans }}</em> 
+            <a href="{{ path('media-library') }}"><i class="icon-list"></i>{{ 'global.list' | trans }}</a>&nbsp;
+            <a href="{{ path('media-library-grid-list') }}"> <i class="icon-th"></i>{{ 'global.grid' | trans }}</a>
         </li> <span class="divider">/</span> 
-        <li class="active">Edit image/asset</li>
+        <li class="active">{{ 'asset.editImageAsset' | trans }}</li>
     {% else %}
         <li class="active">
-            <em>Group <i>{{ image.imageGroup.description }}</i> assets</em> 
-            <a href="{{ path('media-library', {'page': 1, 'slug': image.imageGroup.slug}) }}"><i class="icon-list"></i>List</a>&nbsp
-            <a href="{{ path('media-library-group-grid-list', {'group': image.imageGroup.id}) }}"><i class="icon-th"></i>Grid</a>
+            <em>{% trans with {'group': image.imageGroup.description} %}asset.groupAssets{% endtrans %}</em> 
+            <a href="{{ path('media-library', {'page': 1, 'slug': image.imageGroup.slug}) }}"><i class="icon-list"></i>{{ 'global.list' | trans }}</a>&nbsp
+            <a href="{{ path('media-library-group-grid-list', {'group': image.imageGroup.id}) }}"><i class="icon-th"></i>{{ 'global.grid' | trans }}</a>
         </li> <span class="divider">/</span>
-        <li class="active">Edit image</li>
+        <li class="active">{{ 'asset.editImageAsset' | trans }}</li>
     {% endif %}
 {% endblock %}    
     
     
-{% block content -%}    
+{% block content -%}
+<div class="uploader-view">
     <legend>
-        <i class="icon-large icon-brush"></i> Edit Image/asset {% if group is not empty %} - <i>{{ image.imageGroup.description | raw }}</i> group{% endif %}
+        <i class="icon-large icon-brush"></i> {{ 'asset.editImageAsset' | trans }} {% if group is not empty %} - {{ 'global.group' | trans }} <i>{{ image.imageGroup.description | raw }}</i>{% endif %}
         {% if not group %}
-            <a data-toggle="tooltip" title="Back to Grid View" href="{{ path('media-library-grid-list') }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
+            <a data-toggle="tooltip" title="{{ 'global.backToTheGridView' | trans }}" href="{{ path('media-library-grid-list') }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>
         {% else %}
-            <a data-toggle="tooltip" title="Back to Grid View" href="{{ path('media-library-group-grid-list', {'group': image.imageGroup.id}) }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>       
+            <a data-toggle="tooltip" title="{{ 'global.backToTheGridView' | trans }}" href="{{ path('media-library-group-grid-list', {'group': image.imageGroup.id}) }}" title="Grid View" style="float: right;"><i class="icon-large icon-th"></i></a>       
         {% endif %}
     </legend>
     
@@ -38,23 +39,23 @@
         
         <div class="alert alert-block">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <h4>Warning!</h4>
-            Canvas has dimensions 
-            {% if image.imageGroup.imageWidth %} {{ image.imageGroup.imageWidth }}px width {% endif %}
-            {% if image.imageGroup.imageWidth and image.imageGroup.imageHeight %} and {% endif %}
-            {% if image.imageGroup.imageHeight %}{{ image.imageGroup.imageHeight }}px height{% endif %}. Larger image will be cropped to canvas dimensions.
+            <h4>{{ 'global.warning' | trans }}!</h4>
+            {{ 'asset.canvasHasDimensions' | trans }}
+            {% if image.imageGroup.imageWidth %} {{ image.imageGroup.imageWidth }}px {{ 'global.canvasWidth' | trans }} {% endif %}
+            {% if image.imageGroup.imageWidth and image.imageGroup.imageHeight %} {{ 'global.and' | trans }} {% endif %}
+            {% if image.imageGroup.imageHeight %}{{ image.imageGroup.imageHeight }}px {{ 'global.canvasHeight' | trans }}{% endif %}. {{ 'asset.largerImageWillBeCroppedToCanvasDimensions' | trans }}
         </div>
 
     {% endif %}
-    
-    <form novalidate action="{{ path('media-library-image-edit', {'id': image.id,'group': group}) }}" method="post" {{ form_enctype(form) }}>
+            
+    <form class="edit-image-form" novalidate action="{{ path('media-library-image-edit', {'id': image.id,'group': group}) }}" method="post" {{ form_enctype(form) }}>
         
         <div class="control-group" style="float: left; width: 360px;">
             
             <div class="controls">
                 <div class="input-append">
-                    <input style="width: 280px;" id="form_name" type="text" maxlength="255" required="required" name="form[title]" value="{{ image.title }}" {% if image.title is empty %}placeholder="Image/asset title"{% endif %}>
-                    <a class="popoverButton" href="#" data-content="Image title render into HTML img title attribute." data-toggle="popover" data-original-title="Image/asset title">
+                    <input style="width: 280px;" id="form_name" type="text" maxlength="255" required="required" name="form[title]" value="{{ image.title }}" {% if image.title is empty %}placeholder="{{ 'asset.imageAssetTitle' | trans }}"{% endif %}>
+                    <a class="popoverButton" href="#" data-content="{{ 'asset.upload.imageAssetTitleCustom' | trans }}" data-toggle="popover" data-original-title="{{ 'global.filename' | trans }}">
                         <span class="add-on"><i class="icon-question-sign"></i></span>
                     </a>
                 </div>
@@ -63,8 +64,8 @@
         
             <div class="controls">
                 <div class="input-append">
-                <input style="width: 280px;" id="form_name" type="text" maxlength="255" required="required" name="form[priority]" value="{{ image.priority }}" {% if image.priority is empty %}placeholder="Image/asset priority"{% endif %}>
-                <a class="popoverButton" href="#" data-content="Priority of Image/asset display into defined group" data-toggle="popover" data-original-title="Image/asset priority">
+                <input style="width: 280px;" id="form_name" type="text" maxlength="255" required="required" name="form[priority]" value="{{ image.priority }}" {% if image.priority is empty %}placeholder="{{ 'asset.imageAssetPriority' | trans }}"{% endif %}>
+                <a class="popoverButton" href="#" data-content="{{ 'asset.upload.imageAssetPriorityCustom' | trans }}" data-toggle="popover" data-original-title="{{ 'asset.imageAssetPriority' | trans }}">
                     <span class="add-on"><i class="icon-question-sign"></i></span>
                 </a>
                 </div>
@@ -73,8 +74,8 @@
             
             <div class="controls">
                 <div class="input-append">
-                <input style="width: 280px;" id="form_redirect" type="text" maxlength="255" name="form[redirect]" value="{{ image.redirect }}" {% if image.redirect is empty %}placeholder="Redirect after click{% endif %}">
-                <a class="popoverButton" href="#" data-content="Redirect aftter click on image canvas." data-toggle="popover" data-original-title="Redirect after click">
+                <input style="width: 280px;" id="form_redirect" type="text" maxlength="255" name="form[redirect]" value="{{ image.redirect }}" {% if image.redirect is empty %}placeholder="{{ 'asset.redirectAfterClick' | trans }}{% endif %}">
+                <a class="popoverButton" href="#" data-content="{{ 'asset.upload.redirectAfterClickCustom' | trans }}" data-toggle="popover" data-original-title="{{ 'asset.redirectAfterClick' | trans }}">
                     <span class="add-on"><i class="icon-question-sign"></i></span>
                 </a>
                 </div>
@@ -83,8 +84,8 @@
             
             <div class="controls">
                 <div class="input-append">
-                    <input style="width: 280px;" id="form_slug" type="text" maxlength="255" name="form[slug]" value="{{ image.slug }}" {% if image.slug is empty %}placeholder="Image slug"{% endif %}  {% if not is_granted('ROLE_DEVELOPER') %}readonly{% endif %} />
-                <a class="popoverButton" href="#" data-content="Image slug is using whlie identyfing and fetching." data-toggle="popover" data-original-title="Image slug">
+                    <input style="width: 280px;" id="form_slug" type="text" maxlength="255" name="form[slug]" value="{{ image.slug }}" {% if image.slug is empty %}placeholder="{{ 'asset.imageAssetSlug' | trans }}"{% endif %}  {% if not is_granted('ROLE_DEVELOPER') %}readonly{% endif %} />
+                <a class="popoverButton" href="#" data-content="{{ 'asset.upload.imageAssetSlugCustom' | trans }}" data-toggle="popover" data-original-title="{{ 'asset.imageAssetSlug' | trans }}">
                     <span class="add-on"><i class="icon-question-sign"></i></span>
                 </a>
                 </div>
@@ -102,38 +103,40 @@
             <script>$(function(){var txt='Undefined';$('#form_imageGroup option').each(function(){if ($(this).text() === txt) {$(this).attr('selected', 'selected');}});});</script>
             {% endif %}
             <div class="controls" style="margin-top: 15px;">
-                <label for="form_imageGroup">Image/asset group</label>
+                <label for="form_imageGroup">{{ 'asset.group.title' | trans }}</label>
                 {{ form_widget(form.imageGroup, {'attr': {'class': 'span4 selectpicker'}}) }}
                 {{ form_errors(form.imageGroup) }}
             </div>
 
-            
              {{ form_row(form._token) }}
             
         </div>
         <div style="float: right">
+            {% if image.mimeType == 'image/jpeg' or image.mimeType == 'image/png' %}
             <a class="single-image" href="{{ asset('uploads/media-library/')~image.path }}">
                 <img src="{{ asset('uploads/media-library/')~image.path }}" class="img-polaroid" style="max-width: 500px" />
             </a>
+            {% endif %}
         </div>
         
-        <div style="margin-top: 20px; float: left;">
+        <div style="margin-top: 20px; float: left; clear: both;">
             {% if group is defined %}
-                <a href="{{ path('media-library', {'page': 1, 'slug': group}) }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>    
+                <a href="{{ path('media-library', {'page': 1, 'slug': group}) }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>    
             {% else %}
-                <a href="{{ path('media-library') }}" class="btn btn-small"><i class="icon-list"></i> Back to the list</a>    
+                <a href="{{ path('media-library') }}" class="btn btn-small"><i class="icon-list"></i> {{ 'global.backToTheList' | trans }}</a>    
             {% endif %}
-            <a role="button" href="#" class="btn btn-small btn-inverse" data-toggle="modal" data-target="#delete"><i class="icon-trash icon-white"></i> Delete</a>
+                
             {% if group is empty %}
                 {% set href = path('media-library-image-delete', { 'id': image.id }) %}
             {% else%}
                 {% set href = path('media-library-image-delete', { 'id': image.id, 'group': group }) %}
             {% endif %}
 
-            {% include 'CatMSAdminBundle:Helpers:modal.html.twig' with {'id': 'delete', 'msg': 'Confirm delete?', 'btnTxt': 'Delete', 'content': 'Do you confirm delete?', 'href': href} %}    
-                
-            <button class="show-loader btn btn-primary btn-small" type="submit"  data-loading-text="Updating..."><i class="icon-upload"></i> Update</button>
+            <button class="btn btn-primary btn-small show-loader show-submit-loader" type="submit"  data-loading-text="{{ 'global.updating' | trans }}"><i class="icon-upload"></i> {{ 'global.update' | trans }}</button>
         </div>
     </form>
-    
+            
+    {% include 'CatMSAdminBundle:MediaLibrary:widgets/delete-form.html.twig' with {'image': image, 'delete_form': delete_form, 'group': group} %}
+
+</div>
 {% endblock %}

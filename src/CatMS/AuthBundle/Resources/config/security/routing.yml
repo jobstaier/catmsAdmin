@@ -11,7 +11,7 @@ logout:
     defaults:  { _controller: CatMSAuthBundle:Security:logout }
 
 generate_new_password:
-    path:      /generate_new_password
+    path:      /generate-new-password
     defaults:  { _controller: CatMSAuthBundle:Security:generateNewPasswordRequest }
 
 

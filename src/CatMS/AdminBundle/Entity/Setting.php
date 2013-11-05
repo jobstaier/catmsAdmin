@@ -27,7 +27,7 @@ class Setting
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      min="3",
+     *      min="2",
      *      max="255",
      *      minMessage="Setting slug must have at least {{ limit }} characters.",
      *      maxMessage="Setting slug must have no more than {{ limit }} characters."

@@ -2,14 +2,14 @@
 
 {% block breadcrumb %}
     {{ parent() }}
-    <li class="active">Content groups</a>
+    <li class="active">{{ 'contentGroup.title' | trans }}</a>
 {% endblock %} 
 
 {% block content -%}
-    <legend><i class="icon-large icon-tags"></i> Content groups list </legend>
+    <legend><i class="icon-large icon-tags"></i> {{ 'contentGroup.list' | trans }} </legend>
 
     <a href="{{ path('content-group-new') }}" class="btn btn-small" style="margin-bottom: 20px;"><i class="icon-pencil"></i> 
-        Create new group
+        {{ 'global.createNewGroup' | trans }}
     </a>
     
     {% if pagination | length > 0 %}
@@ -19,12 +19,12 @@
     {% else %}
     <div class="alert">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Empty databse!</strong> No records defined
+    {{ 'global.emptyDatabase' | trans | raw }}
     </div>
     {% endif %}
     
     <a href="{{ path('content-group-new') }}" class="btn btn-small"><i class="icon-pencil"></i> 
-        Create new group
+        {{ 'global.createNewGroup' | trans }}
     </a>
     
     {% endblock %}

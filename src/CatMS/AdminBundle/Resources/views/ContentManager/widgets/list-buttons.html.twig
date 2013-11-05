@@ -1,4 +1,4 @@
 <div class="btns-{{ position }}">
-    <a href="{{ path('content-group-edit', {'id': group.id}) }}" class="btn btn-small"><i class="icon-tags"></i> Edit group</a>
-    <a href="{{ path('content-manager-new', {'group': group.slug }) }}" class="btn btn-small btn-primary"><i class="icon-font"></i> Create new content</a>
+    <a href="{{ path('content-group-edit', {'id': group.id}) }}" class="btn btn-small"><i class="icon-tags"></i> {{ 'contentManager.editGroup' | trans }}</a>
+    <a href="{{ path('content-manager-new', {'group': group.slug }) }}" class="btn btn-small btn-primary"><i class="icon-font"></i> {{ 'contentManager.createNewContent' | trans }}</a>
 </div>

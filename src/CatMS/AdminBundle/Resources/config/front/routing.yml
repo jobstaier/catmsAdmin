@@ -1,3 +1,8 @@
 admin-home:
     path:      /
     defaults:  { _controller: CatMSAdminBundle:FrontPage:index }
+    
+set-current-locale:
+    path:     /set-locale/{locale}
+    defaults:  { _controller: CatMSAdminBundle:FrontPage:setCurrentLocale }
+    

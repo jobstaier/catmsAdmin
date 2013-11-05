@@ -63,7 +63,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface
     
     public function findEmail($email) 
     {
-        return $this->getEntityManager()
+        return $this->getManager()
         ->createQuery('SELECT u FROM CatMSAuthBundle:User u
             WHERE u.email = :email')
         ->setParameters(array('email' => $email))

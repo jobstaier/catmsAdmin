@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use CatMS\AdminBundle\Entity\Setting;
 use CatMS\AdminBundle\Form\SettingType;
+use CatMS\AdminBundle\Utility\CommonMethods;
 
 /**
  * Setting controller.
@@ -100,9 +101,12 @@ class SettingController extends Controller
         $dql   = "SELECT s FROM CatMSAdminBundle:Setting s WHERE s.range = :range";
         $query = $em->createQuery($dql);
         $query->setParameter('range', 'Panel');
-        
-        $recordsPerPage = $this->castRecordsPerPage($em->getRepository('CatMSAdminBundle:Setting')->findOneBySlug('settings-panel-list-records-per-page'));
 
+        $recordsPerPage = CommonMethods::castRecordsPerPage(
+        $em->getRepository('CatMSAdminBundle:Setting')
+            ->findOneBySlug('settings-panel-list-records-per-page'), 
+        $this->container);
+        
         $paginator  = $this->get('knp_paginator');
   
         $pagination = $paginator->paginate($query, 
@@ -119,14 +123,6 @@ class SettingController extends Controller
         ));
     }
     
-    private function castRecordsPerPage($recordsPerPage)
-    {
-        if (null === $recordsPerPage || $recordsPerPage->getValue() == 0) {
-            return $this->container->getParameter('knp_paginator.page_range');
-        } else {
-            return (int)$recordsPerPage->getValue();
-        }
-    }
     
     /**
      * Lists all Frontend Setting entities.
@@ -145,8 +141,11 @@ class SettingController extends Controller
         $dql   = "SELECT s FROM CatMSAdminBundle:Setting s WHERE s.range = :range";
         $query = $em->createQuery($dql);
         $query->setParameter('range', 'Frontend');
-        
-        $recordsPerPage = $this->castRecordsPerPage($em->getRepository('CatMSAdminBundle:Setting')->findOneBySlug('settings-panel-list-records-per-page'));
+
+        $recordsPerPage = CommonMethods::castRecordsPerPage(
+        $em->getRepository('CatMSAdminBundle:Setting')
+            ->findOneBySlug('settings-panel-list-records-per-page'), 
+        $this->container);        
         
         $paginator  = $this->get('knp_paginator');
        
@@ -189,7 +188,7 @@ class SettingController extends Controller
             $this->get('session')->getFlashBag()->add('noticeSuccess', 'create.success');
             return $this->redirect($this->generateUrl($pathname));
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'create.error');
+            $this->get('session')->getFlashBag()->add('noticeFailure', 'create.error');
         }
 
         return array(
@@ -315,7 +314,7 @@ class SettingController extends Controller
                 return $this->redirect($this->generateUrl('settings-edit', array('id' => $id, 'range' => $range)));
             }
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'edit.error');
+            $this->get('session')->getFlashBag()->add('noticeFailure', 'edit.error');
         }
 
         return array(
@@ -355,7 +354,7 @@ class SettingController extends Controller
             $em->flush();
             $this->get('session')->getFlashBag()->add('noticeSuccess', 'setting.remove.success');
         } else {
-            $this->get('session')->getFlashBag()->add('noticeError', 'setting.remove.error');
+            $this->get('session')->getFlashBag()->add('noticeFailure', 'setting.remove.error');
         }
 
         return $this->redirect($this->generateUrl($pathname));

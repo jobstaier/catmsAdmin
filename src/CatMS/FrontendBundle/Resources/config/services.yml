@@ -1,0 +1,7 @@
+parameters:
+    common_methods.class: CatMS\FrontendBundle\Services\CommonMethods
+    
+services:
+    common_methods:
+        class: "%common_methods.class%"
+        arguments: ["@doctrine.orm.entity_manager"]    

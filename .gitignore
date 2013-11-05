@@ -13,3 +13,6 @@
 /web/css/yui/.css
 /web/js/yui/cmp_*
 /web/js/yui/.js
+/app/config/parameters.yml
+/.idea/
+/code/*

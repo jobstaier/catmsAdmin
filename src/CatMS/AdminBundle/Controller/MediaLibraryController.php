@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use CatMS\AdminBundle\Entity\ImageUpload;
-use CatMS\AdminBundle\Controller\CommonMethods;
+use CatMS\AdminBundle\Utility\CommonMethods;
 use CatMS\AdminBundle\Logger\History;
 use Symfony\Component\HttpFoundation\Response;
 use CatMS\AdminBundle\Entity\ImageGroup;
@@ -115,13 +115,14 @@ class MediaLibraryController extends Controller
             $groupEntity = null;
         }
         
+        
         if ($this->getRequest()->isMethod('POST')) {
 
             $form->bind($this->getRequest());
-
-            if ($form->isValid()) {
+            
+            $formFile = $this->getRequest()->files->get('form');
+            if ($form->isValid() && is_object($formFile['file'])) {
                 $em = $this->getDoctrine()->getManager();
-                
                 
                 $files = $this->getRequest()->files->get('form');
                 if ($files['file'] == null) {
@@ -135,14 +136,19 @@ class MediaLibraryController extends Controller
                     $this->get('session')->getFlashBag()
                         ->add('noticeSuccess', 'upload.success');
                 }
-                
+
                 if ($group) {
                     return $this->redirect(
-                        $this->generateUrl('media-library', 
-                            array('page' => 1, 'slug' => $group)
+                        $this->generateUrl('media-library-image-edit', 
+                            array(
+                                'id' => $document->getId(), 
+                                'group' => $document->getImageGroup()->getSlug()
+                            )
                         ));
                 } else {
-                    return $this->redirect($this->generateUrl('media-library'));
+                    return $this->redirect($this->generateUrl('media-library-image-edit',
+                        array('id' =>  $document->getId())
+                    ));
                 }
                 
             } else {
@@ -165,12 +171,12 @@ class MediaLibraryController extends Controller
      * @param string $group Image group slug
      */
     public function deleteImageAction(Request $request, ImageUpload $image, $group)
-    {  
+    {
         $form = $this->createDeleteForm($image->getId());
         $form->bind($request);
         
         if ($form->isValid()) {      
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
 
             if (!$image) {
                 throw $this->createNotFoundException(
@@ -187,7 +193,7 @@ class MediaLibraryController extends Controller
                 ->add('noticeSuccess', 'remove.success');
         } else {
             $this->get('session')->getFlashBag()
-                ->add('noticFailure', 'delete.error');
+                ->add('noticeFailure', 'delete.error');
         }
 
         return $this->redirect($this->generateUrl(
@@ -219,7 +225,7 @@ class MediaLibraryController extends Controller
      */
     public function editImageAction(ImageUpload $image, $group)
     {   
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         if (!$image) {
             throw $this->createNotFoundException('Unable to find Image entity.');
@@ -286,14 +292,16 @@ class MediaLibraryController extends Controller
             array(
                 'group' => $group,
                 'form' => $form->createView(), 
-                'image' => $image
+                'image' => $image,
+                'delete_form' => $this->createDeleteForm($image->getId())
+                    ->createView()
             )
         );
     }
     
     private function getGroups()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $objs = $em->getRepository('CatMSAdminBundle:ImageGroup')
             ->findBy(array(), array('slug' => 'asc'));
         
@@ -320,7 +328,7 @@ class MediaLibraryController extends Controller
             $removed = array();
             
             foreach ($data as $key => $id) {
-                $em = $this->getDoctrine()->getEntityManager();
+                $em = $this->getDoctrine()->getManager();
                 $image = $em->getRepository('CatMSAdminBundle:ImageUpload')
                     ->find($id);
                 

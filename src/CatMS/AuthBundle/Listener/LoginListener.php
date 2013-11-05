@@ -37,13 +37,14 @@ class LoginListener
         if ($user) {
             //$user->setLastSuccessfulLogin(new \DateTime());
             //$user->setLoginFailureAttemps(0);  
-            //$em = $this->doctrine->getEntityManager();
+            //$em = $this->doctrine->getManager();
             //$em->flush();
             
-            $username = $user->getUsername();
+            //$username = $user->getUsername();
             $request = $event->getRequest();
             $session = $request->getSession();
-            $session->getFlashBag()->add('noticeSuccess', 'Logged in. Hello '.$username.'!');
+
+            $session->getFlashBag()->add('noticeSuccess', 'auth.signin.success');
         } 
     }
 }

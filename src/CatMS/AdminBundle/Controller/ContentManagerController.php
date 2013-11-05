@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use CatMS\AdminBundle\Entity\ContentManager;
 use CatMS\AdminBundle\Form\ContentManagerType;
-use CatMS\AdminBundle\Controller\CommonMethods;
+use CatMS\AdminBundle\Utility\CommonMethods;
 use CatMS\AdminBundle\Logger\History;
 use CatMS\AdminBundle\Entity\ContentArchive;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +29,7 @@ class ContentManagerController extends Controller
         
         $dql = "SELECT cm FROM CatMSAdminBundle:ContentManager cm 
                 JOIN cm.contentGroup cg WHERE cg.slug = :slug 
-                ORDER BY cm.priority ASC";
+                ORDER BY cm.createdAt DESC";
         
         $group = $em->getRepository('CatMSAdminBundle:ContentGroup')
             ->findOneBySlug($slug);
@@ -88,7 +88,7 @@ class ContentManagerController extends Controller
             ));
         } else {
             $this->get('session')->getFlashBag()
-                ->add('noticeError', 'create.error');
+                ->add('noticeFailure', 'create.error');
         }
 
         return array(
@@ -107,7 +107,7 @@ class ContentManagerController extends Controller
     {
         $entity = new ContentManager();
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $contentGroup = $em->getRepository('CatMSAdminBundle:ContentGroup')
             ->findOneBySlug($group);
 
@@ -289,14 +289,21 @@ class ContentManagerController extends Controller
 
             $em->remove($entity);
             $em->flush();
+            
+            $this->get('session')->getFlashBag()
+                ->add('noticeSuccess', 'remove.success');            
+            
+        } else {
+            $this->get('session')->getFlashBag()
+                ->add('noticeFailure', 'remove.error');            
         }
 
         return $this->redirect(
-                $this->generateUrl('content-manager-list', array(
-                    'page' => 1, 
-                    'slug' => $group
-                ))
-            );
+            $this->generateUrl('content-manager-list', array(
+                'page' => 1,
+                'slug' => $group
+            ))
+    );
     }
 
     /**

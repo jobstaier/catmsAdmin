@@ -1,9 +1,26 @@
 services:
   request:
     class: Symfony\Component\HttpFoundation\Request
-  
-  catms.twig.twig_user_extension:
-      class: CatMS\AdminBundle\Twig\TwigUserExtension
-      arguments: ['@request', '@doctrine.orm.entity_manager'] 
+          
+  catms.twig.twig_text_helpers:
+      class: CatMS\AdminBundle\Twig\TwigTextHelpers
       tags:
           - { name: twig.extension }
+          
+  catms.twig.twig_catms_getters:
+      class: CatMS\AdminBundle\Twig\TwigCatMSGetters
+      arguments: ['@doctrine.orm.entity_manager'] 
+      tags:
+          - { name: twig.extension }   
+          
+  catms.twig.twig_catms_extension:
+      class: CatMS\AdminBundle\Twig\TwigCatMSExtension
+      arguments: ['@request', '@doctrine.orm.entity_manager'] 
+      tags:
+          - { name: twig.extension }   
+          
+  catms.locale_listener:
+      class: CatMS\AdminBundle\Listener\LocaleListener
+      arguments: ["%kernel.default_locale%"]
+      tags:
+          - { name: kernel.event_subscriber }          
