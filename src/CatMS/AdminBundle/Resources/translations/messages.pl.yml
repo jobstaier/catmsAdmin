@@ -167,7 +167,7 @@ asset:
     canvasHasDimensions: Narzucony rozmiar pliku to
     canvasWidth: szerokości
     canvasHeight: wysokości
-    largerImageWillBeCroppedToCanvasDimensions: Większe obrazy zostaną przeskalowane
+    largerImageWillBeCroppedToCanvasDimensions: Większe obrazy zostaną przeskalowane.
     imageAssetTitle: Atrybut title html #Image/asset title
     imageAssetPriority: Priorytet wyświetlania
     redirectAfterClick: Przekierowanie po kliknięciu
@@ -230,7 +230,7 @@ settings:
 #SEO
 seo:
     settings: Ustawienia SEO
-    pagesList: List zdefiniowanych stron
+    pagesList: Lista zdefiniowanych stron
     createNewSeoPage: Zdefiniuj nową stronę
     creatingNewSeoPAge: Definiowanie nowej strony
     edit: Edytowanie

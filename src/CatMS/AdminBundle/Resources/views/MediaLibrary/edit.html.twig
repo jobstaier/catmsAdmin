@@ -41,9 +41,9 @@
             <button type="button" class="close" data-dismiss="alert">&times;</button>
             <h4>{{ 'global.warning' | trans }}!</h4>
             {{ 'asset.canvasHasDimensions' | trans }}
-            {% if image.imageGroup.imageWidth %} {{ image.imageGroup.imageWidth }}px {{ 'global.canvasWidth' | trans }} {% endif %}
+            {% if image.imageGroup.imageWidth %} {{ image.imageGroup.imageWidth }}px {{ 'asset.canvasWidth' | trans }} {% endif %}
             {% if image.imageGroup.imageWidth and image.imageGroup.imageHeight %} {{ 'global.and' | trans }} {% endif %}
-            {% if image.imageGroup.imageHeight %}{{ image.imageGroup.imageHeight }}px {{ 'global.canvasHeight' | trans }}{% endif %}. {{ 'asset.largerImageWillBeCroppedToCanvasDimensions' | trans }}
+            {% if image.imageGroup.imageHeight %}{{ image.imageGroup.imageHeight }}px {{ 'asset.canvasHeight' | trans }}{% endif %}. {{ 'asset.largerImageWillBeCroppedToCanvasDimensions' | trans }}
         </div>
 
     {% endif %}
