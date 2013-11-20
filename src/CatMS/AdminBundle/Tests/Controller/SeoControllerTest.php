@@ -9,17 +9,18 @@ use CatMS\AdminBundle\Tests\Controller\AuthCase;
  */
 class SeoControllerTest extends AuthCase
 {
-    /*
+    public function setUp()
+    {
+        parent::setUp();
+    }
+
     public function testIndex()
     {
-        $client = static::createClient();
-
-        $crawler = $client->request('GET', '/admin/seo/');
+        $crawler = $this->client->request('GET',  $this->router->generate('seo'));
 
         $this->assertGreaterThan(
             0,
-            $crawler->filter('html:contains("Lista zdefiniowanych stron")')->count()
+            $crawler->filter('html:contains("' . $this->translator->trans('seo.pagesList') . '")')->count()
         );
     }
-    */
 }

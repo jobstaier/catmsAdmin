@@ -13,7 +13,10 @@ class AuthCase extends WebTestCase
     public function setUp()
     {
         $this->client = static::createClient();
-        $this->client->followRedirects();
+        $this->router = $this->client->getContainer()->get('router');
+        $this->translator = $this->client->getContainer()->get('translator');
+
+        $this->logIn();
     }
 
     protected function logIn()
@@ -22,7 +25,12 @@ class AuthCase extends WebTestCase
 
         $firewall = 'secured_area';
 
-        $token = new UsernamePasswordToken('admin', null, $firewall, array('ROLE_ADMIN'));
+        $em = $this->client->getContainer()->get('doctrine')->getManager();
+        $user = $em->getRepository('CatMSAuthBundle:User')->findOneByUsername('jobs');
+
+        $token = new UsernamePasswordToken($user, $user->getPassword(), $firewall, $user->getRoles());
+        self::$kernel->getContainer()->get('security.context')->setToken($token);
+
         $session->set('_security_'.$firewall, serialize($token));
         $session->save();
 
@@ -30,10 +38,25 @@ class AuthCase extends WebTestCase
         $this->client->getCookieJar()->set($cookie);
     }
 
-    public function testSecuredHello()
+    public function testSecuredArea()
     {
-        $this->logIn();
-        $this->client->request('GET', '/admin/');
+        $crawler = $this->client->request('GET', $this->router->generate('admin-home'));
         $this->assertTrue($this->client->getResponse()->isSuccessful());
+    }
+
+    public function testFronPageIndex()
+    {
+        $crawler = $this->client->request('GET', $this->router->generate('admin-home'));
+        $this->assertEquals(
+            1,
+            $crawler->filter('.hero-unit h2:contains("' .
+                $this->translator->trans('auth.welcome', array('username' => 'jobs')) .
+                '")')->count()
+        );
+    }
+
+    protected function isSuccessNotice()
+    {
+        return count($this->client->getContainer()->get('session')->getFlashBag()->get('noticeSuccess'));
     }
 }
