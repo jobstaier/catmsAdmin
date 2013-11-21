@@ -13,16 +13,12 @@ use CatMS\AdminBundle\Form\SeoType;
 /**
  * Seo controller.
  *
- * @Route("/admin/seo")
  */
 class SeoController extends Controller
 {
     /**
      * Lists all Seo entities.
      *
-     * @Route("/", name="seo")
-     * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -30,17 +26,17 @@ class SeoController extends Controller
 
         $entities = $em->getRepository('CatMSAdminBundle:Seo')->findAll();
 
-        return array(
-            'entities' => $entities,
+        return $this->render(
+            'CatMSAdminBundle:Seo:index.html.twig',
+            array(
+                'entities' => $entities,
+            )
         );
     }
 
     /**
      * Creates a new Seo entity.
      *
-     * @Route("/", name="seo-create")
-     * @Method("POST")
-     * @Template("CatMSAdminBundle:Seo:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -59,36 +55,36 @@ class SeoController extends Controller
             $this->get('session')->getFlashBag()->add('noticeFailure', 'seo.create.error');
         }
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+        return $this->render(
+            'CatMSAdminBundle:Seo:new.html.twig',
+            array(
+                'entity' => $entity,
+                'form'   => $form->createView(),
+            )
         );
     }
 
     /**
      * Displays a form to create a new Seo entity.
      *
-     * @Route("/new", name="seo-new")
-     * @Method("GET")
-     * @Template()
      */
     public function newAction()
     {
         $entity = new Seo();
         $form   = $this->createForm(new SeoType(), $entity);
 
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+        return $this->render(
+            'CatMSAdminBundle:Seo:new.html.twig',
+            array(
+                'entity' => $entity,
+                'form'   => $form->createView(),
+            )
         );
     }
 
     /**
      * Finds and displays a Seo entity.
      *
-     * @Route("/{id}", name="seo-show")
-     * @Method("GET")
-     * @Template()
      */
     public function showAction($id)
     {
@@ -102,18 +98,18 @@ class SeoController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
+        return $this->render(
+            'CatMSAdminBundle:Seo:show.html.twig',
+            array(
+                'entity'      => $entity,
+                'delete_form' => $deleteForm->createView(),
+            )
         );
     }
 
     /**
      * Displays a form to edit an existing Seo entity.
      *
-     * @Route("/{id}/edit", name="seo-edit")
-     * @Method("GET")
-     * @Template()
      */
     public function editAction($id)
     {
@@ -128,19 +124,19 @@ class SeoController extends Controller
         $editForm = $this->createForm(new SeoType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+        return $this->render(
+            'CatMSAdminBundle:Seo:edit.html.twig',
+            array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            )
         );
     }
 
     /**
      * Edits an existing Seo entity.
      *
-     * @Route("/{id}", name="seo-update")
-     * @Method("PUT")
-     * @Template("CatMSAdminBundle:Seo:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -166,18 +162,19 @@ class SeoController extends Controller
             $this->get('session')->getFlashBag()->add('noticeFailure', 'edit.error');
         }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+        return $this->render(
+            'CatMSAdminBundle:Seo:edit.html.twig',
+            array(
+                'entity'      => $entity,
+                'edit_form'   => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            )
         );
     }
 
     /**
      * Deletes a Seo entity.
      *
-     * @Route("/{id}", name="seo-delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {

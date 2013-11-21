@@ -1,0 +1,36 @@
+seo:
+    path: /
+    defaults:  { _controller: CatMSAdminBundle:Seo:index }
+    requirements:
+        page:  \d+
+    methods:  [GET]
+
+seo-create:
+    path:      /
+    defaults:  { _controller: CatMSAdminBundle:Seo:create }
+    methods:  [POST]
+
+seo-new:
+    path:      /new
+    defaults:  { _controller: CatMSAdminBundle:Seo:new }
+    methods:  [GET]
+
+seo-show:
+    path: /{id}
+    defaults:  { _controller: CatMSAdminBundle:Seo:show }
+    methods:  [GET]
+
+seo-edit:
+    path: /{id}/edit
+    defaults:  { _controller: CatMSAdminBundle:Seo:edit }
+    methods:  [GET]
+
+seo-update:
+    path: /{id}/edit
+    defaults:  { _controller: CatMSAdminBundle:Seo:update }
+    methods:  [PUT]
+
+seo-delete:
+    path: /{id}
+    defaults:  { _controller: CatMSAdminBundle:Seo:delete }
+    methods:  [DELETE]

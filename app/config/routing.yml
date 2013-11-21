@@ -32,7 +32,11 @@ cat_ms_admin_content_group:
     
 cat_ms_admin_ajax:
     resource: "@CatMSAdminBundle/Resources/config/ajax/routing.yml"
-    prefix:   /admin/ajax   
+    prefix:   /admin/ajax
+
+cat_ms_admin_seo:
+    resource: "@CatMSAdminBundle/Resources/config/seo/routing.yml"
+    prefix:   /admin/seo
 
 catms_auth_user:
     resource: "@CatMSAuthBundle/Resources/config/user/routing.yml"

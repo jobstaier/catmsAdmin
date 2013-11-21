@@ -2,12 +2,15 @@
 
 namespace CatMS\AdminBundle\Tests\Controller;
 
-use CatMS\AdminBundle\Tests\Controller\AuthCase;
+use CatMS\AdminBundle\Tests\AuthWebTestCase;
+
+use CatMS\AdminBundle\Entity\Seo;
 
 /**
  * @group seo
+ *
  */
-class SeoControllerTest extends AuthCase
+class SeoControllerTest extends AuthWebTestCase
 {
     public function setUp()
     {
@@ -21,6 +24,16 @@ class SeoControllerTest extends AuthCase
         $this->assertGreaterThan(
             0,
             $crawler->filter('html:contains("' . $this->translator->trans('seo.pagesList') . '")')->count()
+        );
+    }
+
+    public function testShowCreate()
+    {
+        $crawler = $this->client->request('GET',  $this->router->generate('seo-new'));
+
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('html:contains("' . $this->translator->trans('seo.creatingNewSeoPage') . '")')->count()
         );
     }
 }

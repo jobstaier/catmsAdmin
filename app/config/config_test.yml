@@ -14,3 +14,13 @@ web_profiler:
 
 swiftmailer:
     disable_delivery: true
+
+doctrine:
+    dbal:
+        driver:   %database_driver_test%
+        host:     %database_host_test%
+        port:     %database_port_test%
+        dbname:   %database_name_test%
+        user:     %database_user_test%
+        password: %database_password_test%
+        charset:  UTF8

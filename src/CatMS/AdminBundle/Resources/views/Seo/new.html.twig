@@ -8,12 +8,12 @@
 {% block breadcrumb %}
     {{ parent() }}
     <li><a href="{{ path('seo') }}">{{ 'seo.pagesList' | trans }}</a></li> <span class="divider">/</span>
-    <li class="active">{{ 'seo.creatingNewSeoPAge' | trans }}</li>
+    <li class="active">{{ 'seo.creatingNewSeoPage' | trans }}</li>
 {% endblock %}
     
 {% block content -%}
     <legend>
-        <i class="icon-large icon-globe"></i> {{ 'seo.creatingNewSeoPAge' | trans }}
+        <i class="icon-large icon-globe"></i> {{ 'seo.creatingNewSeoPage' | trans }}
     </legend>
 
     <form novalidate action="{{ path('seo-create') }}" method="post" {{ form_enctype(form) }} style="width: 220px;">

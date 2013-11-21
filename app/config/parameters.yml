@@ -5,6 +5,14 @@ parameters:
     database_name: catms_admin
     database_user: root
     database_password: dawid11
+
+    database_driver_test: pdo_mysql
+    database_host_test: 127.0.0.1
+    database_port_test: null
+    database_name_test: catms_admin_test
+    database_user_test: root
+    database_password_test: dawid11
+
     mailer_transport: gmail
     mailer_host: ~
     mailer_user: catms.mailer@gmail.com
