@@ -64,10 +64,31 @@ class UserRepository extends EntityRepository implements UserProviderInterface
     public function findEmail($email) 
     {
         return $this->getManager()
-        ->createQuery('SELECT u FROM CatMSAuthBundle:User u
-            WHERE u.email = :email')
-        ->setParameters(array('email' => $email))
-        ->getResult();
+            ->createQuery('SELECT u FROM CatMSAuthBundle:User u
+                WHERE u.email = :email')
+            ->setParameters(array('email' => $email))
+            ->getResult();
+    }
+
+    public function findAllAdmins($roles)
+    {
+        if ($roles == 'all') {
+            return $this->createQueryBuilder('u')
+                ->where('u.roles LIKE :roleAdmin')
+                ->orWhere('u.roles LIKE :roleDeveloper')
+                ->setParameters(array(
+                    'roleAdmin' => '%ROLE_ADMIN%',
+                    'roleDeveloper' => '%ROLE_DEVELOPER%'
+                ))
+                ->getQuery()
+                ->execute();
+        }
+
+        return $this->createQueryBuilder('u')
+            ->where('u.roles LIKE :role')
+            ->setParameter('role', '%ROLE_' . strtoupper($roles) . '%')
+            ->getQuery()
+            ->execute();
     }
 }
 
