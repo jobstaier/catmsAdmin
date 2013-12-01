@@ -23,8 +23,10 @@ var BaseView = Backbone.View.extend({
         this.$el.find('a.single-image').map(function() {
             context.showLightbox(this);
         });
-    },        
-            
+
+        this.$('input[type="checkbox"]').checkbox();
+    },
+
     setLocale: function(event) {
 
         var loader = new ModalLoaderView();

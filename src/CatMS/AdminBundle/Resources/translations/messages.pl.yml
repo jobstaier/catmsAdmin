@@ -24,6 +24,8 @@ nav:
         dropdownHeaders:
             panelSettings:  Ustawienie panelu
             otherSettings:  Ustawienie strony
+            panel: Panel
+            front: Strona publiczna
             cache:  Cache
             appLanguage:  Język aplikacji
         list:

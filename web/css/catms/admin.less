@@ -1,4 +1,14 @@
+@font-face {
+    font-family: 'Oxygen';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Oxygen'), local('Oxygen-Regular'), url(/font/catms/Oxygen-Regular.woff) format('woff');
+}
+
 body {
+
+    font-family: 'Oxygen', sans-serif !important;
+
     padding-top: 60px;
 
     a, img {
@@ -63,47 +73,73 @@ body {
     }
 
   input[type="file"] {
-    height: 22px;
-    line-height: 22px;
+      height: 22px;
+      line-height: 22px;
   }
 
   .uploader-view {
-    #uploader_browse {
-      margin-right: 10px: !important;
-    }
-    #uploader_filelist {
-      height: 242px;
-    }
-    #uploader {
-      float: right;
-      width: 520px;
-      margin-top: -10px;
-    }
-    .plupload_scroll .plupload_filelist {
-      background: none;
-      border-left: 1px dashed #DDD;
-    }
-    .image-form-delete {
-      float: right;
-      margin-top: 20px;
-    }
+      #uploader_browse {
+          margin-right: 10px: !important;
+      }
+      #uploader_filelist {
+        height: 242px;
+      }
+      #uploader {
+          float: right;
+          width: 520px;
+          margin-top: -10px;
+      }
+      .plupload_scroll .plupload_filelist {
+          background: none;
+          border-left: 1px dashed #DDD;
+      }
+      .image-form-delete {
+          float: right;
+          margin-top: 20px;
+      }
 
-    .user-list td {
-      vertical-align: middle !important;
-    }
+      .user-list td {
+          vertical-align: middle !important;
+      }
   }
 
   .seo-edit-view {
-    form {
-      .buttons {
-        width: 500px;
-        a, btn {
-          float: left;
-          margin-right: 5px;
-        }
+      form {
+          .buttons {
+              width: 500px;
+              a, btn {
+                float: left;
+                margin-right: 5px;
+              }
+          }
       }
-    }
   }
+
+  .bootstrap-checkbox {
+      position: relative;
+      top: -7px;
+      button {
+          outline: none !important;
+      }
+  }
+
+  .table {
+      tr {
+          td {
+              vertical-align: middle;
+          }
+      }
+  }
+
+  .flag {
+      width: 16px;
+      height: 11px;
+      background: url('../../img/catms/flags.png') no-repeat
+  }
+
+  .flag.flag-gb {background-position: -16px 0px}
+  .flag.flag-pl {background-position: 0 -11px}
+
 }
 
 
@@ -527,15 +563,6 @@ thead {
 .delete-popvoer .btn {
     float: none;
 }
-
-.flag {
-    width: 16px;
-    height: 11px;
-    background: url('../../img/catms/flags.png') no-repeat
-}
-
-.flag.flag-gb {background-position: -16px 0}
-.flag.flag-pl {background-position: 0 -11px}
 
 .lang-dropdown span {
     padding-left: 22px;

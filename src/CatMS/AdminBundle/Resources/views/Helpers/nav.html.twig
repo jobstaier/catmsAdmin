@@ -66,13 +66,13 @@
     </a>
 
     <ul class="dropdown-menu">
-        <li class="nav-header">{{ 'nav.settings.dropdownHeaders.panelSettings' | trans }}</li>
+        <li class="nav-header">{{ 'nav.settings.dropdownHeaders.panel' | trans }}</li>
         <li {% if is_active_nav_button('setting', 'panelSetting') %}class="active"{% endif %}><a href="{{ path('panel-settings') }}"><i class="icon-wrench"></i> {{ 'nav.settings.list.showSettings' | trans }}</a></li>
         {% if is_granted('ROLE_DEVELOPER') %}
         <li><a href="{{ path('settings-new', {'range': 'panel'}) }}"><i class="icon-plus"></i> {{ 'nav.settings.list.addNew' | trans }}</a></li>
         {% endif %}
         <li class="divider"></li>
-        <li class="nav-header">{{ 'nav.settings.dropdownHeaders.otherSettings' | trans }}</li>
+        <li class="nav-header">{{ 'nav.settings.dropdownHeaders.front' | trans }}</li>
         <li {% if is_active_nav_button('setting', 'frontendSetting') %}class="active"{% endif %}><a href="{{ path('frontend-settings') }}"><i class="icon-wrench"></i> {{ 'nav.settings.list.showSettings' | trans }}</a></li>
         {% if is_granted('ROLE_DEVELOPER') %}
         <li><a href="{{ path('settings-new', {'range': 'frontend'}) }}"><i class="icon-plus"></i> {{ 'nav.settings.list.addNew' | trans }}</a></li>
